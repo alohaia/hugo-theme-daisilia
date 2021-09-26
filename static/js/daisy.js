@@ -1,5 +1,5 @@
 // @force: 0 to close; 1 to open
-const toggleSidebar = function(force){
+function toggleSidebar(force){
     let siteRoot = $(".site-root");
     let actived = / sidebar-active/.test(siteRoot.attr("class"));
     if(force === 0 || actived){
@@ -9,15 +9,33 @@ const toggleSidebar = function(force){
         siteRoot.attr("class", siteRoot.attr("class") + " sidebar-active");
     }
 }
-$(".sidebar-toggle").click(toggleSidebar)
-$(".site-content").ready(function(){
-    if($(".sidebar-nav-docs").length || $(".sidebar-nav-docs").length){
-        toggleSidebar(1);
-    }
-})
 
-// sidebar nav
+// generate numbers for lists
+function genUlNum(ulNode, nums = [0]){
+    for(let i = 0; i < ulNode.childElementCount; i++){
+        nums[nums.length-1] += 1;
+        if(ulNode.children[i].childElementCount > 1) {
+            genUlNum(ulNode.children[i].children[1], nums.concat(0));
+        }
+        ulNode.children[i].children[0].innerText = nums.join(".") + ". " + ulNode.children[i].children[0].innerText;
+        if(i == ulNode.childElementCount){
+            return;
+        }
+    }
+}
+
+// add callback
 $("sidebar-content").ready(function(){
+    $(".sidebar-toggle").click(toggleSidebar)
+
+    if(document.getElementById("TableOfContents")){
+        genUlNum(document.getElementById("TableOfContents").children[0]);
+    }
+    if(document.getElementsByClassName("doc-structure")[0]){
+        genUlNum(document.getElementsByClassName("doc-structure")[0]);
+    }
+
+    // sidebar nav
     let navs, pannels;
     navs = document.getElementsByClassName("sidebar-nav-item")
     pannels = document.getElementsByClassName("sidebar-pannel")
@@ -37,24 +55,10 @@ $("sidebar-content").ready(function(){
             }
         })
     }
+
+    // auto-open sidebar
+    if($(".sidebar-nav-docs").length || $(".sidebar-nav-docs").length){
+        toggleSidebar(1);
+    }
 })
 
-// generate numbers for lists
-function genUlNum(ulNode, nums = [0]){
-    for(let i = 0; i < ulNode.childElementCount; i++){
-        nums[nums.length-1] += 1;
-        if(ulNode.children[i].childElementCount > 1) {
-            genUlNum(ulNode.children[i].children[1], nums.concat(0));
-        }
-        ulNode.children[i].children[0].innerText = nums.join(".") + ". " + ulNode.children[i].children[0].innerText;
-        if(i == ulNode.childElementCount){
-            return;
-        }
-    }
-}
-if(document.getElementById("TableOfContents")){
-    genUlNum(document.getElementById("TableOfContents").children[0]);
-}
-if(document.getElementsByClassName("doc-structure")[0]){
-    genUlNum(document.getElementsByClassName("doc-structure")[0]);
-}

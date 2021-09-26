@@ -24,7 +24,11 @@
   {{ if eq .Site.Params.daisy.scrollbar.style "custom" }}
   <link rel="stylesheet" href="/css/widgets/scrollbar.css">
   {{ end }}
-<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+  <script src="/js/daisy.js"></script>
+  {{ if .Site.Params.daisy.pjax.enable }}
+  <script src="/js/pjax.js"></script>
+  {{ end }}
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 <body class="site-root">
   <div class="site-inner">
@@ -39,10 +43,6 @@
   </div>
   <div class="site-sidebar closed">{{ partial "sidebar" . }}</div>
 </body>
-  <script src="/js/daisy.js"></script>
-  {{ if .Site.Params.daisy.pjax.enable }}
-  <script src="/js/pjax.js"></script>
-  {{ end }}
 </html>
 
 {{/* vim:set ft=gohtmltmpl: */}}
