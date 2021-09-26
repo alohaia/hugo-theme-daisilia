@@ -1,0 +1,136 @@
+{{ $theme := .Site.Params.daisy }}
+{{ $hasToc := ge (len .TableOfContents) 40 }}
+{{ $showDocs := ne . (.GetPage "docs")
+  | and (eq .FirstSection (.GetPage "docs"))
+}}
+<div class="sidebar-nav" pjax>
+{{ if or $hasToc $showDocs }}
+  {{ if $showDocs }}
+    <span class="sidebar-nav-item sidebar-nav-docs">Documents</span>
+  {{ end }}
+  {{ if $hasToc }}
+    <span class="sidebar-nav-item sidebar-nav-toc">TOC</span>
+  {{ end }}
+  <span class="sidebar-nav-item sidebar-nav-overview">Overview</span>
+{{ end }}
+</div>
+<div class="sidebar-content">
+  {{/* sidebar docs */}}
+  {{ if $showDocs }}
+    <div class="sidebar-docs sidebar-pannel" pjax>
+      {{ partial "docs/doc-structure" . }}
+    </div>
+  {{ end }}
+  {{/* END sidebar docs */}}
+  {{/* sidebar toc */}}
+  {{ if $hasToc }}
+    <div class="sidebar-toc sidebar-pannel" pjax>
+      <h1 class="toc-top"><a href="#">{{ .Title }}</a></h1>
+      {{ .TableOfContents }}
+    </div>
+  {{ end }}
+  {{/* END sidebar toc */}}
+  {{/* sidebar overview */}}
+  <div class="sidebar-overview sidebar-pannel">
+    <div class="sidebar-avatar">
+      <a href="/about"><img class="site-avatar-image" alt="{{ .Site.Author.nickname }}" src="{{ .Site.Author.avatar }}"></a>
+    </div>
+    <p class="site-author-name">{{ with .Site.Author }}{{ .fullname }}{{ else }}Site author here{{ end }}</p>
+    <p class="site-description">{{ with $theme.description }}{{ . }}{{ else }}Subtitle here{{ end }}</p>
+    {{ $ndocs := 0 }}
+    {{ range (.GetPage "docs").Sections }}
+      {{ $ndocs = (add $ndocs 1) }}
+    {{ end }}
+    <div class="site-state">
+      <a class="site-state-item" href="/">
+        <p class="site-state-num">{{ len .Site.RegularPages }}</p>
+        <p class="site-state-name">Pages</p>
+      </a>
+      <a class="site-state-item" href="/docs">
+        <p class="site-state-num">{{ $ndocs }}</p>
+        <p class="site-state-name">Docs</p>
+      </a>
+      <a class="site-state-item" href="/categories">
+        <p class="site-state-num">{{ len .Site.Taxonomies.categories }}</p>
+        <p class="site-state-name">Categories</p>
+      </a>
+      <a class="site-state-item" href="/tags">
+        <p class="site-state-num">{{ len .Site.Taxonomies.tags }}</p>
+        <p class="site-state-name">Tags</p>
+      </a>
+    </div>
+    <div class="sidebar-quote">
+    {{ if eq $theme.quote.enable "jinrishici" }}
+    <p class="sidebar-quote-content">主人不来过夜半，闲敲棋子落灯花。</p>
+    <p class="sidebar-quote-from">——</p>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script>
+    var poem_part, poem_full;
+    function toggleFull() {
+        var FULLYSHOWED = false;
+        return function() {
+            var content = $(".sidebar-quote-content");
+            if (FULLYSHOWED) {
+                content.html(poem_part);
+                // content.style.textIndent = "0px";
+                FULLYSHOWED = false;
+            } else {
+                content.html(poem_full);
+                // content.style.textIndent = "1em";
+                FULLYSHOWED = true;
+            }
+        }
+    }
+    jinrishici.load(function(result) {
+        const content = $(".sidebar-quote-content");
+        const from = $(".sidebar-quote-from");
+        poem_part = result.data.content;
+        content.html(poem_part);
+        from.html('——' + result.data.origin.dynasty + '·' +
+            result.data.origin.author + '《' + result.data.origin.title + '》');
+        const indent = "&nbsp".repeat(8);
+        poem_full = indent + result.data.origin.content.join('<br/>' + indent);
+        content.click(toggleFull())
+    });
+    </script>
+    {{ end }}
+    {{ if eq $theme.quote.enable "rainbow" }}
+    <p class="sidebar-quote-content">🌈 获取中...</p>
+    <p class="rainbow-from"></p>
+    <script>
+    fetch('https://api.eatrice.top')
+    .then(response => response.json())
+    .then(data => {
+        var sidebar_quote_content = document.querySelector('.sidebar-quote-content');
+        var sidebar_quote_from = document.querySelector('.sidebar-quote-from');
+        sidebar_quote_content.innerHTML = data.Content;
+        if(data.Author == 'unknown' && data.Source == 'unknown') {
+            sidebar_quote_from.setAttribute('visibility', 'hidden');
+        } else {
+            var from_text = "—";
+            if(data.Author != 'unknown') {
+                from_text += ' ' + data.Author;
+            }
+            if(data.Source != 'unknown') {
+                from_text += '《' + data.Source + '》';
+            }
+            sidebar_quote_from.innerHTML = from_text;
+        }
+    })
+    .catch(console.error)
+    </script>
+    {{ end }}
+    </div>
+    {{ if $theme.music.enable }}
+    <div class="sidebar-music">{{ partial "third-party/music" . }}</div>
+    {{ end }}
+  </div>
+  {{/* END sidebar overview */}}
+</div>
+
+<div class="sidebar-toggle" role="button">
+  <span class="toggle-line over"></span>
+  <span class="toggle-line middle"></span>
+  <span class="toggle-line below"></span>
+</div>
+{{/* vim:set ft=gohtmltmpl: */}}

@@ -1,0 +1,16 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<div>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</div>
+<div>{{ if .Params.author }}Author: {{ .Params.Author }}{{end}}</div>
+<div>{{ .Content }}</div>
+<div class="page-nav">
+  {{ with .Prev }}
+  <a class="page-nav-prev" href="{{ .Permalink }}"><i class="fa fa-chevron-left"></i> {{ .Title }}</a>
+  {{ end }}
+  {{ with .Next }}
+  <a class="page-nav-next" href="{{ .Permalink }}">{{ .Title }} <i class="fa fa-chevron-right"></i></a>
+  {{ end }}
+</div>
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

@@ -1,0 +1,44 @@
+{{/******** main ********/}}
+{{ define "main" }}
+  {{ if eq .File.Dir "docs/" }}
+    {{ block "_root" . }}{{ end }}
+  {{ else }}
+    {{ block "_doc" . }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{ define "_root" }}
+  <div class="page-list doc-list">
+  {{ with .Sections }}
+    {{ partial "components/page-list" . }}
+  {{ end }}
+  </div>
+{{ end }}
+
+{{ define "_doc" }}
+  {{ with .Content }}
+    <div class="article-content">
+      {{ . }}
+    </div>
+  {{ else }}
+    <div class="page-list">
+      {{ partial "components/page-list" .Pages.ByLastmod }}
+    </div>
+  {{ end }}
+{{ end }}
+
+{{/******** left ********/}}
+{{ define "left" }}
+{{/* {{ if ne .File.Dir "docs/" }}
+       {{ partial "docs/doc-structure" . }}
+     {{ end }} */}}
+{{ end  }}
+
+{{/******** right ********/}}
+{{ define "right" }}
+{{/* {{ if ge (len .TableOfContents) 40 }}
+       {{ .TableOfContents }}
+     {{ end }} */}}
+{{ end  }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

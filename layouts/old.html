@@ -1,0 +1,21 @@
+{{ define "main" }}
+  {{ .Content }}
+  {{ range .Site.RegularPages }}
+  <div style="border: 1px solid black; margin:10px; padding:10px; ">
+      <div style="font-size:20px;">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </div>
+      {{ partial "metadata" . }}
+
+      <p style="font-size:18px;">
+      {{ if .Params.summary }}
+        {{- .Params.summary | markdownify -}}
+      {{ else }}
+        {{- .Summary -}}
+      {{ end }}
+      </p>
+  </div>
+  {{ end }}
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

@@ -1,0 +1,10 @@
+/* global styles and .site-root */
+@import 'root.css';
+
+/* .site-sidebar */
+@import 'sidebar.css';
+
+/* .site-main */
+@import 'main.css';
+
+@import 'page.css';

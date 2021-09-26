@@ -1,0 +1,8 @@
+{{ if .Params.summary }}
+  {{- .Params.summary | markdownify -}}
+{{ else }}
+  {{- .Summary -}}
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}
+

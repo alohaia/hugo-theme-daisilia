@@ -1,0 +1,17 @@
+{{ define "main" }}
+  {{ .Content }}
+  {{ with .Content }}
+    <div class="article-content">{{ . }}</div>
+  {{ else }}
+    <div class="page-list">{{ partial "components/page-list" .Pages.ByLastmod }}</div>
+  {{ end }}
+  {{ range .Pages }}
+  <div style="border: 1px solid black; margin:10px; padding:10px; ">
+      <div style="font-size:20px;">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </div>
+  </div>
+  {{ end }}
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

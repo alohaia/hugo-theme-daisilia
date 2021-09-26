@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+  {{/* metadata  */}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {{/* title */}}
+  {{ if not .IsHome }}
+  <title>{{ print .Title " | " .Site.Title }}</title>
+  {{ else }}{{ with $.Site.Params.daisy.subtitle }}
+  <title>{{ print $.Site.Title " - " . }}</title>
+  {{ else }}
+  <title>{{ $.Site.Title }}</title>
+  {{ end }}{{ end }}
+  {{/* favicon */}}
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon" />
+  <!-- <script src="/js/third-party/jquery-3.6.0.min.js"></script> -->
+  <!-- <script src="/js/third-party/jquery.pjax.js"></script> -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+  <link rel="stylesheet" href="/css/index.css" />
+  {{ if eq .Site.Params.daisy.scrollbar.style "custom" }}
+  <link rel="stylesheet" href="/css/widgets/scrollbar.css">
+  {{ end }}
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body class="site-root">
+  <div class="site-inner">
+    <div class="site-header">{{ partial "header" (dict "Kind" .Kind "Template" "List") }}</div>
+    <div class="site-main">
+      <div class="site-main-left">{{ block "left" . }}{{ end }}</div>
+      <div class="site-content">{{ block "main" . }}{{ end }}</div>
+      <div class="site-comment">{{ partial "third-party/comment" . }}</div>
+      <div class="site-main-right">{{ block "right" . }}{{ end }}</div>
+    </div>
+    <div class="site-footer">{{ partial "footer" . }}</div>
+  </div>
+  <div class="site-sidebar closed">{{ partial "sidebar" . }}</div>
+</body>
+  <script src="/js/daisy.js"></script>
+  {{ if .Site.Params.daisy.pjax.enable }}
+  <script src="/js/pjax.js"></script>
+  {{ end }}
+</html>
+
+{{/* vim:set ft=gohtmltmpl: */}}

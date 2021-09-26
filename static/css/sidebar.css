@@ -1,0 +1,196 @@
+.site-sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+
+    width: 300px;
+    padding: 18px 10px;
+    height: 100%;
+    color: #999;
+    background: #222;
+    transition: all 0.2s ease-out;
+
+    overflow: hidden;
+
+    text-align: center;
+}
+
+.sidebar-active .site-sidebar {
+    left: 0;
+}
+
+/* sidebar nav */
+.sidebar-nav {
+    margin-bottom: 15px;
+}
+.sidebar-nav-item {
+    border-bottom: 1px solid;
+    opacity: 0.6;
+    cursor: pointer;
+    font-size: 85%;
+}
+.sidebar-nav-item:hover {
+    opacity: 1;
+}
+.sidebar-pannel {
+    animation: fadeEffect 0.5s ease-out;
+}
+@keyframes fadeEffect {
+    0%    {opacity: 0; transform: translateY(-10px)}
+    100%  {opacity: 1; transform: translateY(0)}
+}
+.sidebar-pannel:not(.active) {
+    display: none;
+}
+
+/* sidebar toggle */
+.sidebar-toggle {
+    background: #222;
+    position: fixed;
+    bottom: 45px;
+    left: 30px;
+    width: 14px;
+    height: 12px;
+    padding: 6px 5px;
+
+    font-size: 15px;
+    display: grid;
+    align-content: center;
+    text-align: center;
+
+    cursor: pointer;
+}
+.sidebar-toggle .toggle-line {
+    position: relative;
+    display: block;
+    height: 2px;
+    width: 100%;
+    margin: 1.5px 0;
+    background-color: #fff;
+    opacity: 0.75;
+    transition: all 0.4s;
+}
+/* hover */
+.sidebar-toggle:hover .toggle-line {
+    opacity: 1;
+}
+.site-root:not(.sidebar-active) .sidebar-toggle:hover .toggle-line.over {
+    transform: translate(4px, 2px) skew(45deg) scale(0.2,3);
+}
+.site-root:not(.sidebar-active) .sidebar-toggle:hover .toggle-line.below {
+    transform: translate(4px, -2px) skew(-45deg) scale(0.2,3);
+}
+/* sidebar actived */
+.sidebar-active .sidebar-toggle .toggle-line.over {
+    transform: translate(0px, 5px) rotate(45deg);
+}
+.sidebar-active .sidebar-toggle:not(:hover) .toggle-line.middle {
+    opacity: 0;
+}
+.sidebar-active .sidebar-toggle .toggle-line.below {
+    transform: translate(0px, -5px) rotate(-45deg);
+}
+.sidebar-active .sidebar-toggle:hover .toggle-line.over {
+    transform: translate(-4px, 2px) skew(-45deg) scale(0.2,3);
+}
+.sidebar-active .sidebar-toggle:hover .toggle-line.below {
+    transform: translate(-4px, -2px) skew(45deg) scale(0.2,3);
+}
+
+.sidebar-docs, .sidebar-toc {
+    text-align: left;
+    line-height: 1.6;
+}
+.doc-first-title, .toc-top {
+    text-align: center;
+    font-size: 125%;
+}
+.sidebar-docs a:hover, .sidebar-toc a:hover {
+    color: #ddd;
+}
+.sidebar-docs ul, .sidebar-toc ul {
+    padding: 0 2px 5px 10px;
+}
+.sidebar-docs li::marker, .sidebar-toc li::marker {
+    content: none;
+}
+
+/* sidebar avatar */
+.sidebar-avatar {
+    text-align: center;
+}
+.sidebar-avatar a {
+    border: none;
+}
+.site-avatar-image {
+    max-width: 96px;
+    border: 2px solid #333;
+    padding: 2px;
+    border-radius: 50%;
+    transition: transform 1s ease-out;
+}
+.site-avatar-image:hover{
+    transform: rotateZ(360deg);
+}
+
+.site-author-name {
+    margin: 5px 0 0;
+    color: #ddd;
+}
+.site-description {
+    margin: 5px 0 0;
+    line-height: 1.5;
+}
+
+/* sidebar quote */
+.sidebar-quote {
+    margin-top: 25px;
+    width: 100%;
+    text-align: left;
+}
+.sidebar-quote-content {
+    cursor: pointer;
+    line-height: 1.5;
+    margin: 0;
+}
+.sidebar-quote-from {
+    margin: 0;
+    text-align: right;
+    font-style: italic;
+    font-size: smaller;
+    opacity: 0.8;
+}
+
+/* site state */
+.site-state {
+    margin: 25px auto 0;
+    width: fit-content;
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-column-gap: 5px;
+
+    line-height: 1.75;
+}
+.site-state-item {
+    display: block;
+    border-bottom: none;
+}
+.site-state-item:hover {
+    color: #ddd;
+}
+.site-state-num {
+    font-weight: 600;
+    font-size: 125%;
+    margin: 0;
+}
+.site-state-name {
+    font-size: 85%;
+    margin: 0;
+}
+
+/* sidebar music */
+.sidebar-music {
+    all: initial;
+}
+
