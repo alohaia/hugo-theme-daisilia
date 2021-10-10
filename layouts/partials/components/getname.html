@@ -1,0 +1,11 @@
+{{ with .Site.Author }}
+  {{ if .fullname }}
+    {{- .fullname -}}
+  {{ else if .nickname }}
+    {{- .nickname -}}
+  {{ end }}
+{{ else }}
+  {{- "Site author here" -}}
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

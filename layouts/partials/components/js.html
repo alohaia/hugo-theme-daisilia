@@ -1,0 +1,62 @@
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{ if .Site.Params.daisy.fancybox.enable }}{{ partial "third-party/fancybox.html" . }}{{ end }}
+{{ if or .Params.math .Params.mathjax }}{{ partial "third-party/mathjax.html" . }}{{ end }}
+{{ $js := resources.Get "js/daisy.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ $each := resources.Get "js/daisy.each.js" | minify | fingerprint }}
+<script data-pjax src="{{ $each.RelPermalink }}" integrity="{{ $each.Data.Integrity  }}"></script>
+{{ if .Site.Params.daisy.pjax.enable }}
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+{{ $pjax := resources.Get "js/pjax.js" | minify | fingerprint }}
+<script src="{{ $pjax.RelPermalink }}" integrity="{{ $pjax.Data.Integrity  }}"></script>
+{{ end }}
+
+{{ $theme := .Site.Params.daisy }}
+{{ if eq $theme.quote.enable "jinrishici" }}
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script>
+    var poem_part, poem_full;
+    const content = document.getElementById("SidebarQuoteContent");
+    const from = document.getElementById("SidebarQuoteFrom");
+    function toggleFull() {
+        if (content.innerHTML == poem_part) {
+            content.innerHTML = poem_full;
+        } else {
+            content.innerHTML = poem_part;
+        }
+    }
+    jinrishici.load(function(result) {
+        poem_part = result.data.content;
+        content.innerText = poem_part;
+        from.innerText = '——' + result.data.origin.dynasty + '·'
+            + result.data.origin.author + '《' + result.data.origin.title + '》';
+        poem_full = "&nbsp".repeat(8) + result.data.origin.content.join('<br/>' + "&nbsp".repeat(8));
+        content.onclick = toggleFull;
+    });
+</script>
+{{ else if eq $theme.quote.enable "rainbow" }}
+<script>
+    fetch('https://api.eatrice.top')
+    .then(response => response.json())
+    .then(data => {
+        var sidebar_quote_content = document.querySelector('.sidebar-quote-content');
+        var sidebar_quote_from = document.querySelector('.sidebar-quote-from');
+        sidebar_quote_content.innerHTML = data.Content;
+        if(data.Author == 'unknown' && data.Source == 'unknown') {
+            sidebar_quote_from.setAttribute('visibility', 'hidden');
+        } else {
+            var from_text = "—";
+            if(data.Author != 'unknown') {
+                from_text += ' ' + data.Author;
+            }
+            if(data.Source != 'unknown') {
+                from_text += '《' + data.Source + '》';
+            }
+            sidebar_quote_from.innerHTML = from_text;
+        }
+    })
+    .catch(console.error)
+</script>
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

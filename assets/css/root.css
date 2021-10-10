@@ -1,0 +1,33 @@
+:root {
+    line-height: 2;
+    font-family: 'Noto Sans', sans-serif;
+
+    --header-height: 80px;
+    --footer-height: 64px;
+
+    --white: #ffffff;
+    --gray: #cccccc;
+    --gray-light: #f0f0f0;
+    --gray-deep: #818181;
+    --black: #1b1b1b;
+    --orange: #ff8855;
+    --orange-deep: #ff6020;
+    --code-background: #fafafa;
+    --inline-code-background: #fff6db;
+}
+
+body, html {
+    height: 100%;
+}
+body {
+    scroll-behavior: smooth;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+}
+
+a[scroll] {
+    cursor: pointer;
+}

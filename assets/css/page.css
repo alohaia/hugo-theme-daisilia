@@ -1,0 +1,379 @@
+.article-title {
+    text-align: center;
+    font-size: 24px;
+    /* font-weight: normal; */
+    margin: 40px 0 0 0;
+}
+.article-title:not(.page-title) {
+    position: sticky;
+    top: 0px;
+    background-color: var(--white);
+    cursor: pointer;
+}
+.article-title:not(.page-title):hover {
+    text-decoration: underline;
+}
+.page-title {
+    text-align: left;
+}
+
+.article-metadata {
+    text-align: center;
+    color: var(--gray-deep);
+    font-size: 0.875em;
+}
+.page-metadata {
+    text-align: left;
+}
+.meta-item {
+    display: inline-block;
+    white-space: nowrap;
+}
+.meta-item::marker {
+    content: none;
+}
+.meta-item:not(:last-child)::after {
+    content: "|";
+    margin: 0 2px;
+}
+.meta-section {
+    margin: 0;
+    padding: 0;
+}
+.meta-item-value {
+    border-bottom: 1px dashed;
+}
+.article-metadata a {
+    text-decoration: none;
+}
+
+/* link */
+.page-title a,
+.article-metadata a,
+.article-content a {
+    color: var(--orange);
+    transition: all 0.3s;
+    text-decoration: none;
+}
+.page-title a:hover,
+.article-metadata a:hover,
+.article-content a:hover {
+    color: var(--orange-deep);
+    text-decoration: underline;
+}
+.article-content h1 a,
+.article-content h2 a,
+.article-content h3 a,
+.article-content h4 a,
+.article-content h5 a,
+.article-content h6 a {
+    color: var(--black);
+}
+
+.page-nav {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+
+    font-size: 0.875em;
+    line-height: 1.6;
+}
+.page-nav a {
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.6;
+}
+.page-nav a:hover {
+    opacity: 1;
+}
+.page-nav .fa { font-size: 0.75em; }
+.page-nav-prev .fa { margin-right: 5px; }
+.page-nav-next .fa { margin-left: 5px; }
+.page-nav-prev { text-align: left; }
+.page-nav-next { text-align: right; }
+
+/* image */
+.image-wrap {
+    text-align: center;
+}
+.image-wrap img {
+    max-width: 100%;
+}
+.image-wrap a[data-src] {
+    cursor: pointer;
+}
+
+/* content font size */
+.article-content {
+    font-size: 1.125em;
+    color: var(--black);
+    overflow-wrap: break-word;
+}
+
+/* table */
+table {
+    border-collapse: collapse;
+    border: 1px solid var(--gray-deep);
+    width: 100%;
+    font-size: 0.875em;
+}
+table:not(.highlight table) {
+    white-space: nowrap;
+    margin-top: 10px;
+}
+.table-container {
+    overflow: auto;
+}
+table thead {
+    border-bottom: 3px solid var(--gray-deep);
+}
+table thead th {
+    color: var(--black);
+}
+table td, table th {
+    padding: 0.5em 1em;
+    border: 1px solid var(--gray-deep);
+}
+tbody:not(.highlight tbody) tr:nth-of-type(odd) {
+    background-color: var(--gray-light);
+}
+tbody:not(.highlight tbody) tr:hover {
+    transition: all 0.4s;
+    background-color: var(--gray);
+}
+
+/* highlight & block */
+.highlight {
+    margin-top: 10px;
+    /* box-shadow: 1px 1px 2px #0005; */
+    border: 8px solid #fafafa;
+    border-radius: 4px;
+}
+pre {
+    font-family: 'Noto Sans', sans-serif;
+}
+.highlight td {
+    margin: 0;
+}
+pre:not(.highlight pre) { /* block */
+    margin-top: 10px;
+    /* box-shadow: 1px 1px 2px #0005; */
+    border: 8px solid var(--code-background);
+    border-radius: 4px;
+    background-color: var(--code-background);
+    overflow: auto;
+}
+code:not(pre code) { /* inline block */
+    margin-top: 10px;
+    border: 2px solid var(--inline-code-background);
+    border-radius: 3px;
+    background-color: var(--inline-code-background);
+}
+.highlight tr td:first-child {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* list */
+.article-content li p,
+.article-content dd p {
+    margin: 0;
+}
+.article-content li:hover,
+.article-content dd:hover {
+    background-color: #3a3a3a10;
+}
+.article-content li:hover::marker {
+    color: var(--orange);
+}
+.article-content li,
+.article-content dd {
+    transition: all 0.4s;
+}
+
+/* heading */
+.article-content h2, h3, h4, h5, h6 {
+    margin: 0;
+    /* font-weight: normal; */
+}
+.article-content h1 {
+    font-size: 32px;
+}
+.article-content h2 {
+    text-align: center;
+    font-size: 28px;
+    position: sticky;
+    top: 48px;
+    background-color: var(--white);
+    counter-reset: h3Counter h4Counter h5Counter h6Counter;
+    counter-increment: h2Counter;
+}
+.article-content h3 {
+    font-size: 24px;
+    counter-reset: h4Counter h5Counter h6Counter;
+    counter-increment: h3Counter;
+}
+.article-content h4 {
+    font-size: 22px;
+    counter-reset: h5Counter h6Counter;
+    counter-increment: h4Counter;
+}
+.article-content h5 {
+    font-size: 20px;
+    counter-reset: h6Counter;
+    counter-increment: h5Counter;
+}
+.article-content h6 {
+    font-size: 18px;
+    counter-increment: h6Counter;
+}
+
+.article-content h2:before {
+    content: counter(h2Counter) ". ";
+}
+.article-content h3:before {
+    content: counter(h2Counter) "." counter(h3Counter) ". ";
+}
+.article-content h4:before {
+    content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) ". ";
+}
+.article-content h5:before {
+    content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) ". ";
+    /* content: counter(h5Counter, upper-roman) ". "; */
+}
+.article-content h6:before {
+    content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) "." counter(h6Counter) ". ";
+    /* content: counter(h6Counter, lower-alpha) ". "; */
+}
+
+/* kbd */
+kbd {
+    display: inline-block;
+    padding: .25em;
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+    border-bottom-color: var(--gray-deep);
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 var(--gray-deep);
+    font-size: .8em;
+    line-height: 1.25;
+    font-family: sfmono-regular,liberation mono,roboto mono,Menlo,Monaco,Consolas,courier new,Courier,monospace;
+    color: var(--black);
+}
+
+/* footnote */
+.footnotes hr {
+    background-image: repeating-linear-gradient(
+-45deg, #ddd, #ddd 4px, transparent 4px, transparent 8px);
+    height: 2px;
+    margin: 20px 0;
+    border: none;
+}
+
+/* deflist */
+dt {
+    font-weight: bold;
+}
+dd {
+    margin: 0;
+    padding: 0 0 0 0.5em;
+}
+dd::before {
+    content: "# ";
+    color: var(--gray-deep);
+    font-weight: bold;
+}
+
+/* blockquote */
+blockquote {
+    border-left: 4px solid #ddd;
+    color: var(--gray-deep);
+    margin: 0;
+    padding: 0 15px;
+}
+
+/* doc-structure */
+.doc-structure-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    white-space: nowrap;
+    width: 320px;
+    right: -320px;
+    transition: all .5s ease-out;
+    z-index: 10;
+}
+/* .site-root:not(.header-hidden) .doc-structure-container { */
+/*     top: 80px; */
+/* } */
+.doc-structure-container:hover {
+    right: 0;
+}
+.doc-structure-container a {
+    color: var(--gray-deep);
+}
+.doc-structure-container a:hover {
+    color: var(--orange-deep);
+}
+.doc-structure-toggle {
+    position: fixed;
+    top: 120px;
+    right: 0;
+
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 0 0 8px;
+    z-index: 5;
+}
+.doc-structure-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px 0 0 4px;
+    z-index: 10;
+}
+.doc-structure-content li::marker {
+    content: none;
+}
+.doc-structure-content li:hover {
+    background-color: var(--gray);
+}
+.doc-structure-content ul {
+    padding: 0 2px 5px 10px;
+    margin: 0;
+}
+ul.doc-structure {
+    padding: 0;
+    margin-bottom: 10px;
+    text-indent: 10px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+}
+.doc-structure-content a {
+    text-decoration: none;
+}
+.doc-first-title {
+    font-size: 1.25em;
+}

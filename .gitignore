@@ -1,2 +1,5 @@
 .trash/
 test
+*.old
+*.backup
+*.back

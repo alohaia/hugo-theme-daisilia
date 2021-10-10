@@ -1,0 +1,29 @@
+{{ if eq .Parent .FirstSection }}                       {{/* docs/病原生物学/ */}}
+  <a class="doc-first-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{ block "_structure" . }}{{ end }}
+{{ else if eq .Parent.Parent .FirstSection }}           {{/* docs/病原生物学/医学蠕虫/ */}}
+  <a class="doc-first-title" href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a>
+  {{ block "_structure" .Parent }}{{ end }}
+{{ else if eq .Parent.Parent.Parent .FirstSection }}    {{/* docs/病原生物学/医学蠕虫/吸虫/ */}}
+  <a class="doc-first-title" href="{{ .Parent.Parent.RelPermalink }}">{{ .Parent.Parent.Title }}</a>
+  {{ block "_structure" .Parent.Parent }}{{ end }}
+{{ end }}
+
+{{ define "_structure" }}
+<ul class="doc-structure" id="DocStructure">
+{{ range .Pages.ByWeight }}
+  <li>
+    <a class="doc-entry" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ if eq .Kind "section" }}
+    <ul>
+      {{ range .Pages.ByWeight }}
+      <li><a class="doc-entry" href="{{ .RelPermalink }}">{{ .Title }}</a></li></li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </li>
+{{ end }}
+</ul>
+{{ end }}
+
+{{/* vim:set ft=gohtmltmpl: */}}

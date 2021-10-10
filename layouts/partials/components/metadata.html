@@ -1,5 +1,70 @@
-<div style="color:grey; font-size:16px;">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</div>
-<div style="color:grey; font-size:16px;">{{ if .Params.tags }}<strong>Tags:</strong> {{ range .Params.tags }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{end}}{{end}}</div>
-<div style="color:grey; font-size:16px;">{{ if .Params.categories }}<strong>Categories:</strong> {{ range .Params.categories }}<a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{end}}{{end}}</div>
-<div style="color:grey; font-size:16px;">{{ if .Params.moods }}<strong>Moods:</strong> {{ range .Params.moods }}<a href="{{ "/moods/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{end}}{{end}}</div>
+<ul class="meta-section">
+  <li class="meta-item">
+    <i class="fas fa-calendar"></i>
+    <span class="meta-item-text">Posted on</span>
+    <span class="meta-item-value">{{ .PublishDate.Format "2006-01-02" }}</span>
+  </li>
+  <li class="meta-item">
+    <i class="fas fa-clock"></i>
+    <span class="meta-item-text">Edited on</span>
+    <span class="meta-item-value">{{ .Lastmod.Format "2006-01-02" }}</span>
+  </li>
+  {{ with .Params.author }}
+    <li class="meta-item">
+      <i class="fas fa-user"></i>
+      <span class="meta-item-text">Author:</span>
+      <span class="meta-item-value">{{ . }}</span>
+    </li>
+  {{ else }}
+    <li class="meta-item">
+      <i class="fas fa-user"></i>
+      <span class="meta-item-text">Author:</span>
+      <span class="meta-item-value">{{ partial "components/getname" . }}</span>
+    </li>
+  {{ end }}
+  {{ with .Params.coauthors }}
+    <li class="meta-item">
+      <i class="fas fa-users"></i>
+      <span class="meta-item-text">Co-Authors:</span>
+      <span class="meta-item-value">{{ delimit . ", " }}</span>
+    </li>
+  {{ end }}
+</ul>
+{{ if or .Params.tags .Params.categories }}
+  <ul class="meta-section">
+    {{ with .Params.tags }}
+      <li class="meta-item">
+        <i class="fas fa-tags"></i>
+        <span class="meta-item-text">Tags:</span>
+        <span class="meta-item-value">{{ range $i,$v := . }}{{ if ne $i 0 }}, {{ end }}<a class="tag" href="/tags/{{ $v | urlize }}">{{ $v }}</a>{{end}}</span>
+      </li>
+    {{ end }}
+    {{ with .Params.categories }}
+      <li class="meta-item"><i class="fas fa-th-list"></i>
+        <span class="meta-item-text">Categories:</span>
+        <span class="meta-item-value">{{ range $i,$v := . }}{{ if ne $i 0 }}, {{ end }}<a class="category" href="/categories/{{ $v | urlize }}">{{ $v }}</a>{{end}}</span>
+      </li>
+    {{ end }}
+    {{ with .Parent }}
+      <li class="meta-item"><i class="fas fa-folder"></i>
+        <span class="meta-item-text">In</span>
+        <a class="meta-item-value" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}
+<li class="meta-item">
+  <i class="far fa-file-word"></i>
+  <span class="meta-item-text">Word count ≈</span>
+  <span class="meta-item-value">{{ .FuzzyWordCount }}</span>
+</li>
+<li class="meta-item">
+  <i class="fas fa-hourglass-start"></i>
+  <span class="meta-item-text">Reading time {{ if ne .ReadingTime 0 | and (ge .FuzzyWordCount 100) }}≈</span>
+  <span class="meta-item-value">{{ .ReadingTime }} min</span>
+  {{ else }}≤</span>
+  <span class="meta-item-value">1 min</span>
+  {{ end }}
+</li>
 
+{{/* vim:set ft=gohtmltmpl: */}}

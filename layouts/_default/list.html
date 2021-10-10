@@ -1,17 +1,11 @@
 {{ define "main" }}
-  {{ .Content }}
+  <h1 class="article-title list-title">{{ .Title }}</h1>
+  <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
   {{ with .Content }}
     <div class="article-content">{{ . }}</div>
-  {{ else }}
-    <div class="page-list">{{ partial "components/page-list" .Pages.ByLastmod }}</div>
   {{ end }}
-  {{ range .Pages }}
-  <div style="border: 1px solid black; margin:10px; padding:10px; ">
-      <div style="font-size:20px;">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </div>
-  </div>
-  {{ end }}
+  <div class="page-list">{{ partial "components/page-list" .Pages.ByLastmod }}</div>
+  {{/* {{ partial "components/page-nav" . }} */}}
 {{ end }}
 
 {{/* vim:set ft=gohtmltmpl: */}}

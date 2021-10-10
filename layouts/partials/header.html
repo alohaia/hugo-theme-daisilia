@@ -1,4 +1,11 @@
-<h1 class="site-title"><a href="/">{{- .Site.Title -}}</a>{{.Template}} Template - {{.Kind}}</h1>
+<h1 class="site-title">{{ .Site.Title }}</h1>
+{{ with .Site.Menus.daisy }}
+  <ul class="main-menu">
+  {{ range . }}
+    <li class="menu-item"><a href="{{ .URL }}">{{ .Pre }}{{ .Name }}</a></li>
+  {{ end }}
+  </ul>
+{{ end }}
 
 
 {{/* vim:set ft=gohtmltmpl: */}}

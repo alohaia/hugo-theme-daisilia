@@ -1,18 +1,21 @@
-{{ $theme := .Site.Params.daisy }}
-{{ if $theme.comment.enable }}
-    {{ if (ne .Kind "page" | and $theme.comment.only_on_pages) }}
-    {{ else if (and .Site.IsServer $theme.comment.disable_on_local) }}
-        <p>Comments are setted to be disabled if the site is being served with local server.</p>
-    {{ else if .Params.comments }}
-        <script src="https://utteranc.es/client.js"
-                repo        = "{{ $theme.comment.repo }}"
-                issue-term  = "{{ $theme.comment.issue_term }}"
-                label       = "{{ $theme.comment.label }}"
-                theme       = "{{ $theme.comment.theme }}"
-                crossorigin = "anonymous"
-                async>
-        </script>
-    {{ end }}
-{{ end }}
+{{- $comment := .Site.Params.daisy.comment -}}
+{{- if and $comment.enable -}}
+  {{- if and .Site.IsServer $comment.disable_on_local -}}
+    <p>Comments are setted to be disabled if the site is being served with local server.</p>
+  {{- else -}}
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ $comment.repo }}"
+            data-repo-id="{{ $comment.repo_id }}"
+            data-category="{{ $comment.category }}"
+            data-category-id="{{ $comment.category_id }}"
+            data-mapping="{{ $comment.mapping }}"
+            data-reactions-enabled="{{ $comment.reactions_enabled }}"
+            data-emit-metadata="{{ $comment.emit_metadata }}"
+            data-theme="light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  {{- end -}}
+{{- end -}}
 
 {{/* vim:set ft=gohtmltmpl: */}}

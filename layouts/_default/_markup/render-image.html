@@ -1,0 +1,7 @@
+<div class="image-wrap">
+  <a data-fancybox data-src="{{ .Destination | safeURL }}">
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}"{{ end }} />
+  </a>
+</div>
+
+{{/* vim:set ft=gohtmltmpl: */}}

@@ -1,20 +1,21 @@
 {{ define "main" }}
-<h1>leaf</h1>
-<p>Single - {{ .Kind}} - {{ .File.Dir }}</p>
-<h1>{{ .Title }}</h1>
-<div>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</div>
-<div>{{ if .Params.author }}Author: {{ .Params.Author }}{{end}}</div>
-<div>{{ .Content }}</div>
-{{ end }}
-
-{{ define "left" }}
-{{/* {{ partial "docs/doc-structure" . }} */}}
+  <h1 class="article-title single-tile">{{ .Title }}</h1>
+  <div class="article-metadata">
+    {{ partial "components/metadata.html" . }}
+  </div>
+  {{ with .Content }}
+    <div class="article-content">{{ . }}</div>
+  {{ end }}
+  {{/* {{ partial "components/page-nav" . }} */}}
 {{ end }}
 
 {{ define "right" }}
-{{/* {{ if ge (len .TableOfContents) 40 }}
-       {{ .TableOfContents }}
-     {{ end }} */}}
+{{ if and (ne . (.GetPage "docs") (eq .FirstSection (.GetPage "docs"))) }}
+<div class="doc-structure-container" id="DocStructureContainer">
+  <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
+  <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>
+</div>
+{{ end }}
 {{ end }}
 
 {{/* vim:set ft=gohtmltmpl: */}}
