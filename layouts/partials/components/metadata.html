@@ -53,18 +53,20 @@
     {{ end }}
   </ul>
 {{ end }}
-<li class="meta-item">
-  <i class="far fa-file-word"></i>
-  <span class="meta-item-text">Word count ≈</span>
-  <span class="meta-item-value">{{ .FuzzyWordCount }}</span>
-</li>
-<li class="meta-item">
-  <i class="fas fa-hourglass-start"></i>
-  <span class="meta-item-text">Reading time {{ if ne .ReadingTime 0 | and (ge .FuzzyWordCount 100) }}≈</span>
-  <span class="meta-item-value">{{ .ReadingTime }} min</span>
-  {{ else }}≤</span>
-  <span class="meta-item-value">1 min</span>
-  {{ end }}
-</li>
+<ul class="meta-section">
+  <li class="meta-item">
+    <i class="far fa-file-word"></i>
+    <span class="meta-item-text">Word count ≈</span>
+    <span class="meta-item-value">{{ .FuzzyWordCount }}</span>
+  </li>
+  <li class="meta-item">
+    <i class="fas fa-hourglass-start"></i>
+    <span class="meta-item-text">Reading time {{ if ne .ReadingTime 0 | and (ge .FuzzyWordCount 100) }}≈</span>
+    <span class="meta-item-value">{{ .ReadingTime }} min</span>
+    {{ else }}≤</span>
+    <span class="meta-item-value">1 min</span>
+    {{ end }}
+  </li>
+</ul>
 
 {{/* vim:set ft=gohtmltmpl: */}}
