@@ -1,6 +1,7 @@
 .article-title {
     text-align: center;
     font-size: 24px;
+    z-index: 1;
     /* font-weight: normal; */
 }
 .article-title:not(.page-title) {
@@ -166,8 +167,12 @@ tbody:not(.highlight tbody) tr:hover {
     border: 8px solid #fafafa;
     border-radius: 4px;
 }
+.highlight pre {
+    margin: 0;
+}
 pre {
-    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    font-family: 'Fira Mono', monospace;
 }
 .highlight td {
     margin: 0;
@@ -212,6 +217,7 @@ code:not(pre code) { /* inline block */
 /* heading */
 .article-content h2, h3, h4, h5, h6 {
     margin: 0;
+    z-index: 1;
     /* font-weight: normal; */
 }
 .article-content h1 {
@@ -220,8 +226,9 @@ code:not(pre code) { /* inline block */
 .article-content h2 {
     text-align: center;
     font-size: 28px;
-    position: sticky;
-    top: 48px;
+    /* scrollIntoView 目前存在问题 */
+    /* position: sticky; */
+    /* top: 48px; */
     background-color: var(--white);
     counter-reset: h3Counter h4Counter h5Counter h6Counter;
     counter-increment: h2Counter;
