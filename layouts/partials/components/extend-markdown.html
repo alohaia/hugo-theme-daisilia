@@ -1,0 +1,9 @@
+{{- $s := .content -}}
+{{- $s :=  $s | replaceRE `<p>:::</p>` "</div>" -}}
+{{- $s :=  $s | replaceRE `<p>:::\s*(#([-a-z0-9]*))?\s*(.([-a-z0-9]*))?\s*</p>` "<div id='$2' class='$4'>" -}}
+{{- $s :=  $s | replaceRE `~([^\n]*?)~` "<sub>$1</sub>" -}}
+{{- $s :=  $s | replaceRE `\^([^\n]*?)\^` "<sup>$1</sup>" -}}
+{{- $s :=  $s | replaceRE `==([^\n]*?)==` "<mark>$1</mark>" -}}
+{{- $s :=  $s | replaceRE `\+\+([^\n]*?)\+\+` "<ins>$1</ins>" -}}
+{{- $s | markdownify -}}
+{{/* vim:set ft=gohtmltmpl: */}}

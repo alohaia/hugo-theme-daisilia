@@ -241,6 +241,7 @@ meting-js {
     display: flex;
     padding: 0 3px;
     color: var(--gray);
+    transition: all 0.3s ease-out;
 }
 .back2top:hover {
     color: var(--gray-light);

@@ -1,11 +1,9 @@
 <h1 class="site-title">{{ .Site.Title }}</h1>
-{{ with .Site.Menus.daisy }}
+{{- with .Site.Menus.daisy -}}
   <ul class="main-menu">
-  {{ range . }}
+  {{- range . -}}
     <li class="menu-item"><a href="{{ .URL }}">{{ .Pre }}{{ .Name }}</a></li>
-  {{ end }}
+  {{- end -}}
   </ul>
-{{ end }}
-
-
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}

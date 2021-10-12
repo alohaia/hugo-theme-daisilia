@@ -1,4 +1,4 @@
-{{ $theme := .Site.Params.daisy }}
+{{- $theme := .Site.Params.daisy -}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
@@ -17,6 +17,5 @@
   preload="{{ $theme.music.preload }}"
   mutex="{{ $theme.music.mutex }}">
 </meting-js>
-
 {{/* vim:set ft=gohtmltmpl: */}}
 

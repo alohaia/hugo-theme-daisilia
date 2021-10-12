@@ -54,10 +54,10 @@ function updateProgress() {
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     // var winScroll = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
     var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    if (height == 0) {
-        document.getElementById("Back2top").style.display = "none";
+    if (height == 0 || winScroll == 0) {
+        document.getElementById("Back2top").style.opacity = 0;
     } else {
-        document.getElementById("Back2top").style.visibility = "flex";
+        document.getElementById("Back2top").style.opacity = 1;
         document.getElementById("Back2topProgress").innerHTML = Math.floor((winScroll / height) * 100) + "%";
     }
 }

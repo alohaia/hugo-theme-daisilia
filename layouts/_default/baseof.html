@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   {{/* title */}}
-  {{ if not .IsHome }}
+  {{- if not .IsHome -}}
   <title>{{ print .Title " | " .Site.Title }}</title>
-  {{ else }}{{ with $.Site.Params.daisy.subtitle }}
+  {{- else -}}{{ with $.Site.Params.daisy.subtitle }}
   <title>{{ print $.Site.Title " - " . }}</title>
-  {{ else }}
+  {{- else -}}
   <title>{{ $.Site.Title }}</title>
-  {{ end }}{{ end }}
-  {{ partial "components/style" . }} {{/* css */}}
+  {{- end -}}{{ end }}
+  {{- partial "components/style" . -}} {{/* css */}}
   {{/* favicon */}}
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon" />
   <link rel="icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon" />
@@ -29,8 +29,7 @@
     <div class="site-footer" id="SiteFooter">{{ partial "footer" . }}</div>
     <div class="site-sidebar" id="SiteSidebar">{{ partial "sidebar" . }}</div>
   </div>
-  {{ partial "components/js" . }} {{/* js */}}
+  {{- partial "components/js" . -}} {{/* js */}}
 </body>
 </html>
-
 {{/* vim:set ft=gohtmltmpl: */}}

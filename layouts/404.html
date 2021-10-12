@@ -1,6 +1,7 @@
-{{ define "main" }}
-{{ $Page := "404" }}
-<div id="404">Over the Mountains, mountains...</div>
-{{ end }}
-
+{{- define "main" -}}
+<div class="not-found">
+  <p>{{ with .Site.Params.daisy.mes_404 }}{{ . }}{{ else }}Over the Mountains, mountains...{{ end }}</p>
+  <a class="back-home" href="/">Back Home</a>
+</div>
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}

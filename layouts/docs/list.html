@@ -1,44 +1,40 @@
 {{/******** main ********/}}
-{{ define "main" }}
+{{- define "main" -}}
   <h1 class="article-title list-title">{{ .Title }}</h1>
   <div class="article-metadata">
-    {{ partial "components/metadata.html" . }}
+    {{- partial "components/metadata.html" . -}}
   </div>
-  {{ if eq .File.Dir "docs/" }}
-    {{ block "_root" . }}{{ end }}
-  {{ else }}
-    {{ block "_doc" . }}{{ end }}
-  {{ end }}
+  {{- if eq .File.Dir "docs/" -}}
+    {{- block "_root" . -}}{{ end }}
+  {{- else -}}
+    {{- block "_doc" . -}}{{ end }}
+  {{- end -}}
   {{/* {{ partial "components/page-nav" . }} */}}
-{{ end }}
-
-{{ define "_root" }}
+{{- end -}}
+{{- define "_root" -}}
   <div class="page-list doc-list">
-  {{ with .Sections }}
-    {{ partial "components/page-list" .ByLastmod }}
-  {{ end }}
+  {{- with .Sections -}}
+    {{- partial "components/page-list" .ByLastmod -}}
+  {{- end -}}
   </div>
-{{ end }}
-
-{{ define "_doc" }}
-  {{ with .Content }}
+{{- end -}}
+{{- define "_doc" -}}
+  {{- if .Content -}}
     <div class="article-content">
-      {{ . }}
+      {{- partial "components/extend-markdown" (dict "content" .Content "page" .) -}}
     </div>
-  {{ else }}
-    <div class="page-list">
-      {{ partial "components/page-list" .Pages.ByLastmod }}
-    </div>
-  {{ end }}
-{{ end }}
-
-{{ define "right" }}
-{{ if and (ne . (.GetPage "docs") (eq .FirstSection (.GetPage "docs"))) }}
+  {{- else -}}
+     <div class="page-list">
+       {{- partial "components/page-list" .Pages.ByLastmod -}}
+     </div>
+   {{- end -}}
+{{- end -}}
+{{- define "right" -}}
+{{- if and (ne . (.GetPage "docs") (eq .FirstSection (.GetPage "docs"))) -}}
 <div class="doc-structure-container" id="DocStructureContainer">
   <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
   <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>
 </div>
-{{ end }}
-{{ end  }}
-
+{{- end -}}
+{{- end  -}}
 {{/* vim:set ft=gohtmltmpl: */}}

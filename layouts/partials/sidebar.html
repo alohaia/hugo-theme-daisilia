@@ -1,18 +1,18 @@
-{{ $theme := .Site.Params.daisy }}
-{{ $hasTOC := ge (len .TableOfContents) 40 }}
+{{- $theme := .Site.Params.daisy -}}
+{{- $hasTOC := ge (len .TableOfContents) 40 -}}
 <div class="sidebar-container">
   <div class="sidebar-nav">
-    {{ if $hasTOC }}
+    {{- if $hasTOC -}}
       <span class="sidebar-nav-item sidebar-nav-docs active">Table of Content</span>
       <span class="sidebar-nav-item sidebar-nav-overview">Overview</span>
-    {{ end }}
+    {{- end -}}
   </div>
   <div class="sidebar-content">
     <div class="sidebar-toc sidebar-pannel active">
-    {{ if $hasTOC }}
+    {{- if $hasTOC -}}
       <h1 class="toc-title" id="TOCTitle">{{ .Title }}</h1>
-      {{ .TableOfContents }}
-    {{ end }}
+      {{- .TableOfContents -}}
+    {{- end -}}
     </div>
     {{/* sidebar overview */}}
     <div class="sidebar-overview sidebar-pannel">
@@ -21,10 +21,10 @@
       </div>
       <p class="site-author-name">{{ partial "components/getname" . }}</p>
       <p class="site-description">{{ with $theme.description }}{{ . }}{{ else }}Subtitle here{{ end }}</p>
-      {{ $ndocs := 0 }}
-      {{ range (.GetPage "docs").Sections }}
-        {{ $ndocs = (add $ndocs 1) }}
-      {{ end }}
+      {{- $ndocs := 0 -}}
+      {{- range (.GetPage "docs").Sections -}}
+        {{- $ndocs = (add $ndocs 1) -}}
+      {{- end -}}
       <div class="site-state">
         <a class="site-state-item" href="/">
           <p class="site-state-num">{{ len .Site.RegularPages }}</p>
@@ -44,17 +44,17 @@
         </a>
       </div>
       <div class="sidebar-quote">
-      {{ if eq $theme.quote.enable "jinrishici" }}
+      {{- if eq $theme.quote.enable "jinrishici" -}}
         <p class="sidebar-quote-content" id="SidebarQuoteContent">主人不来过夜半，闲敲棋子落灯花。</p>
         <p class="sidebar-quote-from" id="SidebarQuoteFrom">——宋代·赵师秀《约客》</p>
-      {{ else if eq $theme.quote.enable "rainbow" }}
+      {{- else if eq $theme.quote.enable "rainbow" -}}
         <p class="sidebar-quote-content">🌈 获取中...</p>
         <p class="rainbow-from"></p>
-      {{ end }}
+      {{- end -}}
       </div>
-      {{ if $theme.music.enable }}
+      {{- if $theme.music.enable -}}
       <div class="sidebar-music">{{ partial "third-party/music" . }}</div>
-      {{ end }}
+      {{- end -}}
     </div>
     {{/* END sidebar overview */}}
   </div>

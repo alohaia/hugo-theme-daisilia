@@ -103,10 +103,26 @@
 /* .site-footer */
 .site-footer {
     grid-area: footer;
-    justify-content: left;
-    background-color: var(--gray-light);
     text-align: center;
+    font-family: 'Lora', serif;
+    color: var(--gray-deep);
+    font-size: 0.85em;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
+.site-footer a {
+    color: var(--orange);
+    text-decoration: none;
+}
+.site-footer a:hover {
+    color: var(--orange-deep);
+}
+.site-footer .heart {
+    color: red;
+}
+
 
 /* .site-main */
 .site-main {
@@ -130,4 +146,20 @@
 }
 .giscus {
     margin-bottom: 40px;
+}
+
+/* 404 */
+.not-found {
+    margin: 100px 0;
+    text-align: center;
+    font-size: 3em;
+    font-family: indie flower,cursive;
+}
+.not-found .back-home {
+    color: var(--orange);
+    text-decoration: none;
+}
+.not-found .back-home:hover {
+    color: var(--orange-deep);
+    text-decoration: underline;
 }

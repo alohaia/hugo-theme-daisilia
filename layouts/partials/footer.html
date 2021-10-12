@@ -1,3 +1,15 @@
-<div class="footer-copyright">Copyright {{ now.Format "2006" }} by {{ partial "components/getname" . }}. All Rights Reserved.</div>
-
+<div class="footer-powerby">
+  <span>Power by <a href="https://gohugo.io">Hugo</a></span>
+  <span class="division">|</span>
+  <span>Theme - <a href="https://github.com/alohaia/hugo-theme-daisilia">Daisilia</a></span>
+</div>
+<div class="footer-copyright">
+  <span>© 2020 - {{ now.Format "2006" }}</span>
+  <span class="heart"><i class="fas fa-heart"></i></span>
+  {{- if .Site.Author.homepage -}}
+    <span><a href="{{ .Site.Author.homepage }}">{{ partial "components/getname" . }}</a></span>
+  {{- else -}}
+    <span>{{ partial "components/getname" . }}</span>
+  {{- end -}}
+</div>
 {{/* vim:set ft=gohtmltmpl: */}}

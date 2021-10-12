@@ -5,11 +5,9 @@
   (resources.Get "css/page.css")
   (resources.Get "css/scrollbar.css")
 }}
-{{ $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint }}
-
+{{- $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen"/>
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
 <link rel="stylesheet" href="https://fonts.font.im/css?family=Fira+Mono|Indie+Flower|Lora|Noto+Sans|Noto+Serif"/>
-
 {{/* vim:set ft=gohtmltmpl: */}}

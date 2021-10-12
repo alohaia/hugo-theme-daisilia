@@ -1,8 +1,7 @@
-{{ if .Params.summary }}
-  {{- .Params.summary | markdownify -}}
-{{ else }}
-  {{- .Summary -}}
-{{ end }}
-
+{{- if .Params.summary -}}
+  {{- partial "components/extend-markdown" (dict "content" .Params.summary "page" .) -}}
+{{- else -}}
+  {{- partial "components/extend-markdown" (dict "content" .Summary "page" .) -}}
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
 

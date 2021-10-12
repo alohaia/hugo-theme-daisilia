@@ -395,10 +395,56 @@ ul.doc-structure {
     font-size: 1.25em;
 }
 
+/* extended markdown */
+ins {
+    text-decoration-thickness: 0.175em;
+}
+
+/* page-list */
 .page-list-item {
     margin-top: 20px;
-    /* background-color: var(--gray-light); */
-    /* border-radius: 5px; */
-    /* padding: 10px; */
-    /* box-shadow: inset 0px 0px 6px 2px var(--gray); */
 }
+.page-list-item .summary {
+    color: var(--gray-deep);
+}
+.page-list-item .read-more {
+    color: var(--orange);
+    text-decoration: none;
+}
+.page-list-item .read-more:hover {
+    color: var(--orange-deep);
+}
+.page-list-item:not(:first-child)::before {
+    content: "";
+    display: block;
+    border-top: 2px solid;
+    width: 75%;
+    margin: auto;
+    color: var(--gray-light);
+    margin-bottom: 20px;
+}
+
+/* short codes */
+
+@counter-style circled-number {
+    system: fixed;
+    symbols: ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳ ⑳;
+}
+
+.inline-list {
+    counter-reset: hzlistCounter;
+}
+
+.inline-list-item {
+    counter-increment: hzlistCounter;
+}
+
+.inline-list-item::before {
+    content: counter(hzlistCounter, circled-number);
+    margin: 0 2px;
+}
+
+.inline-list-conjunction {
+    font-size: 50%;
+}
+
