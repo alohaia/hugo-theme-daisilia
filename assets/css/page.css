@@ -24,6 +24,7 @@
     text-align: center;
     color: var(--gray-deep);
     font-size: 0.875em;
+    user-select: none;
 }
 @media (max-width: 650px) {
     .article-metadata .meta-section:not(:first-child) {
