@@ -12,4 +12,7 @@
     <span>{{ partial "components/getname" . }}</span>
   {{- end -}}
 </div>
+<div class="js-each" style="display:none">
+  {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}
+</div>
 {{/* vim:set ft=gohtmltmpl: */}}

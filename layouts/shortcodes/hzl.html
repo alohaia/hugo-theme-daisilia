@@ -7,5 +7,3 @@
   {{- end -}}
 {{- end -}}
 <span class="inline-list">{{- range (split .Inner $sep) -}}{{ if hasPrefix . "_" }}<span class="inline-list-conjunction">{{ slicestr . 1 }}</span>{{ else }}<span class="inline-list-item">{{ . }}</span>{{ end }}{{ end }}</span>
-{{/* vim:set ft=gohtmltmpl: */}}
-

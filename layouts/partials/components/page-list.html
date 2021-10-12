@@ -1,4 +1,4 @@
-{{- range . -}}
+{{- range where . "Type" "!=" "about" -}}
   <div class="page-list-item">
     <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
     <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>

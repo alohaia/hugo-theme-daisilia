@@ -5,6 +5,7 @@ new Pjax({
         'head title',
         '.sidebar-toc', '.sidebar-nav',
         '.site-content',
+        '.js-each',
         '.site-right',
     ],
     cacheBust: false,
@@ -16,6 +17,7 @@ new Pjax({
         'head title',
         '.sidebar-toc', '.sidebar-nav',
         '.site-content',
+        '.js-each',
     ],
     cacheBust: false,
 });
@@ -35,6 +37,7 @@ document.addEventListener("pjax:complete", function(){
             'head title',
             '.sidebar-toc', '.sidebar-nav',
             '.site-content',
+            '.js-each',
         ],
         cacheBust: false,
     });

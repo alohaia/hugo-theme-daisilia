@@ -83,7 +83,7 @@ var anchors;
 anchors = document.querySelectorAll("a[href^='#']");
 for (let i = 0; i < anchors.length; i++) {
     let a = anchors[i];
-    a.setAttribute("scroll", a.getAttribute("href").slice(1));
+    a.setAttribute("scroll", decodeURI(a.getAttribute("href").slice(1)));
     a.removeAttribute("href");
 }
 // change onclick of a[scroll]
