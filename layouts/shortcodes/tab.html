@@ -1,29 +1,34 @@
-{{- $type := "default" -}}
-{{- $summary := "summary" -}}
-{{- $details := false -}}
-{{- $open := false -}}
-{{- if .Get "type" -}}
-  {{- $type = .Get "type" -}}
-{{- else if .Get 0 -}}
-  {{- $type = .Get 0 -}}
+{{- if .IsNamedParams -}}
+  {{- $type    := default "default" (.Get "type")    -}}
+  {{- $summary := default "summary" (.Get "summary") -}}
+  {{- $details := default false     (.Get "details") -}}
+  {{- $open    := default false     (.Get "open")    -}}
+  {{- if $details -}}
+    <details{{ if $open }} open{{ end }} class="tab {{ $type }}">
+      <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
+      <div class="tab-content">{{- .Inner -}}</div>
+    </details>
+  {{- else -}}
+    <div{{ if $open }} open{{ end }} class="tab {{ $type }}">
+      <div class="tab-title"><span class="tab-title-content">{{ $summary }}</span></div>
+      <div class="tab-content">{{- .Inner -}}</div>
+    </div>
+  {{- end -}}
+{{- else -}}
+  {{- $type    := default "default" (.Get 0) -}}
+  {{- $summary := default "summary" (.Get 1) -}}
+  {{- $details := default false     (.Get 2) -}}
+  {{- $open    := default false     (.Get 3) -}}
+  {{- if $details -}}
+    <details{{ if $open }} open{{ end }} class="tab {{ $type }}">
+      <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
+      <div class="tab-content">{{- .Inner -}}</div>
+    </details>
+  {{- else -}}
+    <div{{ if $open }} open{{ end }} class="tab {{ $type }}">
+      <div class="tab-title"><span class="tab-title-content">{{ $summary }}</span></div>
+      <div class="tab-content">{{- .Inner -}}</div>
+    </div>
+  {{- end -}}
 {{- end -}}
-{{- if (.Get "summary") -}}
-  {{- $summary = .Get "summary" -}}
-{{- else if .Get 1 -}}
-  {{- $summary = .Get 1 -}}
-{{- end -}}
-{{- if .Get "details" -}}
-  {{- $details = .Get "details" -}}
-{{- else if .Get 2 -}}
-  {{- $details = .Get 2 -}}
-{{- end -}}
-{{- if .Get "open" -}}
-  {{- $open = .Get "open" -}}
-{{- else if .Get 3 -}}
-  {{- $open = .Get 3 -}}
-{{- end -}}
-<details{{ if $open }} open{{ end }} class="tab {{ $type }}">
-  <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
-  <div class="tab-content">{{- .Inner -}}</div>
-</details>
 {{/* vim:set ft=gohtmltmpl: */}}

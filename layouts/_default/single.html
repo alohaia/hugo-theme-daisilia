@@ -3,9 +3,9 @@
   <div class="article-metadata">
     {{- partial "components/metadata.html" . -}}
   </div>
-  {{- if .Content -}}
+  {{- with .Content -}}
     <div class="article-content">
-      {{- partial "components/extend-markdown" (dict "content" .Content "page" .) -}}
+      {{- . -}}
     </div>
   {{- end -}}
   {{/* {{ partial "components/page-nav" . }} */}}

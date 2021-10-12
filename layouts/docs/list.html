@@ -5,36 +5,27 @@
     {{- partial "components/metadata.html" . -}}
   </div>
   {{- if eq .File.Dir "docs/" -}}
-    {{- block "_root" . -}}{{ end }}
+    {{- block "_body" (dict "content" .Content "pages" .Sections.ByLastmod) -}}{{ end }}
   {{- else -}}
-    {{- block "_doc" . -}}{{ end }}
+    {{- block "_body" (dict "content" .Content "pages" .Pages.ByLastmod) -}}{{ end }}
   {{- end -}}
-  {{/* {{ partial "components/page-nav" . }} */}}
 {{- end -}}
-{{- define "_root" -}}
-  <div class="page-list doc-list">
-  {{- with .Sections -}}
-    {{- partial "components/page-list" .ByLastmod -}}
-  {{- end -}}
-  </div>
-{{- end -}}
-{{- define "_doc" -}}
-  {{- if .Content -}}
+{{- define "_body" -}}
+  {{- with .content -}}
     <div class="article-content">
-      {{- partial "components/extend-markdown" (dict "content" .Content "page" .) -}}
+      {{- . -}}
     </div>
-  {{- else -}}
-     <div class="page-list">
-       {{- partial "components/page-list" .Pages.ByLastmod -}}
-     </div>
-   {{- end -}}
+  {{- end -}}
+  {{- with .pages -}}
+    <div class="page-list">{{ partial "components/page-list" . }}</div>
+  {{- end -}}
 {{- end -}}
 {{- define "right" -}}
-{{- if and (ne . (.GetPage "docs") (eq .FirstSection (.GetPage "docs"))) -}}
-<div class="doc-structure-container" id="DocStructureContainer">
-  <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
-  <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>
-</div>
-{{- end -}}
+  {{- if and (ne . (.GetPage "docs") (eq .Kind  "docs")) -}}
+    <div class="doc-structure-container" id="DocStructureContainer">
+      <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
+      <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>
+    </div>
+  {{- end -}}
 {{- end  -}}
 {{/* vim:set ft=gohtmltmpl: */}}

@@ -1,7 +1,7 @@
   {{- if not .IsHome -}}
   <title>{{ print .Title " | " .Site.Title }}</title>
-  {{- else -}}{{ with $.Site.Params.daisy.subtitle }}
-  <title>{{ print $.Site.Title " - " . }}</title>
+  {{- else if $.Site.Params.daisy.subtitle -}}
+  <title>{{ print $.Site.Title " - " $.Site.Params.daisy.subtitle }}</title>
   {{- else -}}
   <title>{{ $.Site.Title }}</title>
-  {{- end -}}{{ end }}
+  {{- end -}}

@@ -1,3 +1,8 @@
+@keyframes fadeRight {
+    0%    {opacity: 0; transform: translateX(-20px)}
+    100%  {opacity: 1; transform: translateX(0)}
+}
+
 .site-sidebar {
     position: fixed;
     top: 0;
@@ -63,10 +68,6 @@
 }
 .sidebar-pannel {
     animation: fadeRight 0.5s ease-out;
-}
-@keyframes fadeRight {
-    0%    {opacity: 0; transform: translateX(-20px)}
-    100%  {opacity: 1; transform: translateX(0)}
 }
 .sidebar-pannel:not(.active) {
     display: none;
@@ -239,9 +240,10 @@ meting-js {
     justify-content: center;
     align-items: center;
     display: flex;
+    gap: 3px;
     padding: 0 3px;
     color: var(--gray);
-    transition: all 0.3s ease-out;
+    /* transition: all 0.3s ease-out; */
 }
 .back2top:hover {
     color: var(--gray-light);
@@ -253,6 +255,7 @@ meting-js {
     position: fixed;
     bottom: 45px;
     left: 54px;
+    padding-right: 6px;
     background-color: var(--black);
     height: 24px;
     margin: auto 0;

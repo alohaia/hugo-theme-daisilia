@@ -1,12 +1,13 @@
 {{- define "main" -}}
   <h1 class="article-title list-title">{{ .Title }}</h1>
   <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
-  {{- if .Content -}}
+  {{- with .Content -}}
     <div class="article-content">
-      {{- partial "components/extend-markdown" (dict "content" .Content "page" .) -}}
+      {{- . -}}
     </div>
   {{- end -}}
-  <div class="page-list">{{ partial "components/page-list" .Pages.ByLastmod }}</div>
-  {{/* {{ partial "components/page-nav" . }} */}}
+  {{- with .Pages -}}
+    <div class="page-list">{{ partial "components/page-list" .ByLastmod }}</div>
+  {{- end -}}
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}

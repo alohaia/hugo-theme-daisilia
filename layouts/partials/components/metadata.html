@@ -1,9 +1,11 @@
 <ul class="meta-section">
+  {{- if .PublishDate -}}
   <li class="meta-item">
-    <i class="fas fa-calendar"></i>
-    <span class="meta-item-text">Posted on</span>
-    <span class="meta-item-value">{{ .PublishDate.Format "2006-01-02" }}</span>
+      <i class="fas fa-calendar"></i>
+      <span class="meta-item-text">Posted on</span>
+      <span class="meta-item-value">{{ .PublishDate.Format "2006-01-02" }}</span>
   </li>
+  {{- end -}}
   <li class="meta-item">
     <i class="fas fa-clock"></i>
     <span class="meta-item-text">Edited on</span>
@@ -53,19 +55,21 @@
     {{- end -}}
   </ul>
 {{- end -}}
-<ul class="meta-section">
-  <li class="meta-item">
-    <i class="far fa-file-word"></i>
-    <span class="meta-item-text">Word count ≈</span>
-    <span class="meta-item-value">{{ .FuzzyWordCount }}</span>
-  </li>
-  <li class="meta-item">
-    <i class="fas fa-hourglass-start"></i>
-    <span class="meta-item-text">Reading time {{ if ne .ReadingTime 0 | and (ge .FuzzyWordCount 100) }}≈</span>
-    <span class="meta-item-value">{{ .ReadingTime }} min</span>
-    {{- else -}}≤</span>
-    <span class="meta-item-value">1 min</span>
-    {{- end -}}
-  </li>
-</ul>
+{{- if .Content -}}
+  <ul class="meta-section">
+    <li class="meta-item">
+      <i class="far fa-file-word"></i>
+      <span class="meta-item-text">Word count ≈</span>
+      <span class="meta-item-value">{{ .FuzzyWordCount }}</span>
+    </li>
+    <li class="meta-item">
+      <i class="fas fa-hourglass-start"></i>
+      <span class="meta-item-text">Reading time {{ if ne .ReadingTime 0 | and (ge .FuzzyWordCount 100) }}≈</span>
+      <span class="meta-item-value">{{ .ReadingTime }} min</span>
+      {{- else -}}≤</span>
+      <span class="meta-item-value">1 min</span>
+      {{- end -}}
+    </li>
+  </ul>
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
