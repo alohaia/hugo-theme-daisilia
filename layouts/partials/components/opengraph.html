@@ -1,6 +1,6 @@
 <meta property="og:site_name" content="{{ .Site.Title }}"/>
 <meta property="og:title" content="{{ .Title }}"/>
-<meta property="og:description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else if .Summary }}{{ .Summary }}{{ end }}"/>
+<meta property="og:description" name="description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else if .Summary }}{{ .Summary }}{{ end }}"/>
 <meta property="og:locale" content="zh_CN"/>
 <meta property="og:url" content="{{ .Permalink }}"/>
 <meta property="og:image" content="https://daisilia.wiki/images/favicon.ico"/>
@@ -9,6 +9,6 @@
 <meta property="article:modified_time" content="{{ .Lastmod }}"/>
 <meta property="article:expiration_time" content="{{ .ExpiryDate }}"/>
 <meta property="article:author" content="{{ partial "components/getname" . }}"/>
-<meta property="article:tag" content="{{ with .Params.tags }}{{ index . 0 }}{{ end }}"/>
+<meta property="article:tag" name="keywords" name="news_keywords" content="{{ range .Params.tags }}{{ . }} {{ end }}"/>
 <meta property="article:section" content="{{ with .Params.categories }}{{ index . 0 }}{{ end }}"/>
 {{/* vim:set ft=gohtmltmpl: */}}
