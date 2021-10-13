@@ -1,7 +1,7 @@
 {{- if .Params.summary -}}
-  {{- partial "components/extend-markdown" (dict "content" .Params.summary "page" .) -}}
+  {{- .Params.summary -}}
 {{- else -}}
-  {{- partial "components/extend-markdown" (dict "content" .Summary "page" .) -}}
+  {{- .Summary -}}
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
 

@@ -3,6 +3,7 @@ new Pjax({
     selectors: [
         '[data-pjax]',
         'head title',
+        'meta[property]',
         '.sidebar-toc', '.sidebar-nav',
         '.site-content',
         '.js-each',
@@ -15,6 +16,7 @@ new Pjax({
     selectors: [
         '[data-pjax]',
         'head title',
+        'meta[property]',
         '.sidebar-toc', '.sidebar-nav',
         '.site-content',
         '.js-each',
@@ -35,6 +37,7 @@ document.addEventListener("pjax:complete", function(){
         selectors: [
             '[data-pjax]',
             'head title',
+            'meta[property]',
             '.sidebar-toc', '.sidebar-nav',
             '.site-content',
             '.js-each',

@@ -239,7 +239,7 @@ code:not(pre code) { /* inline block */
     counter-reset: h4Counter h5Counter h6Counter;
     counter-increment: h3Counter;
 }
-.article-content h4 {
+.article-content h4:not(figcaption h4) {
     font-size: 22px;
     counter-reset: h5Counter h6Counter;
     counter-increment: h4Counter;
@@ -260,7 +260,7 @@ code:not(pre code) { /* inline block */
 .article-content h3:before {
     content: counter(h2Counter) "." counter(h3Counter) ". ";
 }
-.article-content h4:before {
+.article-content h4:not(figcaption h4):before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) ". ";
 }
 .article-content h5:before {
