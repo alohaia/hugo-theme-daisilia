@@ -21,7 +21,7 @@
 
     line-height: 1.5;
 
-    z-index: 1000;
+    z-index: var(--z-sidebar);
 }
 
 .sidebar-container {

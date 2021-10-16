@@ -1,7 +1,7 @@
 .article-title {
     text-align: center;
     font-size: 24px;
-    z-index: 1;
+    z-index: var(--z-overcontent);
     color: var(--black);
     /* font-weight: normal; */
 }
@@ -244,7 +244,7 @@ code:not(pre code) { /* inline block */
     text-align: center;
     font-size: 28px;
     /* scrollIntoView 目前存在问题 */
-    z-index: 1;
+    z-index: var(--z-overcontent);
     /* position: sticky; */
     /* top: 48px; */
     background-color: var(--white);
@@ -345,11 +345,8 @@ blockquote {
     width: 320px;
     right: -320px;
     transition: all .5s ease-out;
-    z-index: 10;
+    z-index: var(--z-docs);
 }
-/* .site-root:not(.header-hidden) .doc-structure-container { */
-/*     top: 80px; */
-/* } */
 .doc-structure-container:hover {
     right: 0;
 }
@@ -372,7 +369,7 @@ blockquote {
     align-items: center;
     justify-content: center;
     border-radius: 8px 0 0 8px;
-    z-index: 5;
+    z-index: var(--z-docs);
 }
 .doc-structure-content {
     position: relative;
@@ -385,7 +382,7 @@ blockquote {
     align-items: center;
     justify-content: center;
     border-radius: 4px 0 0 4px;
-    z-index: 10;
+    z-index: var(--z-docs);
 }
 .doc-structure-content li::marker {
     content: none;
@@ -473,6 +470,7 @@ ins {
     font-size: 50%;
 }
 
+/* hdt */
 .hidden-text { background-color: var(--black) }
 .hidden-text:hover { background-color: var(--white) }
 

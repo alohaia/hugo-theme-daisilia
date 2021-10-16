@@ -25,7 +25,6 @@
     background-color: var(--gray-light);
     transition: all .2s ease-out;
     width: 100%;
-    z-index: 10;
     overscroll-behavior: contain;
 }
 .site-header a {
@@ -54,7 +53,7 @@
     .fullscreen-header .site-header {
         position: fixed;
         height: 100%;
-        z-index: 99999;
+        z-index: var(--z-fullscreen);
     }
     .main-menu {
         flex-direction: column;
@@ -135,6 +134,28 @@
 }
 .giscus {
     margin-bottom: 40px;
+}
+
+/* pjax loading bar */
+.loading-track {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: red;
+    height: 1px;
+    z-index: var(--z-loadingbar);
+    opacity: 0;
+    transition: opacity .4s linear;
+}
+.loading-track.loading {
+    opacity: 1;
+}
+.loading-progress {
+    width: 0;
+    background-color: red;
+    background-color: #77b6ff;
+    box-shadow: 0 0 10px rgba(119, 182, 255, .7);
+    transition: width .4s ease;
 }
 
 /* 404 */
