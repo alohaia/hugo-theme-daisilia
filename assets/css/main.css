@@ -1,9 +1,3 @@
-/* font-family: 'Noto Sans', sans-serif; */
-/* font-family: 'Noto Serif', serif; */
-/* font-family: 'Lora', serif; */
-/* font-family: 'Fira Mono', monospace; */
-/* font-family: 'Indie Flower', cursive; */
-
 .site-root {
     margin-left: 0;
     transition: all 0.2s ease-out;
@@ -45,7 +39,7 @@
     margin: 0;
     font-size: 32px;
     line-height: var(--header-height);
-    font-family: 'Indie Flower', cursive;
+    font-family: var(--font-handwrite);
     user-select: none;
 }
 @media (min-width: 851px) {
@@ -101,7 +95,7 @@
 .site-footer {
     grid-area: footer;
     text-align: center;
-    font-family: 'Lora', serif;
+    font-family: var(--font-serif);
     color: var(--gray-deep);
     font-size: 0.85em;
     display: flex;
@@ -148,7 +142,7 @@
     margin: 100px 0;
     text-align: center;
     font-size: 3em;
-    font-family: indie flower,cursive;
+    font-family: var(--font-handwrite);
 }
 .not-found .back-home {
     color: var(--orange);

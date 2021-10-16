@@ -1,9 +1,13 @@
 :root {
     line-height: 2;
-    font-family: 'Noto Sans', sans-serif;
 
     --header-height: 80px;
     --footer-height: 64px;
+
+    --font-handwrite: 'Indie Flower', cursive;
+    --font-code: 'JetBrains Mono', monospace;
+    --font-sans: 'Roboto', 'Noto Sans SC', sans-serif;
+    --font-serif: 'Andada Pro', 'Noto Serif SC', serif;
 
     --white: #ffffff;
     --gray: #cccccc;
@@ -19,16 +23,16 @@
 body, html {
     height: 100%;
 }
+
 body {
     scroll-behavior: smooth;
     margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;
+    font-family: var(--font-sans); /* default font family */
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lora', serif;
-}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif) }
 
 a[scroll] {
     cursor: pointer;
