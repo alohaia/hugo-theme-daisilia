@@ -516,6 +516,6 @@ details[open] .tab-title-indicator {
 .tab.error   .tab-title { background-color: #d9534f25 }
 
 /* small adjustments */
-p:not(li p)+ol {
+p:not(li p)+ol, p:not(li p)+ul {
     margin-top: -20px;
 }
