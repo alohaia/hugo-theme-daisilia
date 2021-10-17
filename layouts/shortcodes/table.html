@@ -1,0 +1,8 @@
+{{- $title   := .Get "title"   -}}
+{{- $caption := .Get "caption" -}}
+{{- $head := "" -}}
+{{- with $title -}}{{- $head = (print $head "<h4>" (. | markdownify) "</h4>") -}}{{- end -}}
+{{- with $caption -}}{{- $head = (print $head "<p>" (. | markdownify) "</p>") -}}{{- end -}}
+{{- $head = printf "<table><caption>%s</caption>" $head -}}
+{{- .Inner | markdownify | replaceRE "<table>" $head | safeHTML -}}
+{{/* vim:set ft=gohtmltmpl: */}}

@@ -74,14 +74,7 @@
     color: var(--orange-deep);
     text-decoration: underline;
 }
-.article-content h1 a,
-.article-content h2 a,
-.article-content h3 a,
-.article-content h4 a,
-.article-content h5 a,
-.article-content h6 a {
-    color: var(--black);
-}
+.heading a { color: var(--black) }
 
 .page-nav {
     width: 100%;
@@ -126,10 +119,12 @@
 figure {
     margin: 24px 0;
 }
-figcaption {
+
+/* caption */
+figcaption, table caption {
     text-align: left;
 }
-figcaption>h4 {
+figcaption>h4, table caption>h4{
     margin: 0;
     font-size: 1.125em;
     line-height: 1.1;
@@ -138,7 +133,11 @@ figcaption>h4::before {
     content: "Figure - ";
     color: var(--gray);
 }
-figcaption>p {
+table caption>h4::before {
+    content: "Table - ";
+    color: var(--gray);
+}
+figcaption>p ,table caption>p{
     margin: 0;
     color: var(--gray-deep);
 }
@@ -237,10 +236,10 @@ code:not(pre code) { /* inline block */
 }
 
 /* heading */
-.article-content h1 {
+h1.heading {
     font-size: 32px;
 }
-.article-content h2 {
+h2.heading {
     text-align: center;
     font-size: 28px;
     /* scrollIntoView 目前存在问题 */
@@ -251,40 +250,40 @@ code:not(pre code) { /* inline block */
     counter-reset: h3Counter h4Counter h5Counter h6Counter;
     counter-increment: h2Counter;
 }
-.article-content h3 {
+h3.heading {
     font-size: 24px;
     counter-reset: h4Counter h5Counter h6Counter;
     counter-increment: h3Counter;
 }
-.article-content h4:not(figcaption h4) {
+h4.heading {
     font-size: 22px;
     counter-reset: h5Counter h6Counter;
     counter-increment: h4Counter;
 }
-.article-content h5 {
+h5.heading {
     font-size: 20px;
     counter-reset: h6Counter;
     counter-increment: h5Counter;
 }
-.article-content h6 {
+h6.heading {
     font-size: 18px;
     counter-increment: h6Counter;
 }
 
-.article-content h2:before {
+h2.heading:before {
     content: counter(h2Counter) ". ";
 }
-.article-content h3:before {
+h3.heading:before {
     content: counter(h2Counter) "." counter(h3Counter) ". ";
 }
-.article-content h4:not(figcaption h4):before {
+h4.heading:before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) ". ";
 }
-.article-content h5:before {
+h5.heading:before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) ". ";
     /* content: counter(h5Counter, upper-roman) ". "; */
 }
-.article-content h6:before {
+h6.heading:before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) "." counter(h6Counter) ". ";
     /* content: counter(h6Counter, lower-alpha) ". "; */
 }

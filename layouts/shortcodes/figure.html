@@ -6,7 +6,7 @@
   {{- end }}
     <img src="{{ .Get "src" | safeURL }}"
       {{- if or (.Get "alt") (.Get "caption") }}
-      alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
+      alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| safeHTML }}{{ end }}"
       {{- end -}}
       {{- with .Get "width" }} width="{{ . }}"{{ end -}}
       {{- with .Get "height" }} height="{{ . }}"{{ end -}}
