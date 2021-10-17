@@ -6,30 +6,20 @@ $("sidebar-content").ready(function(){
         genUlNum(toc.children[0]);
     }
     // add click events for nav items
+    let navs = document.getElementsByClassName("sidebar-nav-item");
+    let pannels = document.getElementsByClassName("sidebar-pannel");
     for(let i = 0; i < navs.length; i++) {
         navs[i].onclick = function(){
-            for(let j = 0; j < navs.length; j++){
-                if(j != i){
-                    pannels[j].classList.remove("active");
-                    navs[j].classList.remove("active");
-                } else {
-                    pannels[j].classList.add("active");
-                    navs[j].classList.add("active");
-                }
-            }
+            switchPannel(i);
         }
     }
-    // switch to first non-empty pannel
+    // active first non-empty pannel
     for(let i = 0; i < pannels.length; i++){
         if(pannels[i].childElementCount > 0){
-            pannels[i].className += " active";
+            switchPannel(i);
             break;
         }
     }
-    // auto-open sidebar
-    // if($(".sidebar-nav-docs").length || $(".sidebar-nav-docs").length){
-    //     toggleSidebar(1);
-    // }
 })
 
 $(".doc-structure").ready(function(){

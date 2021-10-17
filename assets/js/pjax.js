@@ -1,49 +1,45 @@
-new Pjax({
-    elements: ['a[href]:not([no-pjax], .sidebar-toc a, .doc-structure-container a)'],
+const pjax = new Pjax({
+    elements: ["a[href]:not([no-pjax], .sidebar-toc a)"],
     selectors: [
-        '[data-pjax]',
-        'head title',
-        'meta[property]',
-        '.sidebar-toc', '.sidebar-nav',
-        '.site-content',
-        '.js-each',
-        '.site-right',
+        "[data-pjax]",
+        "head title",
+        "meta[property]",
+        ".sidebar-toc", ".sidebar-nav",
+        ".site-content",
+        ".js-each",
+        ".site-right",
     ],
+    // switches: {
+    //     // ".site-content": Pjax.switches.sideBySide,
+    // },
+    // switchesOptions: {
+    //     ".site-content": {
+    //         classNames: {
+    //             // class added to the old element being replaced, e.g. a fade out
+    //             remove: "animated",
+    //             // class added to the new element that is replacing the old one, e.g. a fade in
+    //             add: "animated",
+    //             // class added on the element when navigating back
+    //             backward: "animate__slideInUp",
+    //             // class added on the element when navigating forward (used for new page too)
+    //             forward: "animate__slideInDown"
+    //         },
+    //         callbacks: {
+    //             // // to make a nice transition with 2 pages at the same time
+    //             // // we are playing with absolute positioning for the element we are removing
+    //             // // & we need live metrics to have something great
+    //             // // see associated CSS below
+    //             // removeElement: function(el) {
+    //             //     el.style.marginLeft = "-" + (el.getBoundingClientRect().width/2) + "px"
+    //             // }
+    //         }
+    //     }
+    // },
     cacheBust: false,
-});
-new Pjax({
-    elements: ['.doc-structure-container a[href]'],
-    selectors: [
-        '[data-pjax]',
-        'head title',
-        'meta[property]',
-        '.sidebar-toc', '.sidebar-nav',
-        '.site-content',
-        '.js-each',
-    ],
-    cacheBust: false,
+    analytics: false,
 });
 
 document.addEventListener("pjax:complete", function(){
-    for(let i = 0; i < navs.length; i++){
-        if(i != 0){
-            pannels[i].classList.remove("active");
-        } else {
-            pannels[i].classList.add("active");
-        }
-    }
-    new Pjax({
-        elements: ['.doc-structure-container a[href]'],
-        selectors: [
-            '[data-pjax]',
-            'head title',
-            'meta[property]',
-            '.sidebar-toc', '.sidebar-nav',
-            '.site-content',
-            '.js-each',
-        ],
-        cacheBust: false,
-    });
     if(document.querySelector('iframe.giscus-frame')) {
         document.querySelector('iframe.giscus-frame').contentWindow.postMessage({
           giscus: {

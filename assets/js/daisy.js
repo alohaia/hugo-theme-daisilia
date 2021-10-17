@@ -1,5 +1,21 @@
-const navs = document.getElementsByClassName("sidebar-nav-item");
-const pannels = document.getElementsByClassName("sidebar-pannel");
+function switchPannel(n){
+    let navs = document.getElementsByClassName("sidebar-nav-item");
+    let pannels = document.getElementsByClassName("sidebar-pannel");
+
+    for(let i = 0; i < pannels.length; i++){
+        if(i == n){
+            if(navs.length){
+                navs[i].classList.add("active");
+            }
+            pannels[i].classList.add("active");
+        } else {
+            if(navs.length){
+                navs[i].classList.remove("active");
+            }
+            pannels[i].classList.remove("active");
+        }
+    }
+}
 
 // @force: 0 to close; 1 to open
 function toggleSidebar(force){
