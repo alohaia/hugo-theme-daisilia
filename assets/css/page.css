@@ -507,13 +507,13 @@ details[open] .tab-title-indicator {
 .tab.warning { border-color: #f0ad4e; box-shadow: 0 0 2px 2px #f0ad4e25; }
 .tab.danger,
 .tab.error   { border-color: #d9534f }
-.tab.default .tab-title { background-color: #77777725 }
-.tab.success .tab-title { background-color: #5cb85c25 }
-.tab.primary .tab-title { background-color: #6f42c125 }
-.tab.info    .tab-title { background-color: #428bca25 }
-.tab.warning .tab-title { background-color: #f0ad4e25 }
-.tab.danger  .tab-title,
-.tab.error   .tab-title { background-color: #d9534f25 }
+.tab.default > .tab-title { background-color: #77777725 }
+.tab.success > .tab-title { background-color: #5cb85c25 }
+.tab.primary > .tab-title { background-color: #6f42c125 }
+.tab.info    > .tab-title { background-color: #428bca25 }
+.tab.warning > .tab-title { background-color: #f0ad4e25 }
+.tab.danger  > .tab-title,
+.tab.error   > .tab-title { background-color: #d9534f25 }
 
 /* small adjustments */
 p:not(li p)+ol, p:not(li p)+ul {
