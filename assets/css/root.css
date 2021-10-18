@@ -53,3 +53,4 @@ a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a):
     text-overflow: ellipsis;
     overflow: hidden;
 }
+

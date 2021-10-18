@@ -1,0 +1,23 @@
+@media print {
+    body {
+        background-color: white;
+        margin: 2px 0;
+    }
+    .tab {
+        box-shadow: none;
+    }
+    .tab, table, figure, p {
+        page-break-inside: avoid;
+    }
+    .site-sidebar, .site-footer, .site-header,
+    .site-comment, .doc-structure-container {
+        display: none;
+    }
+    .site-inner {
+        grid-template-rows: 0 auto 0;
+    }
+    .article-metadata .meta-section:not(:first-child) {
+        display: none;
+    }
+}
+

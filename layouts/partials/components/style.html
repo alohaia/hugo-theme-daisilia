@@ -4,9 +4,10 @@
   (resources.Get "css/main.css")
   (resources.Get "css/page.css")
   (resources.Get "css/scrollbar.css")
+  (resources.Get "css/print.css")
 }}
 {{- $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint -}}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen"/>
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
 <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">

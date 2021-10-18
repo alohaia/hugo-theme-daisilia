@@ -28,11 +28,6 @@
 }
 @media (max-width: 650px) {
     .article-metadata .meta-section:not(:first-child) {
-        font-size: 
-    }
-}
-@media (max-width: 650px) {
-    .article-metadata .meta-section:not(:first-child) {
         display: none;
     }
 }
