@@ -409,11 +409,6 @@ ul.doc-structure {
     font-size: 1.25em;
 }
 
-/* extended markdown */
-ins {
-    text-decoration-thickness: 0.175em;
-}
-
 /* page-list */
 .article-content+.page-list::before {
     content: "Child Pages";
@@ -441,7 +436,7 @@ ins {
 .page-list-item:not(:first-child)::before {
     content: "";
     display: block;
-    border-top: 2px solid;
+    border-top: 2px dashed;
     width: 75%;
     margin: auto;
     color: var(--gray-light);
@@ -518,4 +513,7 @@ details[open] .tab-title-indicator {
 /* small adjustments */
 p:not(li p)+ol, p:not(li p)+ul {
     margin-top: -20px;
+}
+ins, del {
+    text-decoration-thickness: 0.175em; /* default text decoration thickness */
 }

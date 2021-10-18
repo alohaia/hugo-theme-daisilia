@@ -14,7 +14,6 @@
       {{- .TableOfContents -}}
     {{- end -}}
     </div>
-    {{/* sidebar overview */}}
     <div class="sidebar-overview sidebar-pannel">
       <div class="sidebar-avatar">
         <a href="/about"><img class="site-avatar-image" alt="{{ .Site.Author.nickname }}" src="{{ .Site.Author.avatar }}"></a>
@@ -55,8 +54,25 @@
       {{- if $theme.music.enable -}}
       <div class="sidebar-music">{{ partial "third-party/music" . }}</div>
       {{- end -}}
+      {{- with $theme.social -}}
+      <div class="sidebar-social">
+        {{- if .email -}}
+        <a class="sidebar-social-item" href="mailto:{{ .email }}"><i class="fas fa-envelope"></i>E-Mail</a>
+        {{- end -}}
+        {{- if .github -}}
+        <a class="sidebar-social-item" href="{{ .email }}"><i class="fab fa-github"></i>Github</a>
+        {{- end -}}
+      </div>
+      {{- end -}}
+      {{- with $theme.links -}}
+      <div class="sidebar-links">
+        <div class="sidebar-links-title"><i class="fas fa-user-friends"></i>友链</div>
+        {{- range $text,$url := . -}}
+        <a class="sidebar-links-item" href="{{ $url }}">{{ $text | markdownify | safeHTML }}</a>
+        {{- end -}}
+      </div>
+      {{- end -}}
     </div>
-    {{/* END sidebar overview */}}
   </div>
   <div class="back2top" id="Back2top" role="button">
     <i class="fas fa-angle-double-up"></i>

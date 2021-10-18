@@ -21,8 +21,8 @@
 
     --z-overcontent: 1;
     --z-docs: 10;
-    --z-loadingbar: 100;
-    --z-sidebar: 1000;
+    --z-sidebar: 100;
+    --z-loadingbar: 1000;
     --z-fullscreen: 9999;
 }
 

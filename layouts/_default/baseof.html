@@ -9,7 +9,6 @@
   {{- partial "components/favicon" . -}}   {{/* favicon */}}
 </head>
 <body class="site-root" id="SiteRoot">
-  <div class="loading-track"><div class="loading-progress"></div></div>
   <div class="site-inner" id="SiteInner">
     <header class="site-header" id="SiteHeader">{{ partial "header" . }}</header>
     <div class="site-main" id="SiteMain">
@@ -21,6 +20,7 @@
     <footer class="site-footer" id="SiteFooter">{{ partial "footer" . }}</footer>
     <aside class="site-sidebar" id="SiteSidebar">{{ partial "sidebar" . }}</aside>
   </div>
+  <div class="loading-track"><div class="loading-progress"></div></div>
   {{- partial "components/js" . -}} {{/* js */}}
 </body>
 </html>

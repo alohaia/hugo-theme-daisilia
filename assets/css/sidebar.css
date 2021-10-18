@@ -231,6 +231,20 @@ meting-js {
     all: initial;
 }
 
+/* social and friend links */
+.sidebar-social i, .sidebar-links i {
+    margin-right: 5px;
+}
+.sidebar-social, .sidebar-links {
+    margin-top: 15px;
+}
+.sidebar-social-item, .sidebar-links-item {
+    margin: 0 5px;
+    white-space: nowrap;
+    text-decoration: none;
+    border-bottom: 1px dashed;
+}
+
 /* back to top */
 .back2top {
     width: fit-content;
