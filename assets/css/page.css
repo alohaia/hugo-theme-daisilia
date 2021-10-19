@@ -505,6 +505,17 @@ details[open] .tab-title-indicator {
 .tab.danger  > .tab-title,
 .tab.error   > .tab-title { background-color: #d9534f25 }
 
+/* sa - see also */
+.see-also:before {
+    content: "See also:";
+    color: var(--gray);
+}
+.see-also a {
+    background-color: var(--gray-light);
+    border-radius: 4px;
+    padding: 2px;
+}
+
 /* small adjustments */
 p:not(li p)+ol, p:not(li p)+ul {
     margin-top: -20px;
