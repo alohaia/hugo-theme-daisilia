@@ -26,6 +26,9 @@
     font-size: 0.875em;
     user-select: none;
 }
+.article-metadata .meta-item-value{
+    user-select: text;
+}
 @media (max-width: 650px) {
     .article-metadata .meta-section:not(:first-child) {
         display: none;
@@ -105,35 +108,46 @@
     text-align: center;
 }
 .image-wrap img, figure img {
-    width: 100%;
     max-width: 100%;
+    max-height: 75vh;
 }
 .image-wrap a[data-src], figure a[data-src] {
     cursor: pointer;
 }
 figure {
     margin: 24px 0;
+    overflow: hidden;
+}
+
+figure.left img {
+    float: left;
+    max-width: 75%;
+}
+figure.right img {
+    float: right;
+    max-width: 75%;
 }
 
 /* caption */
 figcaption, table caption {
     text-align: left;
 }
-figcaption>h4, table caption>h4{
-    margin: 0;
+figcaption>.title, table caption>.title{
+    margin: 10px 0 0;
     font-size: 1.125em;
     line-height: 1.1;
 }
-figcaption>h4::before {
+figcaption>.title::before {
     content: "Figure - ";
     color: var(--gray);
 }
-table caption>h4::before {
+table caption>.title::before {
     content: "Table - ";
     color: var(--gray);
 }
-figcaption>p ,table caption>p{
-    margin: 0;
+figcaption>.caption ,table caption>.caption{
+    line-height: 1.6;
+    margin: 10px 0 0;
     color: var(--gray-deep);
 }
 
@@ -516,6 +530,25 @@ details[open] .tab-title-indicator {
     padding: 2px;
 }
 
+/* bilibili & youtube */
+.vedio-container {
+    height: 0;
+    margin: 10px 0;
+    overflow: hidden;
+    padding-top: 75%;
+    position: relative;
+    width: 100%;
+}
+.vedio-container .bilibili-player,
+.vedio-container .youtube-player {
+    height: 100%;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
 /* small adjustments */
 p:not(li p)+ol, p:not(li p)+ul {
     margin-top: -20px;
@@ -523,3 +556,10 @@ p:not(li p)+ol, p:not(li p)+ul {
 ins, del {
     text-decoration-thickness: 0.175em; /* default text decoration thickness */
 }
+a.exturl::before {
+    content: "\f360";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin: 0 0.1em;
+}
+

@@ -1,4 +1,3 @@
-{{/******** main ********/}}
 {{- define "main" -}}
   <h1 class="article-title list-title">{{ .Title }}</h1>
   <div class="article-metadata">
@@ -21,7 +20,7 @@
   {{- end -}}
 {{- end -}}
 {{- define "right" -}}
-  {{- if and (ne . (.GetPage "docs") (eq .Kind  "docs")) -}}
+  {{- if ne . (.GetPage "docs") -}}
     <div class="doc-structure-container" id="DocStructureContainer">
       <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
       <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>
