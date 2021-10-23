@@ -20,9 +20,15 @@
       </div>
       <p class="site-author-name">{{ partial "components/getname" . }}</p>
       <p class="site-description">{{ with $theme.description }}{{ . }}{{ else }}Subtitle here{{ end }}</p>
-      {{- $ndocs := 0 -}}
-      {{- range (.GetPage "docs").Sections -}}
-        {{- $ndocs = (add $ndocs 1) -}}
+      {{- with $theme.social -}}
+      <div class="sidebar-social">
+        {{- if .email -}}
+        <a class="sidebar-social-item" href="mailto:{{ .email }}"><i class="fas fa-envelope"></i>E-Mail</a>
+        {{- end -}}
+        {{- if .github -}}
+        <a class="sidebar-social-item" href="{{ .email }}"><i class="fab fa-github"></i>Github</a>
+        {{- end -}}
+      </div>
       {{- end -}}
       <div class="site-state">
         <a class="site-state-item" href="/">
@@ -30,7 +36,7 @@
           <p class="site-state-name">Pages</p>
         </a>
         <a class="site-state-item" href="/docs">
-          <p class="site-state-num">{{ $ndocs }}</p>
+          <p class="site-state-num">{{ len (.GetPage "docs").Sections }}</p>
           <p class="site-state-name">Docs</p>
         </a>
         <a class="site-state-item" href="/categories">
@@ -53,16 +59,6 @@
       </div>
       {{- if $theme.music.enable -}}
       <div class="sidebar-music">{{ partial "third-party/music" . }}</div>
-      {{- end -}}
-      {{- with $theme.social -}}
-      <div class="sidebar-social">
-        {{- if .email -}}
-        <a class="sidebar-social-item" href="mailto:{{ .email }}"><i class="fas fa-envelope"></i>E-Mail</a>
-        {{- end -}}
-        {{- if .github -}}
-        <a class="sidebar-social-item" href="{{ .email }}"><i class="fab fa-github"></i>Github</a>
-        {{- end -}}
-      </div>
       {{- end -}}
       {{- with $theme.links -}}
       <div class="sidebar-links">

@@ -3,6 +3,10 @@
 {{- $head := "" -}}
 {{- with $title -}}{{- $head = (print $head "<h4 class='title'>" (. | markdownify) "</h4>") -}}{{- end -}}
 {{- with $caption -}}{{- $head = (print $head "<p class='caption'>" (. | markdownify) "</p>") -}}{{- end -}}
-{{- $head = printf "<table><caption>%s</caption>" $head -}}
+{{- if .Get "left_sticky" -}}
+  {{- $head = printf "<table class='left-sticky'><caption>%s</caption>" $head -}}
+{{- else -}}
+  {{- $head = printf "<table><caption>%s</caption>" $head -}}
+{{- end -}}
 {{- .Inner | markdownify | replaceRE "<table>" $head | safeHTML -}}
 {{/* vim:set ft=gohtmltmpl: */}}

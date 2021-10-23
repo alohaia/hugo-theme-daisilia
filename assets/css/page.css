@@ -1,7 +1,6 @@
 .article-title {
     text-align: center;
     font-size: 24px;
-    z-index: var(--z-overcontent);
     color: var(--black);
     /* font-weight: normal; */
 }
@@ -9,6 +8,7 @@
     margin: 40px 0 0 0;
     position: sticky;
     top: 0px;
+    z-index: var(--z-title);
     background-color: var(--white);
     cursor: pointer;
 }
@@ -159,35 +159,45 @@ figcaption>.caption ,table caption>.caption{
 }
 
 /* table */
-table {
-    border-collapse: collapse;
-    border: 1px solid var(--gray-deep);
-    width: 100%;
-    font-size: 0.875em;
-}
-table:not(.highlight table) {
-    white-space: nowrap;
-    margin-top: 10px;
-}
 .table-container {
     overflow: auto;
+    margin-top: 10px;
+    max-height: 75vh;
+    white-space: nowrap;
 }
-table thead {
-    border-bottom: 3px solid var(--gray-deep);
+.table-container table {
+    width: 100%;
+    font-size: 0.875em;
+    border-collapse: separate;
+    border-spacing: 0;
 }
-table thead th {
-    color: var(--black);
-}
-table td, table th {
-    padding: 0.5em 1em;
+.table-container table th {
     border: 1px solid var(--gray-deep);
+    border-bottom: 3px solid var(--gray-deep);
+    position: sticky;
+    z-index: var(--z-overcontent);
+    top: 0;
+    background-color: var(--white);
+    padding: .5em 1em;
 }
-tbody:not(.highlight tbody) tr:nth-of-type(odd) {
+.table-container table td {
+    border: 1px solid var(--gray-deep);
+    padding: .5em 1em;
+}
+.table-container tbody tr:nth-of-type(even) {
+    background-color: var(--white);
+}
+.table-container tbody tr:nth-of-type(odd) {
     background-color: var(--gray-light);
 }
-tbody:not(.highlight tbody) tr:hover {
+.table-container tbody tr:hover {
     transition: all 0.4s;
     background-color: var(--gray);
+}
+.table-container table.left-sticky td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: inherit;
 }
 
 /* highlight & block */
@@ -475,7 +485,7 @@ ul.doc-structure {
 
 /* hdt */
 .hidden-text { background-color: var(--black) }
-.hidden-text:hover { background-color: var(--white) }
+.hidden-text:hover { background-color: inherit }
 
 /* tab */
 .tab {
