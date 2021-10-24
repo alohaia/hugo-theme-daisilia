@@ -49,7 +49,8 @@ a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a):
     font-weight: bold;
 }
 
-#TableOfContents li, .doc-structure li {
+.toc-title, #TableOfContents li,
+.doc-first-title, .doc-structure li {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

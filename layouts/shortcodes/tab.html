@@ -4,14 +4,14 @@
   {{- $details := default false     (.Get "details") -}}
   {{- $open    := default false     (.Get "open")    -}}
   {{- if and $details (ne $summary "") -}}
-<details{{ if $open }} open{{ end }} class="tab {{ $type }}">
+<details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
   <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
   <div class="tab-content">
     {{ .Inner }}
   </div>
 </details>
   {{- else -}}
-<div{{ if $open }} open{{ end }} class="tab {{ $type }}">
+<div{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
   <div class="tab-title"><span class="tab-title-content">{{ $summary }}</span></div>
   <div class="tab-content">
     {{ .Inner }}
@@ -24,14 +24,14 @@
   {{- $details := default false     (.Get 2) -}}
   {{- $open    := default false     (.Get 3) -}}
   {{- if and $details (ne $summary "") -}}
-<details{{ if $open }} open{{ end }} class="tab {{ $type }}">
+<details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get 4 }} id="{{ . }}"{{ end }}>
   <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
   <div class="tab-content">
     {{ .Inner }}
   </div>
 </details>
   {{- else -}}
-<div{{ if $open }} open{{ end }} class="tab {{ $type }}">
+<div{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get 4 }} id="{{ . }}"{{ end }}>
   {{ if ne $summary "" }}<div class="tab-title"><span class="tab-title-content">{{ $summary }}</span></div>{{ end }}
   <div class="tab-content">
     {{ .Inner }}

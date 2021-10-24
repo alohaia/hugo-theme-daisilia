@@ -563,13 +563,29 @@ details[open] .tab-title-indicator {
 p:not(li p)+ol, p:not(li p)+ul {
     margin-top: -20px;
 }
-ins, del {
-    text-decoration-thickness: 0.175em; /* default text decoration thickness */
-}
 a.exturl::before {
     content: "\f360";
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     margin: 0 0.1em;
 }
+sup, sub {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+}
+sup { vertical-align: super }
+sub { vertical-align: sub }
+ins {
+    text-decoration: none;
+    border-bottom: 0.16em solid;
+}
 
+
+/* custom */
+.medicine::after {
+    content: "\f484";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #82c91e;
+}

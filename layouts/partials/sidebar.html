@@ -22,11 +22,11 @@
       <p class="site-description">{{ with $theme.description }}{{ . }}{{ else }}Subtitle here{{ end }}</p>
       {{- with $theme.social -}}
       <div class="sidebar-social">
-        {{- if .email -}}
-        <a class="sidebar-social-item" href="mailto:{{ .email }}"><i class="fas fa-envelope"></i>E-Mail</a>
+        {{- with .email -}}
+        <a class="sidebar-social-item" href="mailto:{{ . }}"><i class="fas fa-envelope"></i>E-Mail</a>
         {{- end -}}
-        {{- if .github -}}
-        <a class="sidebar-social-item" href="{{ .email }}"><i class="fab fa-github"></i>Github</a>
+        {{- with .github -}}
+        <a class="sidebar-social-item" target="_blank" href="{{ . }}"><i class="fab fa-github"></i>Github</a>
         {{- end -}}
       </div>
       {{- end -}}

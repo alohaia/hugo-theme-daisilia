@@ -4,9 +4,9 @@
     {{- partial "components/metadata.html" . -}}
   </div>
   {{- if eq .File.Dir "docs/" -}}
-    {{- block "_body" (dict "content" .Content "pages" .Sections.ByLastmod) -}}{{ end }}
+    {{- block "_body" (dict "content" .Content "pages" .Sections) -}}{{ end }}
   {{- else -}}
-    {{- block "_body" (dict "content" .Content "pages" .Pages.ByLastmod) -}}{{ end }}
+    {{- block "_body" (dict "content" .Content "pages" .Pages) -}}{{ end }}
   {{- end -}}
 {{- end -}}
 {{- define "_body" -}}
