@@ -246,6 +246,9 @@ code:not(pre code) { /* inline block */
 /* .article-content dd:hover { */
 /*     background-color: #3a3a3a10; */
 /* } */
+.article-content li::marker {
+    color: var(--gray);
+}
 .article-content li:hover::marker {
     color: var(--orange);
 }
@@ -289,6 +292,9 @@ h6.heading {
     counter-increment: h6Counter;
 }
 
+.heading:before {
+    color: var(--gray);
+}
 h2.heading:before {
     content: counter(h2Counter) ". ";
 }
@@ -477,6 +483,7 @@ ul.doc-structure {
 }
 .inline-list-item::before {
     content: counter(hzlistCounter, circled-number);
+    color: var(--gray);
     margin: 0 2px;
 }
 .inline-list-conjunction {
@@ -588,4 +595,5 @@ ins {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     color: #82c91e;
+    margin: 0 5px;
 }
