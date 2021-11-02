@@ -242,15 +242,8 @@ code:not(pre code) { /* inline block */
 .article-content dd p {
     margin: 0;
 }
-/* .article-content li:hover, */
-/* .article-content dd:hover { */
-/*     background-color: #3a3a3a10; */
-/* } */
 .article-content li::marker {
     color: var(--gray);
-}
-.article-content li:hover::marker {
-    color: var(--orange);
 }
 .article-content li,
 .article-content dd {

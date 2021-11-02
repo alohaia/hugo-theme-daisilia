@@ -1,2 +1,1 @@
 <h{{ .Level }} id="{{ with .Attributes.id }}{{ . | safeURL }}{{ else }}{{ .Anchor | safeURL }}{{ end }}" class="heading {{ .Attributes.class }}" {{- range $a,$v := .Attributes -}}{{ if and (ne $a "id") (ne $a "class") }}{{ $a }}="{{ $v }}"{{ end }}{{ end }}><a scroll="{{ .Anchor }}">{{ .Text | safeHTML }}</a></h{{ .Level }}>
-{{/* vim:set ft=gohtmltmpl: */}}
