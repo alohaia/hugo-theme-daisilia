@@ -285,23 +285,23 @@ h6.heading {
     counter-increment: h6Counter;
 }
 
-.heading:before {
+.heading::before {
     color: var(--gray-deep);
 }
-h2.heading:before {
+h2.heading::before {
     content: counter(h2Counter) ". ";
 }
-h3.heading:before {
+h3.heading::before {
     content: counter(h2Counter) "." counter(h3Counter) ". ";
 }
-h4.heading:before {
+h4.heading::before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) ". ";
 }
-h5.heading:before {
+h5.heading::before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) ". ";
     /* content: counter(h5Counter, upper-roman) ". "; */
 }
-h6.heading:before {
+h6.heading::before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) "." counter(h6Counter) ". ";
     /* content: counter(h6Counter, lower-alpha) ". "; */
 }
@@ -530,14 +530,16 @@ details[open] .tab-title-indicator {
 .tab.error   > .tab-title { background-color: #d9534f25 }
 
 /* sa - see also */
-.see-also:before {
+.see-also::before {
     content: "See also:";
     color: var(--gray);
+    white-space: nowrap;
 }
 .see-also a {
     background-color: var(--gray-light);
     border-radius: 4px;
     padding: 2px;
+    max-width: var(--content-width);
 }
 
 /* bilibili & youtube */
@@ -560,9 +562,9 @@ details[open] .tab-title-indicator {
 }
 
 /* small adjustments */
-p:not(li p)+ol, p:not(li p)+ul {
-    margin-top: -20px;
-}
+/* p:not(li p)+ol, p:not(li p)+ul { */
+/*     margin-top: -20px; */
+/* } */
 a.exturl::before {
     content: "\f360";
     font-family: 'Font Awesome 5 Free';

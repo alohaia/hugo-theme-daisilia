@@ -81,9 +81,18 @@ anchors = document.querySelectorAll("a[scroll]");
 for (let i = 0; i < anchors.length; i++) {
     anchors[i].onclick = function(){
         let anc = this.getAttribute("scroll");
-        document.getElementById(anc).scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        })
+        let target_id = document.getElementById(anc);
+        let target_alias = document.querySelector("[alias~='" + anc + "']");
+        if (target_id) {
+            target_id.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        } else if (target_alias) {
+            target_alias.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
     }
 }

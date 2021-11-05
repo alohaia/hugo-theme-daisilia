@@ -126,12 +126,12 @@
     grid-template-areas:
         "left content right"
         "left comment right";
-    grid-template-columns: 1fr minmax(140px,840px) 1fr;
+    grid-template-columns: 1fr minmax(140px,var(--content-width)) 1fr;
     grid-column-gap: 20px;
 }
 .site-content {
     grid-area: content;
-    margin: 0 20px 80px;
+    margin-bottom: 80px;
 }
 .site-comment {
     grid-area: comment;

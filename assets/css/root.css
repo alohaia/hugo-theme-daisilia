@@ -3,6 +3,7 @@
 
     --header-height: 80px;
     --footer-height: 64px;
+    --content-width: 800px;
 
     --font-handwrite: 'Indie Flower', cursive;
     --font-code: 'JetBrains Mono', monospace;
