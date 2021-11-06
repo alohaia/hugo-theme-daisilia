@@ -506,11 +506,12 @@ summary.tab-title::marker { content: none }
 summary.tab-title {
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 .tab-title-indicator {
     opacity: 0.5;
 }
-details[open] .tab-title-indicator {
+details[open]>summary>.tab-title-indicator {
     transform: rotate(90deg);
 }
 /* color */
