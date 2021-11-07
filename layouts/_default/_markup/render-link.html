@@ -1,8 +1,5 @@
 {{- if hasPrefix .Destination "#" -}}
 <a scroll="{{ substr .Destination 1 }}" class="anchor" title="{{ .Destination }}">{{ .Text | safeHTML }}</a>
-{{- else if hasPrefix .Destination "/" -}}
-<a href="{{ .Destination }}" title="{{ .Destination }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
 <a target="_blank" href="{{ .Destination }}" class="exurl" title="{{ .Destination }}">{{ .Text | safeHTML }}</a>
 {{- end -}}
-{{/* vim:set ft=gohtmltmpl: */}}
