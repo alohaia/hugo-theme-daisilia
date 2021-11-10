@@ -131,11 +131,13 @@ figure.right img {
 /* caption */
 figcaption, table caption {
     text-align: left;
+    max-width: var(--content-width);
 }
 figcaption>.title, table caption>.title{
     margin: 10px 0 0;
     font-size: 1.125em;
     line-height: 1.1;
+    white-space: pre-wrap;
 }
 figcaption>.title::before {
     content: "Figure - ";
@@ -149,6 +151,7 @@ figcaption>.caption ,table caption>.caption{
     line-height: 1.6;
     margin: 0;
     color: var(--gray-deep);
+    white-space: pre-wrap;
 }
 
 /* content font size */
@@ -305,6 +308,10 @@ h6.heading::before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) "." counter(h6Counter) ". ";
     /* content: counter(h6Counter, lower-alpha) ". "; */
 }
+.heading-id { color: var(--gray-deep) }
+.heading-id::before { content: "#" }
+.heading-alias { color: var(--gray-deep) }
+.heading-alias::before { content: "·" }
 
 /* kbd */
 kbd {
@@ -582,6 +589,10 @@ sub { vertical-align: sub }
 ins {
     text-decoration: none;
     border-bottom: 0.16em solid;
+}
+del {
+    text-decoration-color: red;
+    text-decoration-thickness: 0.16em;
 }
 mjx-container {
     overflow-x: auto;
