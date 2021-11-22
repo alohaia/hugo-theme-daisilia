@@ -1,5 +1,5 @@
 {{- if hasPrefix .Destination "#" -}}
 <a scroll="{{ substr .Destination 1 }}" class="anchor"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- else -}}
-<a target="_blank" href="{{ .Destination }}" class="exurl"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- end -}}

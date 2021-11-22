@@ -21,7 +21,7 @@
     --inline-code-background: #fff6db;
 
     --z-overcontent: 1;
-    --z-title: 100;
+    /* --z-title: 100; */
     --z-docs: 200;
     --z-sidebar: 300;
     --z-loadingbar: 400;

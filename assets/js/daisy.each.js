@@ -86,12 +86,12 @@ for (let i = 0; i < anchors.length; i++) {
         if (target_id) {
             target_id.scrollIntoView({
                 behavior: "smooth",
-                block: "center"
+                block: "start"
             });
         } else if (target_alias) {
             target_alias.scrollIntoView({
                 behavior: "smooth",
-                block: "center"
+                block: "start"
             });
         }
     }

@@ -6,9 +6,9 @@
 }
 .article-title:not(.page-title) {
     margin: 40px 0 0 0;
-    position: sticky;
-    top: 0px;
-    z-index: var(--z-title);
+    /* position: sticky; */
+    /* top: 0px; */
+    /* z-index: var(--z-title); */
     background-color: var(--white);
     cursor: pointer;
 }
@@ -407,6 +407,8 @@ blockquote {
     justify-content: center;
     border-radius: 4px 0 0 4px;
     z-index: var(--z-docs);
+
+    box-shadow: 0px 0px 2px 2px var(--gray);
 }
 .doc-structure-content li::marker {
     content: none;
@@ -615,4 +617,7 @@ mjx-container {
 .heading.item::after {
     content: "】";
     color: var(--gray-deep);
+}
+.heading.important a {
+    color: red;
 }
