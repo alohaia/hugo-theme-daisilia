@@ -35,9 +35,9 @@ $("table:not(.highlight table)").wrap(`<div class="table-container"></div>`);
 if (document.getElementById("TOCTitle")) {
     document.getElementById("TOCTitle").onclick = back2Top;
 }
-if (document.querySelector(".article-title:not(.page-title)")) {
-    document.querySelector(".article-title:not(.page-title)").onclick = back2Top;
-}
+// if (document.querySelector(".article-title:not(.page-title)")) {
+//     document.querySelector(".article-title:not(.page-title)").onclick = back2Top;
+// }
 
 var prevScrollpos = window.pageYOffset;
 function updateProgress() {

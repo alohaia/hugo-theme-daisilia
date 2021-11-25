@@ -9,12 +9,12 @@
     /* position: sticky; */
     /* top: 0px; */
     /* z-index: var(--z-title); */
-    background-color: var(--white);
-    cursor: pointer;
+    /* background-color: var(--white); */
+    /* cursor: pointer; */
 }
-.article-title:not(.page-title):hover {
-    text-decoration: underline;
-}
+/* .article-title:not(.page-title):hover { */
+/*     text-decoration: underline; */
+/* } */
 .page-title {
     text-align: left;
     margin: 0;
