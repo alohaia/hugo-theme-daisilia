@@ -118,7 +118,8 @@ figure {
     margin: 24px 0;
     overflow: hidden;
 }
-
+figure.float-left  { float: left  }
+figure.float-right { float: right }
 figure.left img {
     float: left;
     max-width: 75%;
