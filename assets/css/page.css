@@ -486,7 +486,7 @@ ul.doc-structure {
 }
 .inline-list-item::before {
     content: counter(hzlistCounter, circled-number);
-    color: var(--gray);
+    color: var(--gray-deep);
     margin: 0 2px;
 }
 .inline-list-conjunction {
