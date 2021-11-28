@@ -56,7 +56,7 @@ document.getElementById("Back2top").onclick = back2Top;
 
 const header = document.getElementById("SiteHeader");
 header.onclick = function(){
-    if(document.body.clientWidth <= 850) {
+    if(document.body.clientWidth <= 750) {
         document.getElementById("SiteInner").classList.toggle("fullscreen-header");
         if(this.ontouchmove){
             this.ontouchmove = null;
