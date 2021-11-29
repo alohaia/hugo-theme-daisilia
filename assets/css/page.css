@@ -132,7 +132,7 @@ figure.right img {
 /* caption */
 figcaption, table caption {
     text-align: left;
-    max-width: var(--content-width);
+    /* max-width: var(--content-width); */
 }
 figcaption>.title, table caption>.title{
     margin: 10px 0 0;
