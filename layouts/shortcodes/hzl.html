@@ -6,4 +6,4 @@
     {{- $sep = . -}}
   {{- end -}}
 {{- end -}}
-<span class="inline-list">{{- range (split .Inner $sep) -}}{{ if hasPrefix . "_" }}<span class="inline-list-conjunction">{{ slicestr . 1 }}</span>{{ else }}<span class="inline-list-item">{{ . | htmlUnescape | safeHTML }}</span>{{- end -}}{{- end -}}</span>{{- "" -}}
+<span class="inline-list"{{ with .Get "start" }} style="counter-set: hzlistCounter {{ sub . 1 }};"{{ end }}>{{- range (split .Inner $sep) -}}{{ if hasPrefix . "_" }}<span class="inline-list-conjunction">{{ slicestr . 1 }}</span>{{ else }}<span class="inline-list-item">{{ . | htmlUnescape | safeHTML }}</span>{{- end -}}{{- end -}}</span>{{- "" -}}
