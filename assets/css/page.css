@@ -341,14 +341,27 @@ kbd {
 /* deflist */
 dt {
     font-weight: bold;
+    /* display: inline; */
+    /* font-size: 125%; */
+    /* line-height: 1.6; */
+    /* vertical-align: bottom; */
+}
+dt::after {
+    content: ":";
+    color: var(--gray-deep);
+    font-weight: bold;
+    margin-right: 5px;
 }
 dd {
     margin: 0;
 }
+/* dd:first-of-type { */
+/*     display: inline; */
+/* } */
 dd::before {
-    content: ":";
+    content: "#";
     color: var(--gray-deep);
-    font-weight: 1000;
+    font-weight: bold;
     margin-right: 5px;
 }
 
