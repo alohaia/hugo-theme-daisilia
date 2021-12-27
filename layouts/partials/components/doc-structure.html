@@ -10,7 +10,7 @@
 {{- end -}}
 {{- define "_structure" -}}
 <ul class="doc-structure" id="DocStructure">
-{{- range .Pages.ByWeight -}}
+{{- range (where .Pages "Params.draft" false).ByWeight -}}
   <li>
     <a class="doc-entry" href="{{ .RelPermalink }}">{{ .Title }}</a>
     {{- if eq .Kind "section" -}}
