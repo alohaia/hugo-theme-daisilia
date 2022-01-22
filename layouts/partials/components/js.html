@@ -1,9 +1,14 @@
+{{/* jquery */}}
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{/* fancybox */}}
 {{- if .Site.Params.daisy.fancybox.enable -}}{{ partial "third-party/fancybox.html" . }}{{ end }}
-{{- $js := resources.Get "js/daisy.js" | minify | fingerprint -}}
-<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{/* daisy.js */}}
+{{- $daisy := resources.Get "js/daisy.js" | minify | fingerprint -}}
+<script src="{{ $daisy.RelPermalink }}" integrity="{{ $daisy.Data.Integrity }}"></script>
+{{/* daisy.each.js */}}
 {{- $each := resources.Get "js/daisy.each.js" | minify | fingerprint -}}
 <script data-pjax src="{{ $each.RelPermalink }}" integrity="{{ $each.Data.Integrity  }}"></script>
+{{/* pjax.js */}}
 {{- if .Site.Params.daisy.pjax.enable -}}
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 {{- $pjax := resources.Get "js/pjax.js" | minify | fingerprint -}}

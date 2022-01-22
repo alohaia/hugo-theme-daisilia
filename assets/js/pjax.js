@@ -9,9 +9,9 @@ const pjax = new Pjax({
         ".js-each",
         ".site-right",
     ],
-    // switches: {
-    //     // ".site-content": Pjax.switches.sideBySide,
-    // },
+    switches: {
+        ".site-content": Pjax.switches.sideBySide,
+    },
     // switchesOptions: {
     //     ".site-content": {
     //         classNames: {

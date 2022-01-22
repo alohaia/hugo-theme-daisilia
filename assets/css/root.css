@@ -1,6 +1,4 @@
 :root {
-    line-height: 2;
-
     --header-height: 80px;
     --footer-height: 64px;
     --content-width: 800px;
@@ -57,3 +55,6 @@ a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a):
     overflow: hidden;
 }
 
+::selection {
+    background-color: var(--gray);
+}

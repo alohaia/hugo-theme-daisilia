@@ -67,3 +67,6 @@ header.onclick = function(){
         }
     }
 }
+
+// preload
+$("#loading").fadeOut("1000")
