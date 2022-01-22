@@ -377,28 +377,29 @@ blockquote {
     padding: 0 15px;
 }
 
-/* doc-structure */
-.doc-structure-container {
+/* series */
+.series-container {
     position: fixed;
     top: 0;
     bottom: 0;
 
     white-space: nowrap;
     width: 320px;
-    right: -320px;
+    right: -325px;
     transition: all .5s ease-out;
-    z-index: var(--z-docs);
+    z-index: var(--z-series);
 }
-.doc-structure-container:hover {
+.series-container:hover {
     right: 0;
 }
-.doc-structure-container a {
+.series-container a {
     color: var(--gray-deep);
+    text-decoration: none;
 }
-.doc-structure-container a:hover {
+.series-container a:hover {
     color: var(--orange-deep);
 }
-.doc-structure-toggle {
+.series-toggle {
     position: fixed;
     top: 120px;
     right: 0;
@@ -411,36 +412,27 @@ blockquote {
     align-items: center;
     justify-content: center;
     border-radius: 8px 0 0 8px;
-    z-index: var(--z-docs);
+    z-index: var(--z-series);
 }
-.doc-structure-content {
-    position: relative;
-    width: 100%;
+.series-content {
     height: 100%;
-
     background-color: var(--gray-light);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 4px 0 0 4px;
-    z-index: var(--z-docs);
-
-    box-shadow: 0px 0px 2px 2px var(--gray);
-
+    z-index: var(--z-series);
     line-height: 1.5;
 }
-.doc-structure-content li::marker {
+.series-content li::marker {
     content: none;
 }
-.doc-structure-content li:hover {
-    background-color: var(--gray);
-}
-.doc-structure-content ul {
-    padding: 0 2px 5px 10px;
+.series-content ul {
+    padding: 0 2px 5px 15px;
     margin: 0;
 }
-ul.doc-structure {
+.series-list {
     padding: 0;
     margin-bottom: 10px;
     text-indent: 10px;
@@ -449,10 +441,7 @@ ul.doc-structure {
     overflow-x: hidden;
     overscroll-behavior: contain;
 }
-.doc-structure-content a {
-    text-decoration: none;
-}
-.doc-first-title {
+.series-title {
     font-size: 1.25em;
 }
 

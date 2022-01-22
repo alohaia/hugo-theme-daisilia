@@ -22,11 +22,11 @@ $("sidebar-content").ready(function(){
     }
 })
 
-$(".doc-structure").ready(function(){
-    let doc = document.getElementById("DocStructure");
-    if(doc && !doc.classList.contains("numbered")){
-        doc.classList.add("numbered");
-        genUlNum(document.getElementById("DocStructure"));
+$(".series-list").ready(function(){
+    let series = document.querySelector(".series-list");
+    if(series && !series.classList.contains("numbered")){
+        series.classList.add("numbered");
+        genUlNum(series);
     }
 })
 

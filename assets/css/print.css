@@ -10,7 +10,7 @@
         page-break-inside: avoid;
     }
     .site-sidebar, .site-footer, .site-header,
-    .site-comment, .doc-structure-container {
+    .site-comment, .series-container {
         display: none;
     }
     .site-inner {

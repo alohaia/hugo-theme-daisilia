@@ -18,9 +18,9 @@
 {{- end -}}
 {{- define "right" -}}
   {{- if ne . (.GetPage "series") -}}
-    <div class="doc-structure-container" id="DocStructureContainer">
-      <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
-      <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>
+    <div class="series-container">
+      <div class="series-toggle"><i class="fas fa-book"></i></div>
+      <div class="series-content">{{ partial "components/series-list" . }}</div>
     </div>
   {{- end -}}
 {{- end  -}}

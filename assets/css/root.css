@@ -19,8 +19,7 @@
     --inline-code-background: #fafafa;
 
     --z-overcontent: 1;
-    /* --z-title: 100; */
-    --z-docs: 200;
+    --z-series: 200;
     --z-sidebar: 300;
     --z-loadingbar: 400;
     --z-fullscreen: 9999;
@@ -49,7 +48,7 @@ a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a):
 }
 
 .toc-title, #TableOfContents li,
-.doc-first-title, .doc-structure li {
+.series-title, .series-list-item {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

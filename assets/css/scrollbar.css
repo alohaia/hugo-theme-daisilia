@@ -37,7 +37,7 @@
   background-color: #858585;
 }
 
-.doc-structure::-webkit-scrollbar,
+.series-list::-webkit-scrollbar,
 .sidebar-content::-webkit-scrollbar {
   width: 0;
 }
