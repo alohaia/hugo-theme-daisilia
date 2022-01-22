@@ -125,13 +125,15 @@ function executeSearch(term) {
   let searchitems = ''; // our results bucket
 
   if (results.length === 0) { // no results based on what was typed into the input box
-    console.log("no results")
     resultsAvailable = false;
     searchitems = '';
   } else { // build our html
-    console.log(results)
-    for (let item in results.slice(0,5)) { // only show first 5 results
-      searchitems = searchitems + '<li><a href="' + results[item].permalink + '" tabindex="0">' + '<span class="title">' + results[item].title + '</span><br /> <span class="sc">'+ results[item].section +'</span> — ' + results[item].date + ' — <em>' + results[item].desc + '</em></a></li>';
+    for (let item of results.slice(0,5)) { // only show first 5 results
+      console.log(item.item)
+      item = item.item
+      searchitems = searchitems + '<li><a href="' + item.permalink + '" tabindex="0">'
+        + '<span class="title">' + item.title + '</span><br /> <span class="sc">'
+        + item.section +'</span> — ' + item.date + ' — <em>' + item.categories[0] + '</em></a></li>';
     }
     resultsAvailable = true;
   }
