@@ -3,7 +3,7 @@
 <div class="sidebar-container">
   <div class="sidebar-nav">
     {{- if $hasTOC -}}
-      <span role="button" class="sidebar-nav-item sidebar-nav-docs">Table of Content</span>
+      <span role="button" class="sidebar-nav-item sidebar-nav-series">Table of Content</span>
       <span role="button" class="sidebar-nav-item sidebar-nav-overview">Overview</span>
     {{- end -}}
   </div>
@@ -35,17 +35,13 @@
           <p class="site-state-num">{{ len .Site.RegularPages }}</p>
           <p class="site-state-name">Pages</p>
         </a>
-        <a class="site-state-item" href="/docs">
-          <p class="site-state-num">{{ len (.GetPage "docs").Sections }}</p>
-          <p class="site-state-name">Docs</p>
-        </a>
-        <a class="site-state-item" href="/categories">
-          <p class="site-state-num">{{ len .Site.Taxonomies.categories }}</p>
-          <p class="site-state-name">Categories</p>
-        </a>
         <a class="site-state-item" href="/tags">
           <p class="site-state-num">{{ len .Site.Taxonomies.tags }}</p>
           <p class="site-state-name">Tags</p>
+        </a>
+        <a class="site-state-item" href="/series">
+          <p class="site-state-num">{{ len (.GetPage "series").Sections }}</p>
+          <p class="site-state-name">Series</p>
         </a>
       </div>
       <div class="sidebar-quote">

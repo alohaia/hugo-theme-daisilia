@@ -202,13 +202,12 @@
 /* site state */
 .site-state {
     margin: 25px auto 0;
-    width: fit-content;
-
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-column-gap: 5px;
-
+    width: 100%;
     line-height: 1.75;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 20px;
 }
 .site-state-item {
     text-decoration: none;

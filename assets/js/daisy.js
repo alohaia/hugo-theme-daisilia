@@ -69,4 +69,8 @@ header.onclick = function(){
 }
 
 // preload
-$("#loading").fadeOut("1000")
+document.onreadystatechange = function(){
+    if(document.readyState === 'complete') {
+        $("#loading").fadeOut("1000")
+    }
+};

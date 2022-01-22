@@ -1,9 +1,6 @@
 {{- define "main" -}}
-  <h1 class="article-title list-title">{{ .Title }}</h1>
-  <div class="article-metadata">
-    {{- partial "components/metadata.html" . -}}
-  </div>
-  {{- if eq .File.Dir "docs/" -}}
+  <h1 class="article-title">{{ .Title }}</h1>
+  {{- if eq .File.Dir "series/" -}}
     {{- block "_body" (dict "content" .Content "pages" .Sections) -}}{{ end }}
   {{- else -}}
     {{- block "_body" (dict "content" .Content "pages" .Pages) -}}{{ end }}
@@ -20,7 +17,7 @@
   {{- end -}}
 {{- end -}}
 {{- define "right" -}}
-  {{- if ne . (.GetPage "docs") -}}
+  {{- if ne . (.GetPage "series") -}}
     <div class="doc-structure-container" id="DocStructureContainer">
       <div class="doc-structure-toggle" id="DocStructureToggle"><i class="fas fa-book"></i></div>
       <div class="doc-structure-content">{{ partial "components/doc-structure" . }}</div>

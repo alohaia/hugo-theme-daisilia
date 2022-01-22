@@ -83,6 +83,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    line-height: 2;
 }
 .main-menu a {
     color: #555;
@@ -139,6 +140,17 @@
         "left comment right";
     grid-template-columns: 1fr minmax(140px,var(--content-width)) 1fr;
     grid-column-gap: 20px;
+}
+@media (max-width: 750px) {
+    .site-main {
+        grid-template-areas:
+            "left"
+            "right"
+            "content"
+            "comment";
+        grid-template-columns: (140px,var(--content-width));
+        margin: 0 10px;
+    }
 }
 .site-content {
     grid-area: content;
