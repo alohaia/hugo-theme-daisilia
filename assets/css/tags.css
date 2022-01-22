@@ -6,14 +6,18 @@
     margin-top: 100px;
 }
 
-.tag-cloud-item {
+.tag-cloud-item .link {
     text-decoration: none;
     color: var(--black);
     white-space: nowrap;
     height: 100%;
 }
 
-.tag-cloud-item:hover {
+.tag-cloud-item .link.now {
+    color: var(--orange);
+}
+
+.tag-cloud-item .link:hover {
     color: var(--orange-deep);
 }
 

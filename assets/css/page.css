@@ -399,6 +399,9 @@ blockquote {
 .series-container a:hover {
     color: var(--orange-deep);
 }
+.series-title.now, .series-item.now {
+    color: var(--orange);
+}
 .series-toggle {
     position: fixed;
     top: 120px;
