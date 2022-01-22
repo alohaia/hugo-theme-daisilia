@@ -99,8 +99,8 @@ for (let i = 0; i < anchors.length; i++) {
 
 $(".tag-cloud").ready(function(){
     if(window.location.pathname == "/tags/") { return }
-    let tags = document.querySelectorAll(".tag-cloud-item .link")
-    for(tag of tags){
+    let tags = document.querySelectorAll(".tag-cloud-item")
+    for(let tag of tags){
         if(tag.getAttribute("href") + "/" == window.location.pathname) {
             tag.classList.add("now")
             break
@@ -111,7 +111,7 @@ $(".tag-cloud").ready(function(){
 $(".series-content").ready(function(){
     if(window.location.pathname == "/series/") { return }
     let items = document.querySelectorAll(".series-title, .series-item")
-    for(item of items){
+    for(let item of items){
         if(item.getAttribute("href") == window.location.pathname) {
             item.classList.add("now")
             break

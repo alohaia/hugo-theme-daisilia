@@ -3,21 +3,21 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px 20px;
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
-.tag-cloud-item .link {
+.tag-cloud-item {
     text-decoration: none;
     color: var(--black);
     white-space: nowrap;
     height: 100%;
 }
 
-.tag-cloud-item .link.now {
+.tag-cloud-item.now {
     color: var(--orange);
 }
 
-.tag-cloud-item .link:hover {
+.tag-cloud-item:hover {
     color: var(--orange-deep);
 }
 

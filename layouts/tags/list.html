@@ -1,4 +1,5 @@
 {{- define "main" -}}
+<h1 class="article-title">Tag Cloud</h1>
 <div class="tag-cloud">
     {{ if ne (len $.Site.Taxonomies.tags) 0 }}
       {{ $largestFontSize := 3.0 }}
@@ -13,10 +14,7 @@
           {{ $currentFontSize := (add $smallestFontSize (mul (sub $tagCount $min) $fontStep) ) }}
           {{ $weigth := div (sub (math.Log $tagCount) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
           {{ $currentFontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weigth)) }}
-        <span class="tag-cloud-item">
-            <a class="link" href="{{ "/tags/" | relURL }}{{ $name | urlize }}" style="font-size: {{ $currentFontSize }}rem;" >{{ $name }}</a>
-            <sup class="count">{{ $tagCount }}</sup>
-        </span>
+        <a class="tag-cloud-item" href="{{ "/tags/" | relURL }}{{ $name | urlize }}" style="font-size: {{ $currentFontSize }}rem;" >{{ $name }}<sup>{{ $tagCount }}</sup></a>
         {{ end }}
     {{ end }}
 </div>
