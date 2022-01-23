@@ -261,7 +261,7 @@ code:not(pre code) { /* inline block */
 
 /* heading */
 h1.heading {
-    font-size: 32px;
+    font-size: var(--font-height-double);
 }
 h2.heading {
     text-align: center;
@@ -591,7 +591,7 @@ details[open]>summary>.tab-title-indicator {
 .article-content p,
 .article-content li,
 .article-content dl {
-    line-height: 32px;
+    line-height: var(--font-height-double);
 }
 
 

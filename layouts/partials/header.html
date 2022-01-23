@@ -4,6 +4,7 @@
   {{- range . -}}
     <li class="menu-item"><a href="{{ .URL }}">{{ .Pre }}{{ .Name }}</a></li>
   {{- end -}}
+    <li class="menu-item search" id="searchBtn"><i class="fas fa-search"></i>CTRL-/</li>
   </ul>
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}

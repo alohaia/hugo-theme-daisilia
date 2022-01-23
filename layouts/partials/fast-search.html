@@ -1,6 +1,11 @@
 <div id="fastSearch">
-  <input id="searchInput" tabindex="0">
-  <ul id="searchResults"></ul>
+  <div class="fast-search-container">
+    <div class="fast-search-header">
+      <input id="searchInput" autocomplete="false" tabindex="0">
+      <span class="fast-search-hint">CTRL-/</span>
+    </div>
+    <ul id="searchResults"></ul>
+  </div>
 </div>
 <script src="/js/fuse.min.js"></script>
 <script src="/js/fastsearch.js"></script>

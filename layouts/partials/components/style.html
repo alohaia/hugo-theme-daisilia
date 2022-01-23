@@ -5,6 +5,7 @@
   (resources.Get "css/page.css")
   (resources.Get "css/scrollbar.css")
   (resources.Get "css/tags.css")
+  (resources.Get "css/fastsearch.css")
   (resources.Get "css/print.css")
 }}
 {{- $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint -}}

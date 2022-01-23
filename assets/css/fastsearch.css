@@ -1,0 +1,120 @@
+#fastSearch {
+    position: fixed;
+    background: #0000007a;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-fullscreen);
+    animation: fadeIn 0.2s ease-out;
+}
+.fast-search-container {
+    color: var(--gray-deep);
+    background: var(--white);
+    height: 80vh;
+    width: var(--content-width);
+    margin: auto;
+    margin-top: 10vh;
+    border: 5px solid var(--gray-light);
+    animation: fadeUp 0.2s ease-out;
+}
+.fast-search-header {
+    height: 50px;
+    padding: 5px 10px 10px;
+    border-bottom: 2px dashed var(--gray-light);
+    font-size: 30px;
+    line-height: 30px;
+}
+#searchInput {
+    height: 40px;
+    border: none;
+    padding: 0;
+    font-size: 30px;
+    line-height: 30px;
+    width: calc(100% - 110px);
+    border: 5px solid var(--gray-light);
+    border-radius: 8px;
+}
+#searchInput:focus {
+    background-color: var(--gray-light);
+}
+#searchResults {
+    height: calc(100% - 76px);
+    overflow-y: auto;
+    padding: 5px 20px;
+    margin: 0;
+}
+
+.search-result-item::marker {
+    content: none;
+}
+
+.search-result-item {
+    margin: 10px;
+}
+.search-result-item:not(:first-child)::before {
+    content: "";
+    display: block;
+    border-top: 2px dashed var(--gray-light);
+    width: 75%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.search-result-item .header {
+    display: grid;
+    grid-template-areas:
+        "title publish"
+        "tags edit";
+    justify-content: space-between;
+}
+.search-result-item .header .title {
+    grid-area: title;
+    font-size: 150%;
+    line-height: 1;
+    color: var(--black);
+    text-decoration: underline;
+    font-family: var(--font-serif);
+}
+.search-result-item .header .title:hover {
+    color: var(--orange-deep);
+}
+.search-result-item .header .publish {
+    grid-area: publish;
+    line-height: 150%;
+    font-style: italic;
+    text-align: right;
+    font-family: var(--font-serif);
+}
+.search-result-item .header .publish::before {
+    content: "Published on ";
+}
+.search-result-item .header .tags {
+    grid-area: tags;
+    font-style: italic;
+    display: flex;
+    gap: 8px;
+    font-family: var(--font-sans);
+}
+.search-result-item .header .tags .tag {
+    color: var(--gray-deep);
+}
+.search-result-item .header .tags .tag:hover {
+    color: var(--orange-deep);
+}
+.search-result-item .header .tags .tag::before {
+    content: "#";
+}
+.search-result-item .header .edit {
+    grid-area: edit;
+    font-style: italic;
+    text-align: right;
+    font-family: var(--font-serif);
+}
+.search-result-item .header .edit::before {
+    content: "Edited on ";
+}
+
+.search-result-item .summary * {
+    color: var(--gray-deep)
+}

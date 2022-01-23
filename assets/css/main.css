@@ -46,7 +46,7 @@
 }
 .site-title {
     margin: 0;
-    font-size: 32px;
+    font-size: var(--font-height-double);
     line-height: var(--header-height);
     font-family: var(--font-handwrite);
     user-select: none;
@@ -85,8 +85,10 @@
     text-align: center;
     line-height: 2;
 }
-.main-menu a {
+.main-menu a,
+.main-menu .search {
     color: #555;
+    cursor: pointer;
 }
 .main-menu .menu-item {
     display: inline-block;

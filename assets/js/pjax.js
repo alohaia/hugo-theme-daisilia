@@ -9,32 +9,6 @@ const pjax = new Pjax({
         ".js-each",
         ".site-right",
     ],
-    // switches: {
-    //     ".site-content": Pjax.switches.sideBySide,
-    // },
-    // switchesOptions: {
-    //     ".site-content": {
-    //         classNames: {
-    //             // class added to the old element being replaced, e.g. a fade out
-    //             remove: "animated",
-    //             // class added to the new element that is replacing the old one, e.g. a fade in
-    //             add: "animated",
-    //             // class added on the element when navigating back
-    //             backward: "animate__slideInUp",
-    //             // class added on the element when navigating forward (used for new page too)
-    //             forward: "animate__slideInDown"
-    //         },
-    //         callbacks: {
-    //             // // to make a nice transition with 2 pages at the same time
-    //             // // we are playing with absolute positioning for the element we are removing
-    //             // // & we need live metrics to have something great
-    //             // // see associated CSS below
-    //             // removeElement: function(el) {
-    //             //     el.style.marginLeft = "-" + (el.getBoundingClientRect().width/2) + "px"
-    //             // }
-    //         }
-    //     }
-    // },
     cacheBust: false,
     analytics: false,
 });

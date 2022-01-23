@@ -7,6 +7,7 @@
     --font-code: 'JetBrains Mono', monospace;
     --font-sans: 'Roboto', 'Noto Sans SC', sans-serif;
     --font-serif: 'Andada Pro', 'Noto Serif SC', serif;
+    --font-height-double: 32px;
 
     --white: #ffffff;
     --gray: #cccccc;
@@ -32,8 +33,7 @@ body, html {
 body {
     scroll-behavior: smooth;
     margin: 0;
-    overflow-x: hidden;
-    overflow-y: overlay;
+    overflow: hidden; /* set overflow-y to "overlay" in daisy.js when page loaded */
     font-family: var(--font-sans); /* default font family */
 }
 
@@ -57,3 +57,21 @@ a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a):
 ::selection {
     background-color: var(--gray);
 }
+
+:focus-visible {
+    outline: none;
+}
+
+@keyframes fadeRight {
+    0%    {opacity: 0; transform: translateX(-20px)}
+    100%  {opacity: 1; transform: translateX(0)}
+}
+@keyframes fadeUp {
+    0%    {opacity: 0; transform: translateY(-20px)}
+    100%  {opacity: 1; transform: translateY(0)}
+}
+@keyframes fadeIn {
+    0%    {opacity: 0;}
+    100%  {opacity: 1;}
+}
+

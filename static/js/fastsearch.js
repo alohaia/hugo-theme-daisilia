@@ -1,45 +1,54 @@
 var fuse; // holds our search engine
-var searchVisible = false;
+var searchVisible = false
 var firstRun = true; // allow us to delay loading json data unless search activated
 var list = document.getElementById('searchResults'); // targets the <ul>
 var first = list.firstChild; // first child of search list
 var last = list.lastChild; // last child of search list
 var maininput = document.getElementById('searchInput'); // input box for search
 var resultsAvailable = false; // Did we get any search results?
+const keys = [ 'title', 'contents' ]
+
+function toggleSearch() {
+    // Load json search index if first time invoking search
+    // Means we don't load json unless searches are going to happen; keep user payload small unless needed
+    if(firstRun) {
+      loadSearch(); // loads our json data and builds fuse.js search index
+      firstRun = false; // let's never do this again
+    }
+
+    // Toggle visibility of search box
+    if (!searchVisible) {
+      document.getElementById("fastSearch").style.display = "block"; // show search box
+      document.body.style.overflowY = "hidden"
+      document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
+      searchVisible = true; // search visible
+    } else {
+      document.getElementById("fastSearch").style.display = "none"; // hide search box
+      document.body.style.overflowY = "overlay"
+      document.activeElement.blur(); // remove focus from search box
+      searchVisible = false; // search not visible
+    }
+}
+
+document.getElementById("searchBtn").onclick = toggleSearch;
 
 // ==========================================
 // The main keyboard event listener running the show
 //
 document.addEventListener('keydown', function(event) {
-
-  // CMD-/ to show / hide Search
-  if (event.metaKey && event.key == "/") {
-      // Load json search index if first time invoking search
-      // Means we don't load json unless searches are going to happen; keep user payload small unless needed
-      if(firstRun) {
-        loadSearch(); // loads our json data and builds fuse.js search index
-        firstRun = false; // let's never do this again
-      }
-
-      // Toggle visibility of search box
-      if (!searchVisible) {
-        document.getElementById("fastSearch").style.visibility = "visible"; // show search box
-        document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
-        searchVisible = true; // search visible
-      }
-      else {
-        document.getElementById("fastSearch").style.visibility = "hidden"; // hide search box
-        document.activeElement.blur(); // remove focus from search box
-        searchVisible = false; // search not visible
-      }
+  // Crtl-/ to show / hide Search
+  if (event.ctrlKey && event.key == "/") {
+    event.preventDefault();
+    toggleSearch();
   }
 
   // Allow ESC (27) to close search box
   if (event.key == "Escape") {
     if (searchVisible) {
-      document.getElementById("fastSearch").style.visibility = "hidden";
-      document.activeElement.blur();
-      searchVisible = false;
+      document.getElementById("fastSearch").style.display = "none"
+      document.body.style.overflowY = "overlay"
+      document.activeElement.blur()
+      searchVisible = false
     }
   }
 
@@ -62,14 +71,14 @@ document.addEventListener('keydown', function(event) {
       else { document.activeElement.parentElement.previousSibling.firstElementChild.focus(); } // Otherwise, select the search result above the current active one
     }
   }
-});
+})
 
 
 // ==========================================
 // execute search as each character is typed
 //
 document.getElementById("searchInput").onkeyup = function(e) {
-  executeSearch(this.value);
+  executeSearch(this.value)
 }
 
 
@@ -77,17 +86,17 @@ document.getElementById("searchInput").onkeyup = function(e) {
 // fetch some json without jquery
 //
 function fetchJSONFile(path, callback) {
-  var httpRequest = new XMLHttpRequest();
+  var httpRequest = new XMLHttpRequest()
   httpRequest.onreadystatechange = function() {
     if (httpRequest.readyState === 4) {
       if (httpRequest.status === 200) {
-        var data = JSON.parse(httpRequest.responseText);
-          if (callback) callback(data);
+        var data = JSON.parse(httpRequest.responseText)
+          if (callback) callback(data)
       }
     }
-  };
-  httpRequest.open('GET', path);
-  httpRequest.send();
+  }
+  httpRequest.open('GET', path)
+  httpRequest.send()
 }
 
 
@@ -100,20 +109,71 @@ function loadSearch() {
 
     var options = { // fuse.js options; check fuse.js website for details
       shouldSort: true,
-      location: 0,
-      distance: 100,
-      threshold: 0.4,
       minMatchCharLength: 2,
-      keys: [
-        'title',
-        'permalink',
-        'summary'
-        ]
-    };
+      useExtendedSearch: true,
+      keys: keys,
+    }
     fuse = new Fuse(data, options); // build the index from the json file
+  })
+}
+
+function isResultEqual(r1, r2) {
+  for(let idx = 0; idx < keys.length; idx++) {
+    if(r1[keys[idx]] != r2[keys[idx]]) {
+      return false
+    }
+  }
+  return true
+}
+// ===========================================
+// get first length results, length <= 0 to get as much as possible
+//
+function uniqueResults(results, length) {
+  let res = [results[0].item];    // hold return value
+  if(length <= 0) {
+    length = results.length
+  }
+  for(let idx = 1; idx < results.length; idx++) { // starts from the second
+    let alreasyExists = false
+    for(i of res) {
+      if(isResultEqual(results[idx].item, i)) {
+        alreasyExists = true
+      }
+    }
+    if(!alreasyExists) {
+      res.push(results[idx].item)
+      if(res.length >= length) {
+        break
+      }
+    }
+  }
+  return res
+}
+
+function afterSearch(){
+  $("table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
+  const pjax = new Pjax({
+    elements: ["a[href]:not([no-pjax], .sidebar-toc a)"],
+    selectors: [
+      "[data-pjax]",
+      "head title",
+      "meta[property]",
+      ".sidebar-toc", ".sidebar-nav",
+      ".site-content",
+      ".js-each",
+      ".site-right",
+    ],
+    cacheBust: false,
+    analytics: false,
   });
 }
 
+document.addEventListener("pjax:complete", function () {
+  document.getElementById("fastSearch").style.display = "none";
+  document.body.style.overflowY = "overlay"
+  document.activeElement.blur();
+  searchVisible = false;
+})
 
 // ==========================================
 // using the index we loaded on CMD-/, run
@@ -122,25 +182,40 @@ function loadSearch() {
 //
 function executeSearch(term) {
   let results = fuse.search(term); // the actual query being run using fuse.js
+  console.log(results)
   let searchitems = ''; // our results bucket
 
   if (results.length === 0) { // no results based on what was typed into the input box
-    resultsAvailable = false;
-    searchitems = '';
+    resultsAvailable = false
+    searchitems = ''
   } else { // build our html
-    for (let item of results.slice(0,5)) { // only show first 5 results
-      console.log(item.item)
-      item = item.item
-      searchitems = searchitems + '<li><a href="' + item.permalink + '" tabindex="0">'
-        + '<span class="title">' + item.title + '</span><br /> <span class="sc">'
-        + item.section +'</span> — ' + item.date + ' — <em>' + item.categories[0] + '</em></a></li>';
+    let items = uniqueResults(results, 5)
+    for (let item of items) {
+      let tags = ""
+      if(item.tags.length > 0) {
+        for(let tag of item.tags) {
+          tags += `<a class="tag" href="/tags/${tag}">${tag}</a>`;
+        }
+      }
+      searchitems = searchitems +
+`<li class="search-result-item">
+  <div class="header">
+    <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
+    <span class="publish">${item.date}</span>
+    <span class="tags">${tags}</span>
+    <span class="edit">${item.edit}</span>
+  </div>
+  <div class="summary article-content">${item.summary}</div>
+</li>`
     }
-    resultsAvailable = true;
+    resultsAvailable = true
   }
 
-  document.getElementById("searchResults").innerHTML = searchitems;
+  document.getElementById("searchResults").innerHTML = searchitems
   if (results.length > 0) {
     first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
     last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
   }
+
+  afterSearch()
 }

@@ -30,7 +30,7 @@ $(".series-list").ready(function(){
     }
 })
 
-$("table:not(.highlight table)").wrap(`<div class="table-container"></div>`);
+$("table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`);
 
 if (document.getElementById("TOCTitle")) {
     document.getElementById("TOCTitle").onclick = back2Top;

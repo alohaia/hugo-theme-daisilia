@@ -70,7 +70,8 @@ header.onclick = function(){
 
 // preload
 document.onreadystatechange = function(){
-    if(document.readyState === 'complete') {
+    if(document.readyState == 'complete') {
         $("#loading").fadeOut("1000")
+        document.body.style.overflowY = "overlay";
     }
 };
