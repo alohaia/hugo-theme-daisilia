@@ -18,12 +18,12 @@ function toggleSearch() {
 
     // Toggle visibility of search box
     if (!searchVisible) {
-      document.getElementById("fastSearch").style.display = "block"; // show search box
+      document.getElementById("fastSearch").style.display = "block"
       document.body.style.overflowY = "hidden"
       document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
       searchVisible = true; // search visible
     } else {
-      document.getElementById("fastSearch").style.display = "none"; // hide search box
+      document.getElementById("fastSearch").style.display = "none"
       document.body.style.overflowY = "overlay"
       document.activeElement.blur(); // remove focus from search box
       searchVisible = false; // search not visible
@@ -31,6 +31,15 @@ function toggleSearch() {
 }
 
 document.getElementById("searchBtn").onclick = toggleSearch;
+
+document.addEventListener("click", event => {
+  if(event.target === document.getElementById("fastSearch")) {
+    document.getElementById("fastSearch").style.display = "none"
+    document.body.style.overflowY = "overlay"
+    document.activeElement.blur(); // remove focus from search box
+    searchVisible = false; // search not visible
+  }
+});
 
 // ==========================================
 // The main keyboard event listener running the show
@@ -109,7 +118,7 @@ function loadSearch() {
 
     var options = { // fuse.js options; check fuse.js website for details
       shouldSort: true,
-      minMatchCharLength: 2,
+      // minMatchCharLength: 2,
       useExtendedSearch: true,
       keys: keys,
     }
