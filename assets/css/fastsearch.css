@@ -67,6 +67,7 @@
         "title publish"
         "tags edit";
     justify-content: space-between;
+    align-items: end;
 }
 .search-result-item .header .title {
     grid-area: title;
@@ -92,12 +93,13 @@
 .search-result-item .header .tags {
     grid-area: tags;
     font-style: italic;
-    display: flex;
-    gap: 8px;
     font-family: var(--font-sans);
 }
 .search-result-item .header .tags .tag {
     color: var(--gray-deep);
+}
+.search-result-item .header .tags .tag:not(:first-child) {
+    margin-left: 8px;
 }
 .search-result-item .header .tags .tag:hover {
     color: var(--orange-deep);
@@ -117,4 +119,18 @@
 
 .search-result-item .summary * {
     color: var(--gray-deep)
+}
+.fast-search-hint {
+    cursor: pointer;
+}
+
+@media (max-width: 820px) {
+    .fast-search-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin-top: 0;
+        height: 100%;
+        width: calc(100% - 10px);
+    }
 }

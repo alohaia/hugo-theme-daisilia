@@ -31,6 +31,7 @@ function toggleSearch() {
 }
 
 document.getElementById("searchBtn").onclick = toggleSearch;
+document.getElementById("searchHint").onclick = toggleSearch;
 
 document.addEventListener("click", event => {
   if(event.target === document.getElementById("fastSearch")) {
@@ -58,26 +59,6 @@ document.addEventListener('keydown', function(event) {
       document.body.style.overflowY = "overlay"
       document.activeElement.blur()
       searchVisible = false
-    }
-  }
-
-  // DOWN (40) arrow
-  if (event.key == "ArrowDown") {
-    if (searchVisible && resultsAvailable) {
-      event.preventDefault(); // stop window from scrolling
-      if ( document.activeElement == maininput) { first.focus(); } // if the currently focused element is the main input --> focus the first <li>
-      else if ( document.activeElement == last ) { last.focus(); } // if we're at the bottom, stay there
-      else { document.activeElement.parentElement.nextSibling.firstElementChild.focus(); } // otherwise select the next search result
-    }
-  }
-
-  // UP (38) arrow
-  if (event.key == "ArrowUp") {
-    if (searchVisible && resultsAvailable) {
-      event.preventDefault(); // stop window from scrolling
-      if ( document.activeElement == maininput) { maininput.focus(); } // If we're in the input box, do nothing
-      else if ( document.activeElement == first) { maininput.focus(); } // If we're at the first item, go to input box
-      else { document.activeElement.parentElement.previousSibling.firstElementChild.focus(); } // Otherwise, select the search result above the current active one
     }
   }
 })
@@ -119,6 +100,9 @@ function loadSearch() {
     var options = { // fuse.js options; check fuse.js website for details
       shouldSort: true,
       // minMatchCharLength: 2,
+      threshold: 0.6, // 0 for a perfect match, 1 would match anything
+      ignoreLocation: true,
+      includeMatches: true,
       useExtendedSearch: true,
       keys: keys,
     }
@@ -161,7 +145,7 @@ function uniqueResults(results, length) {
 
 function afterSearch(){
   $("table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
-  const pjax = new Pjax({
+  new Pjax({
     elements: ["a[href]:not([no-pjax], .sidebar-toc a)"],
     selectors: [
       "[data-pjax]",
@@ -191,17 +175,16 @@ document.addEventListener("pjax:complete", function () {
 //
 function executeSearch(term) {
   let results = fuse.search(term); // the actual query being run using fuse.js
-  console.log(results)
   let searchitems = ''; // our results bucket
 
   if (results.length === 0) { // no results based on what was typed into the input box
     resultsAvailable = false
     searchitems = ''
   } else { // build our html
-    let items = uniqueResults(results, 5)
+    let items = uniqueResults(results, 20)
     for (let item of items) {
       let tags = ""
-      if(item.tags.length > 0) {
+      if(item.tags && item.tags.length > 0) {
         for(let tag of item.tags) {
           tags += `<a class="tag" href="/tags/${tag}">${tag}</a>`;
         }
