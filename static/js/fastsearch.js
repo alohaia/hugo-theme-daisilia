@@ -8,7 +8,11 @@ var maininput = document.getElementById('searchInput'); // input box for search
 var resultsAvailable = false; // Did we get any search results?
 const keys = [ 'title', 'contents' ]
 
-function toggleSearch() {
+// ==========================================
+// Check searchVisible and toggle search
+// force true: force on, false: force off
+//
+function toggleSearch(force) {
     // Load json search index if first time invoking search
     // Means we don't load json unless searches are going to happen; keep user payload small unless needed
     if(firstRun) {
@@ -17,28 +21,26 @@ function toggleSearch() {
     }
 
     // Toggle visibility of search box
-    if (!searchVisible) {
+    if (force == true || (force === undefined && !searchVisible)) {
       document.getElementById("fastSearch").style.display = "block"
       document.body.style.overflowY = "hidden"
       document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
       searchVisible = true; // search visible
     } else {
-      document.getElementById("fastSearch").style.display = "none"
+      // document.getElementById("fastSearch").style.display = "none"
+      $("#fastSearch").fadeOut(200)
       document.body.style.overflowY = "overlay"
       document.activeElement.blur(); // remove focus from search box
       searchVisible = false; // search not visible
     }
 }
 
-document.getElementById("searchBtn").onclick = toggleSearch;
-document.getElementById("searchHint").onclick = toggleSearch;
+document.getElementById("searchBtn").onclick = ()=>{ toggleSearch(true) }
+document.getElementById("searchHint").onclick = ()=>{ toggleSearch(false) }
 
 document.addEventListener("click", event => {
   if(event.target === document.getElementById("fastSearch")) {
-    document.getElementById("fastSearch").style.display = "none"
-    document.body.style.overflowY = "overlay"
-    document.activeElement.blur(); // remove focus from search box
-    searchVisible = false; // search not visible
+    toggleSearch(false)
   }
 });
 
@@ -54,12 +56,7 @@ document.addEventListener('keydown', function(event) {
 
   // Allow ESC (27) to close search box
   if (event.key == "Escape") {
-    if (searchVisible) {
-      document.getElementById("fastSearch").style.display = "none"
-      document.body.style.overflowY = "overlay"
-      document.activeElement.blur()
-      searchVisible = false
-    }
+    toggleSearch(false)
   }
 })
 
@@ -67,7 +64,7 @@ document.addEventListener('keydown', function(event) {
 // ==========================================
 // execute search as each character is typed
 //
-document.getElementById("searchInput").onkeyup = function(e) {
+document.getElementById("searchInput").onkeyup = function() {
   executeSearch(this.value)
 }
 
@@ -162,10 +159,7 @@ function afterSearch(){
 }
 
 document.addEventListener("pjax:complete", function () {
-  document.getElementById("fastSearch").style.display = "none";
-  document.body.style.overflowY = "overlay"
-  document.activeElement.blur();
-  searchVisible = false;
+  toggleSearch(false);
 })
 
 // ==========================================
