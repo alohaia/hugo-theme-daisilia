@@ -141,9 +141,9 @@ function uniqueResults(results, length) {
 }
 
 function afterSearch(){
-  $("table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
+  $("#searchResults table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
   new Pjax({
-    elements: ["a[href]:not([no-pjax], .sidebar-toc a)"],
+    elements: ["a[href]:not([no-pjax])"],
     selectors: [
       "[data-pjax]",
       "head title",

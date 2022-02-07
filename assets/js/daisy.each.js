@@ -8,13 +8,13 @@ $("sidebar-content").ready(function(){
     // add click events for nav items
     let navs = document.getElementsByClassName("sidebar-nav-item");
     let pannels = document.getElementsByClassName("sidebar-pannel");
-    for(let i = 0; i < navs.length; i++) {
+    for(let i in navs) {
         navs[i].onclick = function(){
             switchPannel(i);
         }
     }
     // active first non-empty pannel
-    for(let i = 0; i < pannels.length; i++){
+    for(let i in pannels) {
         if(pannels[i].childElementCount > 0){
             switchPannel(i);
             break;

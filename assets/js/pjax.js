@@ -1,17 +1,21 @@
-const pjax = new Pjax({
-    elements: ["a[href]:not([no-pjax], .sidebar-toc a)"],
-    selectors: [
-        "[data-pjax]",
-        "head title",
-        "meta[property]",
-        ".sidebar-toc", ".sidebar-nav",
-        ".site-content",
-        ".js-each",
-        ".site-right",
-    ],
-    cacheBust: false,
-    analytics: false,
+document.addEventListener("DOMContentLoaded", function() {
+    // Init Pjax instance
+    new Pjax({
+        elements: ["a[href]:not([no-pjax])"],
+        selectors: [
+            "[data-pjax]",
+            "head title",
+            "meta[property]",
+            ".sidebar-toc", ".sidebar-nav",
+            ".site-content",
+            ".js-each",
+            ".site-right",
+        ],
+        cacheBust: false,
+        analytics: false,
+    });
 });
+
 
 document.addEventListener("pjax:complete", function(){
     if(document.querySelector('iframe.giscus-frame')) {
