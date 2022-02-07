@@ -255,10 +255,6 @@ code:not(pre code) { /* inline block */
 .article-content li::marker {
     color: var(--gray-deep);
 }
-.article-content li,
-.article-content dd {
-    transition: all 0.4s;
-}
 
 /* heading */
 h1.heading {
@@ -346,24 +342,25 @@ kbd {
 /* deflist */
 dt {
     font-weight: bold;
-    /* display: inline; */
+    display: inline;
     /* font-size: 125%; */
     /* line-height: 1.6; */
     /* vertical-align: bottom; */
 }
 dt::after {
-    content: ":";
+    content: ": ";
     color: var(--gray-deep);
     font-weight: bold;
     margin-right: 5px;
 }
-dd {
+dt+dd {
     margin: 0;
+    display: inline;
 }
 /* dd:first-of-type { */
 /*     display: inline; */
 /* } */
-dd::before {
+dd:not(dt+dd)::before {
     content: "#";
     color: var(--gray-deep);
     font-weight: bold;
