@@ -219,7 +219,7 @@ code {
     border: 8px solid var(--code-background);
     border-radius: 4px;
     background-color: var(--code-background);
-    line-height: 1.25;
+    line-height: 24px;
 }
 .highlight pre {
     margin: 0;
@@ -234,7 +234,7 @@ pre:not(.highlight pre) { /* block */
     /* border-radius: 4px; */
     background-color: var(--code-background);
     overflow: auto;
-    line-height: 1.25;
+    line-height: 24px;
 }
 code:not(pre code) { /* inline block */
     margin-top: 10px;
