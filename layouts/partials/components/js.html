@@ -10,7 +10,6 @@
 <script data-pjax src="{{ $each.RelPermalink }}" integrity="{{ $each.Data.Integrity  }}"></script>
 {{/* pjax.js */}}
 {{- if .Site.Params.daisy.pjax.enable -}}
-<!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script> -->
 <script src="/js/pjax.min.js"></script>
 {{- $pjax := resources.Get "js/pjax.js" | minify | fingerprint -}}
 <script src="{{ $pjax.RelPermalink }}" integrity="{{ $pjax.Data.Integrity }}"></script>
