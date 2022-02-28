@@ -121,9 +121,17 @@
 figure {
     margin: 24px 0;
     overflow: hidden;
+    display: inline-block;
+    width: 100%;
 }
-figure.float-left  { float: left  }
-figure.float-right { float: right }
+figure.float-left {
+    float: left;
+    max-width: 50%;
+}
+figure.float-right {
+    float: right;
+    max-width: 50%;
+}
 figure.left img {
     float: left;
     max-width: 75%;
@@ -220,6 +228,8 @@ code {
     border-radius: 4px;
     background-color: var(--code-background);
     line-height: 24px;
+    display: inline-block;
+    width: calc(100% - 16px);
 }
 .highlight pre {
     margin: 0;
@@ -259,6 +269,10 @@ code:not(pre code) { /* inline block */
 }
 
 /* heading */
+.heading {
+    display: inline-block;
+    width: 100%;
+}
 h1.heading {
     font-size: var(--font-height-double);
 }
