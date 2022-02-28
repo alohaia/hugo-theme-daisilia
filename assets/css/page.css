@@ -246,6 +246,7 @@ pre:not(.highlight pre) { /* block */
     background-color: var(--code-background);
     /* overflow: auto; */
     line-height: 24px;
+    overflow-x: auto;
 }
 code:not(pre code) { /* inline block */
     margin-top: 10px;
