@@ -150,7 +150,7 @@
             "right"
             "content"
             "comment";
-        grid-template-columns: (140px,var(--content-width));
+        grid-template-columns: minmax(140px,var(--content-width));
         margin: 0 10px;
     }
 }
