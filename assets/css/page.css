@@ -124,21 +124,23 @@ figure {
     display: inline-block;
     width: 100%;
 }
-figure.float-left {
-    float: left;
-    max-width: 50%;
-}
-figure.float-right {
-    float: right;
-    max-width: 50%;
-}
-figure.left img {
-    float: left;
-    max-width: 75%;
-}
-figure.right img {
-    float: right;
-    max-width: 75%;
+@media (min-width: 751px) {
+    figure.float-left {
+        float: left;
+        max-width: 50%;
+    }
+    figure.float-right {
+        float: right;
+        max-width: 50%;
+    }
+    figure.left img {
+        float: left;
+        max-width: 75%;
+    }
+    figure.right img {
+        float: right;
+        max-width: 75%;
+    }
 }
 
 /* caption */
