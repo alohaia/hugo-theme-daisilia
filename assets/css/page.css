@@ -230,6 +230,7 @@ code {
     line-height: 24px;
     display: inline-block;
     width: calc(100% - 16px);
+    overflow-x: auto;
 }
 .highlight pre {
     margin: 0;
@@ -243,7 +244,7 @@ pre:not(.highlight pre) { /* block */
     /* border: 8px solid var(--code-background); */
     /* border-radius: 4px; */
     background-color: var(--code-background);
-    overflow: auto;
+    /* overflow: auto; */
     line-height: 24px;
 }
 code:not(pre code) { /* inline block */
