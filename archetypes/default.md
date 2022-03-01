@@ -6,6 +6,5 @@ draft: true
 comments: true
 math: false
 tags:
-categories:
 ---
 

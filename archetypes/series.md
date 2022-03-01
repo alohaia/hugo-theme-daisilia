@@ -7,6 +7,5 @@ comments: true
 math: false
 weight: 1
 tags:
-categories:
 ---
 

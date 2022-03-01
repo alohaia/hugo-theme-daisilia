@@ -1,0 +1,13 @@
+{{- define "main" -}}
+  <h1 class="article-title">{{ .Title }}</h1>
+  <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
+  {{- with .Content -}}
+    <div class="article-content">
+      {{- . -}}
+    </div>
+  {{- end -}}
+  {{- with .Pages -}}
+    <div class="page-list">{{ partial "components/page-list" .ByLastmod }}</div>
+  {{- end -}}
+{{- end -}}
+{{/* vim:set ft=gohtmltmpl: */}}

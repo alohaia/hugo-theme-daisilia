@@ -14,10 +14,14 @@
     --gray-light: #f0f0f0;
     --gray-deep: #818181;
     --black: #1b1b1b;
+    --dark: #000000;
     --orange: #ff8855;
     --orange-deep: #ff6020;
+
     --code-background: #fafafa;
     --inline-code-background: #fafafa;
+    --link: var(--black);
+    --link-hover: var(--orange-deep);
 
     --z-overcontent: 1;
     --z-series: 200;
