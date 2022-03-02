@@ -357,7 +357,7 @@ kbd {
 }
 
 /* footnote */
-.footnotes hr {
+hr {
     background-image: repeating-linear-gradient(-45deg, #ddd, #ddd 4px, transparent 4px, transparent 8px);
     height: 2px;
     margin: 20px 0;
@@ -368,9 +368,7 @@ kbd {
 dt {
     font-weight: bold;
     display: inline;
-    /* font-size: 125%; */
-    /* line-height: 1.6; */
-    /* vertical-align: bottom; */
+    float: left;
 }
 dt::after {
     content: ": ";
@@ -378,13 +376,9 @@ dt::after {
     font-weight: bold;
     margin-right: 5px;
 }
-dt+dd {
+dd {
     margin: 0;
-    display: inline;
 }
-/* dd:first-of-type { */
-/*     display: inline; */
-/* } */
 dd:not(dt+dd)::before {
     content: "#";
     color: var(--gray-deep);
