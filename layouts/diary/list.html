@@ -7,7 +7,15 @@
     </div>
   {{- end -}}
   {{- with .Pages -}}
-    <div class="page-list">{{ partial "components/page-list" .ByLastmod }}</div>
+    <div class="page-list">
+      {{- range .ByDate.Reverse -}}
+      <div class="page-list-item">
+        <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+        <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
+        <div class="summary article-content">{{ partial "components/summary" . }}</div>
+      </div>
+      {{- end -}}
+    </div>
   {{- end -}}
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
