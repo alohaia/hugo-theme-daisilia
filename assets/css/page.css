@@ -183,7 +183,7 @@ figcaption>.caption ,table caption>.caption{
 /* table */
 .table-container {
     overflow: auto;
-    margin-top: 10px;
+    margin: 15px 0;
     max-height: 75vh;
     white-space: nowrap;
 }
