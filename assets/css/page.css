@@ -377,6 +377,9 @@ dt::after {
 dd {
     margin: 0;
 }
+dd:not(dt+dd) {
+    text-indent: 2em;
+}
 dd:not(dt+dd)::before {
     content: "#";
     color: var(--gray-deep);

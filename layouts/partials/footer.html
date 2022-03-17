@@ -1,14 +1,14 @@
 <div class="footer-powerby">
-  <span>Power by <a target="_blank" href="https://gohugo.io">Hugo</a></span>
-  <span class="division">|</span>
-  <span>Theme - <a target="_blank" href="https://github.com/alohaia/hugo-theme-daisilia">Daisilia</a></span>
+    <span>Power by <a target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span class="division">|</span>
+    <span>Theme - <a target="_blank" href="https://github.com/alohaia/hugo-theme-daisilia">Daisilia</a></span>
 </div>
-<div class="footer-copyright">© 2020 - {{ now.Format "2006" }}<span class="heart animate__heartBeat animate__infinite"><i class="fas fa-heart"></i></span>
-  {{- if .Site.Author.homepage -}}
+<div class="footer-copyright">© {{ .Site.Params.daisy.copyright.startyear }} - {{ now.Format "2006" }}<span class="heart animate__heartBeat animate__infinite"><i class="fas fa-heart"></i></span>
+    {{- if .Site.Author.homepage -}}
     <span><a target="_blank" href="{{ .Site.Author.homepage }}">{{ partial "components/getname" . }}</a></span>
-  {{- else -}}
+    {{- else -}}
     <span>{{ partial "components/getname" . }}</span>
-  {{- end -}}
+    {{- end -}}
 </div>
 <div class="js-each" style="display:none">
   {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}

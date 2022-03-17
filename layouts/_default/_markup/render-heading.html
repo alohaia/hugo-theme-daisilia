@@ -2,7 +2,7 @@
   class="heading {{ .Attributes.class }}"
   {{- range $a,$v := .Attributes -}}{{ if ne $a "class" }}{{ $a }}="{{ $v }}"{{ end }}{{ end }}
 ><a scroll="{{ .Anchor }}">{{ .Text | safeHTML }}</a>
-{{- if ne (.Attributes.id | replaceRE `-\d+$` "") (.PlainText | replaceRE `\s+` "-" | replaceRE "[`~!@#$%^&*()_=+\\[\\]\\\\|{};:'\",<.>/?·！¥…（）—「【〔［『〖｛」】〕］』〗｝、；：‘”，《〈«‹。》〉»›？]" "" | lower) -}}<span class="heading-id">{{ .Attributes.id }}</span>{{- end -}}
+{{/* {{- if ne (.Attributes.id | replaceRE `-\d+$` "") (.PlainText | replaceRE `\s+` "-" | replaceRE "[`~!@#$%^&*()_=+\\[\\]\\\\|{};:'\",<.>/?·！¥…（）—「【〔［『〖｛」】〕］』〗｝、；：‘”，《〈«‹。》〉»›？]" "" | lower) -}}<span class="heading-id">{{ .Attributes.id }}</span>{{- end -}} */}}
   {{- with .Attributes.alias -}}<span class="heading-aliases">{{- range (split . " ") -}}<span class="heading-alias">{{ . | htmlUnescape | safeHTML }}</span>{{- end -}}</span>{{- end -}}
 </h{{ .Level }}>
 {{/* vim:set ft=gohtmltmpl: */}}
