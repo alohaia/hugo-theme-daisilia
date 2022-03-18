@@ -663,3 +663,11 @@ mjx-container {
     color: red;
 }
 
+.article-content [target=_blank]::after {
+    content: " \f35d ";
+    border-bottom: none;
+    font-family: 'font awesome 5 free';
+    font-weight: 900;
+    font-size: 50%;
+    vertical-align: super;
+}

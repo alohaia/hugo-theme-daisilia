@@ -1,6 +1,0 @@
-<script>
-const nodes = document.evaluate("//div[@id='SiteContent']//a[@href][not(starts-with(@href,'/'))][not(starts-with(@href,'http://localhost:'))]", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE)
-for(let i = 0; i < nodes.snapshotLength; i++){
-    nodes.snapshotItem(i).classList.add("exturl")
-}
-</script>
