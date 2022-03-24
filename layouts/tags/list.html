@@ -1,6 +1,6 @@
 {{- define "main" -}}
 <h1 class="article-title">Tag Cloud</h1>
-<div class="tag-cloud">
+<div class="tag-cloud tag-cloud-body">
     {{ if ne (len $.Site.Taxonomies.tags) 0 }}
       {{ $largestFontSize := 3.0 }}
       {{ $smallestFontSize := 1.0 }}
