@@ -43,14 +43,6 @@ body {
 
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif) }
 
-a[scroll] {
-    cursor: pointer;
-}
-a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a)::before {
-    content: "#";
-    font-weight: bold;
-}
-
 .toc-title, #TableOfContents li,
 .series-title, .series-list-item {
     white-space: nowrap;

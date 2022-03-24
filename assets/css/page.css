@@ -334,8 +334,8 @@ h6.heading::before {
     content: counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) "." counter(h5Counter) "." counter(h6Counter) ". ";
     /* content: counter(h6Counter, lower-alpha) ". "; */
 }
-.heading-id { color: var(--gray-deep) }
-.heading-id::before { content: "#" }
+/* .heading-id { color: var(--gray-deep) } */
+/* .heading-id::before { content: "#" } */
 .heading-alias { color: var(--gray-deep) }
 .heading-alias::before { content: "·" }
 
@@ -642,6 +642,23 @@ mjx-container {
     overflow-y: hidden;
 }
 
+/* anchors */
+a[scroll] {
+    cursor: pointer;
+}
+a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a)::before {
+    content: "#";
+    font-weight: bold;
+}
+
+.article-content [target="_blank"]::after {
+    content: " \f35d ";
+    border-bottom: none;
+    font-family: 'font awesome 5 free';
+    font-weight: 900;
+    font-size: 50%;
+    vertical-align: super;
+}
 
 /* custom */
 .heading.medicine::after {
@@ -663,11 +680,3 @@ mjx-container {
     color: red;
 }
 
-.article-content [target=_blank]::after {
-    content: " \f35d ";
-    border-bottom: none;
-    font-family: 'font awesome 5 free';
-    font-weight: 900;
-    font-size: 50%;
-    vertical-align: super;
-}
