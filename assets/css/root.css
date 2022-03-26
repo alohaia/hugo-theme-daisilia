@@ -51,6 +51,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif) }
 }
 
 ::selection {
+    text-shadow: 1px 1px var(--gray-deep);
     background-color: var(--gray);
 }
 
