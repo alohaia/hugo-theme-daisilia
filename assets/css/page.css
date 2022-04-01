@@ -62,7 +62,6 @@
     color: var(--link);
     transition: all 0.3s;
     text-decoration: underline;
-    /* text-decoration-thickness: 2px; */
     text-decoration-color: var(--gray-deep);
     text-decoration-thickness: 2px;
 }
@@ -75,6 +74,7 @@
 .article-content a:hover {
     color: var(--orange-deep);
     text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 .summary.article-content {
     margin: 18px 0;
