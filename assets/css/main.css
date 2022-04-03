@@ -136,7 +136,7 @@
     grid-area: content;
     display: grid;
     justify-content: space-between;
-    align-content: space-between;
+    align-content: start;
     grid-template-areas:
         "left message right"
         "left content right"
