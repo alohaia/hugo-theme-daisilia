@@ -1,7 +1,15 @@
 .site-message-list {
-    grid-area: message;
     display: flex;
     flex-direction: column;
+    min-width: 150px;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.site-message-list::-webkit-scrollbar {
+    width: 0;
 }
 
 .site-message-close {
@@ -16,7 +24,7 @@
 }
 
 .site-message-item {
-    margin: 5px;
+    margin: 10px;
     padding: 10px;
 }
 
