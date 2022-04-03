@@ -138,6 +138,7 @@
     justify-content: space-between;
     align-content: space-between;
     grid-template-areas:
+        "left message right"
         "left content right"
         "left comment right";
     grid-template-columns: 1fr minmax(140px,var(--content-width)) 1fr;
@@ -148,6 +149,7 @@
         grid-template-areas:
             "left"
             "right"
+            "message"
             "content"
             "comment";
         grid-template-columns: minmax(140px,var(--content-width));

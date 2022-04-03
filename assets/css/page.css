@@ -562,7 +562,7 @@ details[open]>summary>.tab-title-indicator {
 .tab.info    { border-color: #428bca; box-shadow: 0 0 2px 2px #428bca25; }
 .tab.warning { border-color: #f0ad4e; box-shadow: 0 0 2px 2px #f0ad4e25; }
 .tab.danger,
-.tab.error   { border-color: #d9534f }
+.tab.error   { border-color: #d9534f; box-shadow: 0 0 2px 2px #d9534f25; }
 .tab.default > .tab-title { background-color: #77777725 }
 .tab.success > .tab-title { background-color: #5cb85c25 }
 .tab.primary > .tab-title { background-color: #6f42c125 }
