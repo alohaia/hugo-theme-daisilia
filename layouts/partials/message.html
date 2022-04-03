@@ -1,0 +1,25 @@
+<div class="site-message-list">
+{{- with .Site.Params.daisy.message -}}
+<link rel="stylesheet" href="/css/message.css"></link>
+{{- range . -}}
+<div class="site-message-item {{ with .type }}{{ . }}{{ else }}default{{ end }}">
+    <div class="site-message-close" role="button">X</div>
+    {{- with .title -}}
+    <h1 class="site-message-title">{{ . }}</h1>
+    {{- end -}}
+    {{- with .content -}}
+    <p class="site-message-content">{{ . }}</p>
+    {{- end -}}
+</div>
+{{- end }}
+<script>
+    document.querySelectorAll(".site-message-close").forEach(function(currentValue) {
+        console.log(currentValue)
+        currentValue.onclick = function() {
+            this.parentElement.style.display = "none"
+        }
+    })
+</script>
+{{ end -}}
+</div>
+{{/* vim:set ft=gohtmltmpl: */}}

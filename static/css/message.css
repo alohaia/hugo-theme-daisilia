@@ -1,0 +1,27 @@
+.site-message-list {
+    grid-area: message;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-message-close {
+    float: right;
+    cursor: pointer;
+    user-select: none;
+}
+
+.site-message-title {
+    font-size: 125%;
+    margin: 15px 0;
+}
+
+.site-message-item {
+    margin: 5px;
+    padding: 10px;
+}
+
+.site-message-item.default { background-color: #77777725; box-shadow: 0 0 2px 2px #77777725; }
+.site-message-item.info    { background-color: #428bca25; box-shadow: 0 0 2px 2px #428bca25; }
+.site-message-item.warning { background-color: #f0ad4e25; box-shadow: 0 0 2px 2px #f0ad4e25; }
+.site-message-item.danger,
+.site-message-item.error   { background-color: #d9534f25; box-shadow: 0 0 2px 2px #d9534f25; }
