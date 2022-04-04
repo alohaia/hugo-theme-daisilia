@@ -1,7 +1,6 @@
 .site-message-list {
     display: flex;
     flex-direction: column;
-    min-width: 150px;
     position: sticky;
     top: 0;
     overflow-y: auto;
@@ -26,6 +25,7 @@
 .site-message-item {
     margin: 10px;
     padding: 10px;
+    min-width: 150px;
 }
 
 .site-message-item.default { background-color: #77777725; box-shadow: 0 0 2px 2px #77777725; }
