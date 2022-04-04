@@ -1,6 +1,7 @@
 <div class="site-message-list">
 {{- with .Site.Params.daisy.message -}}
-<link rel="stylesheet" href="/css/message.css"></link>
+{{ $style := resources.Get "css/message.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}"/>
 {{- range . -}}
 <div class="site-message-item {{ with .type }}{{ . }}{{ else }}default{{ end }}">
     <div class="site-message-close" role="button">X</div>
