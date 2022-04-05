@@ -43,8 +43,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif) }
 
-.toc-title, #TableOfContents li,
-.series-title, .series-list-item {
+#TableOfContents li, .series-title, .series-list-item {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
