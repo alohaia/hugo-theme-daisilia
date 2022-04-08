@@ -172,8 +172,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--orange-deep);
-    height: 2px;
     z-index: var(--z-loadingbar);
     opacity: 0;
     transition: opacity .4s linear;
@@ -181,12 +179,23 @@
 .loading-track.loading {
     opacity: 1;
 }
+
+@keyframes loading {
+  0% {width: 0; opacity: 1;}
+  50% {opacity: 0.9;}
+  100% {width: 100%; opacity: 0;}
+}
+
 .loading-progress {
-    width: 0;
-    height: 2px;
+    margin: auto;
+    height: 4px;
     background-color: #77b6ff;
     box-shadow: 0 0 3px 2px #77b6ff80;
     transition: width .4s ease;
+    animation-name: loading;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
 }
 
 /* 404 */

@@ -1,14 +1,14 @@
 {{- $theme := .Site.Params.daisy -}}
 {{- $hasTOC := ge (len .TableOfContents) 40 -}}
 <div class="sidebar-container">
-  <div class="sidebar-nav">
+  <div class="sidebar-nav" data-pjax>
     {{- if $hasTOC -}}
       <span role="button" class="sidebar-nav-item sidebar-nav-series">Table of Content</span>
       <span role="button" class="sidebar-nav-item sidebar-nav-overview">Overview</span>
     {{- end -}}
   </div>
   <div class="sidebar-content">
-    <div class="sidebar-toc sidebar-pannel">
+    <div class="sidebar-toc sidebar-pannel" data-pjax>
     {{- if $hasTOC -}}
       <h1 class="toc-title" id="TOCTitle">{{ .Title }}</h1>
       {{- .TableOfContents -}}

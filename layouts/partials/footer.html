@@ -10,8 +10,8 @@
     <span>{{ partial "components/getname" . }}</span>
     {{- end -}}
 </div>
-<div class="footer-creativecommons">版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/{{ lower .Site.Params.daisy.copyright.creativecommons }}/4.0/deed.zh" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>{{ upper .Site.Params.daisy.copyright.creativecommons }}</a> 许可协议。转载请注明出处。</div>
-<div class="js-each" style="display:none">
+<div class="footer-creativecommons">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/{{ lower .Site.Params.daisy.copyright.creativecommons }}/4.0/deed.zh" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>{{ upper .Site.Params.daisy.copyright.creativecommons }}</a> 许可协议。转载请注明出处。</div>
+<div class="js-each" data-pjax style="display:none">
   {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}
   {{- if .Site.Params.daisy.exturl.enable -}}{{ partial "components/exturl.html" . }}{{- end -}}
 </div>

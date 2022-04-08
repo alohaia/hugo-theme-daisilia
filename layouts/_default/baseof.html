@@ -14,9 +14,9 @@
     <header class="site-header" id="SiteHeader">{{ partial "header" . }}</header>
     <div class="site-main" id="SiteMain">
       <div class="site-left">{{ block "left" . }}{{- partial "message" . -}}{{ end }}</div>
-      <div class="site-content" id="SiteContent">{{ block "main" . }}{{ end }}</div>
+      <div class="site-content" data-pjax id="SiteContent">{{ block "main" . }}{{ end }}</div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
-      <div class="site-right">{{ block "right" . }}{{ end }}</div>
+      <div class="site-right" data-pjax>{{ block "right" . }}{{ end }}</div>
     </div>
     {{- partial "fast-search" . -}}
     <footer class="site-footer" id="SiteFooter">{{ partial "footer" . }}</footer>

@@ -99,7 +99,7 @@ function loadSearch() {
       // minMatchCharLength: 2,
       threshold: 0.6, // 0 for a perfect match, 1 would match anything
       ignoreLocation: true,
-      includeMatches: true,
+      includeMatches: false,
       useExtendedSearch: true,
       keys: keys,
     }
@@ -148,10 +148,6 @@ function afterSearch(){
       "[data-pjax]",
       "head title",
       "meta[property]",
-      ".sidebar-toc", ".sidebar-nav",
-      ".site-content",
-      ".js-each",
-      ".site-right",
     ],
     cacheBust: false,
     analytics: false,
