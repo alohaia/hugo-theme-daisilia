@@ -77,7 +77,7 @@ for (let i = 0; i < anchors.length; i++) {
     a.removeAttribute("href");
 }
 // change onclick of a[scroll]
-anchors = document.querySelectorAll("a[scroll]");
+anchors = document.querySelectorAll("a[scroll]:not(.page-list-item a)");
 for (let i = 0; i < anchors.length; i++) {
     anchors[i].onclick = function(){
         let anc = this.getAttribute("scroll");

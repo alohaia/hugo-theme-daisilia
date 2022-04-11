@@ -71,7 +71,7 @@
 }
 .page-title a:hover,
 .article-metadata a:hover,
-.article-content a:hover {
+.article-content a:not(.page-list-item a[scroll]):hover {
     color: var(--orange-deep);
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -643,10 +643,16 @@ mjx-container {
 }
 
 /* anchors */
-a[scroll] {
+a[scroll]:not(.page-list-item a) {
     cursor: pointer;
 }
-a[scroll]:not(#TableOfContents a, .footnote-backref, .footnote-ref, .heading a)::before {
+.page-list-item a[scroll] {
+    text-decoration: none;
+}
+.page-list-item a[anchor]:hover {
+    color: var(--gray-deep);
+}
+a[scroll]:not(.page-list-item a, #TableOfContents a, .footnote-backref, .footnote-ref, .heading a)::before {
     content: "#";
     font-weight: bold;
 }
