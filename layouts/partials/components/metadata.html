@@ -18,11 +18,6 @@
       <span class="meta-item-value">{{ . }}</span>
     </li>
   {{- else -}}
-    <li class="meta-item">
-      <i class="fas fa-user"></i>
-      <span class="meta-item-text">Author:</span>
-      <span class="meta-item-value">{{ partial "components/getname" . }}</span>
-    </li>
   {{- end -}}
   {{- with .Params.coauthors -}}
     <li class="meta-item">
@@ -48,14 +43,14 @@
       </li>
     {{- end -}}
     {{- with .Parent -}}
-      <li class="meta-item"><i class="fas fa-folder"></i>
+      <li class="meta-item"><i class="fas fa-folder-open"></i>
         <span class="meta-item-text">In</span>
         <a class="meta-item-value" href="{{ .RelPermalink }}">{{ .Title }}</a>
       </li>
     {{- end -}}
   </ul>
 {{- end -}}
-{{/* {{- if .Content -}} */}}{{- if false -}}
+{{- if .Content -}}
   <ul class="meta-section">
     <li class="meta-item">
       <i class="far fa-file-word"></i>
