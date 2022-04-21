@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   {{- partial "components/opengraph" . -}} {{/* open graph */}}
-  {{- partial "components/title" . -}}     {{/* title */}}
+  {{- block "title" . -}}
+  <title>{{ print .Title " | " .Site.Title }}</title>
+  {{ end -}}
   {{- partial "components/style" . -}}     {{/* css */}}
   {{- partial "components/favicon" . -}}   {{/* favicon */}}
 </head>

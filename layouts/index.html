@@ -1,3 +1,11 @@
+{{- define "title" -}}
+  {{- if $.Site.Params.daisy.subtitle -}}
+  <title>{{ print $.Site.Title " - " $.Site.Params.daisy.subtitle }}</title>
+  {{- else -}}
+  <title>{{ $.Site.Title }}</title>
+  {{- end -}}
+{{- end -}}
+
 {{- define "main" -}}
   {{- with .Content -}}
     <div class="article-content">

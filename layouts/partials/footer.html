@@ -14,5 +14,13 @@
 <div class="js-each" data-pjax style="display:none">
   {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}
   {{- if .Site.Params.daisy.exturl.enable -}}{{ partial "components/exturl.html" . }}{{- end -}}
+  {{- if .Site.Params.daisy.scroll_title }}<script>
+    (function titleScroller(text) {
+      document.title = text;
+      setTimeout(function () {
+          titleScroller(text.substr(1) + text.substr(0, 1));
+      }, 500);
+    }(document.title + " | "));
+  </script>{{ end -}}
 </div>
 {{/* vim:set ft=gohtmltmpl: */}}
