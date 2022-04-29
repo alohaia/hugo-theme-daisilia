@@ -94,6 +94,8 @@ for (let i = 0; i < anchors.length; i++) {
                 block: "start"
             });
         }
+
+        history.pushState(null, "", "#" + anc)
     }
 }
 
