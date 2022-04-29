@@ -207,10 +207,6 @@ figcaption>.caption ,table caption>.caption{
 .table-container tbody tr:nth-of-type(odd) {
     background-color: var(--gray-light);
 }
-.table-container tbody tr:hover {
-    transition: all 0.4s;
-    background-color: var(--gray);
-}
 .table-container table.left-sticky td:first-child {
     position: sticky;
     left: 0;
