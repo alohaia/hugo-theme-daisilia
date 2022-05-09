@@ -578,14 +578,15 @@ details[open]>summary>.tab-title-indicator {
 /* bilibili & youtube */
 .vedio-container {
     height: 0;
-    margin: 10px 0;
+    margin: 10px 15px;
     overflow: hidden;
     padding-top: 75%;
     position: relative;
-    width: 100%;
+    width: calc(100% - 30px);
 }
-.vedio-container .bilibili-player,
-.vedio-container .youtube-player {
+.vedio-container iframe,
+.vedio-container object,
+.vedio-container embed {
     height: 100%;
     left: 0;
     margin: 0;
