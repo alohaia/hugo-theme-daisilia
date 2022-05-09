@@ -1,8 +1,8 @@
 {{- define "title" -}}
-  {{- if $.Site.Params.daisy.subtitle -}}
-  <title>{{ print $.Site.Title " - " $.Site.Params.daisy.subtitle }}</title>
+  {{- if site.Params.daisy.subtitle -}}
+  <title>{{ print site.Title " - " site.Params.daisy.subtitle }}</title>
   {{- else -}}
-  <title>{{ $.Site.Title }}</title>
+  <title>{{ site.Title }}</title>
   {{- end -}}
 {{- end -}}
 

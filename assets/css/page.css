@@ -638,7 +638,7 @@ a[scroll]:not(.page-list-item a) {
     cursor: pointer;
 }
 .page-list-item a[scroll] {
-    text-decoration: none;
+    color: var(--gray-deep);
 }
 .page-list-item a[anchor]:hover {
     color: var(--gray-deep);
