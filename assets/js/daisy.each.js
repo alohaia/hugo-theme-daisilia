@@ -97,11 +97,10 @@ for (let i = 0; i < anchors.length; i++) {
     }
 }
 
-$(".tag-cloud").ready(function(){
-    if(window.location.pathname == "/tags/") { return }
+$(".tag-cloud.side").ready(function(){
     let tags = document.querySelectorAll(".tag-cloud-item")
     for(let tag of tags){
-        if(tag.getAttribute("href") + "/" == window.location.pathname) {
+        if(tag.getAttribute("href") == window.location.pathname) {
             tag.classList.add("now")
             break
         }
