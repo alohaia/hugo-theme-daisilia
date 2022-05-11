@@ -218,6 +218,11 @@ code {
     /* line-height: 1.6; */
     font-family: var(--font-code);
 }
+code > span > span:first-child {
+    background-color: #fafafa;
+    position: sticky;
+    left: 0;
+}
 .highlight {
     margin: 10px 0;
     box-shadow: 1px 1px 2px #0005;
