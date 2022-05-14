@@ -19,5 +19,12 @@
     .article-metadata .meta-section:not(:first-child) {
         display: none;
     }
+    table {
+        max-height: 100%;
+        white-space: normal;
+    }
+    table td, table th {
+        padding: .2em .4em;
+    }
 }
 

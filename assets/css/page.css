@@ -161,7 +161,7 @@ table caption>.title::before {
     content: "Table - ";
     color: var(--gray);
 }
-figcaption>.caption ,table caption>.caption{
+figcaption>.caption, table caption>.caption{
     line-height: 1.6;
     margin: 0;
     color: var(--gray-deep);
@@ -176,38 +176,38 @@ figcaption>.caption ,table caption>.caption{
 }
 
 /* table */
-.table-container {
+table {
+    display: block;
     overflow: auto;
-    margin: 15px 0;
+    margin: 15px auto;
     max-height: 75vh;
     white-space: nowrap;
-}
-.table-container table {
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
     font-size: 0.875em;
     border-collapse: separate;
     border-spacing: 0;
 }
-.table-container table th {
+table th {
     border: 1px solid var(--gray-deep);
     border-bottom: 3px solid var(--gray-deep);
     position: sticky;
     z-index: var(--z-overcontent);
     top: 0;
     background-color: var(--white);
-    padding: .5em 1em;
+    padding: .3em 1em;
 }
-.table-container table td {
+table td {
     border: 1px solid var(--gray-deep);
-    padding: .5em 1em;
+    padding: .3em 1em;
 }
-.table-container tbody tr:nth-of-type(even) {
+tbody tr:nth-of-type(even) {
     background-color: var(--white);
 }
-.table-container tbody tr:nth-of-type(odd) {
+tbody tr:nth-of-type(odd) {
     background-color: var(--gray-light);
 }
-.table-container table.left-sticky td:first-child {
+table.left-sticky td:first-child {
     position: sticky;
     left: 0;
     background-color: inherit;
