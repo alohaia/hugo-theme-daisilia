@@ -466,7 +466,7 @@ blockquote {
 .article-content+.page-list::before {
     content: "Child Pages";
     color: var(--gray);
-    border-bottom: 1px solid var(--gray);
+    border-bottom: 2px dashed var(--gray);
     display: block;
     width: 50%;
     margin: auto;
