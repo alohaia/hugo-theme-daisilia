@@ -16,7 +16,7 @@
 {{- range (where .Pages "Params.draft" false).ByWeight -}}
   <li>
     <a class="series-item" href="{{ .RelPermalink }}">{{ .Title }}</a>
-    {{- if eq .Kind "section" -}}
+    {{- if eq .Kind "section" | and .Pages -}}
     <ul>
       {{- range .Pages.ByWeight -}}
       <li><a class="series-item" href="{{ .RelPermalink }}">{{ .Title }}</a></li>

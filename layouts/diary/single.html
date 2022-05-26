@@ -8,9 +8,7 @@
 
 {{- define "main" -}}
   <h1 class="article-title single-title">{{ time.Format "2006-01-02" .Date | title }} {{ .Title }}</h1>
-  <div class="article-metadata">
-    {{- partial "components/metadata.html" . -}}
-  </div>
+  <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
   {{- with .Content -}}
     <div class="article-content">
       {{- . -}}
