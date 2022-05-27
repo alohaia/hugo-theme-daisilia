@@ -3,6 +3,6 @@
   {{- range $a,$v := .Attributes -}}{{ if ne $a "class" }}{{ $a }}="{{ $v }}"{{ end }}{{ end }}
 ><a scroll="{{ .Anchor }}">{{ .Text | safeHTML }}</a>
 {{/* {{- if ne (.Attributes.id | replaceRE `-\d+$` "") (.PlainText | replaceRE `\s+` "-" | replaceRE "[`~!@#$%^&*()_=+\\[\\]\\\\|{};:'\",<.>/?·！¥…（）—「【〔［『〖｛」】〕］』〗｝、；：‘”，《〈«‹。》〉»›？]" "" | lower) -}}<span class="heading-id">{{ .Attributes.id }}</span>{{- end -}} */}}
-  {{- with .Attributes.alias -}}<span class="heading-aliases">{{- range (split . " ") -}}<span class="heading-alias">{{ replace (. | htmlUnescape | safeHTML) "\\_" " " }}</span>{{- end -}}</span>{{- end -}}
+  {{- with .Attributes.alias -}}<span class="heading-aliases">{{- range (split . " ") -}}<span class="heading-alias">{{ replace . "\\_" " " | htmlUnescape | safeHTML }}</span>{{- end -}}</span>{{- end -}}
 </h{{ .Level }}>
 {{/* vim:set ft=gohtmltmpl: */}}
