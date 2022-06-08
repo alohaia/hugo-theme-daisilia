@@ -1,7 +1,9 @@
 {{- if hasPrefix .Destination "#" -}}
-<a scroll="{{ substr .Destination 1 }}" class="anchor"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+<a class="anchor" scroll="{{ substr .Destination 1 }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- else -}}
-  {{- if (hasPrefix (relURL .Destination) "/") -}}
+  {{- if (hasPrefix .Destination "./") -}}
+<a target="_blank" href="{{ replace .Destination "./" .Page.RelPermalink }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+  {{- else if (hasPrefix (relURL .Destination) "/") -}}
 <a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
   {{- else -}}
 <a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }} target="_blank">{{ .Text | safeHTML }}</a>
