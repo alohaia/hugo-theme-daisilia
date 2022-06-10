@@ -1,5 +1,6 @@
 {{- $theme := .Site.Params.daisy -}}
-{{- $hasTOC := ge (len .TableOfContents) 40 -}}
+{{- $page := . }}{{ if .Params.copy }}{{ $page = .GetPage .Params.copy }}{{ end -}}
+{{- $hasTOC := ge (len $page.TableOfContents) 40 -}}
 <div class="sidebar-container">
   <div class="sidebar-nav" data-pjax>
     {{- if $hasTOC -}}
@@ -11,7 +12,7 @@
     <div class="sidebar-toc sidebar-pannel" data-pjax>
     {{- if $hasTOC -}}
       <h1 class="toc-title" id="TOCTitle">{{ .Title }}</h1>
-      {{- .TableOfContents -}}
+      {{- $page.TableOfContents -}}
     {{- end -}}
     </div>
     <div class="sidebar-overview sidebar-pannel">
