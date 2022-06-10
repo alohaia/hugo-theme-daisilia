@@ -1,11 +1,15 @@
 {{- define "main" -}}
   <h1 class="article-title">{{ .Title }}</h1>
   <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
-  {{- with .Content -}}
-    <div class="article-content">
-      {{- . -}}
-    </div>
+  <div class="article-content">
+  {{- if .Params.copy -}}
+    {{- $copyPage := .GetPage .Params.copy -}}
+    <div class="article-copy">This page is a duplicate of <a href="{{ $copyPage.RelPermalink }}">{{ $copyPage.Title }}</a> under <a href="{{ $copyPage.Parent.RelPermalink }}">{{ $copyPage.Parent.Title }}</a>.</div>
+    {{- $copyPage.Content -}}
+  {{- else -}}
+    {{- .Content -}}
   {{- end -}}
+  </div>
 {{- end -}}
 {{- define "right" -}}
   <div class="series-container">

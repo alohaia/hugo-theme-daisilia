@@ -71,6 +71,14 @@
     text-decoration: underline;
     text-decoration-thickness: 2px;
 }
+
+.article-copy {
+    background: var(--gray-light);
+    border: 2px dashed var(--gray);
+    padding: 1em;
+    margin: 15px 0;
+}
+
 .summary.article-content {
     margin: 18px 0;
 }

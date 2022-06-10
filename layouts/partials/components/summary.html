@@ -1,7 +1,8 @@
-{{- if .Params.summary -}}
-  {{- .Params.summary -}}
+{{- $page := . }}{{ if .Params.copy }}{{ $page = .GetPage .Params.copy }}{{ end -}}
+{{- if $page.Params.summary -}}
+  {{- $page.Params.summary -}}
 {{- else -}}
-  {{- .Summary -}}
+  {{- $page.Summary -}}
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
 
