@@ -30,12 +30,13 @@
     --z-fullscreen: 9999;
 }
 
-body, html {
+html {
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
-    scroll-behavior: smooth;
+    height: 100%;
     margin: 0;
     overflow: hidden; /* set overflow-y to "overlay" in daisy.js when page loaded */
     font-family: var(--font-sans); /* default font family */

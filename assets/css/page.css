@@ -66,7 +66,7 @@
 }
 .page-title a:hover,
 .article-metadata a:hover,
-.article-content a:not(.page-list-item a[scroll]):hover {
+.article-content a:hover {
     color: var(--orange-deep);
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -531,6 +531,16 @@ blockquote {
 .hidden-text { background-color: var(--black) }
 .hidden-text:hover { background-color: inherit }
 
+/* sense-group */
+.sense-group::before {
+    content: "「";
+    color: var(--gray);
+}
+.sense-group::after {
+    content: "」";
+    color: var(--gray);
+}
+
 /* tab */
 .tab {
     border-left: 4px solid;
@@ -647,17 +657,13 @@ mjx-container {
     overflow-y: hidden;
 }
 
-/* anchors */
-a[scroll]:not(.page-list-item a) {
-    cursor: pointer;
-}
-.page-list-item a[scroll] {
+.page-list-item a[href^="#"] {
     color: var(--gray-deep);
 }
-.page-list-item a[anchor]:hover {
+.page-list-item a[href^="#"]:hover {
     color: var(--gray-deep);
 }
-a[scroll]:not(.page-list-item a, #TableOfContents a, .footnote-backref, .footnote-ref, .heading a)::before {
+.article-content a[href^="#"]:not(.footnote-backref, .footnote-ref, .heading a)::before {
     content: "#";
     font-weight: bold;
 }

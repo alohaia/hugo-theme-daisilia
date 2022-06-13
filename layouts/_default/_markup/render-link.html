@@ -1,5 +1,5 @@
 {{- if hasPrefix .Destination "#" -}}
-<a class="anchor" scroll="{{ substr .Destination 1 }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- else -}}
   {{- if (hasPrefix .Destination "./") -}}
 <a target="_blank" href="{{ replace .Destination "./" .Page.RelPermalink }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>

@@ -68,35 +68,6 @@ window.onscroll = function() {
     prevScrollpos = currentScrollPos;
 }
 
-// remove href of a[href^='#']
-var anchors;
-anchors = document.querySelectorAll("a[href^='#']");
-for (let i = 0; i < anchors.length; i++) {
-    let a = anchors[i];
-    a.setAttribute("scroll", decodeURI(a.getAttribute("href").slice(1)));
-    a.removeAttribute("href");
-}
-// change onclick of a[scroll]
-anchors = document.querySelectorAll("a[scroll]:not(.page-list-item a)");
-for (let i = 0; i < anchors.length; i++) {
-    anchors[i].onclick = function(){
-        let anc = this.getAttribute("scroll");
-        let target_id = document.getElementById(anc);
-        let target_alias = document.querySelector("[alias~='" + anc + "']");
-        if (target_id) {
-            target_id.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        } else if (target_alias) {
-            target_alias.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-    }
-}
-
 $(".tag-cloud.side").ready(function(){
     let tags = document.querySelectorAll(".tag-cloud-item")
     for(let tag of tags){

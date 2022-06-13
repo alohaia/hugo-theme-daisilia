@@ -2,7 +2,7 @@
 {{- if $page.Params.summary -}}
   {{- $page.Params.summary -}}
 {{- else -}}
-  {{- $page.Summary -}}
+  {{- $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" | safeHTML -}}
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
 
