@@ -28,10 +28,9 @@
 }
 
 .tag-cloud.side {
-    margin-top: 0;
     min-width: 250px;
     position: sticky;
-    top: 0;
+    top: 5px;
     max-height: 75vh;
     overflow: auto;
     border: 2px dashed var(--gray);
