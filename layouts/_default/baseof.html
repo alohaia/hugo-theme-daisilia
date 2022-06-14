@@ -4,9 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   {{- partial "components/opengraph" . -}} {{/* open graph */}}
-  {{- block "title" . -}}
-  <title>{{ print .Title " | " .Site.Title }}</title>
-  {{ end -}}
+  {{- block "title" . }}<title>{{ print .Title " | " .Site.Title }}</title>{{ end -}}
   {{- partial "components/style" . -}}     {{/* css */}}
   {{- partial "components/favicon" . -}}   {{/* favicon */}}
 </head>
@@ -16,7 +14,10 @@
     <header class="site-header" id="SiteHeader">{{ partial "header" . }}</header>
     <div class="site-main" id="SiteMain">
       <div class="site-left">{{ block "left" . }}{{- partial "message" . -}}{{ end }}</div>
-      <div class="site-content" data-pjax id="SiteContent">{{ block "main" . }}{{ end }}</div>
+      <div class="site-content" data-pjax id="SiteContent">
+        {{- block "main" . }}{{ end -}}
+        {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}
+      </div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
       <div class="site-right" data-pjax>{{ block "right" . }}{{ end }}</div>
     </div>
