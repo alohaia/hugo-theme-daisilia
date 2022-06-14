@@ -6,6 +6,12 @@
     margin-top: 20px;
 }
 
+.tag-cloud.home .tag-cloud-body {
+    min-width: 80vw;
+    position: relative;
+    left: calc(-40vw + 50%);
+}
+
 .tag-cloud-item {
     text-decoration: none;
     color: var(--black);
@@ -26,12 +32,23 @@
     min-width: 250px;
     position: sticky;
     top: 0;
-    max-height: 100vh;
+    max-height: 75vh;
     overflow: auto;
+    border: 2px dashed var(--gray);
+    margin: 5px;
+    padding: 0 5px 5px;
 }
 
 .tag-cloud.side::-webkit-scrollbar {
     width: 0;
+}
+
+.tag-cloud.side .tag-cloud-title {
+    position: sticky;
+    top: 0;
+    color: var(--gray-deep);
+    background: var(--white);
+    border-bottom: 2px dashed var(--gray-light);
 }
 
 .tag-cloud-title {

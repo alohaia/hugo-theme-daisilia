@@ -16,7 +16,7 @@
 {{- define "right" -}}
 <div class="tag-cloud side">
   <h1 class="tag-cloud-title">Tag Cloud</h1>
-    <div class=" tag-cloud-body">
+    <div class="tag-cloud-body">
         {{- if ne (len site.Taxonomies.tags) 0 -}}
           {{- $largestFontSize := 1.4 -}}
           {{- $smallestFontSize := 0.8 -}}
