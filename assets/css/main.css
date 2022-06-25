@@ -94,6 +94,7 @@
     display: inline-block;
     font-size: 15px;
     transition: all 0.4s;
+    user-select: none;
 }
 .main-menu .menu-item:hover {
     background-color: #ddd;
