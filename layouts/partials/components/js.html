@@ -18,22 +18,33 @@
 {{- if eq $theme.quote.enable "jinrishici" -}}
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script>
-    var poem_part, poem_full;
+    var content_part, content_full;
+    var is_poem = false;
     const content = document.getElementById("SidebarQuoteContent");
     const from = document.getElementById("SidebarQuoteFrom");
     function toggleFull() {
-        if (content.innerHTML == poem_part) {
-            content.innerHTML = poem_full;
+        if (is_poem) {
+            content.classList.toggle("poem-full");
+        }
+        if (content.innerHTML == content_part) {
+            content.innerHTML = content_full;
         } else {
-            content.innerHTML = poem_part;
+            content.innerHTML = content_part;
         }
     }
     jinrishici.load(function(result) {
-        poem_part = result.data.content;
-        content.innerText = poem_part;
+        content_part = result.data.content;
+        content.innerText = content_part;
         from.innerText = '——' + result.data.origin.dynasty + '·'
             + result.data.origin.author + '《' + result.data.origin.title + '》';
-        poem_full = "&nbsp".repeat(8) + result.data.origin.content.join('<br/>' + "&nbsp".repeat(8));
+        var prefix = ''
+        var reg = /^([^，。！？]{5}[，。！？][^，。！？]{5}[，。！？]|[^，。！？]{7}[，。！？][^，。！？]{7}[，。！？])+$/g
+        if (result.data.origin.content.join('').match(reg)) {
+            is_poem = true
+        } else {
+            prefix = "&nbsp".repeat(8)
+        }
+        content_full = prefix + result.data.origin.content.join('<br>'+prefix);
         content.onclick = toggleFull;
     });
 </script>
