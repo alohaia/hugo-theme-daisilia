@@ -1,11 +1,12 @@
 {{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
+{{- $src := print .Page.Permalink (.Get "src" | safeURL) -}}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
   {{- if .Get "link" -}}
   <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
-  {{ else if $fancybox }}
-  <a data-fancybox data-src="{{ .Get "src" | safeURL }}">
+  {{- else if $fancybox -}}
+  <a data-fancybox data-src="{{ $src }}">
   {{- end -}}
-    <img src="{{ .Get "src" | safeURL }}"
+    <img src="{{ $src }}"
       {{- if or (.Get "alt") (.Get "title") }}
       alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
       {{- end -}}
