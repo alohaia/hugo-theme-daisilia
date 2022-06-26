@@ -179,14 +179,14 @@
 .sidebar-quote {
     margin-top: 25px;
     width: 100%;
-    max-height: 40vh;
-    overflow: auto;
 }
 .sidebar-quote-content {
     cursor: pointer;
     text-align: left;
     line-height: 1.5;
     margin: 0;
+    max-height: 30vh;
+    overflow: auto;
 }
 .sidebar-quote-content.poem-full {
     text-align: center;
