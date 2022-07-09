@@ -1,41 +1,35 @@
+{{- $type    := "default" -}}
+{{- $summary := ""        -}}
+{{- $details := false     -}}
+{{- $open    := false     -}}
+{{- $id      := ""        -}}
 {{- if .IsNamedParams -}}
-  {{- $type    := default "default" (.Get "type")    -}}
-  {{- $summary := default ""        (.Get "summary") -}}
-  {{- $details := default false     (.Get "details") -}}
-  {{- $open    := default false     (.Get "open")    -}}
-  {{- if and $details (ne $summary "") -}}
-<details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
-  <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
-  <div class="tab-content">
-    {{ .Inner }}
-  </div>
-</details>
-  {{- else -}}
-<div{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
-  <div class="tab-title"><span class="tab-title-content">{{ $summary }}</span></div>
-  <div class="tab-content">
-    {{ .Inner }}
-  </div>
-</div>
-  {{- end -}}
+  {{- $type    = default "default" (.Get "type")    -}}
+  {{- $summary = .Get "summary" -}}
+  {{- $details = .Get "details" -}}
+  {{- $open    = .Get "open"    -}}
+  {{- $id      = .Get "id"      -}}
 {{- else -}}
-  {{- $type    := default "default" (.Get 0) -}}
-  {{- $summary := default ""        (.Get 1) -}}
-  {{- $details := default false     (.Get 2) -}}
-  {{- $open    := default false     (.Get 3) -}}
-  {{- if and $details (ne $summary "") -}}
-<details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get 4 }} id="{{ . }}"{{ end }}>
-  <summary class="tab-title"><span class="tab-title-content">{{ $summary }}</span><span class="tab-title-indicator"><i class="fas fa-angle-right"></i></span></summary>
+  {{- $type    = default "default" (.Get 0) -}}
+  {{- $summary = .Get 1 -}}
+  {{- $details = .Get 2 -}}
+  {{- $open    = .Get 3 -}}
+  {{- $id      = .Get 4 -}}
+{{- end -}}
+{{- if and $details (ne $summary "") -}}
+<details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
+  <summary class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span><span class="tab-sum-indicator"><i class="fas fa-angle-right"></i></span></summary>
   <div class="tab-content">
-    {{ .Inner }}
+  {{ .Inner }}
   </div>
 </details>
-  {{- else -}}
-<div{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with .Get 4 }} id="{{ . }}"{{ end }}>
-  {{ if ne $summary "" }}<div class="tab-title"><span class="tab-title-content">{{ $summary }}</span></div>{{ end }}
+{{- else -}}
+<div{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
+  {{- if ne $summary "" -}}
+  <div class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span></div>
+  {{- end -}}
   <div class="tab-content">
     {{ .Inner }}
   </div>
 </div>
-  {{- end -}}
 {{- end -}}

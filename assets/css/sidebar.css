@@ -190,6 +190,7 @@
 }
 .sidebar-quote-content.poem-full {
     text-align: center;
+    overflow: overlay;
 }
 .sidebar-quote-from {
     margin: 0;

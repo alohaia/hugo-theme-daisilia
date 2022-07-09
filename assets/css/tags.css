@@ -7,9 +7,9 @@
 }
 
 .tag-cloud.home .tag-cloud-body {
-    min-width: 80vw;
+    width: 75vw;
     position: relative;
-    left: calc(-40vw + 50%);
+    left: calc(-37.5vw + 50%);
 }
 
 .tag-cloud-item {

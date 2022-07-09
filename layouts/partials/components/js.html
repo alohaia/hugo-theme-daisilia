@@ -22,6 +22,7 @@
     var is_poem = false;
     const content = document.getElementById("SidebarQuoteContent");
     const from = document.getElementById("SidebarQuoteFrom");
+    var Result;
     function toggleFull() {
         if (is_poem) {
             content.classList.toggle("poem-full");
@@ -33,6 +34,7 @@
         }
     }
     jinrishici.load(function(result) {
+        Result = result;
         content_part = result.data.content;
         content.innerText = content_part;
         from.innerText = '——' + result.data.origin.dynasty + '·'

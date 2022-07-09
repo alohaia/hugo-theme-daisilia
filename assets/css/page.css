@@ -155,25 +155,30 @@ figcaption, table caption {
     text-align: left;
     /* max-width: var(--content-width); */
 }
-figcaption>.title, table caption>.title{
+figcaption>.title, table caption.title{
     margin: 10px 0 0;
     font-size: 1.125em;
     line-height: 1.1;
     white-space: pre-wrap;
+    font-weight: bold;
+    font-family: var(--font-serif);
 }
 figcaption>.title::before {
     content: "Figure - ";
     color: var(--gray);
 }
-table caption>.title::before {
+table caption.title::before {
     content: "Table - ";
     color: var(--gray);
 }
-figcaption>.caption, table caption>.caption{
+figcaption>.caption, table caption.caption{
     line-height: 1.6;
     margin: 0;
     color: var(--gray-deep);
     white-space: pre-wrap;
+}
+table caption.caption {
+    caption-side: bottom;
 }
 
 /* content font size */
@@ -184,14 +189,14 @@ figcaption>.caption, table caption>.caption{
 }
 
 /* table */
-table {
-    display: block;
+.table-wrap {
     overflow: auto;
     margin: 15px auto;
     max-height: 75vh;
+}
+table {
     white-space: nowrap;
-    width: fit-content;
-    max-width: 100%;
+    width: 100%;
     font-size: 0.875em;
     border-collapse: separate;
     border-spacing: 0;
@@ -551,22 +556,22 @@ blockquote {
 .tab+.tab {
     margin-top: 4px;
 }
-.tab-title { padding: 0 10px }
+.tab-sum { padding: 5px 10px }
 .tab-content { padding: 15px }
 .tab-content>*:last-child:not(.tab) { margin-bottom: 0 }
 .tab-content>*:first-child:not(.tab) { margin-top: 0 }
 /* for details */
 summary:focus-visible { outline: none }
-summary.tab-title::marker { content: none }
-summary.tab-title {
+summary.tab-sum::marker { content: none }
+summary.tab-sum {
     display: flex;
     justify-content: space-between;
     cursor: pointer;
 }
-.tab-title-indicator {
+.tab-sum-indicator {
     opacity: 0.5;
 }
-details[open]>summary>.tab-title-indicator {
+details[open]>summary>.tab-sum-indicator {
     transform: rotate(90deg);
 }
 /* color */
@@ -577,13 +582,13 @@ details[open]>summary>.tab-title-indicator {
 .tab.warning { border-color: #f0ad4e; box-shadow: 0 0 2px 2px #f0ad4e25; }
 .tab.danger,
 .tab.error   { border-color: #d9534f; box-shadow: 0 0 2px 2px #d9534f25; }
-.tab.default > .tab-title { background-color: #77777725 }
-.tab.success > .tab-title { background-color: #5cb85c25 }
-.tab.primary > .tab-title { background-color: #6f42c125 }
-.tab.info    > .tab-title { background-color: #428bca25 }
-.tab.warning > .tab-title { background-color: #f0ad4e25 }
-.tab.danger  > .tab-title,
-.tab.error   > .tab-title { background-color: #d9534f25 }
+.tab.default > .tab-sum { background-color: #77777725 }
+.tab.success > .tab-sum { background-color: #5cb85c25 }
+.tab.primary > .tab-sum { background-color: #6f42c125 }
+.tab.info    > .tab-sum { background-color: #428bca25 }
+.tab.warning > .tab-sum { background-color: #f0ad4e25 }
+.tab.danger  > .tab-sum,
+.tab.error   > .tab-sum { background-color: #d9534f25 }
 
 /* sa - see also */
 .see-also::before {

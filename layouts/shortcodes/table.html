@@ -1,17 +1,22 @@
-{{- $title   := .Get "title"   -}}
-{{- $caption := .Get "caption" -}}
-{{- $id      := .Get "id"      -}}
-{{- $head := "" -}}
-{{- with $title -}}{{- $head = (print $head "<h4 class='title'>" (. | markdownify) "</h4>") -}}{{- end -}}
-{{- with $caption -}}{{- $head = (print $head "<p class='caption'>" (. | markdownify) "</p>") -}}{{- end -}}
-{{- if .Get "left_sticky" -}}
-  {{- $head = printf "<table class='left-sticky'><caption>%s</caption>" $head -}}
-{{- else -}}
-  {{ with $id }}
-    {{- $head = printf "<table id='%s'><caption>%s</caption>" $id $head -}}
-  {{- else -}}
-    {{- $head = printf "<table><caption>%s</caption>" $head -}}
-  {{- end -}}
+{{- $title   := default ""    (.Get "title")       -}}
+{{- $caption := default ""    (.Get "caption")     -}}
+{{- $id      := default ""    (.Get "id")          -}}
+{{- $ls      := default false (.Get "left_sticky") -}}
+{{- with $title -}}
+  {{- $title = print "<caption class='title'>" (. | markdownify) "</caption>" -}}
 {{- end -}}
-{{- .Inner | markdownify | replaceRE "<table>" $head | safeHTML -}}
+{{- with $caption -}}
+  {{- $caption = print "<caption class='caption'>" (. | markdownify) "</caption>" -}}
+{{- end -}}
+{{- if $ls -}}
+  {{- $ls = " class=\"left-sticky\"" -}}
+{{- else -}}
+  {{- $ls = "" -}}
+{{- end -}}
+{{- with $id -}}
+  {{- $id = printf " id=\"%s\"" $id -}}
+{{- end -}}
+{{- $head := printf "<div class='table-wrap'><table%s%s>%s%s" $id $ls $caption $title -}}
+{{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" "</table></div>" | safeHTML -}}
+{{/* {{% table title="肾上腺素受体的分型及效应" caption="" left_sticky=false %}} */}}
 {{/* vim:set ft=gohtmltmpl: */}}
