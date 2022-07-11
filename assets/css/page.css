@@ -50,7 +50,23 @@
     user-select: text;
 }
 
+/* cross reference */
+.cross-refs {
+    margin: 10px 0;
+}
+.cross-refs.top {
+    font-size: 1.125em;
+}
+.cross-refs::before {
+    content: "Link here: ";
+    color: var(--gray);
+}
+.cross-ref {
+
+}
+
 /* link */
+.cross-ref,
 .page-title a,
 .article-metadata a,
 .article-content a {
@@ -64,6 +80,7 @@
 .article-metadata a {
     text-decoration: none;
 }
+.cross-ref:hover,
 .page-title a:hover,
 .article-metadata a:hover,
 .article-content a:hover {
@@ -194,14 +211,14 @@ table caption.caption {
     margin: 15px auto;
     max-height: 75vh;
 }
-table {
+table:not(.highlight table) {
     white-space: nowrap;
     width: 100%;
     font-size: 0.875em;
     border-collapse: separate;
     border-spacing: 0;
 }
-table th {
+table:not(.highlight table) th {
     border: 1px solid var(--gray-deep);
     border-bottom: 3px solid var(--gray-deep);
     position: sticky;
@@ -210,20 +227,26 @@ table th {
     background-color: var(--white);
     padding: .3em 1em;
 }
-table td {
+table:not(.highlight table) td {
     border: 1px solid var(--gray-deep);
     padding: .3em 1em;
 }
-tbody tr:nth-of-type(even) {
+tbody:not(.highlight tbody) tr:nth-of-type(even) {
     background-color: var(--white);
 }
-tbody tr:nth-of-type(odd) {
+tbody:not(.highlight tbody) tr:nth-of-type(odd) {
     background-color: var(--gray-light);
 }
-table.left-sticky td:first-child {
+table:not(.highlight table).left-sticky td:first-child {
     position: sticky;
     left: 0;
     background-color: inherit;
+}
+table:not(.highlight table):not(.table-wrap table) {
+    display: block;
+    overflow: auto;
+    max-width: fit-content;
+    margin: 15px auto;
 }
 
 /* highlight & block */
@@ -701,4 +724,7 @@ mjx-container {
 .heading.important a {
     color: red;
 }
-
+.heading.unimportant a {
+    font-style: italic;
+    color: var(--gray-deep);
+}

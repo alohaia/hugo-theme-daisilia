@@ -1,0 +1,12 @@
+{{- if .Site.Data.refs -}}
+{{- if index $.Site.Data.refs .Page.File.Path -}}
+{{- if index (index $.Site.Data.refs .Page.File.Path) "" -}}
+<div class='cross-refs top'>
+    {{- range $i,$v := index (index $.Site.Data.refs .Page.File.Path) "" -}}
+    {{- if ne $i 0 }}, {{ end }}<a class='cross-ref' href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+    {{- end -}}
+</div>
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{/* vim:set ft=gohtmltmpl: */}}

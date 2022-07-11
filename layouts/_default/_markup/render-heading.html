@@ -5,4 +5,16 @@
 {{/* {{- if ne (.Attributes.id | replaceRE `-\d+$` "") (.PlainText | replaceRE `\s+` "-" | replaceRE "[`~!@#$%^&*()_=+\\[\\]\\\\|{};:'\",<.>/?·！¥…（）—「【〔［『〖｛」】〕］』〗｝、；：‘”，《〈«‹。》〉»›？]" "" | lower) -}}<span class="heading-id">{{ .Attributes.id }}</span>{{- end -}} */}}
   {{- with .Attributes.alias -}}<span class="heading-aliases">{{- range (split . " ") -}}<span class="heading-alias">{{ replace . "\\_" " " | htmlUnescape | safeHTML }}</span>{{- end -}}</span>{{- end -}}
 </h{{ .Level }}>
+{{/* {{- if and (and site.Data.refs (index site.Data.refs .Page.File.Path)) (index (index site.Data.refs .Page.File.Path) .Anchor) -}} */}}
+{{- if site.Data.refs -}}
+{{- if index site.Data.refs .Page.File.Path -}}
+{{- if index (index site.Data.refs .Page.File.Path) .Anchor -}}
+<div class="cross-refs">
+    {{- range $i,$v := index (index site.Data.refs .Page.File.Path) .Anchor -}}
+    {{- if ne $i 0 }}, {{ end }}<a class='cross-ref' href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+    {{- end -}}
+</div>
+{{- end -}}
+{{- end -}}
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
