@@ -1,5 +1,8 @@
 {{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
-{{- $src := print .Page.Permalink (.Get "src" | safeURL) -}}
+{{- $src := .Get "src" | safeURL -}}
+{{- if not (findRE "^(ftp|file|ftp|ftps|gemini|git|gopher|https?|irc|ircs|kitty|mailto|news|sftp|ssh)://" $src) -}}
+    {{- $src = print .Page.Permalink $src -}}
+{{- end -}}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}{{ with .Get "id" }} id="{{ . }}"{{ end }}>
   {{- if .Get "link" -}}
   <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
