@@ -1,4 +1,4 @@
-{{- if .Site.Data.refs -}}
+{{- if and .Site.Data.refs .Page.File -}}
 {{- if index $.Site.Data.refs .Page.File.Path -}}
 {{- if index (index $.Site.Data.refs .Page.File.Path) "" -}}
 <div class='cross-refs top'>

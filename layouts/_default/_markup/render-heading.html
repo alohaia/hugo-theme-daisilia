@@ -5,8 +5,7 @@
 {{/* {{- if ne (.Attributes.id | replaceRE `-\d+$` "") (.PlainText | replaceRE `\s+` "-" | replaceRE "[`~!@#$%^&*()_=+\\[\\]\\\\|{};:'\",<.>/?·！¥…（）—「【〔［『〖｛」】〕］』〗｝、；：‘”，《〈«‹。》〉»›？]" "" | lower) -}}<span class="heading-id">{{ .Attributes.id }}</span>{{- end -}} */}}
   {{- with .Attributes.alias -}}<span class="heading-aliases">{{- range (split . " ") -}}<span class="heading-alias">{{ replace . "\\_" " " | htmlUnescape | safeHTML }}</span>{{- end -}}</span>{{- end -}}
 </h{{ .Level }}>
-{{/* {{- if and (and site.Data.refs (index site.Data.refs .Page.File.Path)) (index (index site.Data.refs .Page.File.Path) .Anchor) -}} */}}
-{{- if site.Data.refs -}}
+{{- if and site.Data.refs .Page.File -}}
 {{- if index site.Data.refs .Page.File.Path -}}
 {{- if index (index site.Data.refs .Page.File.Path) .Anchor -}}
 <div class="cross-refs">
