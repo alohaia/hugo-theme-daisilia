@@ -31,14 +31,14 @@
   <ul class="meta-section">
     {{- with .Params.tags -}}
       <li class="meta-item">
-        <i class="fas fa-tags"></i>
-        <span class="meta-item-text">Tags:</span>
+        <i class="fas fa-tag{{ if gt (len .) 1 }}s{{ end }}"></i>
+        <span class="meta-item-text">Tag{{ if gt (len .) 1 }}s{{ end }}:</span>
         <span class="meta-item-value">{{ range $i,$v := . }}{{ if ne $i 0 }}, {{ end }}<a class="tag" href="/tags/{{ $v | urlize }}">{{ $v }}</a>{{end}}</span>
       </li>
     {{- end -}}
     {{- with .Params.categories -}}
       <li class="meta-item"><i class="fas fa-th-list"></i>
-        <span class="meta-item-text">Categories:</span>
+        <span class="meta-item-text">Categor{{ if gt (len .) 1 }}ies{{ else }}y{{ end }}:</span>
         <span class="meta-item-value">{{ range $i,$v := . }}{{ if ne $i 0 }}, {{ end }}<a class="category" href="/categories/{{ $v | urlize }}">{{ $v }}</a>{{end}}</span>
       </li>
     {{- end -}}
