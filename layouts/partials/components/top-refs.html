@@ -1,9 +1,9 @@
 {{- if and .Site.Data.refs .Page.File -}}
 {{- if index $.Site.Data.refs .Page.File.Path -}}
-{{- if index (index $.Site.Data.refs .Page.File.Path) "" -}}
+{{- if index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
 <div class='cross-refs top'>
-    {{- range $i,$v := index (index $.Site.Data.refs .Page.File.Path) "" -}}
-    {{- if ne $i 0 }}, {{ end }}<a class='cross-ref' href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+    {{- range $i,$v := index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
+    {{- if ne $i 0 }}，{{ end }}<a class='cross-ref' href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
     {{- end -}}
 </div>
 {{- end -}}

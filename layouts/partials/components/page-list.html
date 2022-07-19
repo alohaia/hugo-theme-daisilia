@@ -1,8 +1,8 @@
 {{- range (where . "Type" "!=" "about").ByLastmod.Reverse -}}
-  <div class="page-list-item">
+<div class="page-list-item {{ .Kind }}">
     <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
     <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
-    <div class="summary article-content">{{ partial "components/summary" . }}</div>
+    {{ partial "components/summary" . }}
     {{/* <a class="read-more" href="{{ .RelPermalink }}">Read More ...</a> */}}
   </div>
 {{- end -}}

@@ -66,6 +66,8 @@
 }
 
 /* link */
+.root-section-title a,
+.root-section-childs a,
 .cross-ref,
 .page-title a,
 .article-metadata a,
@@ -80,6 +82,8 @@
 .article-metadata a {
     text-decoration: none;
 }
+.root-section-title a:hover,
+.root-section-childs a:hover,
 .cross-ref:hover,
 .page-title a:hover,
 .article-metadata a:hover,
@@ -94,10 +98,6 @@
     border: 2px dashed var(--gray);
     padding: 1em;
     margin: 15px 0;
-}
-
-.summary.article-content {
-    margin: 18px 0;
 }
 
 .heading a { color: var(--black) }
@@ -499,7 +499,8 @@ blockquote {
 }
 
 /* page-list */
-.article-content+.page-list::before {
+.article-content+.page-list::before,
+.most-referenced::before {
     content: "Child Pages";
     color: var(--gray);
     border-bottom: 2px dashed var(--gray);
@@ -510,11 +511,15 @@ blockquote {
     text-align: center;
     font-size: 24px;
 }
+.most-referenced::before { /* most referenced */
+    content: "Most Referenced";
+}
 .page-list-item {
     margin-top: 20px;
 }
 .page-list-item .summary {
     color: var(--gray-deep);
+    margin: 18px 0;
 }
 /* .page-list-item .read-more { */
 /*     color: var(--orange); */
@@ -523,14 +528,41 @@ blockquote {
 /* .page-list-item .read-more:hover { */
 /*     color: var(--orange-deep); */
 /* } */
-.page-list-item:not(:first-child)::before {
+.page-list-item:not(:last-child)::after {
     content: "";
     display: block;
     border-top: 2px dashed;
-    width: 75%;
+    /* width: 75%; */
     margin: auto;
     color: var(--gray-light);
     margin-bottom: 20px;
+}
+
+/* root sections and pages in home page */
+.root-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row;
+    grid-gap: 10px;
+    margin: 15px 0;
+    font-family: var(--font-sans);
+}
+.root-section {
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    padding: 10px 10px;
+}
+.root-section-title {
+    font-size: 1.125em;
+    margin: 0 0 15px;
+}
+.root-section-childs::before {
+    content: "\f802";
+    font-family: "font awesome 6 free";
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--gray-deep);
+    margin-right: 5px;
 }
 
 /* short codes */
@@ -661,7 +693,7 @@ details[open]>summary>.tab-sum-indicator {
 
 /* a.exturl::before { */
 /*     content: "\f360"; */
-/*     font-family: 'Font Awesome 5 Free'; */
+/*     font-family: 'Font Awesome 6 Free'; */
 /*     font-weight: 900; */
 /*     margin: 0 0.1em; */
 /* } */
@@ -699,7 +731,7 @@ mjx-container {
 .article-content [target="_blank"]::after {
     content: " \f35d ";
     border-bottom: none;
-    font-family: 'font awesome 5 free';
+    font-family: 'font awesome 6 free';
     font-weight: 900;
     font-size: 50%;
     vertical-align: super;
@@ -708,7 +740,7 @@ mjx-container {
 /* custom */
 .heading.medicine::after {
     content: "\f484";
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     color: #82c91e;
     margin: 0 5px;

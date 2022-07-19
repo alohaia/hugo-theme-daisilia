@@ -21,17 +21,21 @@ def ref2pos(ref, reldir):
     if file.endswith('.md'):
         file = file[:-3]
 
-    if file.startswith('/'):
-        for subdir, _, files in os.walk(rootdir):
-            for f in files:
-                full_path = os.path.join(subdir, f)
-                if re.search('(' + re.escape(os.path.join(rootdir, file)) + ')' + ext_pattern, full_path):
-                    file = full_path
-    else:
+    found = False
+    if not file.startswith('/'):
         for subdir, _, files in os.walk(reldir):
             for f in files:
                 full_path = os.path.join(subdir, f)
+                #  print('(' + re.escape(os.sep+file) + ')' + ext_pattern, full_path)
                 if re.search('(' + re.escape(os.sep+file) + ')' + ext_pattern, full_path):
+                    file = full_path
+                    found = True
+    if file.startswith('/') or found == False:
+        for subdir, _, files in os.walk(rootdir):
+            for f in files:
+                full_path = os.path.join(subdir, f)
+                #  print('(' + os.path.join(re.escape(rootdir), "" if file.startswith('/') else ".*", re.escape(file)) + ')' + ext_pattern, full_path)
+                if re.search('(' + os.path.join(re.escape(rootdir), "" if file.startswith('/') else ".*", re.escape(file)) + ')' + ext_pattern, full_path):
                     file = full_path
 
     return (file[len(rootdir):], anchor)
@@ -64,19 +68,27 @@ def get_refs(path):
                 # ensure refs[pos[0]][pos[1]] exists
                 if pos[0] not in refs:
                     refs[pos[0]] = {}
-                    refs[pos[0]][pos[1]] = []
-                elif pos[1] not in refs[pos[0]]:
-                    refs[pos[0]][pos[1]] = []
+                    refs[pos[0]]['file_ref'] = '/' + re.sub(ext_pattern, '', pos[0])
+                    refs[pos[0]]['count'] = 0
+                    refs[pos[0]]['link_here'] = { pos[1]: [] }
+                elif pos[1] not in refs[pos[0]]['link_here']:
+                    refs[pos[0]]['link_here'][pos[1]] = []
 
-                refs[pos[0]][pos[1]].append('/' + file_from + ('#'+current_heading if current_heading!='' else ''))
+
+                if pos[0] == '':
+                    print('Warning: empty filename:', '"'+ref_result[0]+'"', 'in', path)
+
+                refs[pos[0]]['link_here'][pos[1]].append('/' + file_from + ('#'+current_heading if current_heading!='' else ''))
+                refs[pos[0]]['count'] += 1
 
 
-for subdir, dirs, files in os.walk(rootdir):
-    for file in files:
-        if file.endswith('.md'):
-            get_refs(os.path.join(subdir, file))
+if __name__ == '__main__':
+    for subdir, dirs, files in os.walk(rootdir):
+        for file in files:
+            if file.endswith('.md'):
+                get_refs(os.path.join(subdir, file))
 
-if not os.path.exists('data/'):
-    os.makedirs('data')
-with open('data/refs.json', 'w', encoding='utf-8') as f:
-    json.dump(refs, f, ensure_ascii=False, indent=4)
+    if not os.path.exists('data/'):
+        os.makedirs('data')
+    with open('data/refs.json', 'w', encoding='utf-8') as f:
+        json.dump(refs, f, ensure_ascii=False, indent=4)

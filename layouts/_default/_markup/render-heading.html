@@ -7,10 +7,10 @@
 </h{{ .Level }}>
 {{- if and site.Data.refs .Page.File -}}
 {{- if index site.Data.refs .Page.File.Path -}}
-{{- if index (index site.Data.refs .Page.File.Path) .Anchor -}}
+{{- if index (index site.Data.refs .Page.File.Path).link_here .Anchor -}}
 <div class="cross-refs">
-    {{- range $i,$v := index (index site.Data.refs .Page.File.Path) .Anchor -}}
-    {{- if ne $i 0 }}, {{ end }}<a class='cross-ref' href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+    {{- range $i,$v := index (index site.Data.refs .Page.File.Path).link_here .Anchor -}}
+    {{- if ne $i 0 }}，{{ end }}<a class='cross-ref' href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
     {{- end -}}
 </div>
 {{- end -}}

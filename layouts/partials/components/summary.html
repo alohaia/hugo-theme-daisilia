@@ -1,8 +1,9 @@
 {{- $page := . }}{{ if .Params.copy }}{{ $page = .GetPage .Params.copy }}{{ end -}}
+{{- $sum := "" -}}
 {{- if $page.Params.summary -}}
-  {{- $page.Params.summary -}}
+  {{- $sum = $page.Params.summary -}}
 {{- else -}}
-  {{- $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" | safeHTML -}}
+  {{- $sum = $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" | safeHTML -}}
 {{- end -}}
+{{- if $sum }}<div class="summary article-content">{{ $sum }}</div>{{ end -}}
 {{/* vim:set ft=gohtmltmpl: */}}
-

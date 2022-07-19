@@ -13,7 +13,28 @@
     </div>
   {{- end -}}
   {{- with .Pages -}}
-    <div class="page-list">{{ partial "components/page-list" .ByLastmod }}</div>
+    {{- if where . "Kind" "section" -}}
+    <div class="root-sections">
+      {{- range where . "Kind" "section" -}}
+      <div class="root-section">
+        <h4 class="root-section-title">
+          <!-- <i class="fa-solid fa-folder{{ if .Pages }}-open{{ end }}"></i> -->
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h4>
+        {{- if .Pages -}}
+        <div class="root-section-childs">
+          {{- range $i,$p := first 5 .Pages -}}
+            {{ if ne $i 0 }}，{{ end }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{- end -}}
+          {{- if ge (len .Pages) 5 }}<span> ……</span>{{ end -}}
+        </div>
+        {{- end -}}
+        {{ partial "components/summary" . }}
+      </div>
+      {{- end -}}
+    </div>
+    {{- end -}}
   {{- end -}}
+  {{- partial "components/most-referenced" . -}}
 {{- end -}}
-{{/* vim:set ft=gohtmltmpl: */}}
+{{/* vim:set ft=gohtmltmpl tabstop=2 shiftwidth=2: */}}
