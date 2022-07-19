@@ -500,6 +500,7 @@ blockquote {
 
 /* page-list */
 .article-content+.page-list::before,
+.related-contents::before,
 .most-referenced::before {
     content: "Child Pages";
     color: var(--gray);
@@ -511,9 +512,8 @@ blockquote {
     text-align: center;
     font-size: 24px;
 }
-.most-referenced::before { /* most referenced */
-    content: "Most Referenced";
-}
+.most-referenced::before { content: "Most Referenced" } /* most referenced */
+.related-contents::before { content: "See Also" }
 .page-list-item {
     margin-top: 20px;
 }

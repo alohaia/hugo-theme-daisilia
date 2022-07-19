@@ -1,11 +1,11 @@
 {{- define "main" -}}
   <h1 class="article-title">{{ .Title }}</h1>
   <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
-  <!-- {{- partial "components/top-refs" . -}} -->
+  {{- partial "components/top-refs" . -}}
   {{- if eq .File.Dir "series/" -}}
-    {{- block "_body" (dict "content" .Content "pages" .Sections) -}}{{ end }}
+    {{- block "_body" (dict "self" . "content" .Content "pages" .Sections) -}}{{ end }}
   {{- else -}}
-    {{- block "_body" (dict "content" .Content "pages" .Pages) -}}{{ end }}
+    {{- block "_body" (dict "self" . "content" .Content "pages" .Pages) -}}{{ end }}
   {{- end -}}
 {{- end -}}
 {{- define "_body" -}}
@@ -14,6 +14,7 @@
       {{- . -}}
     </div>
   {{- end -}}
+  {{- partial "components/related" .self -}}
   {{- with .pages -}}
     <div class="page-list">{{ partial "components/page-list" . }}</div>
   {{- end -}}

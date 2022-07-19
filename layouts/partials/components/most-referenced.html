@@ -1,13 +1,13 @@
 <div class="most-referenced">
 {{- if .Site.Data.refs -}}
-    {{- range first 10 (sort .Site.Data.refs "count" "desc") -}}
-        {{- $page := site.GetPage (index . "file_ref") -}}
+  {{- range first 10 (sort .Site.Data.refs "count" "desc") -}}
+    {{- $page := site.GetPage (index . "file_ref") -}}
   <div class="page-list-item {{ $page.Kind }}">
     <h1 class="page-title article-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h1>
     <div class="page-metadata article-metadata">{{ partial "components/metadata" $page }}</div>
     {{ partial "components/summary" $page }}
   </div>
-    {{- end -}}
+  {{- end -}}
 {{- end -}}
 </div>
 {{/* vim:set ft=gohtmltmpl: */}}

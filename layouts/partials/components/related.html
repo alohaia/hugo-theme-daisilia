@@ -1,0 +1,7 @@
+{{ $related := .Site.Pages.Related . | first 5 }}
+{{ with $related }}
+<div class="related-contents article-content">
+  <ul>{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+</div>
+{{ end }}
+{{/* vim:set ft=gohtmltmpl tabstop=2 shiftwidth=2: */}}
