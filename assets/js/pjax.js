@@ -12,8 +12,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener("pjax:send", function(){
+    document.querySelectorAll('.heading').forEach((heading) => {
+        TOCOnscrollObserver.unobserve(heading);
+    });
+})
 
-document.addEventListener("pjax:complete", function(){
+document.addEventListener("pjax:success", function(){
     if(document.querySelector('iframe.giscus-frame')) {
         document.querySelector('iframe.giscus-frame').contentWindow.postMessage({
           giscus: {
@@ -23,6 +28,9 @@ document.addEventListener("pjax:complete", function(){
           }
         }, 'https://giscus.app')
     }
+    document.querySelectorAll('.heading').forEach((heading) => {
+        TOCOnscrollObserver.observe(heading);
+    });
 })
 
 var loadingBar = document.querySelector(".loading-track");

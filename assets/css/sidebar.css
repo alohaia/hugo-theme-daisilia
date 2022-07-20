@@ -150,6 +150,12 @@
 .sidebar-toc li::marker {
     content: none;
 }
+#TableOfContents li > a {
+    transition: all 0.5s;
+}
+#TableOfContents li.active > a {
+    color: var(--gray-light);
+}
 
 /* sidebar avatar */
 .sidebar-avatar {
