@@ -11,12 +11,13 @@
     {{- .Content -}}
   {{- end -}}
   </div>
-  {{- partial "components/related" . -}}
 {{- end -}}
+
 {{- define "right" -}}
   <div class="series-container">
     <div class="series-toggle"><i class="fas fa-book"></i></div>
     <div class="series-content">{{ partial "components/series-list" . }}</div>
   </div>
+  {{- partial "components/related" . -}}
 {{- end -}}
 {{/* vim:set ft=gohtmltmpl: */}}

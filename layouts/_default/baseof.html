@@ -13,7 +13,8 @@
   <div class="site-inner" id="SiteInner">
     <header class="site-header" id="SiteHeader">{{ partial "header" . }}</header>
     <div class="site-main" id="SiteMain">
-      <div class="site-left">{{ block "left" . }}{{- partial "message" . -}}{{ end }}</div>
+      <div class="site-left" data-pjax>{{ block "left" . }}{{ end }}</div>
+      <div class="site-message-list">{{- partial "message" . -}}</div>
       <div class="site-content" data-pjax id="SiteContent">
         {{- block "main" . }}{{ end -}}
         {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}

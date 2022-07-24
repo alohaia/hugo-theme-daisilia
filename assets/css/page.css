@@ -498,9 +498,21 @@ blockquote {
     font-size: 1.25em;
 }
 
+/* related-contents */
+.related-contents {
+    position: sticky;
+    top: 20px;
+    min-width: 200px;
+}
+.related-contents .title {
+    text-align: center;
+    margin: 20px 0 0;
+    font-size: larger;
+    color: var(--gray-deep);
+}
+
 /* page-list */
 .article-content+.page-list::before,
-.related-contents::before,
 .most-referenced::before {
     content: "Child Pages";
     color: var(--gray);
@@ -513,7 +525,6 @@ blockquote {
     font-size: 24px;
 }
 .most-referenced::before { content: "Most Referenced" } /* most referenced */
-.related-contents::before { content: "See Also" }
 .page-list-item {
     margin-top: 20px;
 }

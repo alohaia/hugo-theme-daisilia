@@ -1,4 +1,3 @@
-<div class="site-message-list">
 {{- with .Site.Params.daisy.message -}}
 {{ $style := resources.Get "css/message.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}"/>
@@ -22,5 +21,4 @@
     })
 </script>
 {{ end -}}
-</div>
 {{/* vim:set ft=gohtmltmpl: */}}

@@ -139,17 +139,20 @@
     justify-content: space-between;
     align-content: space-between;
     grid-template-areas:
+        "left message right"
         "left content right"
         "left comment right";
     grid-template-columns: 1fr minmax(140px,var(--content-width)) 1fr;
+    grid-template-rows: minmax(0, auto) auto auto;
     grid-column-gap: 20px;
 }
 @media (max-width: 750px) {
     .site-main {
         grid-template-areas:
+            "message"
             "left"
-            "right"
             "content"
+            "right"
             "comment";
         grid-template-columns: minmax(140px,var(--content-width));
         margin: 0 10px;
@@ -158,6 +161,12 @@
 .site-content {
     grid-area: content;
     margin-bottom: 80px;
+}
+.site-left {
+    grid-area: left;
+}
+.site-right {
+    grid-area: right;
 }
 .site-comment {
     grid-area: comment;

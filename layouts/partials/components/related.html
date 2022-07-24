@@ -1,6 +1,7 @@
 {{ $related := .Site.Pages.Related . | first 5 }}
 {{ with $related }}
 <div class="related-contents article-content">
+  <h4 class="title">See Also</h4>
   <ul>{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
 </div>
 {{ end }}

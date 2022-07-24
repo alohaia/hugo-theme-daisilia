@@ -3,9 +3,9 @@
   <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
   {{- partial "components/top-refs" . -}}
   {{- if eq .File.Dir "series/" -}}
-    {{- block "_body" (dict "self" . "content" .Content "pages" .Sections) -}}{{ end }}
+    {{- block "_body" (dict "content" .Content "pages" .Sections) -}}{{ end }}
   {{- else -}}
-    {{- block "_body" (dict "self" . "content" .Content "pages" .Pages) -}}{{ end }}
+    {{- block "_body" (dict "content" .Content "pages" .Pages) -}}{{ end }}
   {{- end -}}
 {{- end -}}
 {{- define "_body" -}}
@@ -14,11 +14,11 @@
       {{- . -}}
     </div>
   {{- end -}}
-  {{- partial "components/related" .self -}}
   {{- with .pages -}}
     <div class="page-list">{{ partial "components/page-list" . }}</div>
   {{- end -}}
 {{- end -}}
+
 {{- define "right" -}}
   {{- if ne . (.GetPage "series") -}}
     <div class="series-container">
@@ -26,5 +26,6 @@
       <div class="series-content">{{ partial "components/series-list" . }}</div>
     </div>
   {{- end -}}
+  {{- partial "components/related" . -}}
 {{- end  -}}
 {{/* vim:set ft=gohtmltmpl: */}}
