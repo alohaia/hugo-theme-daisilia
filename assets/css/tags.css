@@ -31,7 +31,7 @@
     min-width: 250px;
     position: sticky;
     top: 5px;
-    max-height: 75vh;
+    max-height: calc(100vh - 20px - var(--header-height));
     overflow: auto;
     border: 2px dashed var(--gray);
     margin: 5px;

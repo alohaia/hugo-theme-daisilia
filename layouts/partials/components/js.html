@@ -20,13 +20,13 @@
 <script>
     var content_part, content_full;
     var is_poem = false;
+    const wrap = document.getElementsByClassName("sidebar-quote")[0]
     const content = document.getElementById("SidebarQuoteContent");
     const from = document.getElementById("SidebarQuoteFrom");
     var Result;
     function toggleFull() {
-        if (is_poem) {
-            content.classList.toggle("poem-full");
-        }
+        wrap.classList.toggle("expanded")
+        wrap.classList.toggle("collapsed")
         if (content.innerHTML == content_part) {
             content.innerHTML = content_full;
         } else {
@@ -37,11 +37,13 @@
         Result = result;
         content_part = result.data.content;
         content.innerText = content_part;
-        from.innerText = '——' + result.data.origin.dynasty + '·'
-            + result.data.origin.author + '《' + result.data.origin.title + '》';
+        from.innerHTML =
+            `<span class="author">${result.data.origin.dynasty}·${result.data.origin.author}</span>`
+            + `<span class="title">《${result.data.origin.title}》</span>`
         var prefix = ''
         var reg = /^([^，。！？]{5}[，。！？][^，。！？]{5}[，。！？]|[^，。！？]{7}[，。！？][^，。！？]{7}[，。！？])+$/g
         if (result.data.origin.content.join('').match(reg)) {
+            content.classList.add("poem");
             is_poem = true
         } else {
             prefix = "&nbsp".repeat(8)

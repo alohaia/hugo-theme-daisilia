@@ -187,23 +187,49 @@
     width: 100%;
 }
 .sidebar-quote-content {
+    grid-area: content;
     cursor: pointer;
     text-align: left;
     line-height: 1.5;
     margin: 0;
     max-height: 30vh;
-    overflow: auto;
-}
-.sidebar-quote-content.poem-full {
-    text-align: center;
     overflow: overlay;
 }
-.sidebar-quote-from {
+.sidebar-quote.expanded .sidebar-quote-content.poem {
+    text-align: center;
+}
+.sidebar-quote.collapsed .sidebar-quote-from {
     margin: 0;
     text-align: right;
     font-style: italic;
     font-size: smaller;
     opacity: 0.8;
+}
+.sidebar-quote.collapsed .sidebar-quote-from::before { content: "——" }
+.sidebar-quote.expanded {
+    display: grid;
+    grid-template-areas:
+        "from"
+        "content";
+}
+.sidebar-quote.expanded .sidebar-quote-from {
+    grid-area: from;
+
+    display: grid;
+    grid-template-areas:
+        "title"
+        "author";
+
+    margin: 0 0 5px;
+}
+.sidebar-quote.expanded .title  {
+    grid-area: title;
+    font-weight: bold;
+}
+.sidebar-quote.expanded .author {
+    grid-area: author;
+    font-size: smaller;
+    font-style: italic;
 }
 
 /* site state */
