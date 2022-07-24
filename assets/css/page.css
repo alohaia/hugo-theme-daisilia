@@ -295,6 +295,7 @@ code:not(pre code) { /* inline block */
     user-select: none;
     position: sticky;
     left: 0;
+    z-index: var(--z-overcontent);
 }
 
 /* list */

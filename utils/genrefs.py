@@ -11,6 +11,7 @@ ref_pattern = r'\[.*?\]\({{(<\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*>|%\s*(rel)?ref\s
 heading_pattern = r'^(#{1,6})\s+(.*?)(\s*{.*})?$'
 ext_pattern = r'(\.md|/index\.md|/_index\.md)$'
 
+
 # return (file, anchor)
 #   - file: file path that can be use in Hugo, like 'series/病原生物学/_index.md'
 #   - anchor: the anchor which is above the link, '' for empty heaing and top
@@ -39,6 +40,7 @@ def ref2pos(ref, reldir):
                     file = full_path
 
     return (file[len(rootdir):], anchor)
+
 
 def get_refs(path):
     in_code_block = False
@@ -73,7 +75,6 @@ def get_refs(path):
                     refs[pos[0]]['link_here'] = { pos[1]: [] }
                 elif pos[1] not in refs[pos[0]]['link_here']:
                     refs[pos[0]]['link_here'][pos[1]] = []
-
 
                 if pos[0] == '':
                     print('Warning: empty filename:', '"'+ref_result[0]+'"', 'in', path)
