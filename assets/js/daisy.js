@@ -80,12 +80,12 @@ document.onreadystatechange = function(){
 const TOCOnscrollObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         const id = entry.target.getAttribute('id');
+        const el = document.querySelector(`#TableOfContents li a[href="#${id}"]`)
         if (entry.intersectionRatio > 0) {
-            // console.log(`#TableOfContents li a[href="#${id}"]`)
-            document.querySelector(`#TableOfContents li a[href="#${id}"]`).parentElement.classList.add('active');
+            el.parentElement.classList.add('active')
+            // TODO _ensureInView(el)
         } else {
-            // console.log(`#TableOfContents li a[href="#${id}"]`)
-            document.querySelector(`#TableOfContents li a[href="#${id}"]`).parentElement.classList.remove('active');
+            el.parentElement.classList.remove('active')
         }
     });
 });

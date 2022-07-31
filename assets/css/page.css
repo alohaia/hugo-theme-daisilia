@@ -53,6 +53,10 @@
 /* cross reference */
 .cross-refs {
     margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 5px 10px;
 }
 .cross-refs.top {
     font-size: 1.125em;
@@ -60,9 +64,12 @@
 .cross-refs::before {
     content: "Link here: ";
     color: var(--gray);
+    order: -99999;
 }
 .cross-ref {
-
+    background: var(--gray-light);
+    border: 2px solid var(--gray-light);
+    border-radius: 5px;
 }
 
 /* link */

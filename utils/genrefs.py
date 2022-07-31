@@ -72,14 +72,19 @@ def get_refs(path):
                     refs[pos[0]] = {}
                     refs[pos[0]]['file_ref'] = '/' + re.sub(ext_pattern, '', pos[0])
                     refs[pos[0]]['count'] = 0
-                    refs[pos[0]]['link_here'] = { pos[1]: [] }
+                    refs[pos[0]]['link_here'] = { pos[1]: {} }
                 elif pos[1] not in refs[pos[0]]['link_here']:
-                    refs[pos[0]]['link_here'][pos[1]] = []
+                    refs[pos[0]]['link_here'][pos[1]] = {}
 
                 if pos[0] == '':
                     print('Warning: empty filename:', '"'+ref_result[0]+'"', 'in', path)
 
-                refs[pos[0]]['link_here'][pos[1]].append('/' + file_from + ('#'+current_heading if current_heading!='' else ''))
+                #  refs[pos[0]]['link_here'][pos[1]].append('/' + file_from + ('#'+current_heading if current_heading!='' else ''))
+                backlink = '/' + file_from + ('#'+current_heading if current_heading!='' else '')
+                if backlink in refs[pos[0]]['link_here'][pos[1]]:
+                    refs[pos[0]]['link_here'][pos[1]][backlink] += 1
+                else:
+                    refs[pos[0]]['link_here'][pos[1]][backlink] = 1
                 refs[pos[0]]['count'] += 1
 
 
@@ -92,4 +97,4 @@ if __name__ == '__main__':
     if not os.path.exists('data/'):
         os.makedirs('data')
     with open('data/refs.json', 'w', encoding='utf-8') as f:
-        json.dump(refs, f, ensure_ascii=False, indent=4)
+        json.dump(refs, f, ensure_ascii=False)
