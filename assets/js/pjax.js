@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         ],
         cacheBust: false,
         analytics: false,
+        scrollTo: document.getElementById("SiteHeader").scrollHeight,
     });
 });
 
