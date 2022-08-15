@@ -18,7 +18,7 @@
 {{- end -}}
 {{- if and $details (ne $summary "") -}}
 <details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
-  <summary class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span><span class="tab-sum-indicator"><i class="fas fa-angle-right"></i></span></summary>
+  <summary class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span><i class="tab-sum-trigger"></i></summary>
   <div class="tab-content">
   {{ .Inner }}
   </div>

@@ -623,11 +623,15 @@ summary.tab-sum {
     justify-content: space-between;
     cursor: pointer;
 }
-.tab-sum-indicator {
+.tab-sum-trigger::before {
+    font-style: normal;
+    content: "\f105";
     opacity: 0.5;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
 }
-details[open]>summary>.tab-sum-indicator {
-    transform: rotate(90deg);
+details[open]>summary>.tab-sum-trigger::before {
+    content: "\f107";
 }
 /* color */
 .tab.default { border-color: #777777; box-shadow: 0 0 2px 2px #77777725; }
