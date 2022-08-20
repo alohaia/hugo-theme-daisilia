@@ -488,7 +488,13 @@ blockquote {
 }
 
 /* related-contents */
+@media (min-width: 751px) {
+    .related-contents {
+        max-width: 300px;
+    }
+}
 .related-contents {
+    margin-right: 10px;
     position: sticky;
     top: 20px;
     min-width: 200px;
@@ -732,13 +738,16 @@ mjx-container {
     font-weight: bold;
 }
 
-.article-content [target="_blank"]::after {
+.article-content a[target="_blank"]::after {
     content: " \f35d ";
     border-bottom: none;
     font-family: 'font awesome 6 free';
     font-weight: 900;
     font-size: 50%;
     vertical-align: super;
+}
+.article-content a[target="_blank"] {
+    word-break: break-all;
 }
 
 /* custom */
