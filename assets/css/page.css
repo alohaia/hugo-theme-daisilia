@@ -424,8 +424,8 @@ blockquote {
 
     white-space: nowrap;
     width: 320px;
-    right: -325px;
-    transition: all .5s ease-out;
+    right: -320px;
+    transition: right .5s ease-out;
     z-index: var(--z-series);
 }
 .series-container:hover {
@@ -455,6 +455,11 @@ blockquote {
     justify-content: center;
     border-radius: 8px 0 0 8px;
     z-index: var(--z-series);
+
+    transition: right .5s ease-out;
+}
+.series-container:hover .series-toggle {
+    right: 320px;
 }
 .series-content {
     height: 100%;
@@ -521,7 +526,7 @@ blockquote {
 }
 .most-referenced::before { content: "Most Referenced" } /* most referenced */
 .page-list-item {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 .page-list-item .summary {
     color: var(--gray-deep);
@@ -541,7 +546,6 @@ blockquote {
     /* width: 75%; */
     margin: auto;
     color: var(--gray-light);
-    margin-bottom: 20px;
 }
 
 /* root sections and pages in home page */
