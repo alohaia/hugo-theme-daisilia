@@ -16,22 +16,22 @@ function toggleSearch(force) {
     // Load json search index if first time invoking search
     // Means we don't load json unless searches are going to happen; keep user payload small unless needed
     if(firstRun) {
-      loadSearch(); // loads our json data and builds fuse.js search index
-      firstRun = false; // let's never do this again
+        loadSearch(); // loads our json data and builds fuse.js search index
+        firstRun = false; // let's never do this again
     }
 
     // Toggle visibility of search box
     if (force == true || (force === undefined && !searchVisible)) {
-      document.getElementById("fastSearch").style.display = "block"
-      document.body.style.overflowY = "hidden"
-      document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
-      searchVisible = true; // search visible
+        document.getElementById("fastSearch").style.display = "block"
+        document.body.style.overflowY = "hidden"
+        document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
+        searchVisible = true; // search visible
     } else {
-      // document.getElementById("fastSearch").style.display = "none"
-      $("#fastSearch").fadeOut(200)
-      document.body.style.overflowY = "overlay"
-      document.activeElement.blur(); // remove focus from search box
-      searchVisible = false; // search not visible
+        // document.getElementById("fastSearch").style.display = "none"
+        $("#fastSearch").fadeOut(200)
+        document.body.style.overflowY = "overlay"
+        document.activeElement.blur(); // remove focus from search box
+        searchVisible = false; // search not visible
     }
 }
 
@@ -39,25 +39,25 @@ document.getElementById("searchBtn").onclick = ()=>{ toggleSearch(true) }
 document.getElementById("searchHint").onclick = ()=>{ toggleSearch(false) }
 
 document.addEventListener("click", event => {
-  if(event.target === document.getElementById("fastSearch")) {
-    toggleSearch(false)
-  }
+    if(event.target === document.getElementById("fastSearch")) {
+        toggleSearch(false)
+    }
 });
 
 // ==========================================
 // The main keyboard event listener running the show
 //
 document.addEventListener('keydown', function(event) {
-  // Crtl-/ to show / hide Search
-  if (event.ctrlKey && event.key == "/") {
-    event.preventDefault();
-    toggleSearch();
-  }
+    // Crtl-/ to show / hide Search
+    if (event.ctrlKey && event.key == "/") {
+        event.preventDefault();
+        toggleSearch();
+    }
 
-  // Allow ESC (27) to close search box
-  if (event.key == "Escape") {
-    toggleSearch(false)
-  }
+    // Allow ESC (27) to close search box
+    if (event.key == "Escape") {
+        toggleSearch(false)
+    }
 })
 
 
@@ -65,7 +65,7 @@ document.addEventListener('keydown', function(event) {
 // execute search as each character is typed
 //
 document.getElementById("searchInput").onkeyup = function() {
-  executeSearch(this.value)
+    executeSearch(this.value)
 }
 
 
@@ -73,17 +73,17 @@ document.getElementById("searchInput").onkeyup = function() {
 // fetch some json without jquery
 //
 function fetchJSONFile(path, callback) {
-  var httpRequest = new XMLHttpRequest()
-  httpRequest.onreadystatechange = function() {
-    if (httpRequest.readyState === 4) {
-      if (httpRequest.status === 200) {
-        var data = JSON.parse(httpRequest.responseText)
-          if (callback) callback(data)
-      }
+    var httpRequest = new XMLHttpRequest()
+    httpRequest.onreadystatechange = function() {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                var data = JSON.parse(httpRequest.responseText)
+                    if (callback) callback(data)
+            }
+        }
     }
-  }
-  httpRequest.open('GET', path)
-  httpRequest.send()
+    httpRequest.open('GET', path)
+    httpRequest.send()
 }
 
 
@@ -92,70 +92,61 @@ function fetchJSONFile(path, callback) {
 // on first call of search box (CMD-/)
 //
 function loadSearch() {
-  fetchJSONFile('/index.json', function(data){
+    fetchJSONFile('/index.json', function(data){
 
-    var options = { // fuse.js options; check fuse.js website for details
-      shouldSort: true,
-      // minMatchCharLength: 2,
-      threshold: 0.6, // 0 for a perfect match, 1 would match anything
-      ignoreLocation: true,
-      includeMatches: false,
-      useExtendedSearch: true,
-      keys: keys,
-    }
-    fuse = new Fuse(data, options); // build the index from the json file
-  })
+        var options = { // fuse.js options; check fuse.js website for details
+            shouldSort: true,
+            // minMatchCharLength: 2,
+            threshold: 0.6, // 0 for a perfect match, 1 would match anything
+            ignoreLocation: true,
+            includeMatches: false,
+            useExtendedSearch: true,
+            keys: keys,
+        }
+        fuse = new Fuse(data, options); // build the index from the json file
+    })
 }
 
 function isResultEqual(r1, r2) {
-  for(let idx = 0; idx < keys.length; idx++) {
-    if(r1[keys[idx]] != r2[keys[idx]]) {
-      return false
+    for(let idx = 0; idx < keys.length; idx++) {
+        if(r1[keys[idx]] != r2[keys[idx]]) {
+            return false
+        }
     }
-  }
-  return true
+    return true
 }
 // ===========================================
 // get first length results, length <= 0 to get as much as possible
 //
 function uniqueResults(results, length) {
-  let res = [results[0].item];    // hold return value
-  if(length <= 0) {
-    length = results.length
-  }
-  for(let idx = 1; idx < results.length; idx++) { // starts from the second
-    let alreasyExists = false
-    for(i of res) {
-      if(isResultEqual(results[idx].item, i)) {
-        alreasyExists = true
-      }
+    let res = [results[0].item];        // hold return value
+    if(length <= 0) {
+        length = results.length
     }
-    if(!alreasyExists) {
-      res.push(results[idx].item)
-      if(res.length >= length) {
-        break
-      }
+    for(let idx = 1; idx < results.length; idx++) { // starts from the second
+        let alreasyExists = false
+        for(i of res) {
+            if(isResultEqual(results[idx].item, i)) {
+                alreasyExists = true
+            }
+        }
+        if(!alreasyExists) {
+            res.push(results[idx].item)
+            if(res.length >= length) {
+                break
+            }
+        }
     }
-  }
-  return res
+    return res
 }
 
 function afterSearch(){
-  // $("#searchResults table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
-  new Pjax({
-    elements: ["a[href]:not([no-pjax]):not([href^='#'])"],
-    selectors: [
-      "[data-pjax]",
-      "head title",
-      "meta[property]",
-    ],
-    cacheBust: false,
-    analytics: false,
-  });
+    // $("#searchResults table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
+    window.pjax.refresh(document.getElementById("searchResults"));
 }
 
 document.addEventListener("pjax:complete", function () {
-  toggleSearch(false);
+    toggleSearch(false);
 })
 
 // ==========================================
@@ -164,40 +155,40 @@ document.addEventListener("pjax:complete", function () {
 // in the search box
 //
 function executeSearch(term) {
-  let results = fuse.search(term); // the actual query being run using fuse.js
-  let searchitems = ''; // our results bucket
+    let results = fuse.search(term); // the actual query being run using fuse.js
+    let searchitems = ''; // our results bucket
 
-  if (results.length === 0) { // no results based on what was typed into the input box
-    resultsAvailable = false
-    searchitems = ''
-  } else { // build our html
-    let items = uniqueResults(results, 20)
-    for (let item of items) {
-      let tags = ""
-      if(item.tags && item.tags.length > 0) {
-        for(let tag of item.tags) {
-          tags += `<a class="tag" href="/tags/${tag}">${tag}</a>`;
-        }
-      }
-      searchitems = searchitems +
+    if (results.length === 0) { // no results based on what was typed into the input box
+        resultsAvailable = false
+        searchitems = ''
+    } else { // build our html
+        let items = uniqueResults(results, 20)
+        for (let item of items) {
+            let tags = ""
+            if(item.tags && item.tags.length > 0) {
+                for(let tag of item.tags) {
+                    tags += `<a class="tag" href="/tags/${tag}">${tag}</a>`;
+                }
+            }
+            searchitems = searchitems +
 `<li class="search-result-item">
-  <div class="header">
-    <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
-    <span class="publish">${item.date}</span>
-    <span class="tags">${tags}</span>
-    <span class="edit">${item.edit}</span>
-  </div>
-  <div class="summary article-content">${item.summary}</div>
+    <div class="header">
+        <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
+        <span class="publish">${item.date}</span>
+        <span class="tags">${tags}</span>
+        <span class="edit">${item.edit}</span>
+    </div>
+    <div class="summary article-content">${item.summary}</div>
 </li>`
+        }
+        resultsAvailable = true
     }
-    resultsAvailable = true
-  }
 
-  document.getElementById("searchResults").innerHTML = searchitems
-  if (results.length > 0) {
-    first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
-    last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
-  }
+    document.getElementById("searchResults").innerHTML = searchitems
+    if (results.length > 0) {
+        first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
+        last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
+    }
 
-  afterSearch()
+    afterSearch()
 }

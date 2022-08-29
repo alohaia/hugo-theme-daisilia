@@ -1,6 +1,7 @@
+var pjax;
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
-    new Pjax({
+    pjax = new Pjax({
         elements: ["a[href]:not([no-pjax]):not([href^='#'])"],
         selectors: [
             "[data-pjax]",
