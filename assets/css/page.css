@@ -424,7 +424,7 @@ blockquote {
 
     white-space: nowrap;
     width: 320px;
-    right: -320px;
+    right: -325px;
     transition: right .5s ease-out;
     z-index: var(--z-series);
 }
@@ -442,9 +442,9 @@ blockquote {
     color: var(--orange);
 }
 .series-toggle {
-    position: fixed;
+    position: absolute;
     top: 120px;
-    right: 0;
+    left: -30px;
 
     font-size: 20px;
     width: 30px;
