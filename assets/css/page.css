@@ -73,6 +73,7 @@
 }
 
 /* link */
+.pagination .page-item a,
 .root-section-title a,
 .root-section-childs a,
 .cross-ref,
@@ -86,6 +87,7 @@
     text-decoration-thickness: 2px;
 }
 .page-title a,
+.pagination .page-item a,
 .article-metadata a {
     text-decoration: none;
 }
@@ -546,6 +548,33 @@ blockquote {
     /* width: 75%; */
     margin: auto;
     color: var(--gray-light);
+}
+
+/* pagination */
+.pagination {
+    user-select: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 40px;
+}
+.pagination .page-item {
+    display: inline-block;
+}
+.pagination .page-item .page-link {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    background: var(--gray-light);
+}
+.pagination .page-item.active .page-link {
+    color: var(--orange);
+}
+.pagination .page-item.disabled {
+    cursor: default;
+}
+.pagination .page-item.disabled .page-link {
+    color: var(--gray-deep);
 }
 
 /* root sections and pages in home page */

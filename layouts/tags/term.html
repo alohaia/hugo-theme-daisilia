@@ -1,16 +1,10 @@
 {{- define "main" -}}
-  {{- block "_body" (dict "content" .Content "pages" .Pages) -}}{{ end }}
-{{- end -}}
-
-{{- define "_body" -}}
-  {{- with .content -}}
+  {{- with .Content -}}
     <div class="article-content">
       {{- . -}}
     </div>
   {{- end -}}
-  {{- with .pages -}}
-    <div class="page-list">{{ partial "components/page-list" . }}</div>
-  {{- end -}}
+  {{- partial "components/pagination-page-list" . -}}
 {{- end -}}
 
 {{- define "left" -}}

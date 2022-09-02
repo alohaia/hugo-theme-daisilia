@@ -2,20 +2,15 @@
   <h1 class="article-title">{{ .Title }}</h1>
   <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
   {{- partial "components/top-refs" . -}}
-  {{- if eq .File.Dir "series/" -}}
-    {{- block "_body" (dict "content" .Content "pages" .Sections) -}}{{ end }}
+  {{- with .Content -}}
+  <div class="article-content">
+    {{- . -}}
+  </div>
+  {{- end -}}
+  {{- if (eq .File.Dir "series/") -}}
+    {{- partial "components/pagination-page-list" . -}}
   {{- else -}}
-    {{- block "_body" (dict "content" .Content "pages" .Pages) -}}{{ end }}
-  {{- end -}}
-{{- end -}}
-{{- define "_body" -}}
-  {{- with .content -}}
-    <div class="article-content">
-      {{- . -}}
-    </div>
-  {{- end -}}
-  {{- with .pages -}}
-    <div class="page-list">{{ partial "components/page-list" . }}</div>
+    <div class="page-list">{{ partial "components/page-list" .Pages }}</div>
   {{- end -}}
 {{- end -}}
 
