@@ -27,7 +27,6 @@ def ref2pos(ref, reldir):
         for subdir, _, files in os.walk(reldir):
             for f in files:
                 full_path = os.path.join(subdir, f)
-                #  print('(' + re.escape(os.sep+file) + ')' + ext_pattern, full_path)
                 if re.search('(' + re.escape(os.sep+file) + ')' + ext_pattern, full_path):
                     file = full_path
                     found = True
@@ -35,7 +34,6 @@ def ref2pos(ref, reldir):
         for subdir, _, files in os.walk(rootdir):
             for f in files:
                 full_path = os.path.join(subdir, f)
-                #  print('(' + os.path.join(re.escape(rootdir), "" if file.startswith('/') else ".*", re.escape(file)) + ')' + ext_pattern, full_path)
                 if re.search('(' + os.path.join(re.escape(rootdir), "" if file.startswith('/') else ".*", re.escape(file)) + ')' + ext_pattern, full_path):
                     file = full_path
 
@@ -43,14 +41,19 @@ def ref2pos(ref, reldir):
 
 
 def get_refs(path):
-    in_code_block = False
+    in_code_block1 = False
+    in_code_block2 = False
     file_from = re.sub(ext_pattern, '', path[len(rootdir):]) # remove rootdir and ext_pattern in path
     current_heading = '' # for empty heading and top
 
     for line in open(path, 'r').readlines():
         if re.match(r'```(|[^`].*)$', line): # starts with ```(xxxx)?
-            in_code_block = not in_code_block
-        if in_code_block:
+            in_code_block1 = not in_code_block1
+        if in_code_block1:
+            continue
+        if re.match(r'~~~(|[^~].*)$', line): # starts with ~~~(xxxx)?
+            in_code_block2 = not in_code_block2
+        if in_code_block2:
             continue
 
         # try updating current heaing
@@ -79,7 +82,6 @@ def get_refs(path):
                 if pos[0] == '':
                     print('Warning: empty filename:', '"'+ref_result[0]+'"', 'in', path)
 
-                #  refs[pos[0]]['link_here'][pos[1]].append('/' + file_from + ('#'+current_heading if current_heading!='' else ''))
                 backlink = '/' + file_from + ('#'+current_heading if current_heading!='' else '')
                 if backlink in refs[pos[0]]['link_here'][pos[1]]:
                     refs[pos[0]]['link_here'][pos[1]][backlink] += 1
