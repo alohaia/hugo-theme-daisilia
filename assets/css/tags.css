@@ -37,6 +37,11 @@
     margin: 5px;
     padding: 0 5px 5px;
 }
+@media (min-width: 751px) {
+    .tag-cloud.side {
+        max-width: 350px;
+    }
+}
 
 .tag-cloud.side::-webkit-scrollbar {
     width: 0;

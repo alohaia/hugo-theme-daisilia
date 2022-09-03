@@ -556,6 +556,10 @@ blockquote {
     padding: 0;
     text-align: center;
     margin-top: 40px;
+    display: inline-flex;
+    width: 100%;
+    gap: 5px;
+    justify-content: center;
 }
 .pagination .page-item {
     display: inline-block;
@@ -570,10 +574,8 @@ blockquote {
 .pagination .page-item.active .page-link {
     color: var(--orange);
 }
-.pagination .page-item.disabled {
-    cursor: default;
-}
 .pagination .page-item.disabled .page-link {
+    cursor: default;
     color: var(--gray-deep);
 }
 
