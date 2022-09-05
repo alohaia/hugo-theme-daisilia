@@ -71,7 +71,7 @@ window.onscroll = function() {
 $(".tag-cloud.side").ready(function(){
     let tags = document.querySelectorAll(".tag-cloud-item")
     for(let tag of tags){
-        if(tag.getAttribute("href") == window.location.pathname) {
+        if(window.location.pathname.startsWith(tag.getAttribute("href"))) {
             tag.classList.add("now")
             break
         }
