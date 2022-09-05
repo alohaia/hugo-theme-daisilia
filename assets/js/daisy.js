@@ -44,7 +44,7 @@ function genUlNum(ulNode, nums = [0]){
 }
 
 function back2Top(){
-    $("html, body").animate({scrollTop: 0}, 500);
+    $("html").animate({scrollTop: document.getElementById("SiteHeader").scrollHeight}, 200);
 }
 
 /****************** Once ****************/
