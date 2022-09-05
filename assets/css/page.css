@@ -272,6 +272,7 @@ pre:not(.highlight pre),
     display: inline-block;
     width: calc(100% - 16px);
     overflow-x: auto;
+    line-height: 1.25;
 }
 .highlight pre {
     margin: 0;
