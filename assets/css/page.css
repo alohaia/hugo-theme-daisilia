@@ -573,6 +573,7 @@ blockquote {
     background: var(--gray-light);
 }
 .pagination .page-item.active .page-link {
+    cursor: default;
     color: var(--orange);
 }
 .pagination .page-item.disabled .page-link {
@@ -724,39 +725,20 @@ details[open]>summary>.tab-sum-trigger::before {
     width: 100%;
 }
 
-/* small adjustments */
-/* p:not(li p)+ol, p:not(li p)+ul { */
-/*     margin-top: -20px; */
-/* } */
-
-/* .article-content p, */
-/* .article-content ul, */
-/* .article-content ol, */
-/* .article-content dl { */
-/*     line-height: var(--font-height-double); */
-/* } */
-
-
-/* a.exturl::before { */
-/*     content: "\f360"; */
-/*     font-family: 'Font Awesome 6 Free'; */
-/*     font-weight: 900; */
-/*     margin: 0 0.1em; */
-/* } */
-/* sup, sub { */
-/*     font-size: 75%; */
-/*     line-height: 0; */
-/*     position: relative; */
-/* } */
-/* sup { vertical-align: super } */
-/* sub { vertical-align: sub } */
 ins {
     text-decoration: none;
     border-bottom: 0.16em solid;
 }
 del {
-    /* text-decoration-color: red; */
     text-decoration-thickness: 0.16em;
+}
+em {
+    font-style: normal;
+    font-family: var(--font-italic);
+}
+strong, dt {
+    font-weight: bold;
+    font-family: var(--font-bold)
 }
 mjx-container {
     overflow-x: auto;

@@ -5,6 +5,8 @@
 
     --font-handwrite: 'Indie Flower', cursive;
     --font-code: 'JetBrains Mono', monospace;
+    --font-italic: 'Marck Script', 'AR PL UKai CN', 'KaiTi', 'STXingkai', cursive;
+    --font-bold: 'Andada Pro', 'AR PL UKai CN', 'KaiTi', 'STXingkai', cursive;
     --font-sans: 'Roboto', 'Noto Sans SC', sans-serif;
     --font-serif: 'Andada Pro', 'Noto Serif SC', serif;
     --font-height-double: 32px;
