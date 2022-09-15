@@ -734,11 +734,8 @@ del {
 }
 em {
     font-style: normal;
-    font-family: var(--font-italic);
-}
-strong, dt {
     font-weight: bold;
-    font-family: var(--font-bold)
+    font-family: var(--font-italic);
 }
 mjx-container {
     overflow-x: auto;
