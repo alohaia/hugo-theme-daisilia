@@ -736,6 +736,7 @@ em {
     font-style: normal;
     font-weight: bold;
     font-family: var(--font-italic);
+    line-height: 1;     /* fix wrong line-height in dt */
 }
 mjx-container {
     overflow-x: auto;
