@@ -392,6 +392,7 @@ dt {
     font-family: var(--font-italic);
     display: inline;
     float: left;
+    font-size: 21px;
 }
 dt::after {
     content: ": ";
