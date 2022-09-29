@@ -11,6 +11,13 @@
     src: url("/font/SFCartoonistHand-BoldItalic.ttf");
 }
 
+@font-face {
+    font-family: "Eng Italic";
+    font-style: italic;
+    font-weight: normal;
+    src: url("/font/SFCartoonistHand-Italic.ttf");
+}
+
 :root {
     --header-height: 80px;
     --footer-height: 64px;
