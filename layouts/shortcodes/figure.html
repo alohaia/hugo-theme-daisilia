@@ -13,6 +13,7 @@
       {{- if or (.Get "alt") (.Get "title") }}
       alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
       {{- end -}}
+      {{/* {{- with .Get "title" -}}title="{{ . }}"{{- end -}} */}}
       {{- with .Get "width" }} width="{{ . }}"{{ end -}}
       {{- with .Get "height" }} height="{{ . }}"{{ end -}}
     />
@@ -24,6 +25,8 @@
         {{- .Get "caption" | safeHTML | markdownify -}}
         {{- with .Get "attrlink" -}}<a href="{{ . }}">{{- .Get "attr" | markdownify -}}</a>{{ end -}}
       </p>{{- end }}
+    {{- with .Get "attribute" -}}<p class="attribution fig-attribution">{{ . | safeHTML | markdownify }}</p>{{- end -}}
     </figcaption>
   {{- end }}
 </figure>
+{{/* vim:set ft=gohtmltmpl: */}}

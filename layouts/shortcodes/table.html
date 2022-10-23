@@ -1,12 +1,14 @@
 {{- $title   := default ""    (.Get "title")       -}}
 {{- $caption := default ""    (.Get "caption")     -}}
+{{- $attrib  := default ""    (.Get "attribution") -}}
 {{- $id      := default ""    (.Get "id")          -}}
 {{- $ls      := default false (.Get "left_sticky") -}}
 {{- with $title -}}
-  {{- $title = print "<caption class='title'>" (. | markdownify) "</caption>" -}}
+  {{- $title = print "<caption class='title'>" (. | safeHTML | markdownify) "</caption>" -}}
 {{- end -}}
-{{- with $caption -}}
-  {{- $caption = print "<caption class='caption'>" (. | markdownify) "</caption>" -}}
+{{- if or $caption $attrib  -}}
+  {{- if $attrib }}{{ $attrib = print "<p class=\"attribution tbl-attribution\">" ($attrib | safeHTML | markdownify) "</p>" }}{{ end -}}
+  {{- $caption = print "<caption class='caption'>" (print ($caption | markdownify) $attrib) "</caption>" -}}
 {{- end -}}
 {{- if $ls -}}
   {{- $ls = " class=\"left-sticky\"" -}}
@@ -18,5 +20,4 @@
 {{- end -}}
 {{- $head := printf "<div class='table-wrap'><table%s%s>%s%s" $id $ls $caption $title -}}
 {{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" "</table></div>" | safeHTML -}}
-{{/* {{% table title="肾上腺素受体的分型及效应" caption="" left_sticky=false %}} */}}
-{{/* vim:set ft=gohtmltmpl: */}}
+{{/* vim:set ft=gohtmltmpl shiftwidth=2 tabstop=2: */}}

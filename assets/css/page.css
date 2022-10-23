@@ -754,6 +754,16 @@ mjx-container {
     font-weight: bold;
 }
 
+/* attribution */
+.attribution {
+    font-size: x-small;
+    margin: 5px 0 0 0;
+}
+.attribution::before {
+    content: "Attribution: ";
+    color: var(--gray);
+}
+
 .article-content a[target="_blank"]::after {
     content: " \f35d ";
     border-bottom: none;
