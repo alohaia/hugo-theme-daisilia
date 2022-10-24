@@ -2,13 +2,13 @@
   {{- with .Date -}}
   <li class="meta-item">
       <i class="fas fa-calendar"></i>
-      <span class="meta-item-text">Posted on</span>
+      <span class="meta-item-text">Published on</span>
       <span class="meta-item-value">{{ .Format "2006-01-02" }}</span>
   </li>
   {{- end -}}
   <li class="meta-item">
     <i class="fas fa-clock"></i>
-    <span class="meta-item-text">Edited on</span>
+    <span class="meta-item-text">Modified on</span>
     <span class="meta-item-value">{{ .Lastmod.Format "2006-01-02" }}</span>
   </li>
   {{- with .Params.author -}}

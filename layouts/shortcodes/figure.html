@@ -25,7 +25,7 @@
         {{- .Get "caption" | safeHTML | markdownify -}}
         {{- with .Get "attrlink" -}}<a href="{{ . }}">{{- .Get "attr" | markdownify -}}</a>{{ end -}}
       </p>{{- end }}
-    {{- with .Get "attribute" -}}<p class="attribution fig-attribution">{{ . | safeHTML | markdownify }}</p>{{- end -}}
+    {{- with .Get "attribution" -}}<p class="attribution fig-attribution">{{ . | safeHTML | markdownify }}</p>{{- end -}}
     </figcaption>
   {{- end }}
 </figure>

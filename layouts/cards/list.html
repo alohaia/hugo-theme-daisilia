@@ -1,0 +1,15 @@
+{{- define "main" -}}
+<div class="card-container">
+    {{- range .Pages.ByLastmod.Reverse -}}
+    <div class="card">
+        <h1 class="card-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+        <ul class="card-metadata article-metadata">
+            <li class="card-date meta-item">Published on {{ .Date.Format "2006-01-02" }} | Modified on {{ .Lastmod.Format "2006-01-02" }}</li>
+            {{- with .Params.tags -}}<li class="card-tags meta-item">{{ range $i,$v := . }}{{ if ne $i 0 }}, {{ end }}<a class="tag" href="/tags/{{ $v | urlize }}">#{{ $v }}</a>{{end}}</li>{{- end -}}
+        </ul>
+        {{ partial "components/summary" . }}
+    </div>
+    {{- end -}}
+</div>
+{{- end -}}
+{{/* vim:set ft=gohtmltmpl: */}}
