@@ -403,7 +403,7 @@ dt {
     font-family: var(--font-italic);
     display: inline;
     float: left;
-    font-size: 21px;
+    line-height: 18px;
 }
 dt::after {
     content: ": ";
