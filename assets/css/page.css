@@ -570,6 +570,8 @@ blockquote {
 .card-container {
     display: grid;
     grid-template-columns: minmax(200px,1fr) minmax(200px,1fr);
+    align-items: start;
+    gap: 5px;
 }
 .card {
     box-shadow: 1px 1px 3px 0px var(--gray-deep);
