@@ -83,6 +83,10 @@
     border: 2px solid var(--gray-light);
     border-radius: 5px;
 }
+.tab .cross-refs {
+    margin: 0;
+    padding: 15px 10px 0 15px;
+}
 
 /* link */
 .pagination .page-item a,
@@ -404,7 +408,7 @@ dt {
     font-family: var(--font-italic);
     display: inline;
     float: left;
-    line-height: 18px;
+    line-height: 24px;
 }
 dt::after {
     content: ": ";
@@ -414,6 +418,7 @@ dt::after {
 }
 dd {
     margin: 0;
+    line-height: 24px;
 }
 dd:not(dt+dd) {
     text-indent: 1em;
