@@ -19,8 +19,21 @@
 {{- if and $details (ne $summary "") -}}
 <details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
   <summary class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span><i class="tab-sum-trigger"></i></summary>
+  {{- if $id -}}
+  {{- if and site.Data.refs .Page.File -}}
+  {{- if index site.Data.refs .Page.File.Path -}}
+  {{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+    <div class="cross-refs">
+      {{- range $v,$c := index (index site.Data.refs .Page.File.Path).link_here $id -}}
+      <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+      {{- end -}}
+    </div>
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
   <div class="tab-content">
-  {{ .Inner }}
+    {{ .Inner }}
   </div>
 </details>
 {{- else -}}
@@ -28,8 +41,22 @@
   {{- if ne $summary "" -}}
   <div class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span></div>
   {{- end -}}
+  {{- if $id -}}
+  {{- if and site.Data.refs .Page.File -}}
+  {{- if index site.Data.refs .Page.File.Path -}}
+  {{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+    <div class="cross-refs">
+      {{- range $v,$c := index (index site.Data.refs .Page.File.Path).link_here $id -}}
+      <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+      {{- end -}}
+    </div>
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
   <div class="tab-content">
     {{ .Inner }}
   </div>
 </div>
 {{- end -}}
+{{/* vim:set ft=gohtmltmpl tabstop=2 shiftwidth=2: */}}
