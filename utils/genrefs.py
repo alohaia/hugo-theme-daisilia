@@ -69,7 +69,6 @@ def get_refs(path):
             for ref_result in ref_results:
                 parent_dir = re.match(r'(.*'+re.escape(os.sep)+')(.*)', path)[1]
                 pos = ref2pos(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8], parent_dir)
-                print(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8])
 
                 # ensure refs[pos[0]][pos[1]] exists
                 if pos[0] not in refs:
@@ -100,4 +99,4 @@ if __name__ == '__main__':
     if not os.path.exists('data/'):
         os.makedirs('data')
     with open('data/refs.json', 'w', encoding='utf-8') as f:
-        json.dump(refs, f, ensure_ascii=False, indent=4)
+        json.dump(refs, f, ensure_ascii=False)

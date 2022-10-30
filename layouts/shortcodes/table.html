@@ -20,4 +20,18 @@
 {{- end -}}
 {{- $head := printf "<div class='table-wrap'><table%s%s>%s%s" $id $ls $caption $title -}}
 {{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" "</table></div>" | safeHTML -}}
+{{- if $id -}}
+{{- if and site.Data.refs .Page.File -}}
+{{- if index site.Data.refs .Page.File.Path -}}
+{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+  <div class="cross-refs">
+  {{- index (index site.Data.refs .Page.File.Path).link_here $id -}}
+    {{- range $v,$c := index (index site.Data.refs .Page.File.Path).link_here $id -}}
+    <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+    {{- end -}}
+  </div>
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl shiftwidth=2 tabstop=2: */}}
