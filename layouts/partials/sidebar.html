@@ -27,10 +27,10 @@
         <a class="sidebar-social-item" href="mailto:{{ . }}"><i class="fas fa-envelope"></i>E-Mail</a>
         {{- end -}}
         {{- with .github -}}
-        <a class="sidebar-social-item" target="_blank" href="{{ . }}"><i class="fab fa-github"></i>Github</a>
+        <a class="sidebar-social-item" href="{{ . }}" target="_blank"><i class="fab fa-github"></i>Github</a>
         {{- end -}}
         {{- with .bilibili -}}
-        <a class="sidebar-social-item" target="_blank" href="{{ . }}"><i class="fa-brands fa-bilibili"></i>Bilibili</a>
+        <a class="sidebar-social-item" href="{{ . }}" target="_blank"><i class="fa-brands fa-bilibili"></i>Bilibili</a>
         {{- end -}}
       </div>
       {{- end -}}
@@ -64,7 +64,7 @@
       <div class="sidebar-links">
         <div class="sidebar-links-title"><i class="fas fa-user-friends"></i>友链</div>
         {{- range $text,$url := . -}}
-        <a class="sidebar-links-item" target="_blank" href="{{ $url }}">{{ $text | markdownify | safeHTML }}</a>
+        <a class="sidebar-links-item" href="{{ $url }}" target="_blank">{{ $text | markdownify | safeHTML }}</a>
         {{- end -}}
       </div>
       {{- end -}}

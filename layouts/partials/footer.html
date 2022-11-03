@@ -1,11 +1,11 @@
 <div class="footer-powerby">
-    <span>Powered by <a target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Powered by <a href="https://gohugo.io" target="_blank">Hugo</a></span>
     <span class="division">|</span>
-    <span>Theme - <a target="_blank" href="https://github.com/alohaia/hugo-theme-daisilia">Daisilia</a></span>
+    <span>Theme - <a href="https://github.com/alohaia/hugo-theme-daisilia" target="_blank">Daisilia</a></span>
 </div>
 <div class="footer-copyright">© {{ .Site.Params.daisy.copyright.startyear }} - {{ now.Format "2006" }}<span class="heart animate__heartBeat animate__infinite"><i class="fas fa-heart"></i></span>
     {{- if .Site.Author.homepage -}}
-    <span><a target="_blank" href="{{ .Site.Author.homepage }}">{{ partial "components/getname" . }}</a></span>
+    <span><a href="{{ .Site.Author.homepage }}" target="_blank">{{ partial "components/getname" . }}</a></span>
     {{- else -}}
     <span>{{ partial "components/getname" . }}</span>
     {{- end -}}

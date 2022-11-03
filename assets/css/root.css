@@ -23,11 +23,11 @@
     --footer-height: 64px;
     --content-width: 800px;
 
-    --font-handwrite: 'Indie Flower', cursive;
-    --font-code: 'JetBrains Mono', monospace;
-    --font-italic: 'Eng Italic', "Han KaiTi", cursive;
-    --font-sans: 'Roboto', 'Noto Sans SC', sans-serif;
-    --font-serif: 'Andada Pro', 'Noto Serif SC', serif;
+    --font-handwrite: "Indie Flower", cursive;
+    --font-code: "JetBrains Mono", monospace;
+    --font-italic: "Eng Italic", "Han KaiTi", "Noto Serif SC", cursive;
+    --font-sans: "Roboto", "Noto Sans SC", sans-serif;
+    --font-serif: "Andada Pro", "Noto Serif SC", serif;
     --font-height-double: 32px;
 
     --white: #ffffff;

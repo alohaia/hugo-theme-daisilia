@@ -2,7 +2,7 @@
 <a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- else -}}
   {{- if (hasPrefix .Destination "./") -}}
-<a target="_blank" href="{{ replace .Destination "./" .Page.RelPermalink }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ replace .Destination "./" .Page.RelPermalink }}"{{ with .Title}} title="{{ . }}"{{ end }} target="_blank">{{ .Text | safeHTML }}</a>
   {{- else if (hasPrefix (relURL .Destination) "/") -}}
 <a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
   {{- else -}}

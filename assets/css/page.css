@@ -406,6 +406,7 @@ hr {
 dt {
     font-weight: bold;
     font-family: var(--font-italic);
+    font-style: italic;
     display: inline;
     float: left;
     line-height: 24px;
@@ -766,7 +767,7 @@ del {
     text-decoration-thickness: 0.16em;
 }
 em {
-    font-style: normal;
+    font-style: italic;
     font-family: var(--font-italic);
 }
 mjx-container {
