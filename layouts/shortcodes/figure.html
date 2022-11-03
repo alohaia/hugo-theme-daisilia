@@ -5,7 +5,7 @@
 {{- $crossrefs = true -}}
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
 {{- $src := .Get "src" | safeURL -}}
-{{- if not (findRE "^(ftp|file|ftp|ftps|gemini|git|gopher|https?|irc|ircs|kitty|mailto|news|sftp|ssh)://" $src) -}}
+{{- if not (findRE "^(ftp|file|ftp|ftps|gemini|git|gopher|https?|irc|ircs|kitty|mailto|news|sftp|ssh)://|^/" $src) -}}
     {{- $src = print .Page.Permalink $src -}}
 {{- end -}}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}{{ with $id }} id="{{ . }}"{{ end }}>
