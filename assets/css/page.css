@@ -729,6 +729,7 @@ details[open]>summary>.tab-sum-trigger::before {
 /* sa - see also */
 .see-also::before {
     content: "See also:";
+    margin-right: 5px;
     color: var(--gray);
     white-space: nowrap;
 }
