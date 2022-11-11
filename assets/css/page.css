@@ -784,6 +784,7 @@ mjx-container {
 }
 .article-content a[href^="#"]:not(.footnote-backref, .footnote-ref, .heading a)::before {
     content: "#";
+    font-family: var(--font-serif);
     font-weight: bold;
 }
 
