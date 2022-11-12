@@ -177,10 +177,12 @@ figure {
     figure.float-left {
         float: left;
         max-width: 50%;
+        margin: 10px;
     }
     figure.float-right {
         float: right;
         max-width: 50%;
+        margin: 10px;
     }
     figure.left img {
         float: left;
