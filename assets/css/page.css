@@ -168,7 +168,7 @@
     cursor: pointer;
 }
 figure {
-    margin: 24px 0;
+    margin: 10px 0;
     overflow: hidden;
     display: inline-block;
     width: 100%;
@@ -223,6 +223,11 @@ figcaption>.caption, table caption.caption{
 }
 table caption.caption {
     caption-side: bottom;
+}
+
+/* fancybox */
+img.fancybox__image {
+    background-color: white;
 }
 
 /* content font size */
