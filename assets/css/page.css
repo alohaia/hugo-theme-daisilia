@@ -501,6 +501,7 @@ blockquote {
     border-radius: 4px 0 0 4px;
     z-index: var(--z-series);
     line-height: 1.5;
+    padding: 10px;
 }
 .series-content li::marker {
     content: none;
@@ -781,6 +782,18 @@ em {
 mjx-container {
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+/* sub and sub */
+sup {
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: super;
+}
+sub {
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: sub;
 }
 
 .page-list-item a[href^="#"] {
