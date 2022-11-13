@@ -1,8 +1,10 @@
-{{ $related := .Site.Pages.Related . | first 5 }}
-{{ with $related }}
+{{- $related := .Site.Pages.Related . | first 5 -}}
+{{- if site.Params.daisy.related.enable -}}
+{{- with $related -}}
 <div class="related-contents article-content">
   <h4 class="title">See Also</h4>
   <ul>{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
 </div>
-{{ end }}
+{{- end -}}
+{{- end -}}
 {{/* vim:set ft=gohtmltmpl tabstop=2 shiftwidth=2: */}}
