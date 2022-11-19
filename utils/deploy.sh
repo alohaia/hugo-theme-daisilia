@@ -8,7 +8,7 @@ fi
 
 Rscript utils/R/build.R
 
-python utils/genrefs.py
+python utils/genrefs.py -c
 
 git add .
 git commit -m "${mes}"
