@@ -88,3 +88,8 @@ $(".series-content").ready(function(){
         }
     }
 })
+
+// https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
+document.querySelectorAll('details').forEach((el) => {
+  new Accordion(el);
+});

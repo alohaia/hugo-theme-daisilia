@@ -708,6 +708,13 @@ summary.tab-sum {
     justify-content: space-between;
     cursor: pointer;
 }
+.tab-sum-trigger {
+    transition: transform .2s;
+    vertical-align: baseline;
+    width: 25px;
+    text-align: center;
+    height: 18.53px;
+}
 .tab-sum-trigger::before {
     font-style: normal;
     content: "\f105";
@@ -715,9 +722,10 @@ summary.tab-sum {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
 }
-details[open]>summary>.tab-sum-trigger::before {
-    content: "\f107";
+details[open] .tab-sum-trigger {
+    transform: rotate(90deg);
 }
+
 /* color */
 .tab.default { border-color: #777777; box-shadow: 0 0 2px 2px #77777725; }
 .tab.success { border-color: #5cb85c; box-shadow: 0 0 2px 2px #5cb85c25; }
