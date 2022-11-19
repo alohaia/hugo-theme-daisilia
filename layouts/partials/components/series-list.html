@@ -1,4 +1,4 @@
-{{- if eq .Parent .FirstSection -}}                       {{/* series/病原生物学 */}}
+{{- if eq .Parent .FirstSection -}}                            {{/* series/病原生物学 */}}
   <a class="series-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
   {{- block "_structure" . -}}{{ end }}
 {{- else if eq .Parent.Parent .FirstSection -}}                {{/* series/病原生物学/医学蠕虫 */}}
@@ -19,7 +19,18 @@
     {{- if eq .Kind "section" | and .Pages -}}
     <ul>
       {{- range .Pages.ByWeight -}}
-      <li><a class="series-item" href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      <li>
+        <a class="series-item" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{- if eq .Kind "section" | and .Pages -}}
+          <ul>
+            {{- range .Pages.ByWeight -}}
+            <li>
+              <a class="series-item" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </li>
+            {{- end -}}
+          </ul>
+          {{- end -}}
+      </li>
       {{- end -}}
     </ul>
     {{- end -}}
