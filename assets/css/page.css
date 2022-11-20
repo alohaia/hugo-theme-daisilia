@@ -714,6 +714,7 @@ summary.tab-sum {
     width: 25px;
     text-align: center;
     height: 18.53px;
+    margin: auto 0;
 }
 .tab-sum-trigger::before {
     font-style: normal;
