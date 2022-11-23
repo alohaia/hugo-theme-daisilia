@@ -18,7 +18,7 @@
 
 ### `hzl`(horizontal list)
 
-### `sa`(see alse)
+### `sa`(see also)
 
 ### `tab`
 
