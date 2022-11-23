@@ -7,6 +7,7 @@
   {{- block "title" . }}<title>{{ print .Title " | " .Site.Title }}</title>{{ end -}}
   {{- partial "components/style" . -}}     {{/* css */}}
   {{- partial "components/favicon" . -}}   {{/* favicon */}}
+  <script src="/js/jquery-3.6.0.min.js"></script>
 </head>
 <body class="site-root" id="SiteRoot">
   <div id="preload-mask">

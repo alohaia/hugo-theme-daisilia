@@ -1,5 +1,3 @@
-{{/* jquery */}}
-<script src="/js/jquery-3.6.0.min.js"></script>
 {{/* fancybox */}}
 {{- if .Site.Params.daisy.fancybox.enable -}}{{ partial "third-party/fancybox.html" . }}{{ end }}
 {{/* daisy.js */}}
@@ -13,6 +11,8 @@
 <script src="/js/pjax.min.js"></script>
 {{- $pjax := resources.Get "js/pjax.js" | minify | fingerprint -}}
 <script src="{{ $pjax.RelPermalink }}" integrity="{{ $pjax.Data.Integrity }}"></script>
+{{- $calendar := resources.Get "js/calendar.js" | minify | fingerprint -}}
+<script src="{{ $calendar.RelPermalink }}" integrity="{{ $calendar.Data.Integrity }}"></script>
 {{- end -}}
 {{- $theme := .Site.Params.daisy -}}
 {{- if eq $theme.quote.enable "jinrishici" -}}

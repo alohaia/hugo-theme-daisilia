@@ -34,20 +34,21 @@
         {{- end -}}
       </div>
       {{- end -}}
-      <div class="site-state">
-        <a class="site-state-item" href="/">
-          <p class="site-state-num">{{ len .Site.RegularPages }}</p>
-          <p class="site-state-name">Pages</p>
+      <div class="site-overview">
+        <a class="site-overview-item" href="/">
+          <p class="site-overview-num">{{ len .Site.RegularPages }}</p>
+          <p class="site-overview-name">Pages</p>
         </a>
-        <a class="site-state-item" href="/tags">
-          <p class="site-state-num">{{ len .Site.Taxonomies.tags }}</p>
-          <p class="site-state-name">Tags</p>
+        <a class="site-overview-item" href="/tags">
+          <p class="site-overview-num">{{ len .Site.Taxonomies.tags }}</p>
+          <p class="site-overview-name">Tags</p>
         </a>
-        <a class="site-state-item" href="/series">
-          <p class="site-state-num">{{ len (.GetPage "series").Sections }}</p>
-          <p class="site-state-name">Series</p>
+        <a class="site-overview-item" href="/series">
+          <p class="site-overview-num">{{ len (.GetPage "series").Sections }}</p>
+          <p class="site-overview-name">Series</p>
         </a>
       </div>
+      {{ partial "components/calendar" . }}
       <div class="sidebar-quote collapsed">
       {{- if eq $theme.quote.enable "jinrishici" -}}
         <p class="sidebar-quote-content" id="SidebarQuoteContent">主人不来过夜半，闲敲棋子落灯花。</p>

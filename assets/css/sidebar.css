@@ -183,7 +183,7 @@
 
 /* sidebar quote */
 .sidebar-quote {
-    margin-top: 25px;
+    margin-top: 15px;
     width: 100%;
 }
 .sidebar-quote-content {
@@ -232,9 +232,9 @@
     font-style: italic;
 }
 
-/* site state */
-.site-state {
-    margin: 25px auto 0;
+/* site overview */
+.site-overview {
+    margin: 15px auto 0;
     width: 100%;
     line-height: 1.75;
     display: flex;
@@ -242,15 +242,15 @@
     justify-content: center;
     gap: 20px;
 }
-.site-state-item {
+.site-overview-item {
     text-decoration: none;
 }
-.site-state-num {
+.site-overview-num {
     font-weight: 600;
     font-size: 150%;
     margin: 0;
 }
-.site-state-name {
+.site-overview-name {
     font-size: 85%;
     margin: 0;
 }
@@ -305,4 +305,58 @@ meting-js {
     background-color: var(--black);
     height: 24px;
     margin: auto 0;
+}
+
+/* calendar */
+.calendar {
+    margin-top: 15px;
+}
+.calendar-week, .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 2px;
+}
+.calendar-days span:not(.empty) {
+    height: 24px;
+    border: 2px solid var(--gray-deep);
+    border-radius: 2px;
+    user-select: none;
+}
+.calendar-days .today {
+    border-color: var(--gray) !important;
+}
+.calendar input {
+    font-size: inherit;
+    vertical-align: middle;
+    background: inherit;
+    color: var(--gray);
+    padding: 0;
+    border: 0;
+    text-align: center;
+}
+.calendar input::placeholder {
+    color: var(--gray-deep);
+}
+input#calendar-year { width: 50px }
+input#calendar-month { width: 30px }
+.calendar-header {
+    display: flex;
+    justify-content: space-around;
+}
+.calendar-header button {
+    border: 0;
+    padding: 0;
+    background: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+.calendar-header button:hover {
+    color: var(--orange);
+}
+.calendar a {
+    text-decoration: none;
+    color: var(--gray);
+}
+.calendar a:hover {
+    color: var(--orange)
 }

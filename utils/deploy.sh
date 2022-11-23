@@ -9,6 +9,7 @@ fi
 Rscript utils/R/build.R
 
 python utils/genrefs.py -c
+python utils/getdiarylist.py
 
 git add .
 git commit -m "${mes}"
