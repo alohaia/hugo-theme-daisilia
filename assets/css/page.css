@@ -280,6 +280,15 @@ table:not(.highlight table):not(.table-wrap table) {
     max-width: fit-content;
     margin: 15px auto;
 }
+/* table-cell */
+table .table-cell.right {
+    text-align: right;
+    padding-left: 1em;
+}
+table .table-cell.left {
+    text-align: left;
+    padding-right: 1em;
+}
 
 /* highlight & block */
 code {
