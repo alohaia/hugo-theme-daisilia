@@ -1,11 +1,18 @@
 {{- if hasPrefix .Destination "#" -}}
-<a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- else -}}
   {{- if (hasPrefix .Destination "./") -}}
 <a href="{{ replace .Destination "./" .Page.RelPermalink }}"{{ with .Title}} title="{{ . }}"{{ end }} target="_blank">{{ .Text | safeHTML }}</a>
   {{- else if (hasPrefix (relURL .Destination) "/") -}}
-<a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
   {{- else -}}
-<a href="{{ .Destination }}"{{ with .Title}} title="{{ . }}"{{ end }} target="_blank">{{ .Text | safeHTML }}</a>
+    {{- $url := .Text | urls.Parse -}}
+    {{- $urltext := "" -}}
+    {{- if $url.Host -}}
+      {{- $urltext = printf "%s://%s%s" $url.Scheme $url.Host $url.Path -}}
+    {{- else -}}
+      {{- $urltext = $url.Path -}}
+    {{- end -}}
+<a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank">{{ $urltext | safeHTML }}</a>
   {{- end -}}
 {{- end -}}
