@@ -50,8 +50,6 @@ class Calendar {
     } else {
       diaries_days = {}
     }
-    console.log(String(date.year), date.month >= 10 ? String(date.month) : "0"+String(date.month))
-    console.log(this.diaries[String(date.year)][date.month >= 10 ? String(date.month) : "0"+String(date.month)])
 
     document.getElementById("calendar-year").value = date.year
     document.getElementById("calendar-month").value = date.month
