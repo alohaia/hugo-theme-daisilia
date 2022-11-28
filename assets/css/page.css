@@ -216,7 +216,6 @@ table caption.title::before {
     color: var(--gray);
 }
 figcaption>.caption, table caption.caption{
-    line-height: 1.6;
     margin: 0;
     color: var(--gray-deep);
     white-space: pre-wrap;
