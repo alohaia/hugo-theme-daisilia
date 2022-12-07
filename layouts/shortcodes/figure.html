@@ -8,7 +8,11 @@
 {{- if not (findRE "^(ftp|file|ftp|ftps|gemini|git|gopher|https?|irc|ircs|kitty|mailto|news|sftp|ssh)://|^/" $src) -}}
     {{- $src = print .Page.Permalink $src -}}
 {{- end -}}
-<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}{{ with $id }} id="{{ . }}"{{ end }}>
+<figure
+  {{- with .Get "class" }} class="{{ . }}"{{ end -}}
+  {{- with $id }} id="{{ . }}"{{ end -}}
+  {{- with .Get "width" }} style="width:{{ . }}"{{ end -}}
+>
   {{- if .Get "link" -}}
   <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
   {{- else if $fancybox -}}
@@ -19,7 +23,7 @@
       alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
       {{- end -}}
       {{/* {{- with .Get "title" -}}title="{{ . }}"{{- end -}} */}}
-      {{- with .Get "width" }} width="{{ . }}"{{ end -}}
+      {{- with .Get "img-width" }} width="{{ . }}"{{ end -}}
       {{- with .Get "height" }} height="{{ . }}"{{ end -}}
     />
   {{- if or (.Get "link") $fancybox }}</a>{{ end -}}
