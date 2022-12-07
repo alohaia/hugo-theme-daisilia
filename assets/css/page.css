@@ -168,10 +168,8 @@
     cursor: pointer;
 }
 figure {
-    margin: 10px 0;
+    margin: 10px auto;
     overflow: hidden;
-    display: inline-block;
-    width: 100%;
 }
 @media (min-width: 751px) {
     figure.float-left {
@@ -683,6 +681,19 @@ blockquote {
 /* hdt */
 .hidden-text { background-color: var(--black) }
 .hidden-text:hover { background-color: inherit }
+
+/* noted text */
+.note {
+    position: absolute;
+    line-height: 0;
+    font-size: 16px;
+    font-family: var(--font-italic);
+}
+
+.noted {
+    line-height: 36px;
+    border-top: 2px solid var(--gray);
+}
 
 /* sense-group */
 .sense-group::before {
