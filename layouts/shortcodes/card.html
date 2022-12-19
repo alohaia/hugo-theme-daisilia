@@ -1,0 +1,7 @@
+<details{{ if .Get "open" }} open{{ end }} class="tab tab-card {{ .Get "type" }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
+  <summary class="tab-sum"><span class="tab-sum-content">{{ .Get "src" }}</span><i class="tab-sum-trigger"></i></summary>
+  <div class="tab-content">
+    {{- (.Site.GetPage (print "/cards/" (.Get "src"))).Content -}}
+  </div>
+</details>
+{{/* vim:set ft=gohtmltmpl tabstop=2 shiftwidth=2: */}}
