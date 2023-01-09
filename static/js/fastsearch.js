@@ -65,8 +65,11 @@ document.addEventListener('keydown', function(event) {
 // ==========================================
 // execute search as text is changed
 //
+var lastText = ''
 maininput.onkeyup = function() {
-    executeSearch(this.value)
+    if (this.value != lastText) {
+        executeSearch(this.value)
+    }
 }
 
 
