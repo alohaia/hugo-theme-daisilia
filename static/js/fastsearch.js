@@ -19,7 +19,7 @@ function toggleSearch(force) {
     if(firstRun) {
         loadSearch(); // loads our json data and builds fuse.js search index
         if (loading) {
-            loading.innerHTML = 'Loading completed, press ENTER after texting to search.';
+            loading.innerHTML = 'Loading completed, type to search.';
             loading.classList.add('loaded');
         }
         firstRun = false; // let's never do this again
@@ -69,7 +69,7 @@ document.addEventListener('keydown', function(event) {
 // ==========================================
 // execute search as text is changed
 //
-maininput.onchange = function() {
+maininput.onkeyup = function() {
     executeSearch(this.value)
 }
 
