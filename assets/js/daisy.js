@@ -71,8 +71,8 @@ header.onclick = function(){
 // preload
 document.onreadystatechange = function(){
     if(document.readyState == 'complete') {
-        $("#preload-mask").fadeOut("1000")
-        document.body.style.overflowY = "overlay";
+        $('#preload-mask').fadeOut('1000')
+        document.body.style.overflowY = (typeof InstallTrigger !== 'undefined') ? 'auto' : 'overlay'; // set 'auto' for firefox
     }
 };
 

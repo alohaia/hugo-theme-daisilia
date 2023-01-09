@@ -23,6 +23,8 @@
     position: relative;
     width: 80px;
     height: 80px;
+}
+#preload-mask .lds-default {
     margin-top: calc(50vh - 40px);
 }
 .lds-default div {

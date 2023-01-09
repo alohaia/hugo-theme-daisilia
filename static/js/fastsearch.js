@@ -1,12 +1,13 @@
 var fuse; // holds our search engine
-var searchVisible = false
+var searchVisible = false;
 var firstRun = true; // allow us to delay loading json data unless search activated
-var list = document.getElementById('searchResults'); // targets the <ul>
+var list = document.getElementById('searchResults');
 var first = list.firstChild; // first child of search list
 var last = list.lastChild; // last child of search list
-var maininput = document.getElementById('searchInput'); // input box for search
+var maininput = document.getElementById('searchInput');
 var resultsAvailable = false; // Did we get any search results?
-const keys = [ 'title', 'contents' ]
+const keys = [ 'title', 'contents' ];
+var loading = document.getElementById('searchLoading');
 
 // ==========================================
 // Check searchVisible and toggle search
@@ -17,6 +18,10 @@ function toggleSearch(force) {
     // Means we don't load json unless searches are going to happen; keep user payload small unless needed
     if(firstRun) {
         loadSearch(); // loads our json data and builds fuse.js search index
+        if (loading) {
+            loading.innerHTML = 'Loading completed, press ENTER after texting to search.';
+            loading.classList.add('loaded');
+        }
         firstRun = false; // let's never do this again
     }
 
@@ -24,12 +29,12 @@ function toggleSearch(force) {
     if (force == true || (force === undefined && !searchVisible)) {
         document.getElementById("fastSearch").style.display = "block"
         document.body.style.overflowY = "hidden"
-        document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
+        maininput.focus(); // put focus in input box so you can just start typing
         searchVisible = true; // search visible
     } else {
         // document.getElementById("fastSearch").style.display = "none"
         $("#fastSearch").fadeOut(200)
-        document.body.style.overflowY = "overlay"
+        document.body.style.overflowY = (typeof InstallTrigger !== 'undefined') ? 'auto' : 'overlay' // set 'auto' for firefox
         document.activeElement.blur(); // remove focus from search box
         searchVisible = false; // search not visible
     }
@@ -62,11 +67,14 @@ document.addEventListener('keydown', function(event) {
 
 
 // ==========================================
-// execute search as each character is typed
+// execute search as text is changed
 //
-document.getElementById("searchInput").onkeyup = function() {
+maininput.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
     executeSearch(this.value)
-}
+  }
+});
 
 
 // ==========================================
@@ -115,6 +123,8 @@ function isResultEqual(r1, r2) {
     }
     return true
 }
+
+
 // ===========================================
 // get first length results, length <= 0 to get as much as possible
 //
@@ -138,11 +148,6 @@ function uniqueResults(results, length) {
         }
     }
     return res
-}
-
-function afterSearch(){
-    // $("#searchResults table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`)
-    window.pjax.refresh(document.getElementById("searchResults"));
 }
 
 document.addEventListener("pjax:complete", function () {
@@ -184,11 +189,12 @@ function executeSearch(term) {
         resultsAvailable = true
     }
 
-    document.getElementById("searchResults").innerHTML = searchitems
+    list.innerHTML = searchitems
     if (results.length > 0) {
         first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
         last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
     }
 
-    afterSearch()
+    // refresh pjax
+    window.pjax.refresh(list);
 }

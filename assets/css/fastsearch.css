@@ -45,6 +45,15 @@
     padding: 5px 20px;
     margin: 0;
 }
+#searchLoading {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+#searchLoading.loaded {
+    width: 100%;
+    text-align: center;
+}
 
 .search-result-item::marker {
     content: none;

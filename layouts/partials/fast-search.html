@@ -1,10 +1,13 @@
 <div id="fastSearch">
+  <div id="MSG"></div>
   <div class="fast-search-container">
     <div class="fast-search-header">
       <input id="searchInput" autocomplete="off" tabindex="0">
       <span class="fast-search-hint" id="searchHint">CTRL-/</span>
     </div>
-    <ul id="searchResults"></ul>
+    <ul id="searchResults">
+      <div id="searchLoading" class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </ul>
   </div>
 </div>
 <script src="/js/fuse.min.js"></script>

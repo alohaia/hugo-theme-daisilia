@@ -443,6 +443,9 @@ dd:not(dt+dd)::before {
     font-weight: bold;
     margin-right: 5px;
 }
+dd+dt, dd+dt+dd {
+    margin-top: 10px;
+}
 
 /* blockquote */
 blockquote {
@@ -526,7 +529,10 @@ blockquote {
     overscroll-behavior: contain;
 }
 .series-title {
-    font-size: 1.25em;
+    font-size: 24px;
+    height: 64px;
+    width: 100%;
+    text-align: center;
 }
 
 /* related-contents */
@@ -590,8 +596,8 @@ blockquote {
 .card-container {
     display: grid;
     grid-template-columns: minmax(200px,1fr) minmax(200px,1fr);
-    align-items: start;
     gap: 5px;
+    margin-top: 40px;
 }
 .card {
     box-shadow: 1px 1px 3px 0px var(--gray-deep);
