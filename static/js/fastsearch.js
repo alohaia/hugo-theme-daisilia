@@ -69,12 +69,9 @@ document.addEventListener('keydown', function(event) {
 // ==========================================
 // execute search as text is changed
 //
-maininput.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
+maininput.onchange = function() {
     executeSearch(this.value)
-  }
-});
+}
 
 
 // ==========================================
