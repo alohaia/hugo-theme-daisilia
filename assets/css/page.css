@@ -694,6 +694,7 @@ blockquote {
     line-height: 0;
     font-size: 16px;
     font-family: var(--font-italic);
+    user-select: none;
 }
 
 .noted {
