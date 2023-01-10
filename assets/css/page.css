@@ -414,6 +414,13 @@ hr {
     margin: 20px 0;
     border: none;
 }
+.footnote-ref::before {
+    content: "[";
+}
+
+.footnote-ref::after {
+    content: "]";
+}
 
 /* deflist */
 dt {
