@@ -803,6 +803,32 @@ details[open] .tab-sum-trigger {
     width: 100%;
 }
 
+/* blockquote */
+.blockquote {
+    font-family: var(--font-italic);
+    font-weight: bold;
+    color: var(--gray-deep);
+    margin: 20px;
+}
+.blockquote .quote-content, .blockquote .quote-from {
+    margin: 0;
+}
+.blockquote.float-right {
+    max-width: 50%;
+    float: right;
+}
+.blockquote.float-left {
+    max-width: 50%;
+    float: right;
+}
+.blockquote.center .quote-content {
+    text-align: center;
+}
+.blockquote .quote-from {
+    text-align: right;
+}
+
+/* others */
 ins {
     text-decoration: none;
     border-bottom: 0.16em solid;
