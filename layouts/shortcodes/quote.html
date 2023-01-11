@@ -1,8 +1,10 @@
 <div class="blockquote {{ with .Get "style" }}{{ . }}{{ end }}">
-  <p class="quote-content">{{ .Inner }}</p>
-  <p class="quote-from"><span>——</span>
+  <div class="quote-content">
+    {{ .Inner }}
+  </div>
+  <div class="quote-from"><span>——</span>
     {{- with .Get "work" }}<span class="quote-from-work">{{ . }}</span>{{ end -}}
     {{- with .Get "author" }}<span class="quote-from-author">{{ . }}</span>{{ end -}}
-  <p>
+  </div>
 </div>
 {{/* vim:set ft=gohtmltmpl ts=2 sw=2: */}}
