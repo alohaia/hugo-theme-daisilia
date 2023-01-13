@@ -302,6 +302,7 @@ pre:not(.highlight pre),
     width: calc(100% - 16px);
     overflow-x: auto;
     line-height: 1.5;
+    max-height: 50vh;
 }
 .highlight pre {
     margin: 0;
