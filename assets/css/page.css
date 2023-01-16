@@ -424,23 +424,27 @@ hr {
 }
 
 /* deflist */
+dt, dd {
+    line-height: 24px;  /* vertical align */
+}
 dt {
     font-weight: bold;
     font-family: var(--font-italic);
     font-style: italic;
     display: inline;
     float: left;
-    line-height: 24px;
 }
 dt::after {
     content: ": ";
     color: var(--gray-deep);
     font-weight: bold;
+    font-style: normal;
     margin-right: 5px;
+    font-family: var(--font-sans);
+    line-height: 0;  /* to prevent dt deviation */
 }
 dd {
     margin: 0;
-    line-height: 24px;
 }
 dd:not(dt+dd) {
     text-indent: 1em;
@@ -453,6 +457,14 @@ dd:not(dt+dd)::before {
 }
 dd+dt, dd+dt+dd {
     margin-top: 10px;
+}
+/* grid deflist */
+dl.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+dl.grid dd:not(dt+dd) {
+    grid-column: 1 / -1;
 }
 
 /* blockquote */
