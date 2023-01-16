@@ -266,10 +266,16 @@ tbody:not(.highlight tbody) tr:nth-of-type(even) {
 tbody:not(.highlight tbody) tr:nth-of-type(odd) {
     background-color: var(--gray-light);
 }
-table:not(.highlight table).left-sticky td:first-child {
+table:not(.highlight table).left-sticky td:first-child{
     position: sticky;
     left: 0;
     background-color: inherit;
+}
+table:not(.highlight table).left-sticky th:first-child {
+    position: sticky;
+    left: 0;
+    background-color: var(--white);
+    z-index: calc(var(--z-overcontent) + 1);
 }
 table:not(.highlight table):not(.table-wrap table) {
     display: block;
