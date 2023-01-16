@@ -182,14 +182,14 @@ figure {
         max-width: 50%;
         margin: 10px;
     }
-    figure.left img {
-        float: left;
+    figure.left img, figure.right img {
         max-width: 75%;
+        width: 200px;
+        margin: 10px;
+        margin-top: 0;
     }
-    figure.right img {
-        float: right;
-        max-width: 75%;
-    }
+    figure.left  img { float: left }
+    figure.right img { float: right }
 }
 
 /* caption */
