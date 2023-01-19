@@ -430,6 +430,9 @@ hr {
 }
 
 /* deflist */
+dl {
+    margin: 15px 0;
+}
 dt, dd {
     line-height: 24px;  /* vertical align */
 }
@@ -459,18 +462,35 @@ dd:not(dt+dd)::before {
     content: "#";
     color: var(--gray-deep);
     font-weight: bold;
-    margin-right: 5px;
+    margin: 0 5px;
 }
-dd+dt, dd+dt+dd {
+dl:not(.grid) dd+dt, dl:not(.grid) dd+dt+dd {
     margin-top: 10px;
 }
 /* grid deflist */
 dl.grid {
     display: grid;
     grid-template-columns: auto auto;
+    grid-gap: 5px;
 }
 dl.grid dd:not(dt+dd) {
     grid-column: 1 / -1;
+}
+dl.grid dt::after {
+    content: none;
+}
+/* indent deflist */
+dl.indent dt {
+    display: block;
+    float: none;
+}
+dl.indent dd {
+    margin-top: 5px !important;
+    margin-left: 10px;
+    text-indent: 0;
+}
+dl.indent dt::after {
+    content: none;
 }
 
 /* blockquote */
