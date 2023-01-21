@@ -493,14 +493,6 @@ dl.indent dt::after {
     content: none;
 }
 
-/* blockquote */
-blockquote {
-    border-left: 4px solid #ddd;
-    color: var(--gray-deep);
-    margin: 0;
-    padding-left: 15px;
-}
-
 /* series */
 .series-container {
     position: fixed;
@@ -850,27 +842,35 @@ details[open] .tab-sum-trigger {
 }
 
 /* blockquote */
-.blockquote {
-    font-family: var(--font-italic);
+blockquote {
     font-weight: bold;
     color: var(--gray-deep);
     margin: 20px;
 }
-.blockquote .quote-content, .blockquote .quote-from {
+blockquote * {
+    font-family: var(--font-italic);
+}
+blockquote a.cite {
+    text-decoration: none;
+}
+blockquote a[target=_blank].cite::after {
+    content: none;
+}
+blockquote .quote-content, blockquote .quote-from {
     margin: 0;
 }
-.blockquote.float-right {
+blockquote.float-right {
     max-width: 50%;
     float: right;
 }
-.blockquote.float-left {
+blockquote.float-left {
     max-width: 50%;
     float: right;
 }
-.blockquote.center .quote-content {
+blockquote.center .quote-content {
     text-align: center;
 }
-.blockquote .quote-from {
+blockquote .quote-from {
     text-align: right;
 }
 
