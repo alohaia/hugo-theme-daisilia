@@ -18,7 +18,7 @@
 {{- end -}}
 {{- if and $details (ne $summary "") -}}
 <details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
-  <summary class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span><i class="tab-sum-trigger"></i></summary>
+  <summary class="tab-sum"><span class="tab-sum-content">{{ $summary | safeHTML | markdownify }}</span><i class="tab-sum-trigger"></i></summary>
   {{- if $id -}}
   {{- if and site.Data.refs .Page.File -}}
   {{- if index site.Data.refs .Page.File.Path -}}
@@ -39,7 +39,7 @@
 {{- else -}}
 <div{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
   {{- if ne $summary "" -}}
-  <div class="tab-sum"><span class="tab-sum-content">{{ $summary }}</span></div>
+  <div class="tab-sum"><span class="tab-sum-content">{{ $summary | safeHTML | markdownify }}</span></div>
   {{- end -}}
   {{- if $id -}}
   {{- if and site.Data.refs .Page.File -}}

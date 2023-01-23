@@ -1,9 +1,6 @@
-<h{{ .Level }}
-  class="heading {{ .Attributes.class }}"
-  {{- range $a,$v := .Attributes -}}{{ if or (ne $a "id") (in $.Attributes.class "item" | not) }}{{ $a }}="{{ $v }}"{{ end }}{{ end }}
-><a href="#{{ .Anchor }}">{{ .Text | safeHTML }}</a>
-{{/* {{- if ne (.Attributes.id | replaceRE `-\d+$` "") (.PlainText | replaceRE `\s+` "-" | replaceRE "[`~!@#$%^&*()_=+\\[\\]\\\\|{};:'\",<.>/?·！¥…（）—「【〔［『〖｛」】〕］』〗｝、；：‘”，《〈«‹。》〉»›？]" "" | lower) -}}<span class="heading-id">{{ .Attributes.id }}</span>{{- end -}} */}}
-  {{- with .Attributes.alias -}}<span class="heading-aliases">{{- range (split . " ") -}}<span class="heading-alias">{{ replace . "\\_" " " | htmlUnescape | safeHTML }}</span>{{- end -}}</span>{{- end -}}
+<h{{ .Level }} class="heading{{ with .Attributes.class }} {{ . }}{{ end }}" {{- range $a,$v := .Attributes -}}{{ if or (ne $a "id") (in $.Attributes.class "item" | not) }}{{ $a }}="{{ $v }}"{{ end }}{{ end -}}>
+  <a href="#{{ .Anchor }}">{{ .Text | safeHTML }}</a>
+  {{- with .Attributes.alias -}}<span class="heading-aliases">{{ range (split . " ") }}<span class="heading-alias">{{ replace . "\\_" " " | htmlUnescape | safeHTML }}</span>{{ end }}</span>{{ end -}}
 </h{{ .Level }}>
 {{- if and site.Data.refs .Page.File -}}
 {{- if index site.Data.refs .Page.File.Path -}}
