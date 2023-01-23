@@ -2,7 +2,7 @@ var pjax;
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
     pjax = new Pjax({
-        elements: ["a[href]:not([no-pjax]):not([href^='#'])"],
+        elements: ["a[href]:not([no-pjax]):not([href^='#']):not(target='_blank')"],
         selectors: [
             "[data-pjax]",
             "head title",
