@@ -5,13 +5,14 @@ import sys
 import re
 import json
 rootdir = 'content' + os.sep  # use os.sep
-ref_in_heading = True
+ref_in_heading = True         # do not check ref in headings
 # empty_heading_prefix = 'heading' # Hugo's default heading id prefix of empty heading
 refs = {}
 ref_pattern = r'\[.*?\]\({{(<\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*>|%\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*%)}}\)'
 heading_pattern = r'^(#{1,6})\s+(.*?)(\s*{.*})?$'
 ext_pattern = r'(\.md|/index\.md|/_index\.md)$'
 check = ('-c' in sys.argv) or ('--check' in sys.argv)
+format = ('-f' in sys.argv) or ('--format' in sys.argv)
 
 def check_anchor(file, anchor):
   is_contained = False
@@ -64,6 +65,8 @@ def get_refs(path):
   linenr = 0
   for line in open(path, 'r').readlines():
     linenr = linenr + 1
+
+    # skip code block
     if re.match(r'```(|[^`].*)$', line): # starts with ```(xxxx)?
       in_code_block1 = not in_code_block1
     if in_code_block1:
@@ -117,5 +120,9 @@ if __name__ == '__main__':
 
   if not os.path.exists('data/'):
     os.makedirs('data')
-  with open('data/refs.json', 'w', encoding='utf-8') as f:
-    json.dump(refs, f, ensure_ascii=False)
+  if format:
+    with open('data/refs.json', 'w', encoding='utf-8') as f:
+      json.dump(refs, f, ensure_ascii=False, indent=4)
+  else:
+    with open('data/refs.json', 'w', encoding='utf-8') as f:
+      json.dump(refs, f, ensure_ascii=False)
