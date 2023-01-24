@@ -334,6 +334,10 @@ code:not(pre code) { /* inline block */
 .article-content li::marker {
     color: var(--gray-deep);
 }
+.article-content ol,
+.article-content ul {
+    margin: 15px 0;
+}
 
 /* heading */
 .heading {
@@ -754,11 +758,11 @@ dl.indent dt::after {
 .tab {
     border-left: 4px solid;
     border-radius: 2px;
-    margin: 0 4px;
+    margin: 0 4px 15px;
     width: calc(100% - 8px);
 }
 .tab+.tab {
-    margin-top: 4px;
+    margin-top: -11px;
 }
 .tab-sum { padding: 5px 10px }
 .tab-content { padding: 15px }
