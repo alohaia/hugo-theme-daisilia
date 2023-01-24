@@ -77,9 +77,9 @@ def get_refs(path):
       continue
 
     # try updating current heaing
-    heading_results = re.findall(heading_pattern, line)
+    heading_results = re.search(heading_pattern, line)
     if heading_results:
-      current_heading = heading_results[0][1]
+      current_heading = heading_results[2]
       if not ref_in_heading:
         continue
 

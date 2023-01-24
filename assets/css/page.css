@@ -875,6 +875,22 @@ blockquote .quote-from {
     text-align: right;
 }
 
+/* section-heading */
+.section-heading {
+    display: inline-block;
+    margin: 10px 0;
+    font-weight: bold;
+    font-family: var(--font-serif);
+}
+.section-heading::before {
+    content: "【";
+    color: var(--gray-deep);
+}
+.section-heading::after {
+    content: "】";
+    color: var(--gray-deep);
+}
+
 /* others */
 ins {
     text-decoration: none;
@@ -945,14 +961,6 @@ sub {
     font-weight: 900;
     color: #82c91e;
     margin: 0 5px;
-}
-.heading.item::before {
-    content: "【";
-    color: var(--gray-deep);
-}
-.heading.item::after {
-    content: "】";
-    color: var(--gray-deep);
 }
 .heading.important a {
     color: red;
