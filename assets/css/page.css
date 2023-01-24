@@ -337,9 +337,8 @@ code:not(pre code) { /* inline block */
 
 /* heading */
 .heading {
-    display: inline-block;
     width: 100%;
-    margin: 1ex 0;
+    margin: 15px 0;
 }
 h1.heading {
     font-size: var(--font-height-double);
@@ -876,19 +875,36 @@ blockquote .quote-from {
 }
 
 /* section-heading */
-.section-heading {
-    display: inline-block;
-    margin: 10px 0;
-    font-weight: bold;
-    font-family: var(--font-serif);
+@media (max-width: 900px) {
+    .section-heading {
+        display: inline-block;
+        margin: 10px 0;
+        font-weight: bold;
+        font-family: var(--font-serif);
+    }
+    .section-heading::before {
+        content: "「";
+        color: var(--gray-deep);
+    }
+    .section-heading::after {
+        content: "」";
+        color: var(--gray-deep);
+    }
 }
-.section-heading::before {
-    content: "【";
-    color: var(--gray-deep);
-}
-.section-heading::after {
-    content: "】";
-    color: var(--gray-deep);
+@media (min-width: 901px) {
+    .section-heading:hover {
+        opacity: 1;
+    }
+    .section-heading {
+        position: relative;
+        left: -40px;
+        width: 0;
+        float: left;
+        writing-mode: vertical-lr;
+        font-weight: 700;
+        font-family: var(--font-serif);
+        opacity: .6;
+    }
 }
 
 /* others */
