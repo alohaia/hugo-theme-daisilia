@@ -19,7 +19,6 @@ References:
 {{- /* Initialize variables. */}}
 {{- $attrs := .Attributes }}
 {{- $inner := .Inner }}
-{{- $ordinal := .Ordinal }}
 {{- $page := .Page }}
 {{- $position := .Position }}
 {{- $url := "https://kroki.io/" }}
@@ -32,14 +31,22 @@ References:
 {{- $typesDelimited := delimit $supportedTypes ", " ", and " }}
 
 {{/* Add attributes. */}}
-{{- $id := printf "kroki-%d" (add 1 $ordinal) }}
 {{- $class := "" }}
 {{- with $attrs.class }}
   {{- $class = printf "diagram-kroki diagram-kroki-%s %s" $attrs.type $attrs.class }}
 {{- else }}
   {{- $class = printf "diagram-kroki diagram-kroki-%s" $attrs.type }}
 {{- end }}
-{{- $attrs := merge $attrs (dict "class" $class "id" $id "alt" "kroki diagram") }}
+{{- /* Process style and width */ -}}
+{{ $style := "" }}
+{{- if $attrs.width -}}
+  {{- if $style -}}
+    {{- $style = printf "%s width=\"%s\"" $style $attrs.width -}}
+  {{- else -}}
+    {{- $style = printf "width=\"%s\"" $attrs.width -}}
+  {{- end -}}
+{{- end -}}
+{{- $attrs := merge $attrs (dict "class" $class "alt" "kroki diagram" "style" $style) }}
 
 {{- /* Render diagram */}}
 {{- with $diagramType := $attrs.type  | lower }}
@@ -60,14 +67,19 @@ References:
         {{- with .Err }}
           {{- errorf "The Kroki code block render hook was unable to get the remote diagram. See %s" . $position }}
         {{- else }}
-          {{- $attrs = merge $attrs (dict "src" .RelPermalink) }}
-          <img
+          <figure
             {{- range $k, $v := $attrs }}
-              {{- if not (eq $k "type") }}
+              {{- if not (in $k (slice "alt" "img-width" "width")) }}
                 {{- printf " %s=%q" $k $v | safeHTMLAttr }}
               {{- end }}
             {{- end -}}
-          />
+          >
+            <img
+              {{- printf " src=%q" .RelPermalink -}}
+              {{- with $attrs.alt }}{{ printf " alt=%q" . }}{{ end -}}
+              {{- with (index $attrs "img-width") }}{{ printf " width=%q" . }}{{ end -}}
+            />
+          </figure>
         {{- end }}
       {{- else }}
         {{- errorf "The Kroki code block render hook was unable to get the remote diagram. See %s" $position }}
