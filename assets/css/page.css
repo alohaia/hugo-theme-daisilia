@@ -318,6 +318,7 @@ code:not(pre code) { /* inline block */
     margin-top: 10px;
     border-radius: 3px;
     background-color: var(--inline-code-background);
+    border: 1px solid var(--inline-code-background);
 }
 .highlight td:first-child {
     user-select: none;
