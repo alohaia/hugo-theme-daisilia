@@ -1,0 +1,94 @@
+{{- /* https://discourse.gohugo.io/t/36924 */ -}}
+{{- /* https://kroki.io/ */ -}}
+{{- $url := "https://kroki.io/" -}}
+{{- $outputFormat := "svg" -}}
+{{- $supportedTypes := slice
+  "actdiag" "blockdiag" "bpmn" "bytefield" "ditaa" "erd" "graphviz" "mermaid"
+  "nomnoml" "nwdiag" "packetdiag" "pikchr" "plantuml" "rackdiag" "seqdiag"
+  "svgbob" "umlet" "vega" "vegalite" "wavedrom"
+}}
+{{- $typesDelimited := delimit $supportedTypes ", " ", and " -}}
+{{- $diagramSource := "" -}}
+
+{{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
+{{- $class := .Get "class" -}}
+{{- $id := .Get "id" -}}
+{{- $width := .Get "width" -}}
+{{- $alt := default "kroki diagram" (.Get "alt") -}}
+{{- $title := .Get "title" -}}
+{{- $img_width := .Get "img-width" -}}
+{{- $caption := .Get "caption" -}}
+{{- $attr := .Get "attr" -}}
+{{- $crossrefs := false -}}
+{{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+{{- $crossrefs = true -}}
+{{- end -}}{{- end -}}{{- end -}}{{- end -}}
+
+{{- with $diagramType := .Get "type" | strings.ToLower -}}
+  {{- if not (in $supportedTypes .) -}}
+    {{- errorf "The %q shortcode was called with an invalid type %q. Valid types are %s. See %s" $.Name . $typesDelimited $.Position -}}
+  {{- else -}}
+    {{- with $.Get "file" -}}
+      {{- with $.Page.Resources.GetMatch . -}}
+        {{- $diagramSource = strings.Trim .Content "\r\n" -}}
+      {{- else -}}
+        {{- errorf "The %q shortcode was unable to find %q. See %s" $.Name . $.Position -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $diagramSource = strings.Trim $.Inner "\r\n" -}}
+    {{- end -}}
+    {{- with $diagramSource -}}
+      {{- $kroki := dict
+        "diagram_source" .
+        "diagram_type" $diagramType
+        "output_format" $outputFormat
+      -}}
+      {{- $opts := dict
+        "method" "post"
+        "body" ($kroki | jsonify)
+      -}}
+      {{- with resources.GetRemote $url $opts -}}
+        {{- with .Err -}}
+          {{- errorf "The %q shortcode was unable to get the remote diagram. Details: %s. See %s" $.Name . $.Position -}}
+        {{- else -}}
+          <figure class="figure-kroki{{ with $class }} {{ . }}{{ end -}}"
+            {{- with $id }} id="{{ . }}"{{ end -}}
+            {{- with $width }} style="width:{{ . }}"{{ end -}}
+          >
+            {{- if $fancybox }}<a data-fancybox data-src="{{ .RelPermalink }}">{{ end -}}
+              <img src="{{ .RelPermalink }}"
+                {{- with $img_width }} width="{{ . }}"{{ end -}}
+                {{- if or $alt $title }}
+                alt="{{ with $alt }}{{ . }}{{ else }}{{ $title }}{{ end }}"
+                {{- end -}}
+              />
+            {{- if $fancybox }}</a>{{ end -}}
+            {{- if or (or $title $caption) $attr | or $crossrefs -}}
+              <figcaption>
+                {{- if $crossrefs -}}
+                <div class="cross-refs">
+                  {{- range $v,$c := index (index site.Data.refs $.Page.File.Path).link_here $id -}}
+                  <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+                  {{- end -}}
+                </div>
+                {{- end -}}
+                {{ with $title }}<h4 class="title">{{ . }}</h4>{{ end -}}
+                {{- if or $caption $attr -}}<p class="caption">
+                  {{- $caption | safeHTML | markdownify -}}
+                </p>{{- end }}
+              {{- with $attr -}}<p class="attribution fig-attribution">{{ . | safeHTML | markdownify }}</p>{{- end -}}
+              </figcaption>
+            {{- end }}
+          </figure>
+        {{- end -}}
+      {{- else -}}
+        {{- errorf "The %q shortcode was unable to get the remote diagram. See %s" $.Name $.Position -}}
+      {{- end -}}
+    {{- else -}}
+      {{- errorf "The %q shortcode was called without content. See %s" $.Name $.Position -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- errorf "The %q shortcode requires a %q parameter. Valid types are %s. See %s" $.Name "type" $typesDelimited $.Position -}}
+{{- end -}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

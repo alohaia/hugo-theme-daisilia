@@ -1,11 +1,11 @@
 <div class="pagination-page-list">
   {{- range (.Paginate .Pages.ByLastmod.Reverse).Pages -}}
   <div class="page-list-item {{ .Kind }}">
-      <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
-      <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
-      {{- partial "components/summary" . -}}
+    <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+    <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
+    {{- partial "components/summary" . -}}
   </div>
   {{- end -}}
 </div>
 {{- template "_internal/pagination.html" . -}}
-{{/* vim:set ft=gohtmltmpl: */}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

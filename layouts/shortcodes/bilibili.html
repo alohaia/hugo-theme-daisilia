@@ -1,3 +1,4 @@
 <div class="vedio-container">
   <iframe class="bilibili-player" src="//player.bilibili.com/player.html?{{ with .Get "bvid" }}&bvid=BV{{ . }}{{ end }}{{ with .Get "page" }}&page={{ . }}{{ end }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 </div>
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

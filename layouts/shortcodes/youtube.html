@@ -1,3 +1,4 @@
 <div class="vedio-container">
   <iframe class="youtube-player" {{ with .Get "with" }}width="{{ . }}" {{ end }}{{ with .Get "height" }}height="{{ . }}" {{ end }}src="https://www.youtube.com/embed/{{ .Get "id" }}{{ with .Get "start" }}?start={{ . }}{{ end }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

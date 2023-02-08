@@ -27,6 +27,10 @@
     color: var(--orange-deep);
 }
 
+.tag-cloud-item sup {
+    color: var(--gray);
+}
+
 .tag-cloud.side {
     min-width: 250px;
     position: sticky;

@@ -6,4 +6,4 @@
   {{- $sum = $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" | safeHTML -}}
 {{- end -}}
 {{- if $sum }}<div class="summary article-content">{{ $sum }}</div>{{ end -}}
-{{/* vim:set ft=gohtmltmpl: */}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

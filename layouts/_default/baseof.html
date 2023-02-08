@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-  {{- partial "components/opengraph" . -}} {{/* open graph */}}
+  {{- partial "components/opengraph" . -}} {{- /* open graph */ -}}
   {{- block "title" . }}<title>{{ print .Title " | " .Site.Title }}</title>{{ end -}}
-  {{- partial "components/style" . -}}     {{/* css */}}
-  {{- partial "components/favicon" . -}}   {{/* favicon */}}
+  {{- partial "components/style" . -}}     {{- /* css */ -}}
+  {{- partial "components/favicon" . -}}   {{- /* favicon */ -}}
   <script src="/js/jquery-3.6.0.min.js"></script>
 </head>
 <body class="site-root" id="SiteRoot">
@@ -30,7 +30,7 @@
     <aside class="site-sidebar" id="SiteSidebar">{{ partial "sidebar" . }}</aside>
   </div>
   <div class="loading-track"><div class="loading-progress"></div></div>
-  {{- partial "components/js" . -}} {{/* js */}}
+  {{- partial "components/js" . -}} {{- /* js */ -}}
 </body>
 </html>
-{{/* vim:set ft=gohtmltmpl: */}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

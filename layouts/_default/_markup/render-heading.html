@@ -6,11 +6,11 @@
 {{- if index site.Data.refs .Page.File.Path -}}
 {{- if index (index site.Data.refs .Page.File.Path).link_here .Anchor -}}
 <div class="cross-refs">
-    {{- range $v,$c := index (index site.Data.refs .Page.File.Path).link_here .Anchor -}}
-    <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
-    {{- end -}}
+  {{- range $v,$c := index (index site.Data.refs .Page.File.Path).link_here .Anchor -}}
+  <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+  {{- end -}}
 </div>
 {{- end -}}
 {{- end -}}
 {{- end -}}
-{{/* vim:set ft=gohtmltmpl: */}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
