@@ -69,15 +69,14 @@ References:
         {{- else }}
           <figure
             {{- range $k, $v := $attrs }}
-              {{- if not (in $k (slice "alt" "img-width" "width")) }}
+              {{- if not (in $k (slice "alt" "img-width" "width")) | and (not (eq $v "")) }}
                 {{- printf " %s=%q" $k $v | safeHTMLAttr }}
               {{- end }}
             {{- end -}}
           >
-            <img
-              {{- printf " src=%q" .RelPermalink -}}
-              {{- with $attrs.alt }}{{ printf " alt=%q" . }}{{ end -}}
-              {{- with (index $attrs "img-width") }}{{ printf " width=%q" . }}{{ end -}}
+            <img src="{{ .RelPermalink }}"
+              {{- with $attrs.alt }} alt="{{ . }}"{{ end -}}
+              {{- with (index $attrs "img-width") }} width="{{ . }}"{{ end -}}
             />
           </figure>
         {{- end }}
