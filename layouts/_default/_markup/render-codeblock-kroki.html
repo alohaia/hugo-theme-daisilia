@@ -46,7 +46,7 @@ References:
     {{- $style = printf "width=\"%s\"" $attrs.width -}}
   {{- end -}}
 {{- end -}}
-{{- $attrs := merge $attrs (dict "class" $class "alt" "kroki diagram" "style" $style) }}
+{{- $attrs := merge $attrs (dict "class" $class "style" $style) }}
 
 {{- /* Render diagram */}}
 {{- with $diagramType := $attrs.type  | lower }}
@@ -69,15 +69,14 @@ References:
         {{- else }}
           <figure
             {{- range $k, $v := $attrs }}
-              {{- if not (in $k (slice "alt" "img-width" "width")) | and (not (eq $v "")) }}
+              {{- if (not (in $k (slice "img-width" "width"))) | and (not (eq $v "")) }}
                 {{- printf " %s=%q" $k $v | safeHTMLAttr }}
               {{- end }}
             {{- end -}}
           >
-            <img src="{{ .RelPermalink }}"
-              {{- with $attrs.alt }} alt="{{ . }}"{{ end -}}
-              {{- with (index $attrs "img-width") }} width="{{ . }}"{{ end -}}
-            />
+            <embed type="image/svg+xml" src="{{ .RelPermalink }}"
+              {{- with (index $attrs "img-width") }} style='width="{{ . }}"'{{ end -}}
+            ></embed>
           </figure>
         {{- end }}
       {{- else }}

@@ -209,6 +209,9 @@ figcaption>.title::before {
     content: "Figure - ";
     color: var(--gray);
 }
+.figure-kroki figcaption>.title::before {
+    content: "Diagram - ";
+}
 table caption.title::before {
     content: "Table - ";
     color: var(--gray);

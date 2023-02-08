@@ -10,11 +10,9 @@
 {{- $typesDelimited := delimit $supportedTypes ", " ", and " -}}
 {{- $diagramSource := "" -}}
 
-{{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
 {{- $class := .Get "class" -}}
 {{- $id := .Get "id" -}}
 {{- $width := .Get "width" -}}
-{{- $alt := default "kroki diagram" (.Get "alt") -}}
 {{- $title := .Get "title" -}}
 {{- $img_width := .Get "img-width" -}}
 {{- $caption := .Get "caption" -}}
@@ -55,14 +53,9 @@
             {{- with $id }} id="{{ . }}"{{ end -}}
             {{- with $width }} style="width:{{ . }}"{{ end -}}
           >
-            {{- if $fancybox }}<a data-fancybox data-src="{{ .RelPermalink }}">{{ end -}}
-              <img src="{{ .RelPermalink }}"
-                {{- with $img_width }} width="{{ . }}"{{ end -}}
-                {{- if or $alt $title }}
-                alt="{{ with $alt }}{{ . }}{{ else }}{{ $title }}{{ end }}"
-                {{- end -}}
-              />
-            {{- if $fancybox }}</a>{{ end -}}
+            <embed type="image/svg+xml" src="{{ .RelPermalink }}"
+              {{- with $img_width }} style='width="{{ . }}"'{{ end -}}
+            ></embed>
             {{- if or (or $title $caption) $attr | or $crossrefs -}}
               <figcaption>
                 {{- if $crossrefs -}}
