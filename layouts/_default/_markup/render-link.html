@@ -10,8 +10,10 @@
     {{- $urltext := "" -}}
     {{- if $url.Host -}}
       {{- $urltext = printf "%s://%s%s" $url.Scheme $url.Host $url.Path -}}
-    {{- else -}}
+    {{- else if $url.Path -}}
       {{- $urltext = $url.Path -}}
+    {{- else -}}
+      {{- $urltext = .Text -}}
     {{- end -}}
 <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank">{{ $urltext | safeHTML }}</a>
   {{- end -}}
