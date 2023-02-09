@@ -1,20 +1,4 @@
 {{- /* https://discourse.gohugo.io/t/36924 */ -}}
-{{- /*
-Renders diagrams from textual descriptions to SVG images using the Kroki service.
-
-References:
-
-- https://kroki.io/
-- https://kroki.io/#examples
-
-@param {obj} .Attributes The generic attributes from the info string.
-@param {string} .Inner The content between the leading and trailing code fences, excluding the info string.
-@param {obj} .Options The highlighting options from the info string.
-@param {int} .Ordinal The zero-based ordinal of the code block on the page.
-@param {obj} .Page A reference to the page containing the code block.
-@param {obj} .Position The position of the code block within the page content.
-@param {string} .Type The first word of the info string.
-*/}}
 
 {{- /* Initialize variables. */}}
 {{- $attrs := .Attributes }}
@@ -26,16 +10,16 @@ References:
 {{- $supportedTypes := slice
   "actdiag" "blockdiag" "bpmn" "bytefield" "ditaa" "erd" "graphviz" "mermaid"
   "nomnoml" "nwdiag" "packetdiag" "pikchr" "plantuml" "rackdiag" "seqdiag"
-  "svgbob" "umlet" "vega" "vegalite" "wavedrom"
+  "svgbob" "umlet" "vega" "vegalite" "wavedrom" "excalidraw"
 }}
 {{- $typesDelimited := delimit $supportedTypes ", " ", and " }}
 
 {{/* Add attributes. */}}
 {{- $class := "" }}
 {{- with $attrs.class }}
-  {{- $class = printf "diagram-kroki diagram-kroki-%s %s" $attrs.type $attrs.class }}
+  {{- $class = printf "kroki diagram-kroki diagram-kroki-%s %s" $attrs.type $attrs.class }}
 {{- else }}
-  {{- $class = printf "diagram-kroki diagram-kroki-%s" $attrs.type }}
+  {{- $class = printf "kroki diagram-kroki diagram-kroki-%s" $attrs.type }}
 {{- end }}
 {{- /* Process style and width */ -}}
 {{ $style := "" }}
@@ -74,9 +58,13 @@ References:
               {{- end }}
             {{- end -}}
           >
-            <embed type="image/svg+xml" src="{{ .RelPermalink }}"
-              {{- with (index $attrs "img-width") }} style='width="{{ . }}"'{{ end -}}
-            ></embed>
+            <div class="diagram-scroll">
+              <div class="svg-wrap"
+                {{- with (index $attrs "img-width") }} style='width="{{ . }}"'{{ end -}}
+              >
+                {{- .Content | safeHTML -}}
+              </div>
+            </div>
           </figure>
         {{- end }}
       {{- else }}

@@ -191,6 +191,17 @@ figure {
     figure.left  img { float: left }
     figure.right img { float: right }
 }
+/* kroki diagram */
+.diagram-scroll {
+    overflow: auto;
+}
+figure.kroki .svg-wrap {
+    margin: auto;
+}
+.svg-wrap svg {
+    max-width: -webkit-fill-available;
+    height: auto !important;
+}
 
 /* caption */
 figcaption, table caption {

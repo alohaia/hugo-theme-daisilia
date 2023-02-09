@@ -5,7 +5,7 @@
 {{- $supportedTypes := slice
   "actdiag" "blockdiag" "bpmn" "bytefield" "ditaa" "erd" "graphviz" "mermaid"
   "nomnoml" "nwdiag" "packetdiag" "pikchr" "plantuml" "rackdiag" "seqdiag"
-  "svgbob" "umlet" "vega" "vegalite" "wavedrom"
+  "svgbob" "umlet" "vega" "vegalite" "wavedrom" "excalidraw"
 }}
 {{- $typesDelimited := delimit $supportedTypes ", " ", and " -}}
 {{- $diagramSource := "" -}}
@@ -49,13 +49,17 @@
         {{- with .Err -}}
           {{- errorf "The %q shortcode was unable to get the remote diagram. Details: %s. See %s" $.Name . $.Position -}}
         {{- else -}}
-          <figure class="figure-kroki{{ with $class }} {{ . }}{{ end -}}"
+          <figure class="kroki figure-kroki figure-kroki-{{ $diagramType }}{{ with $class }} {{ . }}{{ end -}}"
             {{- with $id }} id="{{ . }}"{{ end -}}
             {{- with $width }} style="width:{{ . }}"{{ end -}}
           >
-            <embed type="image/svg+xml" src="{{ .RelPermalink }}"
-              {{- with $img_width }} style='width="{{ . }}"'{{ end -}}
-            ></embed>
+            <div class="diagram-scroll">
+              <div class="svg-wrap"
+                {{- with $img_width }} style='width="{{ . }}"'{{ end -}}
+              >
+                {{- .Content | safeHTML -}}
+              </div>
+            </div>
             {{- if or (or $title $caption) $attr | or $crossrefs -}}
               <figcaption>
                 {{- if $crossrefs -}}
