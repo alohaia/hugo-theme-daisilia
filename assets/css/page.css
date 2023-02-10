@@ -323,7 +323,7 @@ pre:not(.highlight pre),
     width: calc(100% - 16px);
     overflow-x: auto;
     line-height: 1.5;
-    max-height: 50vh;
+    max-height: 60vh;  /* code blocks of 14 lines on windows overflow if setted to 50vh */
 }
 .highlight pre {
     margin: 0;
@@ -982,7 +982,7 @@ sub {
     border-bottom: none;
     font-family: 'font awesome 6 free';
     font-weight: 900;
-    font-size: 50%;
+    font-size: x-small;
     vertical-align: super;
 }
 .article-content a[target="_blank"] {
