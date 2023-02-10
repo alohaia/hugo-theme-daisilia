@@ -5,14 +5,14 @@ import sys
 import re
 import json
 
-rootdir = 'content' + os.sep  # use os.sep
-ref_in_heading = True         # do not check ref in headings
+rootdir = 'content' + os.sep
 refs = {}
 ref_pattern = r'{{(<\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*>|%\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*%)}}'
 heading_pattern = r'^(#{1,6})\s+(.*?)(\s*{.*})?$'
 ext_pattern = r'(\.md|/index\.md|/_index\.md)$'
 check = ('-c' in sys.argv) or ('--check' in sys.argv)
 format = ('-f' in sys.argv) or ('--format' in sys.argv)
+ref_in_heading = ('--ref-in-heading' in sys.argv)
 
 def check_anchor(file, anchor):
   is_contained = False
