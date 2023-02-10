@@ -1,12 +1,11 @@
 .site-sidebar {
     position: fixed;
     top: 0;
-    bottom: 0;
     left: -320px;
 
     width: 300px;
     padding: 18px 10px;
-    height: 100%;
+    height: -webkit-fill-available;
     color: var(--gray-deep);
     background: var(--black);
     transition: all 0.2s ease-out;
@@ -18,6 +17,33 @@
     line-height: 1.5;
 
     z-index: var(--z-sidebar);
+}
+
+@keyframes sidebar-fill {
+    0%    {opacity: 0; opacity: 0;}
+    100%  {opacity: 1; opacity: 0.7;}
+}
+#SidebarFill {
+    display: none;
+    background: var(--black);
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    overscroll-behavior: none;
+}
+@media (max-width: 750px) {
+    .site-root.sidebar-active {
+        overflow-y: hidden !important;
+    }
+    .site-root.sidebar-active #SidebarFill {
+        display: block;
+        animation: sidebar-fill 0.2s ease-in;
+        opacity: 0.7;
+    }
 }
 
 .sidebar-container {
