@@ -20,6 +20,39 @@ $("sidebar-content").ready(function(){
             break;
         }
     }
+
+    if (document.getElementById("TOCTitle")) {
+        document.getElementById("TOCTitle").onclick = back2Top;
+    }
+
+    var prevScrollpos = window.pageYOffset;
+    function updateProgress() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        // var winScroll = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (height == 0 || winScroll == 0) {
+            document.getElementById("Back2top").style.display = "none";
+        } else {
+            document.getElementById("Back2top").style.display = null;
+            document.getElementById("Back2topProgress").innerHTML = Math.floor((winScroll / height) * 100) + "%";
+        }
+    }
+    updateProgress()
+    window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+
+        // // hide site header on scroll
+        // if (prevScrollpos >= currentScrollPos) {
+        //     document.body.classList.remove("header-hidden");
+        // } else {
+        //     document.body.classList.add("header-hidden");
+        // }
+
+        // scroll progress
+        updateProgress();
+
+        prevScrollpos = currentScrollPos;
+    }
 })
 
 $(".series-list").ready(function(){
@@ -29,44 +62,6 @@ $(".series-list").ready(function(){
         genUlNum(series);
     }
 })
-
-// $("table:not(.table-container table):not(.highlight table)").wrap(`<div class="table-container"></div>`);
-
-if (document.getElementById("TOCTitle")) {
-    document.getElementById("TOCTitle").onclick = back2Top;
-}
-// if (document.querySelector(".article-title:not(.page-title)")) {
-//     document.querySelector(".article-title:not(.page-title)").onclick = back2Top;
-// }
-
-var prevScrollpos = window.pageYOffset;
-function updateProgress() {
-    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    // var winScroll = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    if (height == 0 || winScroll == 0) {
-        document.getElementById("Back2top").style.display = "none";
-    } else {
-        document.getElementById("Back2top").style.display = null;
-        document.getElementById("Back2topProgress").innerHTML = Math.floor((winScroll / height) * 100) + "%";
-    }
-}
-updateProgress();
-window.onscroll = function() {
-    var currentScrollPos = window.pageYOffset;
-
-    // // hide site header on scroll
-    // if (prevScrollpos >= currentScrollPos) {
-    //     document.body.classList.remove("header-hidden");
-    // } else {
-    //     document.body.classList.add("header-hidden");
-    // }
-
-    // scroll progress
-    updateProgress();
-
-    prevScrollpos = currentScrollPos;
-}
 
 $(".tag-cloud.side").ready(function(){
     let tags = document.querySelectorAll(".tag-cloud-item")
