@@ -1,8 +1,8 @@
 {{- if hasPrefix .Destination "#" -}} {{- /* anchor */ -}}
-  <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+  <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
 {{- else -}}
-  {{- if or (hasPrefix .Destination site.BaseURL) (hasPrefix .Destination "/") | or (or (hasPrefix .Destination "./") (hasPrefix .Destination "../")) | or (hasPrefix .Destination "HAHAHUGOSHOR") -}} {{- /* I do not know what's this, .Destination from rel/relref has this prefix */ -}}
-    <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+  {{- if or (hasPrefix .Destination site.BaseURL) (hasPrefix .Destination "/") | or (or (hasPrefix .Destination "./") (hasPrefix .Destination "../")) | or (hasPrefix .Destination "HAHAHUGOSHORTCODE") -}} {{- /* https://discourse.gohugo.io/t/solved-destination-from-rel-or-relref-does-has-unexpect-prefix/42848/2 */ -}}
+    <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
   {{- else -}} {{- /* external link */ -}}
     {{- $url := .Text | urls.Parse -}}
     {{- $urltext := "" -}}
@@ -11,7 +11,7 @@
     {{- else -}}
       {{- $urltext = .Text -}}
     {{- end -}}
-    <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank">{{ $urltext | safeHTML }}</a>
+    <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank">{{ $urltext }}</a>
   {{- end -}}
 {{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

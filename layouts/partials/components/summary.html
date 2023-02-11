@@ -3,7 +3,7 @@
 {{- if $page.Params.summary -}}
   {{- $sum = $page.Params.summary -}}
 {{- else -}}
-  {{- $sum = $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" | safeHTML -}}
+  {{- $sum = $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" -}}
 {{- end -}}
-{{- if $sum }}<div class="summary article-content">{{ $sum }}</div>{{ end -}}
+{{- if $sum }}<div class="summary article-content">{{ $sum | safeHTML }}</div>{{ end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

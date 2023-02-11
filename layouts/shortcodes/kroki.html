@@ -71,9 +71,9 @@
                 {{- end -}}
                 {{ with $title }}<h4 class="title">{{ . }}</h4>{{ end -}}
                 {{- if or $caption $attr -}}<p class="caption">
-                  {{- $caption | safeHTML | markdownify -}}
+                  {{- $caption | markdownify -}}
                 </p>{{- end }}
-              {{- with $attr -}}<p class="attribution fig-attribution">{{ . | safeHTML | markdownify }}</p>{{- end -}}
+              {{- with $attr -}}<p class="attribution fig-attribution">{{ . | markdownify }}</p>{{- end -}}
               </figcaption>
             {{- end }}
           </figure>

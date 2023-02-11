@@ -65,7 +65,7 @@
       <div class="sidebar-links">
         <div class="sidebar-links-title"><i class="fas fa-user-friends"></i>友链</div>
         {{- range $text,$url := . -}}
-        <a class="sidebar-links-item" href="{{ $url }}" target="_blank">{{ $text | markdownify | safeHTML }}</a>
+        <a class="sidebar-links-item" href="{{ $url }}" target="_blank">{{ $text | markdownify }}</a>
         {{- end -}}
       </div>
       {{- end -}}

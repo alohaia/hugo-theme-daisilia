@@ -38,10 +38,10 @@
       {{- end -}}
       {{ with (.Get "title") }}<h4 class="title">{{ . }}</h4>{{ end -}}
       {{- if or (.Get "caption") (.Get "attr") -}}<p class="caption">
-        {{- .Get "caption" | safeHTML | markdownify -}}
+        {{- .Get "caption" | markdownify -}}
         {{- with .Get "attrlink" -}}<a href="{{ . }}">{{- .Get "attr" | markdownify -}}</a>{{ end -}}
       </p>{{- end }}
-    {{- with .Get "attr" -}}<p class="attribution fig-attribution">{{ . | safeHTML | markdownify }}</p>{{- end -}}
+    {{- with .Get "attr" -}}<p class="attribution fig-attribution">{{ . | markdownify }}</p>{{- end -}}
     </figcaption>
   {{- end }}
 </figure>
