@@ -319,8 +319,6 @@ pre:not(.highlight pre),
     border: 8px solid var(--code-background);
     border-radius: 4px;
     background-color: var(--code-background);
-    display: inline-block;
-    width: calc(100% - 16px);
     overflow-x: auto;
     line-height: 1.5;
     max-height: 60vh;  /* code blocks of 14 lines on windows overflow if setted to 50vh */
