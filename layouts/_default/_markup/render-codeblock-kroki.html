@@ -13,6 +13,16 @@
   "svgbob" "umlet" "vega" "vegalite" "wavedrom" "excalidraw"
 }}
 {{- $typesDelimited := delimit $supportedTypes ", " ", and " }}
+{{- $specialAttrs := slice "img-width" "width" "attr" "title" "caption" -}} {{- /* Attributes that are not insert directly */ -}}
+{{- $id := .Attributes.id -}}
+{{- $attr := .Attributes.attr -}}
+{{- $title := .Attributes.title -}}
+{{- $caption := .Attributes.caption -}}
+
+{{- $crossrefs := false -}}
+{{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+{{- $crossrefs = true -}}
+{{- end -}}{{- end -}}{{- end -}}{{- end -}}
 
 {{/* Add attributes. */}}
 {{- $class := "" }}
@@ -53,7 +63,7 @@
         {{- else }}
           <figure
             {{- range $k, $v := $attrs }}
-              {{- if (not (in $k (slice "img-width" "width"))) | and (not (eq $v "")) }}
+              {{- if (not (in $k $specialAttrs)) | and (not (eq $v "")) }}
                 {{- printf " %s=%q" $k $v | safeHTMLAttr }}
               {{- end }}
             {{- end -}}
@@ -65,6 +75,22 @@
                 {{- .Content | safeHTML -}}
               </div>
             </div>
+            {{- if or $title $caption | or $attr | or $crossrefs -}}
+              <figcaption>
+                {{- if $crossrefs -}}
+                <div class="cross-refs">
+                  {{- range $v,$c := index (index site.Data.refs $.Page.File.Path).link_here $id -}}
+                  <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+                  {{- end -}}
+                </div>
+                {{- end -}}
+                {{ with $title }}<h4 class="title">{{ . }}</h4>{{ end -}}
+                {{- if or $caption $attr -}}<p class="caption">
+                  {{- $caption | markdownify -}}
+                </p>{{- end }}
+              {{- with $attr -}}<p class="attribution fig-attribution">{{ . | markdownify }}</p>{{- end -}}
+              </figcaption>
+            {{- end -}}
           </figure>
         {{- end }}
       {{- else }}

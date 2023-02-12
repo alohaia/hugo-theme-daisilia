@@ -17,6 +17,7 @@
 {{- $img_width := .Get "img-width" -}}
 {{- $caption := .Get "caption" -}}
 {{- $attr := .Get "attr" -}}
+
 {{- $crossrefs := false -}}
 {{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
 {{- $crossrefs = true -}}
@@ -49,7 +50,7 @@
         {{- with .Err -}}
           {{- errorf "The %q shortcode was unable to get the remote diagram. Details: %s. See %s" $.Name . $.Position -}}
         {{- else -}}
-          <figure class="kroki figure-kroki figure-kroki-{{ $diagramType }}{{ with $class }} {{ . }}{{ end -}}"
+          <figure class="kroki diagram-kroki diagram-kroki-{{ $diagramType }}{{ with $class }} {{ . }}{{ end -}}"
             {{- with $id }} id="{{ . }}"{{ end -}}
             {{- with $width }} style="width:{{ . }}"{{ end -}}
           >

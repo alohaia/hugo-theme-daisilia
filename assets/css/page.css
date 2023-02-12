@@ -64,7 +64,7 @@
 
 /* cross reference */
 .cross-refs {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -220,7 +220,7 @@ figcaption>.title::before {
     content: "Figure - ";
     color: var(--gray);
 }
-.figure-kroki figcaption>.title::before {
+.diagram-kroki figcaption>.title::before {
     content: "Diagram - ";
 }
 table caption.title::before {
@@ -235,6 +235,9 @@ figcaption>.caption, table caption.caption{
 table caption.caption {
     caption-side: bottom;
     margin-bottom: 5px;
+}
+figcaption .cross-refs, .table-wrap + .cross-ref {
+    font-size: smaller;
 }
 
 /* fancybox */
