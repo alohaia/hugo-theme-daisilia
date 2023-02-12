@@ -1,7 +1,7 @@
 {{- $cite := .Get "cite" -}}
 <blockquote{{ with .Get "style" }} class="{{ . }}"{{ end }}{{ with $cite }} cite="{{ . }}"{{ end }}>
   <div class="quote-content">
-    {{ with $cite }}<a class="cite" target="_blank" href="{{ . }}">{{ end }}{{ .Inner }}{{ with $cite }}</a>{{ end -}}
+    {{ with $cite }}<a class="cite" target="_blank" href="{{ . }}">{{ end }}{{ .Inner | markdownify }}{{ with $cite }}</a>{{ end -}}
   </div>
   {{- if or (.Get "work") (.Get "author") -}}
   <div class="quote-from"><span>——</span>
