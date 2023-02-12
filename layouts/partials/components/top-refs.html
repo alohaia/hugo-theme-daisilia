@@ -3,7 +3,7 @@
 {{- if index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
 <div class='cross-refs top'>
   {{- range $v,$c := index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
-  <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ relref $.Page $v }}">{{ index (last 1 (split $v "/")) 0 }}</a>
+  <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ replaceRE "\\s+" "-" (relref $.Page $v | lower) }}">{{ index (last 1 (split $v "/")) 0 }}</a>
   {{- end -}}
 </div>
 {{- end -}}

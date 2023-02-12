@@ -74,11 +74,11 @@ def get_refs(path):
         'kroki': code_fence[3] == 'kroki'
       }
       if not in_code_block['level']:
-        in_code_block = code_fence                            # beginning fence
+        in_code_block = code_fence                                      # beginning fence
       else:
         if in_code_block['type'] == code_fence['type']:
           if in_code_block['level'] == code_fence['level']:
-            in_code_block = { 'level': 0, 'type': 0, 'kroki': False }         # ending fence
+            in_code_block = { 'level': 0, 'type': 0, 'kroki': False }   # ending fence
           elif in_code_block['level'] < code_fence['level']:
             exit("[ERROR] unclosed code block")
 
@@ -102,29 +102,29 @@ def get_refs(path):
         else:
           exit('[ERROR] fail to get parent directory of path "{path}"'.format(path = path))
 
-        # convert hugo ref to standard (file_path, anchor)
-        pos = ref2pos(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8], parent_dir, path, linenr)
+        # convert hugo ref to standard (path, anchor)
+        (path, anchor) = ref2pos(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8], parent_dir, path, linenr)
 
-        # ensure refs[pos[0]][pos[1]] exists
-        if pos[0] not in refs:
-          refs[pos[0]] = {
-            'file_ref': '/' + re.sub(ext_pattern, '', pos[0]),
+        # ensure refs[path][anchor] exists
+        if path not in refs:
+          refs[path] = {
+            'file_ref': '/' + re.sub(ext_pattern, '', path),
             'count': 0,
-            'link_here': { pos[1]: {} }
+            'link_here': { anchor: {} }
           }
-        elif pos[1] not in refs[pos[0]]['link_here']:
-          refs[pos[0]]['link_here'][pos[1]] = {}
+        elif anchor not in refs[path]['link_here']:
+          refs[path]['link_here'][anchor] = {}
 
-        if pos[0] == '':
+        if path == '':
           print('[Warning] empty filename: "{filename}" in "{path}"'.format(filename = ref_result[0], path = path))
 
         # add backlink and count
         backlink = '/' + file_from + ('#'+current_heading if current_heading!='' else '')
-        if backlink in refs[pos[0]]['link_here'][pos[1]]:
-          refs[pos[0]]['link_here'][pos[1]][backlink] += 1
+        if backlink in refs[path]['link_here'][anchor]:
+          refs[path]['link_here'][anchor][backlink] += 1
         else:
-          refs[pos[0]]['link_here'][pos[1]][backlink] = 1
-        refs[pos[0]]['count'] += 1
+          refs[path]['link_here'][anchor][backlink] = 1
+        refs[path]['count'] += 1
 
   linenr = 0
 
