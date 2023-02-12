@@ -25,33 +25,24 @@ $("sidebar-content").ready(function(){
         document.getElementById("TOCTitle").onclick = back2Top;
     }
 
-    var prevScrollpos = window.pageYOffset;
-    function updateProgress() {
-        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        // var winScroll = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        if (height == 0 || winScroll == 0) {
-            document.getElementById("Back2top").style.display = "none";
+    function updateScrollPercent() {
+        const bkt = document.getElementById("Back2top");
+        var h = document.documentElement,
+            b = document.body,
+            st = 'scrollTop',
+            sh = 'scrollHeight';
+        var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+
+        if (percent == 0) {
+            bkt.style.display = "none";
         } else {
-            document.getElementById("Back2top").style.display = null;
-            document.getElementById("Back2topProgress").innerHTML = Math.floor((winScroll / height) * 100) + "%";
+            bkt.style.display = null;
+            bkt.innerText = (percent < 99 ? Math.round(percent) : 100) + "%";
         }
     }
-    updateProgress()
+    updateScrollPercent()
     window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-
-        // // hide site header on scroll
-        // if (prevScrollpos >= currentScrollPos) {
-        //     document.body.classList.remove("header-hidden");
-        // } else {
-        //     document.body.classList.add("header-hidden");
-        // }
-
-        // scroll progress
-        updateProgress();
-
-        prevScrollpos = currentScrollPos;
+        updateScrollPercent();
     }
 })
 
