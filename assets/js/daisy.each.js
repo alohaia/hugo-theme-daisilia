@@ -55,16 +55,6 @@ $(".series-list").ready(function(){
     }
 })
 
-$(".tag-cloud.side").ready(function(){
-    let tags = document.querySelectorAll(".tag-cloud-item")
-    for(let tag of tags){
-        if(window.location.pathname.startsWith(tag.getAttribute("href"))) {
-            tag.classList.add("now")
-            break
-        }
-    }
-})
-
 $(".series-content").ready(function(){
     if(window.location.pathname == "/series/") { return }
     let items = document.querySelectorAll(".series-title, .series-item")
