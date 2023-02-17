@@ -348,10 +348,6 @@ code:not(pre code) { /* inline block */
 .article-content li::marker {
     color: var(--gray-deep);
 }
-.article-content ol,
-.article-content ul {
-    margin: 15px 0;
-}
 
 /* heading */
 .heading {
@@ -741,7 +737,11 @@ dl.indent dt::after {
 }
 
 /* hdt */
-.hidden-text { background-color: var(--black) }
+.hidden-text {
+    background-color: var(--black);
+    color: var(--black);
+    transition: background-color .5s;
+}
 .hidden-text:hover { background-color: inherit }
 
 /* noted text */
@@ -860,10 +860,15 @@ details[open] .tab-sum-trigger {
 }
 
 /* blockquote */
-blockquote {
-    font-weight: bold;
-    color: var(--gray-deep);
-    margin: 20px;
+blockquote:before {
+    color: var(--gray);
+    content: open-quote;
+    position: relative;
+    float: left;
+    left: -25px;
+    top: -10px;
+    width: 0;
+    font-size: 3em;
 }
 blockquote * {
     font-family: var(--font-italic);
