@@ -27,6 +27,7 @@ $("sidebar-content").ready(function(){
 
     function updateScrollPercent() {
         const bkt = document.getElementById("Back2top");
+        const prog = document.getElementById("Back2topProgress");
         var h = document.documentElement,
             b = document.body,
             st = 'scrollTop',
@@ -37,7 +38,7 @@ $("sidebar-content").ready(function(){
             bkt.style.display = "none";
         } else {
             bkt.style.display = null;
-            bkt.innerText = (percent < 99 ? Math.round(percent) : 100) + "%";
+            prog.innerText = (percent < 99 ? Math.round(percent) : 100) + "%";
         }
     }
     updateScrollPercent()
