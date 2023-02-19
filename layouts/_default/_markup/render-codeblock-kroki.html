@@ -63,7 +63,7 @@
         {{- else }}
           <figure
             {{- range $k, $v := $attrs }}
-              {{- if (not (in $k $specialAttrs)) | and (not (eq $v "")) }}
+              {{- if (not (in $specialAttrs $k)) | and (not (eq $v "")) }}
                 {{- printf " %s=%q" $k $v | safeHTMLAttr }}
               {{- end }}
             {{- end -}}

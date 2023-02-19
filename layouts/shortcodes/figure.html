@@ -5,7 +5,7 @@
 {{- $crossrefs = true -}}
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
 {{- $src := .Get "src" | safeURL -}}
-{{- if not (findRE "^(ftp|file|ftp|ftps|gemini|git|gopher|https?|irc|ircs|kitty|mailto|news|sftp|ssh)://|^/" $src) -}}
+{{- if not (findRE "^(ftp|sftp|file|ftps?|gemini|git|gopher|https?|ircs?|kitty|mailto|news|ssh)://|^/" $src) -}}
     {{- $src = print .Page.Permalink $src -}}
 {{- end -}}
 <figure
@@ -13,20 +13,33 @@
   {{- with $id }} id="{{ . }}"{{ end -}}
   {{- with .Get "width" }} style="width:{{ . }}"{{ end -}}
 >
-  {{- if .Get "link" -}}
-  <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
-  {{- else if $fancybox -}}
-  <a data-fancybox data-src="{{ $src }}">
-  {{- end -}}
-    <img src="{{ $src }}"
-      {{- if or (.Get "alt") (.Get "title") }}
-      alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
+  {{- if .Get "embed" -}}
+    {{- with resources.GetRemote $src }}
+      {{- with .Err -}}
+        {{- errorf "The %q shortcode was unable to get the remote SVG file. Details: %s. See %s" $.Name . $.Position -}}
+      {{- else -}}
+        <div class="diagram-scroll">
+          <div class="svg-wrap">
+            {{- .Content | safeHTML -}}
+          </div>
+        </div>
       {{- end -}}
-      {{/* {{- with .Get "title" -}}title="{{ . }}"{{- end -}} */}}
-      {{- with .Get "img-width" }} width="{{ . }}"{{ end -}}
-      {{- with .Get "height" }} height="{{ . }}"{{ end -}}
-    />
-  {{- if or (.Get "link") $fancybox }}</a>{{ end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- if .Get "link" -}}
+    <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
+    {{- else if $fancybox -}}
+    <a data-fancybox data-src="{{ $src }}">
+    {{- end -}}
+      <img src="{{ $src }}"
+        {{- if or (.Get "alt") (.Get "title") }}
+        alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
+        {{- end -}}
+        {{- with .Get "img-width" }} width="{{ . }}"{{ end -}}
+        {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+      />
+    {{- if or (.Get "link") $fancybox }}</a>{{ end -}}
+  {{- end -}}
   {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") | or $crossrefs -}}
     <figcaption>
       {{- if $crossrefs -}}
