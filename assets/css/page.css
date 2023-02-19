@@ -860,15 +860,30 @@ details[open] .tab-sum-trigger {
 }
 
 /* blockquote */
+blockquote {
+    quotes: "“" "”" "‘" "’" "“" "”" "‘" "’";
+}
 blockquote:before {
     color: var(--gray);
     content: open-quote;
+    font-family: var(--font-sans);
     position: relative;
     float: left;
     left: -25px;
     top: -10px;
     width: 0;
-    font-size: 3em;
+    font-size: xxx-large;
+}
+blockquote::after {
+    color: var(--gray);
+    content: close-quote;
+    font-family: var(--font-sans);
+    position: relative;
+    float: right;
+    right: -5px;
+    bottom: 15px;
+    width: 0;
+    font-size: xxx-large;
 }
 blockquote * {
     font-family: var(--font-italic);
@@ -879,7 +894,7 @@ blockquote a.cite {
 blockquote a[target=_blank].cite::after {
     content: none;
 }
-blockquote .quote-content, blockquote .quote-from {
+blockquote .quote-content, blockquote .quote-from, blockquote p {
     margin: 0;
 }
 blockquote.float-right {
