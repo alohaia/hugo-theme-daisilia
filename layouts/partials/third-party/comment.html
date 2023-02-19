@@ -1,7 +1,7 @@
 {{- $comment := .Site.Params.daisy.comment -}}
 {{- if $comment.enable -}}
   {{- if and .Site.IsServer $comment.disable_on_local -}}
-    <p>Comments are setted to be disabled if the site is being served with local server.</p>
+    <p>Comments are setted to be disabled when the site is being served by local server.</p>
   {{- else -}}
     <script src="https://giscus.app/client.js"
             data-repo="{{ $comment.repo }}"
