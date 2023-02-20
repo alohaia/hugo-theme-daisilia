@@ -209,9 +209,8 @@ figcaption, table caption {
     /* max-width: var(--content-width); */
 }
 figcaption>.title, table caption.title{
-    margin: 10px 0 0;
-    font-size: 1.125em;
-    line-height: 1.1;
+    margin: 0;
+    font-size: 20px;
     white-space: pre-wrap;
     font-weight: bold;
     font-family: var(--font-serif);
