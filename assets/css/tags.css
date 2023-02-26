@@ -17,10 +17,12 @@
     color: var(--black);
     white-space: nowrap;
     height: 100%;
+    font-family: var(--font-serif);
 }
 
 .tag-cloud-item.now {
     color: var(--orange);
+    font-weight: bold;
 }
 
 .tag-cloud-item:hover {
