@@ -979,11 +979,6 @@ sub {
 .page-list-item a[href^="#"]:hover {
     color: var(--gray-deep);
 }
-.article-content a[href^="#"]:not(.footnote-backref, .footnote-ref, .heading a)::before {
-    content: "#";
-    font-family: var(--font-serif);
-    font-weight: bold;
-}
 
 /* attribution */
 .attribution {
@@ -995,6 +990,7 @@ sub {
     color: var(--gray);
 }
 
+/* special hyperlinks */
 .article-content a[target="_blank"]::after {
     content: " \f35d ";
     border-bottom: none;
@@ -1005,6 +1001,18 @@ sub {
 }
 .article-content a[target="_blank"] {
     word-break: break-all;
+}
+.article-content a[href^="#"]:not(.footnote-backref, .footnote-ref, .heading a)::before {
+    content: "#";
+    font-family: var(--font-serif);
+    font-weight: bold;
+}
+.article-content a.page::before {
+    content: "\f15c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 400;
+    font-size: smaller;
+    padding: 0 2px 0 1px;
 }
 
 /* custom */
