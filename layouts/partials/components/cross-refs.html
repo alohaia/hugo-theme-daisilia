@@ -3,8 +3,10 @@
 {{- range $v,$c := (index (index site.Data.refs .page.File.Path).link_here .index) -}}
 {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
 {{- end -}}
-{{- range (sort $refs "count" "desc") -}}
+{{- range sort $refs "count" "desc" -}}
 {{- $refs_html = printf "%s<a class=\"cross-ref page\" href=\"%s\">%s</a>" $refs_html (replaceRE "\\s+" "-" (relref $.page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
 {{- end -}}
-<div class="cross-refs">{{ $refs_html | safeHTML }}</div>
+{{- if ne $refs_html "" -}}
+  <div class="cross-refs">{{ $refs_html | safeHTML }}</div>
+{{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
