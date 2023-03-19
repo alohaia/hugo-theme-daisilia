@@ -10,7 +10,9 @@
   {{- if (eq .File.Dir "series/") -}}
     {{- partial "components/pagination-page-list" . -}}
   {{- else -}}
-    <div class="page-list">{{ partial "components/page-list" .Pages }}</div>
+    {{- with .Pages -}}
+    <div class="page-list">{{ partial "components/page-list" . }}</div>
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

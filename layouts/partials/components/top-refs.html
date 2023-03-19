@@ -1,10 +1,8 @@
 {{- if and .Site.Data.refs .Page.File -}}
 {{- if index $.Site.Data.refs .Page.File.Path -}}
 {{- if index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
-<div class='cross-refs top'>
-  {{- range $v,$c := index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
-  <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ replaceRE "\\s+" "-" (relref $.Page $v | lower) }}">{{ index (last 1 (split $v "/")) 0 }}</a>
-  {{- end -}}
+<div class="top-refs">
+  {{- partial "components/cross-refs.html" (dict "page" .Page "index" "") -}}
 </div>
 {{- end -}}
 {{- end -}}

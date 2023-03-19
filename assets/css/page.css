@@ -65,27 +65,25 @@
 /* cross reference */
 .cross-refs {
     margin: 0 0 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 5px 10px;
-}
-.cross-refs.top {
-    font-size: 1.125em;
+    font-size: 16px;
 }
 .cross-refs::before {
     content: "Link here: ";
-    color: var(--gray);
-    order: -99999;
+    color: var(--gray-deep);
 }
 .cross-ref {
-    background: var(--gray-light);
+    background-color: var(--gray-light);
     border: 2px solid var(--gray-light);
     border-radius: 5px;
+    margin-left: 5px;
+    word-break: break-all;
 }
 .tab .cross-refs {
     margin: 0;
     padding: 15px 10px 0 15px;
+}
+.table-wrap .cross-refs {
+    margin: 0;
 }
 
 /* link */
@@ -233,7 +231,6 @@ figcaption>.caption, table caption.caption{
 }
 table caption.caption {
     caption-side: bottom;
-    margin-bottom: 5px;
 }
 figcaption .cross-refs, .table-wrap + .cross-ref {
     font-size: smaller;
@@ -825,17 +822,21 @@ details[open] .tab-sum-trigger {
 .tab.error   > .tab-sum { background-color: #d9534f25 }
 
 /* sa - see also */
+.see-also {
+    font-size: 16px;
+}
 .see-also::before {
     content: "See also:";
     margin-right: 5px;
-    color: var(--gray);
+    color: var(--gray-deep);
     white-space: nowrap;
 }
 .see-also a {
     background-color: var(--gray-light);
-    border-radius: 4px;
-    padding: 2px;
-    max-width: var(--content-width);
+    border: 2px solid var(--gray-light);
+    border-radius: 5px;
+    margin-left: 5px;
+    word-break: break-all;
 }
 
 /* bilibili & youtube */
@@ -1007,6 +1008,7 @@ sub {
     font-family: var(--font-serif);
     font-weight: bold;
 }
+.top-refs a.page::before,
 .article-content a.page::before {
     content: "\f15c";
     font-family: "Font Awesome 6 Free";

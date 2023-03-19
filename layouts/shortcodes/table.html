@@ -1,37 +1,35 @@
 {{- $title   := default ""    (.Get "title")       -}}
 {{- $caption := default ""    (.Get "caption")     -}}
-{{- $attr    := default ""    (.Get "attrution") -}}
-{{- $id      := default ""    (.Get "id")          -}}
+{{- $attr    := default ""    (.Get "attrution")   -}}
+{{- $id      := .Get "id" -}}
 {{- $ls      := default false (.Get "left_sticky") -}}
-{{- with $title -}}
-  {{- $title = print "<caption class='title'>" (. | markdownify) "</caption>" -}}
+{{- $crossrefs := false -}}
+{{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+  {{- $crossrefs = true -}}
+{{- end -}}{{- end -}}{{- end -}}{{- end -}}
+{{- if or (or $caption $attr) $crossrefs -}}
+  {{- $refs_html := "" -}}
+  {{- $refs := slice -}}
+  {{- range $v,$c := (index (index site.Data.refs .Page.File.Path).link_here "") -}}
+    {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
+  {{- end -}}
+  {{- range (sort $refs "count" "desc") -}}
+    {{- $refs_html = printf "%s<a class=\"cross-ref\" href=\"%s\">%s</a>" $refs_html (replaceRE "\\s+" "-" (relref $.Page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
+  {{- end -}}
+  {{- $refs_html = printf "<div class=\"cross-refs\">%s</div>" $refs_html -}}
+
+  {{- if $attr }}{{ $attr = printf  }}{{ end -}}
+  {{- $caption = printf "<caption class='caption'>%s%s%s</caption>"
+    ($caption | markdownify)
+    (cond (ne $attr "") (printf "<p class=\"attrution tbl-attrution\">%s</p>" ($attr | markdownify)) "")
+    $refs_html
+  -}}
 {{- end -}}
-{{- if or $caption $attr  -}}
-  {{- if $attr }}{{ $attr = print "<p class=\"attrution tbl-attrution\">" ($attr | markdownify) "</p>" }}{{ end -}}
-  {{- $caption = print "<caption class='caption'>" (print ($caption | markdownify) $attr) "</caption>" -}}
-{{- end -}}
-{{- if $ls -}}
-  {{- $ls = " class=\"left-sticky\"" -}}
-{{- else -}}
-  {{- $ls = "" -}}
-{{- end -}}
-{{- with $id -}}
-  {{- $id = printf " id=\"%s\"" $id -}}
-{{- end -}}
-{{- $head := printf "<div class='table-wrap'><table%s%s>%s%s" $id $ls $caption $title -}}
+{{- $head := printf "<div class=\"table-wrap\"><table%s%s>%s%s"
+    (cond (ne $id "") (printf " id=\"%s\"" $id) "")
+    (cond $ls " class=\"left-sticky\"" "")
+    $caption
+    (cond (ne $title "") (printf "<caption class='title'>%s</caption>" ($title | markdownify)) "")
+-}}
 {{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" "</table></div>" | safeHTML -}} {{- /* use markdownify to insure .Inner is render result */ -}}
-{{- if $id -}}
-{{- if and site.Data.refs .Page.File -}}
-{{- if index site.Data.refs .Page.File.Path -}}
-{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
-  <div class="cross-refs">
-  {{- index (index site.Data.refs .Page.File.Path).link_here $id -}}
-    {{- range $v,$c := index (index site.Data.refs .Page.File.Path).link_here $id -}}
-    <a class='cross-ref'{{ if gt $c 1 }} style="order:-{{$c}}"{{ end }} href="{{ replaceRE "\\s+" "-" (relref $.Page $v | lower) }}">{{ index (last 1 (split $v "/")) 0 }}</a>
-    {{- end -}}
-  </div>
-{{- end -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
