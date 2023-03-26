@@ -9,16 +9,18 @@
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
 {{- if or (or $caption $attr) $crossrefs -}}
   {{- $refs_html := "" -}}
-  {{- $refs := slice -}}
-  {{- range $v,$c := (index (index site.Data.refs .Page.File.Path).link_here $id) -}}
-    {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
-  {{- end -}}
-  {{- range sort $refs "count" "desc" -}}
-    {{- $refs_html = printf "<a class=\"cross-ref\" href=\"%s\">%s</a>" (replaceRE "\\s+" "-" (relref $.Page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
-  {{- end -}}
-  {{- $refs_html = printf "<div class=\"cross-refs\">%s</div>" $refs_html -}}
 
-  {{- if $attr }}{{ $attr = printf  }}{{ end -}}
+  {{- if $crossrefs -}}
+    {{- $refs := slice -}}
+    {{- range $v,$c := (index (index site.Data.refs .Page.File.Path).link_here $id) -}}
+      {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
+    {{- end -}}
+    {{- range sort $refs "count" "desc" -}}
+      {{- $refs_html = printf "<a class=\"cross-ref\" href=\"%s\">%s</a>" (replaceRE "\\s+" "-" (relref $.Page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
+    {{- end -}}
+    {{- $refs_html = printf "<div class=\"cross-refs\">%s</div>" $refs_html -}}
+  {{- end -}}
+
   {{- $caption = printf "<caption class='caption'>%s%s%s</caption>"
     ($caption | markdownify)
     (cond (ne $attr "") (printf "<p class=\"attrution tbl-attrution\">%s</p>" ($attr | markdownify)) "")

@@ -1,4 +1,4 @@
-{{ $csses := slice
+{{- $csses := slice
   (resources.Get "css/root.css")
   (resources.Get "css/sidebar.css")
   (resources.Get "css/main.css")
@@ -7,7 +7,7 @@
   (resources.Get "css/tags.css")
   (resources.Get "css/fastsearch.css")
   (resources.Get "css/print.css")
-}}
+-}}
 {{- $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>
 <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">

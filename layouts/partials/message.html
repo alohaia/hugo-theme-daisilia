@@ -1,24 +1,24 @@
 {{- with .Site.Params.daisy.message -}}
-{{ $style := resources.Get "css/message.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}"/>
-{{- range . -}}
-<div class="site-message-item {{ with .type }}{{ . }}{{ else }}default{{ end }}">
-    <div class="site-message-close" role="button">X</div>
-    {{- with .title -}}
-    <h1 class="site-message-title">{{ . }}</h1>
-    {{- end -}}
-    {{- with .content -}}
-    <p class="site-message-content">{{ . }}</p>
-    {{- end -}}
-</div>
-{{- end }}
-<script>
-    document.querySelectorAll(".site-message-close").forEach(function(currentValue) {
-        console.log(currentValue)
-        currentValue.onclick = function() {
-            this.parentElement.style.display = "none"
-        }
-    })
-</script>
-{{ end -}}
+  {{- $style := resources.Get "css/message.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}"/>
+  {{- range . -}}
+  <div class="site-message-item {{ with .type }}{{ . }}{{ else }}default{{ end }}">
+      <div class="site-message-close" role="button">X</div>
+      {{- with .title -}}
+      <h1 class="site-message-title">{{ . }}</h1>
+      {{- end -}}
+      {{- with .content -}}
+      <p class="site-message-content">{{ . }}</p>
+      {{- end -}}
+  </div>
+  {{- end }}
+  <script>
+      document.querySelectorAll(".site-message-close").forEach(function(currentValue) {
+          console.log(currentValue)
+          currentValue.onclick = function() {
+              this.parentElement.style.display = "none"
+          }
+      })
+  </script>
+{{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

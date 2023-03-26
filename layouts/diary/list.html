@@ -13,7 +13,7 @@
       <div class="page-list-item">
         <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ if not .IsSection }}{{ time.Format "2006-01-02" .Date | title }}{{ end }}{{ with .Title }} {{ . }}{{ end }}</a></h1>
         <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
-        {{ partial "components/summary" . }}
+        {{- partial "components/summary" . -}}
       </div>
       {{- end -}}
     </div>

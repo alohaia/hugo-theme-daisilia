@@ -32,7 +32,7 @@
   {{- $class = printf "kroki diagram-kroki diagram-kroki-%s" $attrs.type }}
 {{- end }}
 {{- /* Process style and width */ -}}
-{{ $style := "" }}
+{{- $style := "" -}}
 {{- if $attrs.width -}}
   {{- if $style -}}
     {{- $style = printf "%s width=\"%s\"" $style $attrs.width -}}
@@ -80,7 +80,7 @@
                 {{- if $crossrefs -}}
                   {{- partial "components/cross-refs.html" (dict "page" .Page "index" $id) -}}
                 {{- end -}}
-                {{ with $title }}<h4 class="title">{{ . }}</h4>{{ end -}}
+                {{- with $title }}<h4 class="title">{{ . }}</h4>{{ end -}}
                 {{- if or $caption $attr -}}<p class="caption">
                   {{- $caption | markdownify -}}
                 </p>{{- end }}

@@ -5,7 +5,7 @@
   <div class="page-list-item {{ $page.Kind }}">
     <h1 class="page-title article-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h1>
     <div class="page-metadata article-metadata">{{ partial "components/metadata" $page }}</div>
-    {{ partial "components/summary" $page }}
+    {{- partial "components/summary" $page -}}
   </div>
   {{- end -}}
 {{- end -}}

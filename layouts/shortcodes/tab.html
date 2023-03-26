@@ -29,7 +29,7 @@
   {{- end -}}
   {{- end -}}
   <div class="tab-content">
-    {{ .Inner | markdownify }}
+    {{- .Inner | markdownify -}}
   </div>
 </details>
 {{- else -}}
@@ -47,7 +47,7 @@
   {{- end -}}
   {{- end -}}
   <div class="tab-content">
-    {{ .Inner | markdownify }}
+    {{- .Inner | markdownify -}}
   </div>
 </div>
 {{- end -}}
