@@ -390,3 +390,12 @@ input#calendar-month { width: 30px }
 .calendar a:hover {
     color: var(--orange)
 }
+.calendar-body {
+    transition: max-height 1s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+.calendar:hover .calendar-body {
+    max-height: 999px;
+}
+
