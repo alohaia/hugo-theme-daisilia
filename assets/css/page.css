@@ -242,7 +242,7 @@ img.fancybox__image {
 
 /* content font size */
 .article-content {
-    font-size: 1.125em;
+    font-size: 18px;
     color: var(--black);
     overflow-wrap: break-word;
 }
@@ -307,7 +307,7 @@ table .table-cell.left {
 }
 
 /* highlight & block */
-code {
+code * {
     font-family: var(--font-code);
 }
 pre:not(.highlight pre),
@@ -325,8 +325,10 @@ pre:not(.highlight pre),
 }
 code:not(pre code) { /* inline block */
     margin-top: 10px;
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: var(--inline-code-background);
+    border-left: 5px solid var(--inline-code-background);
+    border-right: 5px solid var(--inline-code-background);
 }
 .highlight td:first-child {
     user-select: none;
@@ -860,6 +862,8 @@ details[open] .tab-sum-trigger {
 /* blockquote */
 blockquote {
     quotes: "“" "”" "‘" "’" "“" "”" "‘" "’";
+    margin: 0;
+    padding: 10px 25px;
 }
 blockquote:before {
     color: var(--gray);
@@ -867,10 +871,10 @@ blockquote:before {
     font-family: var(--font-sans);
     position: relative;
     float: left;
-    left: -25px;
+    font-size: xxx-large;
+    left: -20px;
     top: -10px;
     width: 0;
-    font-size: xxx-large;
 }
 blockquote::after {
     color: var(--gray);
@@ -878,12 +882,12 @@ blockquote::after {
     font-family: var(--font-sans);
     position: relative;
     float: right;
-    right: -5px;
+    font-size: xxx-large;
+    right: -2px;
     bottom: 15px;
     width: 0;
-    font-size: xxx-large;
 }
-blockquote * {
+blockquote, blockquote code {
     font-family: var(--font-italic);
 }
 blockquote a.cite {
