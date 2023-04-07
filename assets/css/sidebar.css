@@ -336,6 +336,9 @@ meting-js {
     height: 24px;
     margin: auto 0;
 }
+.back2top-icon {
+    font-weight: bold;
+}
 
 /* calendar */
 .calendar {
