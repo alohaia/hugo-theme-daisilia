@@ -336,6 +336,10 @@ code:not(pre code) { /* inline block */
     left: 0;
     z-index: var(--z-overcontent);
 }
+.highlight td:first-child code {
+    display: flex;
+    flex-direction: column;
+}
 
 /* list */
 .article-content li p,
@@ -847,6 +851,7 @@ details[open] .tab-sum-trigger {
     padding-top: 75%;
     position: relative;
     width: calc(100% - 30px);
+    background-color: var(--gray);
 }
 .vedio-container iframe,
 .vedio-container object,
