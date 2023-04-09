@@ -9,7 +9,7 @@
   {{- partial "components/favicon" . -}}   {{- /* favicon */ -}}
   <script src="/js/jquery-3.6.0.min.js"></script>
 </head>
-<body class="site-root" id="SiteRoot">
+<body class="site-root{{ if and .Site.IsServer }} local-server{{ end }}" id="SiteRoot">
   <div id="preload-mask">
     <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   </div>

@@ -18,6 +18,9 @@
     z-index: 99999;
     text-align: center;
 }
+.local-server #preload-mask {
+    display: none;
+}
 .lds-default {
     display: inline-block;
     position: relative;
