@@ -119,6 +119,7 @@
     width: 18px;
     text-align: center;
     cursor: pointer;
+    user-select: none;
 }
 
 .sidebar-toggle-icon {
@@ -320,6 +321,7 @@ meting-js {
     height: 18px;
     padding: 6px;
     cursor: pointer;
+    user-select: none;
 }
 .back2top:hover * {
     color: var(--gray-light);

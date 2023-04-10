@@ -848,7 +848,7 @@ details[open] .tab-sum-trigger {
     height: 0;
     margin: 10px 15px;
     overflow: hidden;
-    padding-top: 75%;
+    padding-top: 65%;
     position: relative;
     width: calc(100% - 30px);
     background-color: var(--gray);
