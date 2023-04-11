@@ -746,17 +746,39 @@ dl.indent dt::after {
 .hidden-text:hover { background-color: inherit }
 
 /* noted text */
-.note {
-    position: absolute;
-    line-height: 0;
-    font-size: 16px;
-    font-family: var(--font-italic);
-    user-select: none;
+@media (max-width: 1200px) {
+    .note {
+        font-weight: bold;
+    }
+    .note::before {
+        content: "（";
+    }
+    .note::after {
+        content: "）";
+    }
 }
-
+@media (min-width: 1201px) {
+    .note {
+        float: right;
+        font-weight: bold;
+        max-width: 200px;
+        line-break: anywhere;
+        height: 0;
+        transform: translate(100%, 0);
+    }
+}
 .noted {
-    line-height: 36px;
-    border-top: 2px solid var(--gray);
+    text-decoration: underline;
+    text-decoration-style: double;
+}
+/* exam questions  */
+.noted.exam .note {
+    color: var(--orange);
+}
+.noted.exam {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--orange);
 }
 
 /* sense-group */
