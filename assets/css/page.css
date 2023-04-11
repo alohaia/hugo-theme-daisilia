@@ -746,6 +746,7 @@ dl.indent dt::after {
 .hidden-text:hover { background-color: inherit }
 
 /* noted text */
+/* available classes: inline-note, exam */
 @media (max-width: 1200px) {
     .note {
         font-weight: bold;
@@ -758,7 +759,8 @@ dl.indent dt::after {
     }
 }
 @media (min-width: 1201px) {
-    .note {
+    /* not inline-note */
+    .note:note(.inline-note) {
         float: right;
         font-weight: bold;
         max-width: 200px;
