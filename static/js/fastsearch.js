@@ -17,6 +17,7 @@ function toggleSearch(force) {
     // Load json search index if first time invoking search
     // Means we don't load json unless searches are going to happen; keep user payload small unless needed
     if(firstRun) {
+        maininput.disabled = true;
         loadSearch(); // loads our json data and builds fuse.js search index
         firstRun = false; // let's never do this again
     }
@@ -114,6 +115,8 @@ function loadSearch() {
             loading.innerHTML = 'Loading completed, type to search.';
             loading.classList.add('loaded');
         }
+
+        maininput.disabled = false;
     })
 }
 

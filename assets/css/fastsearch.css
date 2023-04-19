@@ -28,7 +28,6 @@
 }
 #searchInput {
     height: 40px;
-    border: none;
     padding: 0;
     font-size: 30px;
     line-height: 30px;
@@ -38,6 +37,10 @@
 }
 #searchInput:focus {
     background-color: var(--gray-light);
+}
+#searchInput:disabled {
+    background: var(--gray-light);
+    cursor: wait;
 }
 #searchResults {
     height: calc(100% - 76px);
