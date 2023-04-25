@@ -6,7 +6,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: var(--z-fullscreen);
+    z-index: var(--z-search);
     animation: fadeIn 0.2s ease-out;
 }
 .fast-search-container {

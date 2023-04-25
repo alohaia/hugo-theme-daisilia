@@ -2,10 +2,18 @@
     margin-left: 0;
     transition: all 0.2s ease-out;
 }
-@media (min-width: 1000px) {
+@media (min-width: 1001px) {
     .site-root.sidebar-active {
         margin-left: 320px;
     }
+}
+
+/* if on local server */
+.local-server #preload-mask {
+    display: none;
+}
+body.local-server {
+    overflow: auto;
 }
 
 #preload-mask {
@@ -17,9 +25,6 @@
     background-color: white;
     z-index: 99999;
     text-align: center;
-}
-.local-server #preload-mask {
-    display: none;
 }
 .lds-default {
     display: inline-block;

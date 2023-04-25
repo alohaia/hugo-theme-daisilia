@@ -47,7 +47,8 @@
     --z-overcontent: 1;
     --z-series: 200;
     --z-sidebar: 300;
-    --z-loadingbar: 400;
+    --z-search: 400;
+    --z-loadingbar: 500;
     --z-fullscreen: 9999;
 }
 
