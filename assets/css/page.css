@@ -158,6 +158,7 @@
 figure {
     margin: 10px auto;
     overflow: hidden;
+    max-width: 100%;
 }
 @media (min-width: 751px) {
     figure.float-left {

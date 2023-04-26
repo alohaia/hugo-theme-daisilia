@@ -20,7 +20,7 @@
 
 :root {
     --header-height: 80px;
-    --footer-height: 64px;
+    --footer-height: 80px;
     --content-width: 800px;
 
     --font-handwrite: "Indie Flower", cursive;
