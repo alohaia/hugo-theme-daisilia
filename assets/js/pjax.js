@@ -1,4 +1,7 @@
 var pjax;
+var loadingBar = document.querySelector(".loading-track");
+var progress = document.querySelector(".loading-progress");
+
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
     pjax = new Pjax({
@@ -14,13 +17,18 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("pjax:send", function(){
+// Pjax 开始时执行的函数
+document.addEventListener("pjax:send", function () {
+    loadingBar.classList.add("loading");
+
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.unobserve(heading);
     });
-})
+});
 
-document.addEventListener("pjax:success", function(){
+// Pjax 完成之后执行的函数
+document.addEventListener("pjax:complete", function () {
+    loadingBar.classList.remove("loading");
     if(document.querySelector('iframe.giscus-frame')) {
         document.querySelector('iframe.giscus-frame').contentWindow.postMessage({
           giscus: {
@@ -33,17 +41,4 @@ document.addEventListener("pjax:success", function(){
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.observe(heading);
     });
-})
-
-var loadingBar = document.querySelector(".loading-track");
-var progress = document.querySelector(".loading-progress");
-
-// Pjax 开始时执行的函数
-document.addEventListener("pjax:send", function () {
-  loadingBar.classList.add("loading");
-});
-
-// Pjax 完成之后执行的函数
-document.addEventListener("pjax:complete", function () {
-  loadingBar.classList.remove("loading");
 });

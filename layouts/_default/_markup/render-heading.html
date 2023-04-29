@@ -1,4 +1,4 @@
-<h{{ .Level }} class="heading{{ with .Attributes.class }} {{ . }}{{ end }}" {{- range $a,$v := .Attributes -}}{{ if or (ne $a "id") (in $.Attributes.class "item" | not) }}{{ $a }}="{{ $v }}"{{ end }}{{ end -}}>
+<h{{ .Level }} class="heading{{ with .Attributes.class }} {{ . }}{{ end }}" {{- range $attr,$val := .Attributes -}}{{ if (in (slice "alias") $attr | not) }}{{ $attr }}="{{ $val }}"{{ end }}{{ end -}}>
   <a href="#{{ .Anchor }}">{{ .Text | safeHTML }}</a> {{- /* .Text is renered HTML link text */ -}}
   {{- with .Attributes.alias -}}<span class="heading-aliases">{{ range (split . " ") }}<span class="heading-alias">{{ replace . "\\_" " " | markdownify }}</span>{{ end }}</span>{{ end -}}
 </h{{ .Level }}>
