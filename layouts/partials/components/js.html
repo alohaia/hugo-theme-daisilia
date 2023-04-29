@@ -26,61 +26,66 @@
 {{- if eq $theme.quote.enable "jinrishici" -}}
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script>
-    var content_part, content_full;
-    var is_poem = false;
-    const wrap = document.getElementsByClassName("sidebar-quote")[0]
-    const content = document.getElementById("SidebarQuoteContent");
-    const from = document.getElementById("SidebarQuoteFrom");
-    var Result;
-    function toggleFull() {
-        wrap.classList.toggle("expanded")
-        wrap.classList.toggle("collapsed")
-        if (content.innerHTML == content_part) {
-            content.innerHTML = content_full;
-        } else {
-            content.innerHTML = content_part;
-        }
+  var content_part, content_full;
+  var is_poem = true;
+  const wrap = document.getElementsByClassName("sidebar-quote")[0]
+  const content = document.getElementById("SidebarQuoteContent");
+  const from = document.getElementById("SidebarQuoteFrom");
+  var Result;
+  function toggleFull() {
+    wrap.classList.toggle("expanded")
+    wrap.classList.toggle("collapsed")
+    if (content.innerHTML == content_part) {
+      content.innerHTML = content_full;
+    } else {
+      content.innerHTML = content_part;
     }
-    jinrishici.load(function(result) {
-        Result = result;
-        content_part = result.data.content;
-        content.innerText = content_part;
-        from.innerHTML =
-            `<span class="author">${result.data.origin.dynasty}·${result.data.origin.author}</span>`
-            + `<span class="title">《${result.data.origin.title}》</span>`
-        var prefix = ''
-        var reg = /^([^，。！？]{5}[，。！？][^，。！？]{5}[，。！？]|[^，。！？]{7}[，。！？][^，。！？]{7}[，。！？])+$/g
-        if (result.data.origin.content.join('').match(reg)) {
-            content.classList.add("poem");
-            is_poem = true
-        } else {
-            prefix = "&nbsp".repeat(8)
-        }
-        content_full = prefix + result.data.origin.content.join('<br>'+prefix);
-        content.onclick = toggleFull;
-    });
+  }
+  jinrishici.load(function(result) {
+    Result = result;
+    content_part = result.data.content;
+    content.innerText = content_part;
+    from.innerHTML =
+      `<span class="author">${result.data.origin.dynasty}·${result.data.origin.author}</span>`
+      + `<span class="title">《${result.data.origin.title}》</span>`
+    var prefix = ''
+    var reg = /^([^，。！？]{5}[，。！？][^，。！？]{5}[，。！？]|[^，。！？]{7}[，。！？][^，。！？]{7}[，。！？])+$/g
+    result.data.origin.content.forEach((line) => {
+      if (!line.match(reg)) {
+        is_poem = false;
+      }
+    })
+    if (is_poem) {
+      content.classList.add("poem");
+    } else {
+      prefix = "&nbsp".repeat(8)
+    }
+    content_full = prefix + result.data.origin.content.join('<br>'+prefix);
+    content.onclick = toggleFull;
+  });
 </script>
 {{- else if eq $theme.quote.enable "rainbow" -}}
 <script>
-    fetch('https://api.eatrice.top')
-    .then(response => response.json())
-    .then(data => {
-        var sidebar_quote_content = document.querySelector('.sidebar-quote-content');
-        var sidebar_quote_from = document.querySelector('.sidebar-quote-from');
-        sidebar_quote_content.innerHTML = data.Content;
-        if(data.Author == 'unknown' && data.Source == 'unknown') {
-            sidebar_quote_from.setAttribute('visibility', 'hidden');
-        } else {
-            var from_text = "—";
-            if(data.Author != 'unknown') {
-                from_text += ' ' + data.Author;
-            }
-            if(data.Source != 'unknown') {
-                from_text += '《' + data.Source + '》';
-            }
-            sidebar_quote_from.innerHTML = from_text;
-        }
-    })
-    .catch(console.error)
+  fetch('https://api.eatrice.top')
+  .then(response => response.json())
+  .then(data => {
+    var sidebar_quote_content = document.querySelector('.sidebar-quote-content');
+    var sidebar_quote_from = document.querySelector('.sidebar-quote-from');
+    sidebar_quote_content.innerHTML = data.Content;
+    if(data.Author == 'unknown' && data.Source == 'unknown') {
+      sidebar_quote_from.setAttribute('visibility', 'hidden');
+    } else {
+      var from_text = "—";
+      if(data.Author != 'unknown') {
+        from_text += ' ' + data.Author;
+      }
+      if(data.Source != 'unknown') {
+        from_text += '《' + data.Source + '》';
+      }
+      sidebar_quote_from.innerHTML = from_text;
+    }
+  })
+  .catch(console.error)
 </script>
 {{- end -}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
