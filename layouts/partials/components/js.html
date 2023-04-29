@@ -1,20 +1,28 @@
+{{- $theme := .Site.Params.daisy -}}
+
 {{/* fancybox */}}
-{{- if .Site.Params.daisy.fancybox.enable -}}{{ partial "third-party/fancybox.html" . }}{{ end }}
-{{/* daisy.js */}}
+{{- if $theme.fancybox.enable }}{{ partial "third-party/fancybox.html" . }}{{ end -}}
+
+{{- /* daisy.js */ -}}
 {{- $daisy := resources.Get "js/daisy.js" | minify | fingerprint -}}
 <script src="{{ $daisy.RelPermalink }}" integrity="{{ $daisy.Data.Integrity }}"></script>
-{{/* daisy.each.js */}}
+
+{{- /* daisy.each.js */ -}}
 {{- $each := resources.Get "js/daisy.each.js" | minify | fingerprint -}}
 <script data-pjax src="{{ $each.RelPermalink }}" integrity="{{ $each.Data.Integrity  }}"></script>
-{{/* pjax.js */}}
+
+{{- /* pjax.js */ -}}
 {{- if .Site.Params.daisy.pjax.enable -}}
-<script src="/js/pjax.js"></script>
-{{- $pjax := resources.Get "js/pjax.js" | minify | fingerprint -}}
-<script src="{{ $pjax.RelPermalink }}" integrity="{{ $pjax.Data.Integrity }}"></script>
-{{- $calendar := resources.Get "js/calendar.js" | minify | fingerprint -}}
-<script src="{{ $calendar.RelPermalink }}" integrity="{{ $calendar.Data.Integrity }}"></script>
+  <script src="/js/pjax.js"></script> {{- /* static/js/pjax.js */ -}}
+  {{- $pjax := resources.Get "js/pjax.js" | minify | fingerprint -}} {{- /* assets/js/pjax.js */ -}}
+  <script src="{{ $pjax.RelPermalink }}" integrity="{{ $pjax.Data.Integrity }}"></script>
 {{- end -}}
-{{- $theme := .Site.Params.daisy -}}
+
+{{- if $theme.calendar.enable -}}
+  {{- $calendar := resources.Get "js/calendar.js" | minify | fingerprint -}}
+  <script src="{{ $calendar.RelPermalink }}" integrity="{{ $calendar.Data.Integrity }}"></script>
+{{- end -}}
+
 {{- if eq $theme.quote.enable "jinrishici" -}}
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script>
@@ -76,4 +84,3 @@
     .catch(console.error)
 </script>
 {{- end -}}
-{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

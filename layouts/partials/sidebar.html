@@ -48,14 +48,12 @@
           <p class="site-overview-name">Series</p>
         </a>
       </div>
-      {{- partial "components/calendar" . -}}
+      {{- if $theme.calendar.enable -}}
+        {{- partial "components/calendar" . -}}
+      {{- end -}}
       <div class="sidebar-quote collapsed">
-      {{- if eq $theme.quote.enable "jinrishici" -}}
-        <p class="sidebar-quote-content" id="SidebarQuoteContent">主人不来过夜半，闲敲棋子落灯花。</p>
-        <p class="sidebar-quote-from" id="SidebarQuoteFrom">宋代·赵师秀《约客》</p>
-      {{- else if eq $theme.quote.enable "rainbow" -}}
-        <p class="sidebar-quote-content">🌈 获取中...</p>
-        <p class="rainbow-from"></p>
+      {{- if $theme.quote.enable -}}
+        {{- partial "third-party/quote" . -}}
       {{- end -}}
       </div>
       {{- if $theme.music.enable -}}
