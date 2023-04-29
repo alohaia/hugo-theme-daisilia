@@ -8,7 +8,7 @@ import json
 rootdir = 'content' + os.sep
 refs = {}
 ref_pattern = r'{{(<\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*>|%\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*%)}}'
-heading_pattern = r'^(#{1,6})\s+(.*?)(\s*{.*})?$'
+heading_pattern = r'^(#{1,6})\s+(.*?)\s*({.*?#(\S*).*?}|{.*})?$'
 ext_pattern = r'(\.md|/index\.md|/_index\.md)$'
 check = ('-c' in sys.argv) or ('--check' in sys.argv)
 format = ('-f' in sys.argv) or ('--format' in sys.argv)
@@ -24,7 +24,7 @@ def check_anchor(file, anchor):
 
   return is_contained
 
-# return (file, anchor)
+# return file, anchor
 #   - file: file path like 'series/病原生物学/_index.md'
 #   - anchor: anchor, '' for empty heaing and top
 def ref2pos(ref, reldir, path, linenr):
@@ -53,7 +53,7 @@ def ref2pos(ref, reldir, path, linenr):
           if check and anchor and (not check_anchor(full_path, anchor)):
             print('[Warning] {path}:{linenr}:"{orig}", "{anchor}" not found in "{file}"'.format(orig=ref, file=full_path, anchor=anchor, path=path, linenr=linenr))
 
-  return (file[len(rootdir):], anchor)
+  return file[len(rootdir):], anchor
 
 # get refs in file specified by path
 def get_refs(path):
@@ -88,7 +88,7 @@ def get_refs(path):
     # try updating current heaing
     heading_results = re.search(heading_pattern, line)
     if heading_results:
-      current_heading = heading_results[2]
+      current_heading = heading_results[4] if heading_results[4] else heading_results[2]
       if not ref_in_heading:
         continue
 
@@ -103,7 +103,7 @@ def get_refs(path):
           exit('[ERROR] fail to get parent directory of path "{path}"'.format(path = path))
 
         # convert hugo ref to standard (path, anchor)
-        (path, anchor) = ref2pos(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8], parent_dir, path, linenr)
+        path, anchor = ref2pos(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8], parent_dir, path, linenr)
 
         # ensure refs[path][anchor] exists
         if path not in refs:
