@@ -7,8 +7,8 @@ import json
 
 rootdir = 'content' + os.sep
 refs = {}
-ref_pattern = r'{{(<\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*>|%\s*(rel)?ref\s+("(.+?)"|(\S+?))\s*%)}}'
-heading_pattern = r'^(#{1,6})\s+(.*?)\s*({.*?#(\S*).*?}|{.*})?$'
+ref_pattern = r'{{(?:<\s*(?:rel)?ref\s+(?:"(.+?)"|(\S+?))\s*>|%\s*(?:rel)?ref\s+(?:"(.+?)"|(\S+?))\s*%)}}'
+heading_pattern = r'^(#{1,6})\s+(?P<title>.*?)\s*({(.*#(\S*)|(?:.*\s|)id="(\S*)")*(.*#(?P<id1>\S*)|(?:.*\s|)id="(?P<id2>\S*)").*}|{.*})?$'
 ext_pattern = r'(\.md|/index\.md|/_index\.md)$'
 check = ('-c' in sys.argv) or ('--check' in sys.argv)
 format = ('-f' in sys.argv) or ('--format' in sys.argv)
@@ -88,7 +88,10 @@ def get_refs(path):
     # try updating current heaing
     heading_results = re.search(heading_pattern, line)
     if heading_results:
-      current_heading = heading_results[4] if heading_results[4] else heading_results[2]
+      if (heading_results['id1'] or heading_results['id2']):
+        current_heading = heading_results['id1'] or heading_results['id2']
+      else:
+        current_heading = heading_results['title']
       if not ref_in_heading:
         continue
 
@@ -103,28 +106,28 @@ def get_refs(path):
           exit('[ERROR] fail to get parent directory of path "{path}"'.format(path = path))
 
         # convert hugo ref to standard (path, anchor)
-        path, anchor = ref2pos(ref_result[3] or ref_result[4] or ref_result[7] or ref_result[8], parent_dir, path, linenr)
+        p, a = ref2pos(ref_result[0] or ref_result[1] or ref_result[2] or ref_result[3], parent_dir, path, linenr)
 
-        # ensure refs[path][anchor] exists
-        if path not in refs:
-          refs[path] = {
-            'file_ref': '/' + re.sub(ext_pattern, '', path),
+        # ensure refs[p][a] exists
+        if p not in refs:
+          refs[p] = {
+            'file_ref': '/' + re.sub(ext_pattern, '', p),
             'count': 0,
-            'link_here': { anchor: {} }
+            'link_here': { a: {} }
           }
-        elif anchor not in refs[path]['link_here']:
-          refs[path]['link_here'][anchor] = {}
+        elif a not in refs[p]['link_here']:
+          refs[p]['link_here'][a] = {}
 
-        if path == '':
-          print('[Warning] empty filename: "{filename}" in "{path}"'.format(filename = ref_result[0], path = path))
+        if p == '':
+          print('[Warning] get empty source filename: line {linenr} in "{file}: {line}"'.format(linenr = linenr, file = path, line = line))
 
         # add backlink and count
         backlink = '/' + file_from + ('#'+current_heading if current_heading!='' else '')
-        if backlink in refs[path]['link_here'][anchor]:
-          refs[path]['link_here'][anchor][backlink] += 1
+        if backlink in refs[p]['link_here'][a]:
+          refs[p]['link_here'][a][backlink] += 1
         else:
-          refs[path]['link_here'][anchor][backlink] = 1
-        refs[path]['count'] += 1
+          refs[p]['link_here'][a][backlink] = 1
+        refs[p]['count'] += 1
 
   linenr = 0
 
