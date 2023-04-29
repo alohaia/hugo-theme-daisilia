@@ -8,6 +8,10 @@
 - A variety of [shortcodes](#shortcodes)
 - Useful widgets, see the [demo](https://daisilia.com) for more details.
 
+## Config
+
+Note that enabling `music` will cause a small problem for non-English writers: the anchors with non-English id will not be navigated correctly.
+
 ## Shortcodes
 
 ### `bilibili` & `youtube`

@@ -45,6 +45,15 @@ $("sidebar-content").ready(function(){
     window.onscroll = function() {
         updateScrollPercent();
     }
+
+    // let anchors = document.querySelectorAll('a[href^="#"]');
+    // for(let anchor of anchors){
+    //     anchor.onclick = function(e) {
+    //         console.log(anchor.getAttribute("href"));
+    //         location.hash = anchor.getAttribute("href");
+    //         e.preventDefault();
+    //     }
+    // }
 })
 
 $(".series-list").ready(function(){
