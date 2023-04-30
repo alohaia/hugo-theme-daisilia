@@ -1,6 +1,5 @@
 var pjax;
-var loadingBar = document.querySelector(".loading-track");
-var progress = document.querySelector(".loading-progress");
+const siteRoot = document.getElementById("SiteRoot");
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Pjax 开始时执行的函数
 document.addEventListener("pjax:send", function () {
-    loadingBar.classList.add("loading");
+    siteRoot.classList.add("pjax-loading");
 
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.unobserve(heading);
@@ -28,7 +27,9 @@ document.addEventListener("pjax:send", function () {
 
 // Pjax 完成之后执行的函数
 document.addEventListener("pjax:complete", function () {
-    loadingBar.classList.remove("loading");
+    siteRoot.classList.remove("pjax-loading");
+
+    // update giscus
     if(document.querySelector('iframe.giscus-frame')) {
         document.querySelector('iframe.giscus-frame').contentWindow.postMessage({
           giscus: {
@@ -38,6 +39,8 @@ document.addEventListener("pjax:complete", function () {
           }
         }, 'https://giscus.app')
     }
+
+    // observe headings
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.observe(heading);
     });

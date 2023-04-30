@@ -48,8 +48,8 @@
     --z-series: 200;
     --z-sidebar: 300;
     --z-search: 400;
-    --z-loadingbar: 500;
-    --z-fullscreen: 9999;
+    --z-fullscreen: 999;
+    --z-loadingbar: 9999;
 }
 
 html {
