@@ -35,9 +35,6 @@
 
 .tag-cloud.side {
     min-width: 250px;
-    position: sticky;
-    top: 5px;
-    max-height: calc(60vh - 20px - var(--header-height));
     overflow: auto;
     border: 2px dashed var(--gray);
     margin: 5px;
@@ -45,7 +42,15 @@
 }
 @media (min-width: 751px) {
     .tag-cloud.side {
+        position: sticky;
+        top: 5px;
         max-width: 350px;
+        max-height: calc(100vh - 20px - var(--header-height));
+    }
+}
+@media (max-width: 750px) {
+    .tag-cloud.side {
+        max-height: calc(60vh - 20px - var(--header-height));
     }
 }
 

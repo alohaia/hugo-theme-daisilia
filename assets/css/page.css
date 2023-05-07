@@ -405,7 +405,13 @@ h6.heading::before {
     color: var(--gray-deep);
     word-break: break-all;
 }
-.heading-alias::before { content: "·" }
+.heading-alias:hover {
+    color: var(--black);
+}
+.heading-alias::before {
+    content: "·";
+    color: var(--gray-deep);
+}
 
 /* kbd */
 kbd {
@@ -761,27 +767,15 @@ dl.indent dt::after {
 
 /* noted text */
 /* available classes: inline-note, exam */
-@media (max-width: 1200px) {
-    .note {
-        font-weight: bold;
-    }
-    .note::before {
-        content: "（";
-    }
-    .note::after {
-        content: "）";
-    }
+.note {
+    font-weight: bold;
+    line-break: anywhere;
 }
-@media (min-width: 1201px) {
-    /* not inline-note */
-    .note:note(.inline-note) {
-        float: right;
-        font-weight: bold;
-        max-width: 200px;
-        line-break: anywhere;
-        height: 0;
-        transform: translate(100%, 0);
-    }
+.note::before {
+    content: "（";
+}
+.note::after {
+    content: "）";
 }
 .noted {
     text-decoration: underline;
@@ -795,6 +789,20 @@ dl.indent dt::after {
     text-decoration: underline;
     text-decoration-style: wavy;
     text-decoration-color: var(--orange);
+}
+@media (min-width: 1350px) {
+    .noted.exam .note {
+        float: right;
+        max-width: 200px;
+        height: 0;
+        transform: translate(100%, 0);
+    }
+    .noted.exam .note::before {
+        content: none;
+    }
+    .noted.exam .note::after {
+        content: none;
+    }
 }
 
 /* sense-group */
