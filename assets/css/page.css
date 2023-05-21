@@ -302,6 +302,14 @@ table .table-cell.left {
 code * {
     font-family: var(--font-code);
 }
+code:not(pre code) { /* inline code */
+    font-family: var(--font-code);
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: var(--inline-code-background);
+    border-left: 5px solid var(--inline-code-background);
+    border-right: 5px solid var(--inline-code-background);
+}
 pre:not(.highlight pre),
 .highlight {
     margin: 10px 0;
@@ -314,13 +322,6 @@ pre:not(.highlight pre),
 }
 .highlight pre {
     margin: 0;
-}
-code:not(pre code) { /* inline block */
-    margin-top: 10px;
-    border-radius: 4px;
-    background-color: var(--inline-code-background);
-    border-left: 5px solid var(--inline-code-background);
-    border-right: 5px solid var(--inline-code-background);
 }
 .highlight td:first-child {
     user-select: none;
