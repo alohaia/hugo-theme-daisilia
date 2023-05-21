@@ -2,7 +2,7 @@
 {{- $caption := default ""    (.Get "caption")     -}}
 {{- $attr    := default ""    (.Get "attrution")   -}}
 {{- $id      := .Get "id" -}}
-{{- $ls      := default false (.Get "left_sticky") -}}
+{{- $ls      := default false (.Get "left-sticky") -}}
 {{- $crossrefs := false -}}
 {{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
   {{- $crossrefs = true -}}

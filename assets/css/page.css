@@ -951,17 +951,9 @@ blockquote a[target=_blank].cite::after {
 blockquote .quote-content, blockquote .quote-from, blockquote p {
     margin: 0;
 }
-blockquote.float-right {
-    max-width: 50%;
-    float: right;
-}
-blockquote.float-left {
-    max-width: 50%;
-    float: right;
-}
-blockquote.center .quote-content {
-    text-align: center;
-}
+blockquote.align-center .quote-content { text-align: center }
+blockquote.align-left .quote-content { text-align: left }
+blockquote.align-right .quote-content { text-align: right }
 blockquote .quote-from {
     text-align: right;
 }
