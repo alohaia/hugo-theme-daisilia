@@ -14,22 +14,5 @@ Note that enabling `music` will cause a small problem for non-English writers: t
 
 ## Shortcodes
 
-### `bilibili` & `youtube`
+[中文文档](https://daisilia.com/projects/daisilia-主题/)
 
-### `figure`
-
-### `hdt`(hidden text)
-
-### `hzl`(horizontal list)
-
-### `sa`(see also)
-
-### `tab`
-
-## Gallary
-
-![image](https://user-images.githubusercontent.com/36324537/151486512-43da3cef-ffa5-44b2-a9f0-b0a78c1a5ef1.png)
-
-![image](https://user-images.githubusercontent.com/36324537/151486576-6c56b7e4-5cad-471e-ab60-eb12dc0673e4.png)
-
-![image](https://user-images.githubusercontent.com/36324537/151486622-820888a3-ca22-426b-86db-5f136cb9e377.png)
