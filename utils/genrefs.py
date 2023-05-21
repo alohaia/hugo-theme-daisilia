@@ -9,7 +9,7 @@ rootdir = 'content' + os.sep
 refs = {}
 ref_pattern = r'{{(?:<\s*(?:rel)?ref\s+(?:"(.+?)"|(\S+?))\s*>|%\s*(?:rel)?ref\s+(?:"(.+?)"|(\S+?))\s*%)}}'
 heading_pattern = r'^(#{1,6})\s+(?P<title>.*?)\s*({(.*#(\S*)|(?:.*\s|)id="(\S*)")*(.*#(?P<id1>\S*)|(?:.*\s|)id="(?P<id2>\S*)").*}|{.*})?$'
-ext_pattern = r'(\.md|/index\.md|/_index\.md)$'
+ext_pattern = r'(\.md|/?index\.md|/?_index\.md)$'
 check = ('-c' in sys.argv) or ('--check' in sys.argv)
 format = ('-f' in sys.argv) or ('--format' in sys.argv)
 ref_in_heading = ('--ref-in-heading' in sys.argv)
