@@ -48,16 +48,16 @@
           <p class="site-overview-name">Series</p>
         </a>
       </div>
-      {{- if $theme.calendar.enable -}}
-        {{- partial "components/calendar" . -}}
-      {{- end -}}
-      <div class="sidebar-quote collapsed">
       {{- if $theme.quote.enable -}}
-        {{- partial "third-party/quote" . -}}
+        <div class="sidebar-quote collapsed">
+          {{- partial "third-party/quote" . -}}
+        </div>
       {{- end -}}
-      </div>
       {{- if $theme.music.enable -}}
       <div class="sidebar-music">{{ partial "third-party/music" . }}</div>
+      {{- end -}}
+      {{- if $theme.calendar.enable -}}
+        {{- partial "components/calendar" . -}}
       {{- end -}}
       {{- with $theme.links -}}
       <div class="sidebar-links">
