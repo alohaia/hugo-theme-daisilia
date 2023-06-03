@@ -146,3 +146,4 @@ if __name__ == '__main__':
   else:
     with open('data/refs.json', 'w', encoding='utf-8') as f:
       json.dump(refs, f, ensure_ascii=False)
+  print('=> cross reference data is saved in data/refs.json')

@@ -8,12 +8,13 @@ diary_root = 'content' + os.sep + 'diary' + os.sep
 diaries = {}
 
 if __name__ == '__main__':
+  print('=> generate diariy list')
   for subdir, dirs, files in os.walk(diary_root):
     for file in files:
       fullpath = subdir + os.sep + file
-      print(fullpath)
       matches = re.match(re.escape(diary_root)+r"(\d*)/(\d*)/(\d*)(\.md|/index\.md)", fullpath)
       if matches:
+        print('* ' + fullpath)
         if matches[1] not in diaries:
           diaries[matches[1]] = {}
         if matches[2] not in diaries[matches[1]]:

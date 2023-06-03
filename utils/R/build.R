@@ -1,14 +1,16 @@
 #! /usr/bin/env Rscript
 
+message("=> knit Rmarkdown files")
+
 build_one <- function(io) {
     # if output is not older than input, skip the compilation
+    message("* knitting ", io[1])
     if (!blogdown:::require_rebuild(io[2], io[1])
         && !("--force" %in% commandArgs())) {
-        cat(sprintf("%s up to date.\n", io[2]))
+        cat(sprintf("  %s up to date.\n", io[2]))
         return()
     }
 
-    message("* knitting ", io[1])
     if (xfun::Rscript(shQuote(c("utils/R/build_one.R", io))) != 0) {
         unlink(io[2])
         stop("Failed to compile ", io[1], " to ", io[2])
