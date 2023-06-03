@@ -57,20 +57,10 @@ class Calendar {
     const day_container = document.querySelector(".calendar-days")
     var day_els = ""
     const m_fmt = date.month < 10 ? "0" + date.month : date.month
-    if (date.year == today.year && date.month == today.month) {
-      for (let d = 1; d <= month_days.dayCount; d++) {
+    for (let d = 1; d <= month_days.dayCount; d++) {
         const d_fmt = d < 10 ? "0" + d : d
-        if (d == date.date ) {
-          day_els += `<span class="today">${ diaries_days[d] ? '<a href="/diary/'+date.year+'/'+m_fmt+'/'+d_fmt+'">' : '' }${d_fmt}${ diaries_days[d] ? '</a>' : '' }</span>`
-        } else {
-          day_els += `<span>${ diaries_days[d] ? '<a href="/diary/'+date.year+'/'+m_fmt+'/'+d_fmt+'">' : '' }${d_fmt}${ diaries_days[d] ? '</a>' : '' }</span>`
-        }
-      }
-    } else {
-      for (let d = 1; d <= month_days.dayCount; d++) {
-        const d_fmt = d < 10 ? "0" + d : d
-        day_els += `<span>${ diaries_days[d] ? '<a href="/diary/'+date.year+'/'+m_fmt+'/'+d_fmt+'">' : '' }${d_fmt}${ diaries_days[d] ? '</a>' : '' }</span>`
-      }
+        const is_today = date.year == today.year && date.month == today.month && d == date.date
+        day_els += `<span${ is_today ? ' class="today"' : '' }>${ diaries_days[d_fmt] ? '<a href="/diary/'+date.year+'/'+m_fmt+'/'+d_fmt+'">' : '' }${d_fmt}${ diaries_days[d_fmt] ? '</a>' : '' }</span>`
     }
     day_container.innerHTML = '<span class="empty"></span>'.repeat(month_days.firstDay) + day_els
 

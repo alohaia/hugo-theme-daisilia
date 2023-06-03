@@ -1,13 +1,13 @@
 {{- define "title" -}}
   {{- if .Title -}}
-    <title>{{ print .Title " " (time.Format "2006-01-02" .Date) " | " .Site.Title }}</title>
+    <title>{{ print "Diary " .Title " | " .Site.Title }}</title>
   {{- else -}}
     <title>{{ print (time.Format "2006-01-02" .Date) " | " .Site.Title }}</title>
   {{- end -}}
 {{- end -}}
 
 {{- define "main" -}}
-  <h1 class="article-title single-title">{{ time.Format "2006-01-02" .Date | title }} {{ .Title }}</h1>
+  <h1 class="article-title single-title">{{ .Title }}</h1>
   <div class="article-metadata">{{ partial "components/metadata.html" . }}</div>
   {{- partial "components/top-refs" . -}}
   {{- with .Content -}}

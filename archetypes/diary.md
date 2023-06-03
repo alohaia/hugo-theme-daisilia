@@ -1,11 +1,9 @@
 ---
-title: 无题
+title: {{ .Date | time.Format "2006-01-02" }}
 date: {{ .Date }}
-lastmod: 2022-11-28T16:53:08+08:00
+lastmod: {{ .Date }}
 draft: true
 comments: true
 math: false
-tags:
-    - TODO
 ---
 

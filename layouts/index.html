@@ -12,29 +12,20 @@
       {{- . -}}
     </div>
   {{- end -}}
-  {{- with .Pages -}}
-    {{- if where . "Kind" "section" -}}
-    <div class="root-sections">
-      {{- range where . "Kind" "section" -}}
-      <div class="root-section">
-        <h4 class="root-section-title">
-          <!-- <i class="fa-solid fa-folder{{ if .Pages }}-open{{ end }}"></i> -->
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h4>
-        {{- if .Pages -}}
-        <div class="root-section-childs">
-          {{- range $i,$p := first 5 .Pages -}}
-            {{- if ne $i 0 }}，{{ end }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          {{- end -}}
-          {{- if gt (len .Pages) 5 }}<span> ……</span>{{ end -}}
-        </div>
-        {{- end -}}
-        {{- partial "components/summary" . -}}
-      </div>
-      {{- end -}}
+  {{- with .Sections -}}
+    {{- partial "components/section-list" . -}}
+  {{- end -}}
+  <div class="most-referenced">
+  {{- if .Site.Data.refs -}}
+    {{- range first 10 (sort .Site.Data.refs "count" "desc") -}}
+      {{- $page := site.GetPage (index . "file_ref") -}}
+    <div class="page-list-item {{ $page.Kind }}">
+      <h1 class="page-title article-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h1>
+      <div class="page-metadata article-metadata">{{ partial "components/metadata" $page }}</div>
+      {{- partial "components/summary" $page -}}
     </div>
     {{- end -}}
   {{- end -}}
-  {{- partial "components/most-referenced" . -}}
+  </div>
 {{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

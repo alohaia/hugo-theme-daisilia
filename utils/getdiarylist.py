@@ -11,6 +11,7 @@ if __name__ == '__main__':
   for subdir, dirs, files in os.walk(diary_root):
     for file in files:
       fullpath = subdir + os.sep + file
+      print(fullpath)
       matches = re.match(re.escape(diary_root)+r"(\d*)/(\d*)/(\d*)(\.md|/index\.md)", fullpath)
       if matches:
         if matches[1] not in diaries:

@@ -1,13 +1,13 @@
 <ul class="meta-section">
   {{- with .Date -}}
   <li class="meta-item">
-      <i class="fas fa-calendar"></i>
+      <i class="fas fa-upload"></i>
       <span class="meta-item-text">Published on</span>
       <span class="meta-item-value">{{ .Format "2006-01-02" }}</span>
   </li>
   {{- end -}}
   <li class="meta-item">
-    <i class="fas fa-clock"></i>
+    <i class="fas fa-file-pen"></i>
     <span class="meta-item-text">Modified on</span>
     <span class="meta-item-value">{{ .Lastmod.Format "2006-01-02" }}</span>
   </li>

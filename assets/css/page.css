@@ -78,8 +78,7 @@
 
 /* link */
 .pagination .page-item a,
-.root-section-title a,
-.root-section-childs a,
+.section-list a,
 .cross-ref,
 .article-title a,
 .article-metadata a,
@@ -95,8 +94,7 @@
 .article-metadata a {
     text-decoration: none;
 }
-.root-section-title a:hover,
-.root-section-childs a:hover,
+.section-list a:hover,
 .cross-ref:hover,
 .article-title a:hover,
 .article-metadata a:hover,
@@ -630,6 +628,7 @@ dl.indent dt::after {
 
 /* page-list */
 .article-content+.page-list::before,
+.diary-list::before,
 .most-referenced::before {
     content: "Child Pages";
     color: var(--gray);
@@ -642,6 +641,7 @@ dl.indent dt::after {
     font-size: 24px;
 }
 .most-referenced::before { content: "Most Referenced" } /* most referenced */
+.diary-list::before { content: "Diary List" }
 .page-list-item {
     margin-top: 30px;
 }
@@ -709,8 +709,8 @@ dl.indent dt::after {
     color: var(--gray-deep);
 }
 
-/* root sections and pages in home page */
-.root-sections {
+/* sections list */
+.section-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: row;
@@ -718,16 +718,16 @@ dl.indent dt::after {
     margin: 15px 0;
     font-family: var(--font-sans);
 }
-.root-section {
+.section-list-item {
     border: 2px solid var(--gray-light);
     border-radius: 10px;
     padding: 10px 10px;
 }
-.root-section-title {
+.section-title {
     font-size: 1.125em;
     margin: 0 0 15px;
 }
-.root-section-childs::before {
+.section-childs::before {
     content: "\f802";
     font-family: "font awesome 6 free";
     font-size: 14px;
