@@ -6,10 +6,10 @@
 {{- end -}}
 <div class="page-nav">
   {{- with .Prev -}}
-  <a class="page-nav-prev" href="{{ .Permalink }}"><i class="fa fa-chevron-left"></i> {{ .Title }}</a>
+  <a class="page-nav-prev" href="{{ .RelPermalink }}"><i class="fa fa-chevron-left"></i> {{ .Title }}</a>
   {{- end -}}
   {{- with .Next -}}
-  <a class="page-nav-next" href="{{ .Permalink }}">{{ .Title }} <i class="fa fa-chevron-right"></i></a>
+  <a class="page-nav-next" href="{{ .RelPermalink }}">{{ .Title }} <i class="fa fa-chevron-right"></i></a>
   {{- end -}}
 </div>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
