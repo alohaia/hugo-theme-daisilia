@@ -47,18 +47,22 @@
     content.innerText = content_part;
     from.innerHTML =
       `<span class="author">${result.data.origin.dynasty}·${result.data.origin.author}</span>`
-      + `<span class="title">《${result.data.origin.title}》</span>`
-    var prefix = ''
-    var reg = /^([^，。！？]{5}[，。！？][^，。！？]{5}[，。！？]|[^，。！？]{7}[，。！？][^，。！？]{7}[，。！？])+$/g
+      + `<span class="title">《${result.data.origin.title}》</span>`;
+    var prefix = '';
+    var reg = /^(([^，。！？]{5}[，。！？]){2}|([^，。！？]{7}[，。！？]){2})+$/g;
+    var word_count = 0;
     result.data.origin.content.forEach((line) => {
       if (!line.match(reg)) {
         is_poem = false;
+      } else if (line.match(reg)[0].length + 1 != word_count && word_count != 0) {
+        is_poem = false;
+        word_count = line.match(reg)[0].length + 1
       }
     })
     if (is_poem) {
       content.classList.add("poem");
     } else {
-      prefix = "&nbsp".repeat(8)
+      prefix = "&nbsp".repeat(8);
     }
     content_full = prefix + result.data.origin.content.join('<br>'+prefix);
     content.onclick = toggleFull;
