@@ -6,5 +6,5 @@
     {{- $sep = . -}}
   {{- end -}}
 {{- end -}}
-<span class="inline-list"{{ with .Get "start" }} style="counter-set: hzlistCounter {{ sub . 1 }};"{{ end }}>{{- range (split .Inner $sep) -}}{{ if hasPrefix . "_" }}<span class="inline-list-conjunction">{{ slicestr . 1 }}</span>{{ else }}<span class="inline-list-item">{{ . | markdownify }}</span>{{- end -}}{{- end -}}</span>
+<span class="inline-list"{{ with .Get "start" }} style="counter-set: hzlistCounter {{ sub . 1 }};"{{ end }}>{{- range $i,$e := (split .Inner $sep) -}}{{ if hasPrefix $e "_" }}<span class="inline-list-conjunction">{{ slicestr $e 1 }}</span>{{ else }}{{ if and ($.Get "keep") $i }}{{ $sep }}{{ end }}<span class="inline-list-item">{{ $e | markdownify }}</span>{{- end -}}{{- end -}}</span>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
