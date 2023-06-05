@@ -1095,6 +1095,11 @@ sub {
     padding: 0 2px 0 1px;
 }
 
+/* ul, ol */
+.article-content ol, .article-content ul {
+    padding-inline-start: 25px;
+}
+
 /* custom */
 .heading.medicine::after {
     content: "\f484";
