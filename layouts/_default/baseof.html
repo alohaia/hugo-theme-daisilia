@@ -21,6 +21,12 @@
       <div class="site-content" data-pjax id="SiteContent">
         {{- block "main" . }}{{ end -}}
         {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}
+        {{- if .Page.Store.Get "hasMermaid" }}
+          <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+          </script>
+        {{- end }}
       </div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
       <div class="site-right" data-pjax>{{ block "right" . }}{{ end }}</div>
