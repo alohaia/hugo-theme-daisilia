@@ -918,6 +918,11 @@ blockquote {
     padding: 10px 25px;
     background-color: var(--gray-light);
     border-radius: 4px;
+    font-family: var(--font-italic);
+    font-size: 20px;
+}
+blockquote code {
+    font-family: var(--font-italic);
 }
 blockquote:before {
     color: var(--gray);
@@ -940,9 +945,6 @@ blockquote::after {
     right: -2px;
     bottom: 15px;
     width: 0;
-}
-blockquote, blockquote code {
-    font-family: var(--font-italic);
 }
 blockquote a.cite {
     text-decoration: none;
