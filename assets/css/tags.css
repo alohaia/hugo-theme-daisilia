@@ -45,12 +45,12 @@
         position: sticky;
         top: 5px;
         max-width: 350px;
-        max-height: calc(100vh - 20px - var(--header-height));
+        max-height: max(300px, calc(100vh - 20px - var(--header-height)));
     }
 }
 @media (max-width: 750px) {
     .tag-cloud.side {
-        max-height: calc(60vh - 20px - var(--header-height));
+        max-height: max(300px, calc(60vh - 20px - var(--header-height)));
     }
 }
 

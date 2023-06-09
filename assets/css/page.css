@@ -827,7 +827,11 @@ dl.indent dt::after {
     margin-top: -11px;
 }
 .tab-sum { padding: 5px 10px }
-.tab-content { padding: 15px }
+.tab-content {
+    padding: 15px;
+    max-height: max(250px, 50vh);
+    overflow: auto;
+}
 .tab-content>*:last-child:not(.tab) { margin-bottom: 0 }
 .tab-content>*:first-child:not(.tab) { margin-top: 0 }
 /* for details */
