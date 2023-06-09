@@ -27,7 +27,7 @@
     </li>
   {{- end -}}
 </ul>
-{{- if or .Params.tags .Params.categories -}}
+{{- if or .Params.tags .Params.categories | or .Parent -}}
   <ul class="meta-section">
     {{- with .Params.tags -}}
       <li class="meta-item">
