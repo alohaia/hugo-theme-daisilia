@@ -9,7 +9,7 @@
     {{- $src = print .Page.RelPermalink $src -}}
 {{- end -}}
 <figure
-  {{- with .Get "class" }} class="{{ . }}"{{ end -}}
+  {{- with or (.Get "class") (.Get "style") }} class="{{ . }}"{{ end -}}
   {{- with $id }} id="{{ . }}"{{ end -}}
   {{- with .Get "width" }} style="width:{{ . }}"{{ end -}}
 >
