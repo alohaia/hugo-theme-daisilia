@@ -189,6 +189,10 @@ figure.kroki .svg-wrap {
     max-width: -webkit-fill-available;
     height: auto !important;
 }
+/* mermaid */
+.mermaid {
+    margin: auto;
+}
 
 /* caption */
 figcaption, table caption {

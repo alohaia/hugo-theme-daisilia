@@ -1,4 +1,4 @@
-<div class="mermaid">
+<div class="mermaid"{{ with index (.Attributes.width) }} style="max-width: {{ . }}"{{ end }}>
   {{- .Inner | safeHTML }}
 </div>
 {{- .Page.Store.Set "hasMermaid" true }}
