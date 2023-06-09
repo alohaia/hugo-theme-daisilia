@@ -665,6 +665,21 @@ dl.indent dt::after {
     margin: auto;
     color: var(--gray-light);
 }
+.page-list-item.section .page-title::before {
+    content: "\f07c";
+    font-family: "font awesome 6 free";
+    font-weight: 900;
+    color: var(--gray-deep);
+    margin-right: 5px;
+}
+
+.page-list-item.page .page-title::before {
+    content: "\f15c";
+    font-family: "font awesome 6 free";
+    font-weight: 900;
+    color: var(--gray-deep);
+    margin-right: 5px;
+}
 
 /* card */
 .card-container {
