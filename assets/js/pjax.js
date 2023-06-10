@@ -44,4 +44,6 @@ document.addEventListener("pjax:complete", function () {
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.observe(heading);
     });
+
+    loadOrRefershThirdPartyScripts();
 });

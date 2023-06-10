@@ -1,3 +1,102 @@
+function loadScript(src, type = "text/javascript",async = true) {
+    var scriptEle = document.createElement('script');
+    scriptEle.src = src;
+    scriptEle.type = type;
+    scriptEle.async = async;
+    scriptEle.defer = true;
+
+    return new Promise((resolve, reject) => {
+        scriptEle.onload = e => resolve(e);
+        scriptEle.onerror = e => reject(e);
+        document.head.appendChild(scriptEle);
+    });
+
+}
+
+function MathJaxConfig() {
+    window.MathJax = {
+        loader: {
+            load: ['[tex]/mhchem'], // https://mhchem.github.io/MathJax-mhchem/
+            source: {
+                '[tex]/amsCd': '[tex]/amscd',
+                '[tex]/AMScd': '[tex]/amscd'
+            }
+        },
+        tex: {
+            inlineMath: {'[+]': [['$', '$']]},
+            displayMath: [
+                ["$$", "$$"],
+                ["\[\[", "\]\]"],
+            ],
+            packages: {'[+]': ['mhchem']},
+            tags: 'ams'
+        },
+        options: {
+            renderActions: {
+                findScript: [10, doc => {
+                    document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                        const display = !!node.type.match(/; *mode=display/);
+                        const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                        const text = document.createTextNode('');
+                        node.parentNode.replaceChild(text, node);
+                        math.start = {node: text, delim: '', n: 0};
+                        math.end = {node: text, delim: '', n: 0};
+                        doc.math.push(math);
+                    });
+                }, '', false],
+                insertedScript: [200, () => {
+                    document.querySelectorAll('mjx-container').forEach(node => {
+                        let target = node.parentNode;
+                        if (target.nodeName.toLowerCase() === 'li') {
+                            target.parentNode.classList.add('has-jax');
+                        }
+                    });
+                }, '', false]
+            }
+        }
+    };
+}
+
+function loadOrRefershThirdPartyScripts() {
+    // mermaid
+    if (document.getElementsByClassName("mermaid")[0]) {
+        if (window.mermaid) {
+            mermaid.run();
+        } else {
+            loadScript('https://cdn.jsdelivr.net/npm/mermaid@10.2.3/dist/mermaid.min.js')
+                .then(() => {
+                    mermaid.initialize({
+                        startOnLoad: false, // pjax:complete won't toggle startOnLoad
+                        theme: 'neutral',
+                        pie: {
+                            useMaxWidth: false
+                        }
+                    });
+                    mermaid.run();
+                })
+                .catch(e => {
+                    console.error("failed to load mermaid.min.js:", e)
+                });
+        }
+    }
+
+    // MathJax
+    if (document.getElementById("SiteContent").hasAttribute("mathjax")) {
+        if (window.MathJax) {
+            if (MathJax.typeset) {
+                MathJax.texReset();
+                MathJax.typeset();
+            }
+        } else {
+            MathJaxConfig();
+            loadScript('https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js')
+            .catch(e => {
+                console.error("failed to load tex-mml-chtml.js:", e);
+            });
+        }
+    }
+}
+
 function switchPannel(n){
     let navs = document.getElementsByClassName("sidebar-nav-item");
     let pannels = document.getElementsByClassName("sidebar-pannel");
@@ -89,11 +188,15 @@ const TOCOnscrollObserver = new IntersectionObserver(entries => {
         }
     });
 });
+
+// on DOMContentLoaded
 window.addEventListener('DOMContentLoaded', () => {
     // Track all sections that have an `id` applied
     document.querySelectorAll('.heading').forEach((section) => {
         TOCOnscrollObserver.observe(section);
     });
+
+    loadOrRefershThirdPartyScripts();
 });
 
 // https://css-tricks.com/how-to-animate-the-details-element-using-waapi/

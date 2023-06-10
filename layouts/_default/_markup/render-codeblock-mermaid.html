@@ -1,5 +1,4 @@
-<div class="mermaid"{{ with index (.Attributes.width) }} style="max-width: {{ . }}"{{ end }}>
+<pre class="mermaid"{{ with index (.Attributes.width) }} style="max-width: {{ . }}"{{ end }}>
   {{- .Inner | safeHTML }}
-</div>
-{{- .Page.Store.Set "hasMermaid" true }}
+</pre>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

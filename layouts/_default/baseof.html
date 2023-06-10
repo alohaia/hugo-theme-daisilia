@@ -18,15 +18,8 @@
     <div class="site-main" id="SiteMain">
       <div class="site-left" data-pjax>{{ block "left" . }}{{ end }}</div>
       <div class="site-message-list">{{- partial "message" . -}}</div>
-      <div class="site-content" data-pjax id="SiteContent">
+      <div class="site-content"{{ if .Params.math }} mathjax{{ end }} data-pjax id="SiteContent">
         {{- block "main" . }}{{ end -}}
-        {{- if or .Params.math .Params.mathjax -}}{{ partial "third-party/mathjax.html" . }}{{ end }}
-        {{- if .Page.Store.Get "hasMermaid" }}
-          <script src="/js/mermaid.min.js"></script>
-          <script>
-            mermaid.initialize({ startOnLoad: true, theme: 'neutral', pie: {'useMaxWidth': false} });
-          </script>
-        {{- end }}
       </div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
       <div class="site-right" data-pjax>{{ block "right" . }}{{ end }}</div>

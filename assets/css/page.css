@@ -193,6 +193,9 @@ figure.kroki .svg-wrap {
 .mermaid {
     margin: auto;
 }
+pre.mermaid:not([data-processed="true"]) {
+    max-width: initial !important;
+}
 
 /* caption */
 figcaption, table caption {
@@ -312,7 +315,7 @@ code:not(pre code) { /* inline code */
     border-left: 5px solid var(--inline-code-background);
     border-right: 5px solid var(--inline-code-background);
 }
-pre:not(.highlight pre),
+pre:not(.highlight pre):not([data-processed].mermaid),
 .highlight {
     margin: 10px 0;
     border: 8px solid var(--code-background);
