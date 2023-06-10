@@ -129,11 +129,24 @@ function toggleSidebar(force){
 }
 
 // generate numbers for lists
+function searchIndex(anchor) {
+    let heading = document.querySelector(".heading".concat(anchor));
+    if (heading && heading.hasAttribute("index")) {
+        return Number(heading.getAttribute("index"))
+    }
+    return 0;
+}
 function genUlNum(ulNode, nums = [0]){
     for(let i = 0; i < ulNode.childElementCount; i++){
         nums[nums.length-1] += 1;
         if(ulNode.children[i].childElementCount > 1) {
             genUlNum(ulNode.children[i].children[1], nums.concat(0));
+        }
+        if (ulNode.parentNode.id == "TableOfContents") {
+            let index = searchIndex(ulNode.children[i].children[0].getAttribute("href"));
+            if (index) {
+                nums[nums.length-1] = index;
+            }
         }
         ulNode.children[i].children[0].innerText = nums.join(".") + ". " + ulNode.children[i].children[0].innerText;
         if(i == ulNode.childElementCount){

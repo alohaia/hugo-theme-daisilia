@@ -5,7 +5,7 @@ $("sidebar-content").ready(function(){
         toc.classList.add("numbered");
         genUlNum(toc.children[0]);
     }
-    // add click events for nav items
+    // add click events for nav entries
     let navs = document.getElementsByClassName("sidebar-nav-item");
     let pannels = document.getElementsByClassName("sidebar-pannel");
     for(let i in navs) {
