@@ -68,8 +68,8 @@ function loadOrRefershThirdPartyScripts() {
                     mermaid.initialize({
                         startOnLoad: false, // pjax:complete won't toggle startOnLoad
                         theme: 'neutral',
-                        pie: {
-                            useMaxWidth: false
+                        flowchart: {
+                            useMaxWidth: true
                         }
                     });
                     mermaid.run();

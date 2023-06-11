@@ -190,10 +190,12 @@ figure.kroki .svg-wrap {
     height: auto !important;
 }
 /* mermaid */
-.mermaid {
+.mermaid[data-processed="true"] {
     margin: auto;
+    text-align: center;
+    overflow: auto;
 }
-pre.mermaid:not([data-processed="true"]) {
+.mermaid:not([data-processed="true"]) {
     max-width: initial !important;
 }
 
@@ -1051,7 +1053,7 @@ blockquote .quote-from {
     }
 }
 
-/* others */
+/* styled text */
 ins {
     text-decoration: none;
     border-bottom: 0.16em solid;
@@ -1063,6 +1065,15 @@ em {
     font-style: normal;
     font-family: var(--font-italic);
 }
+.heading em {
+    font-family: inherit;
+    color: var(--gray-deep);
+}
+.heading a:hover em {
+    color: var(--orange-deep);
+}
+
+/* mathjax */
 mjx-container {
     overflow-x: auto;
     overflow-y: hidden;
