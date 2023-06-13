@@ -23,7 +23,7 @@
 
   {{- $caption = printf "<caption class='caption'>%s%s%s</caption>"
     ($caption | markdownify)
-    (cond (ne $attr "") (printf "<p class=\"attrution tbl-attrution\">%s</p>" ($attr | markdownify)) "")
+    (cond (ne $attr "") (printf "<p class=\"attribution tbl-attribution\">%s</p>" ($attr | markdownify)) "")
     $refs_html
   -}}
 {{- end -}}
