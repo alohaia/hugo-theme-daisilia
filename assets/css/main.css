@@ -369,3 +369,9 @@ body.local-server {
 .hover-summary-content *:last-child {
     margin-bottom: 0;
 }
+
+@media (max-width: 750px) {
+    #HoverSummary {
+        display: none;
+    }
+}

@@ -83,8 +83,10 @@ document.querySelectorAll('details').forEach((el) => {
 // HoverSummary
 for (anchor of document.querySelectorAll("a.page")) {
     var timeOutId;
+    var lastHoverEl;
     anchor.addEventListener("mouseenter", function() {
-        clearTimeout(timeOutId);
+        if (lastHoverEl == this) { clearTimeout(timeOutId) };
+        lastHoverEl = this;
         timeOutId = setTimeout(()=>{
             var p = summaries[this.getAttribute("href").split("#")[0].toLowerCase()];
             summaryContentEl.innerHTML = `<h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div>`;
@@ -106,8 +108,9 @@ for (anchor of document.querySelectorAll("a.page")) {
             summaryContentEl.classList.remove("hide");
         }, 500);
     });
-    anchor.addEventListener("mouseleave", ()=>{
-        clearTimeout(timeOutId);
+    anchor.addEventListener("mouseleave", function() {
+        if (lastHoverEl == this) { clearTimeout(timeOutId) };
+        lastHoverEl = this;
         timeOutId = setTimeout(()=>{
             summaryContentEl.classList.add("hide");
         }, 500);
