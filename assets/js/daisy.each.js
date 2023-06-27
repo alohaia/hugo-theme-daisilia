@@ -92,6 +92,8 @@ for (anchor of document.querySelectorAll("a.page")) {
             var p = summaries[this.getAttribute("href").split("#")[0].toLowerCase()];
             summaryContentEl.innerHTML = `<div id="HoverSummaryInner"><h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div></div>`;
             const inner = document.getElementById("HoverSummaryInner");
+            // refresh pjax
+            window.pjax.refresh(inner);
 
             var anchorOffset = this.getBoundingClientRect();
             var x = e.clientX - anchorOffset.left;

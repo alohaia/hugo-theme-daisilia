@@ -25,7 +25,6 @@ document.addEventListener("pjax:send", function () {
     });
 
     summaryContentEl.classList.add("hide");
-    console.log("hide")
 });
 
 // Pjax 完成之后执行的函数
