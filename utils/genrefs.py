@@ -5,7 +5,7 @@ import sys
 import re
 import json
 
-rootdir = 'content' + os.sep
+rootdir = 'content/'
 refs = {}
 ref_pattern = r'{{(?:<\s*(?:rel)?ref\s+(?:"(.+?)"|(\S+?))\s*>|%\s*(?:rel)?ref\s+(?:"(.+?)"|(\S+?))\s*%)}}'
 heading_pattern = r'^(#{1,6})\s+(?P<title>.*?)\s*({(.*#(\S*)|(?:.*\s|)id="(\S*)")*(.*#(?P<id1>\S*)|(?:.*\s|)id="(?P<id2>\S*)").*}|{.*})?$'
@@ -38,8 +38,8 @@ def ref2pos(ref, reldir, path, linenr):
   if not file.startswith('/'):                              # relative path
     for subdir, _, files in os.walk(reldir):
       for f in files:
-        full_path = os.path.join(subdir, f)
-        if re.search('(' + re.escape(os.sep+file) + ')' + ext_pattern, full_path):
+        full_path = subdir + '/' + f
+        if re.search('(' + re.escape('/'+file) + ')' + ext_pattern, full_path):
           found_realtive = True
           file = full_path
           if check and anchor and (not check_anchor(full_path, anchor)):
@@ -47,7 +47,7 @@ def ref2pos(ref, reldir, path, linenr):
   if file.startswith('/') or found_realtive == False:       # absolute path
     for subdir, _, files in os.walk(rootdir):
       for f in files:
-        full_path = os.path.join(subdir, f)
+        full_path = subdir + '/' + f
         base = re.escape(rootdir) + ("" if file.startswith('/') else ".*") + "/" + re.escape(file)
         if re.search('(' + base + ')' + ext_pattern, full_path):
           file = full_path
@@ -100,7 +100,7 @@ def get_refs(path):
     ref_results = re.findall(ref_pattern, line)
     if ref_results:
       for ref_result in ref_results:
-        slice = re.match(r'(.*'+re.escape(os.sep)+')(.*)', path)
+        slice = re.match(r'(.*/)(.*)', path)
         if slice:
           parent_dir = slice[1]
         else:
@@ -137,7 +137,7 @@ if __name__ == '__main__':
   for subdir, dirs, files in os.walk(rootdir):
     for file in files:
       if file.endswith('.md'):
-        get_refs(os.path.join(subdir, file))
+        get_refs(subdir + '/' + file)
 
   if not os.path.exists('data/'):
     os.makedirs('data')
