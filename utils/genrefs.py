@@ -27,7 +27,8 @@ def check_anchor(file, anchor):
 file_pathes = []
 for subdir, _, files in os.walk(rootdir):
   for f in files:
-    file_pathes.append(subdir + '/' + f)
+    full_path = (subdir + '/' + f)
+    file_pathes.append(re.sub(r'/+', '/', full_path))
 
 # return file, anchor
 #   - file: file path like 'series/病原生物学/_index.md'
@@ -143,7 +144,8 @@ if __name__ == '__main__':
   for subdir, dirs, files in os.walk(rootdir):
     for file in files:
       if file.endswith('.md'):
-        get_refs(subdir + '/' + file)
+        full_path = subdir + '/' + file
+        get_refs(re.sub(r'/+', '/', full_path))
 
   if not os.path.exists('data/'):
     os.makedirs('data')
