@@ -289,3 +289,28 @@ class Accordion {
     this.el.style.height = this.el.style.overflow = '';
   }
 }
+
+// HoverSummary
+const summaryContentEl = document.createElement("div");
+summaryContentEl.class = "hide";
+summaryContentEl.id = "HoverSummary";
+document.body.appendChild(summaryContentEl);
+
+const HoverSummaryMargin = 5;
+
+var summaries = {};
+fetch("/index.json").then((e)=>{e.json().then((e)=>{
+    var jsonData;
+    jsonData = e;
+    for (page of jsonData) {
+        summaries[page.permalink.toLowerCase()] = {
+            "title": page.title,
+            "summary": page.summary,
+            "tags": page.tags
+        };
+    }
+})});
+
+function offsetToBody(e, side) {
+    return e.getBoundingClientRect()[side] - document.body.getBoundingClientRect()[side];
+}

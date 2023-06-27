@@ -17,7 +17,6 @@ function toggleSearch(force) {
     // Load json search index if first time invoking search
     // Means we don't load json unless searches are going to happen; keep user payload small unless needed
     if(firstRun) {
-        maininput.disabled = true;
         loadSearch(); // loads our json data and builds fuse.js search index
         firstRun = false; // let's never do this again
     }
@@ -26,14 +25,14 @@ function toggleSearch(force) {
     if (force == true || (force === undefined && !searchVisible)) {
         document.getElementById("fastSearch").style.display = "block"
         document.body.style.overflowY = "hidden"
-        maininput.focus(); // put focus in input box so you can just start typing
-        searchVisible = true; // search visible
+        maininput.focus();
+        searchVisible = true; // search is visible now
     } else {
         // document.getElementById("fastSearch").style.display = "none"
         $("#fastSearch").fadeOut(200)
         document.body.style.overflowY = (typeof InstallTrigger !== 'undefined') ? 'auto' : 'overlay' // set 'auto' for firefox
-        document.activeElement.blur(); // remove focus from search box
-        searchVisible = false; // search not visible
+        // document.activeElement.blur(); // remove focus from search box
+        searchVisible = false; // search is not visible now
     }
 }
 
@@ -65,12 +64,8 @@ document.addEventListener('keydown', function(event) {
 
 // ==========================================
 // execute search as text is changed
-//
-var lastText = ''
 maininput.onkeyup = function() {
-    if (this.value != lastText) {
-        executeSearch(this.value)
-    }
+    executeSearch(this.value);
 }
 
 
@@ -183,7 +178,7 @@ function executeSearch(term) {
             searchitems = searchitems +
 `<li class="search-result-item">
     <div class="header">
-        <a class="title" href="${item.permalink}">${item.title}</a>
+        <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
         <span class="publish">${item.date}</span>
         <span class="tags">${tags}</span>
         <span class="edit">${item.edit}</span>

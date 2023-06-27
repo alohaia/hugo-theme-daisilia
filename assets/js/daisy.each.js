@@ -79,3 +79,37 @@ $(".series-content").ready(function(){
 document.querySelectorAll('details').forEach((el) => {
   new Accordion(el);
 });
+
+// HoverSummary
+for (anchor of document.querySelectorAll("a.page")) {
+    var timeOutId;
+    anchor.addEventListener("mouseenter", function() {
+        clearTimeout(timeOutId);
+        timeOutId = setTimeout(()=>{
+            var p = summaries[this.getAttribute("href").split("#")[0].toLowerCase()];
+            summaryContentEl.innerHTML = `<h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div>`;
+
+            summaryContentEl.style.left = offsetToBody(this, "left") + HoverSummaryMargin + "px";
+            summaryContentEl.style.right = null;
+            if (offsetToBody(this, "left") + HoverSummaryMargin + summaryContentEl.clientWidth >= document.body.clientWidth) {
+                summaryContentEl.style.left = null;
+                summaryContentEl.style.right = "3px";
+            };
+
+            var top = offsetToBody(this, "top") + this.offsetHeight + HoverSummaryMargin + "px";
+            var offset = this.getBoundingClientRect();
+            if (offset.top > (document.body.clientHeight - offset.bottom)) {
+                top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HoverSummaryMargin + "px";
+            };
+            summaryContentEl.style.top = top;
+
+            summaryContentEl.classList.remove("hide");
+        }, 500);
+    });
+    anchor.addEventListener("mouseleave", ()=>{
+        clearTimeout(timeOutId);
+        timeOutId = setTimeout(()=>{
+            summaryContentEl.classList.add("hide");
+        }, 500);
+    });
+}

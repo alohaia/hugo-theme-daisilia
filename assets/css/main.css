@@ -316,3 +316,56 @@ body.local-server {
     color: var(--orange-deep);
     text-decoration: underline;
 }
+
+/* hover summary */
+@keyframes hs-in {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes hs-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+#HoverSummary {
+    position: absolute;
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: 2px 2px 12px 2px var(--gray);
+    padding: 15px;
+    max-width: min(75vw, 400px);
+    min-width: 400px;
+    max-height: min(50vh,500px);
+    overflow: auto;
+    z-index: var(--z-overcontent);
+
+    animation: .2s hs-in ease-in;
+}
+#HoverSummary.hide:not(:hover) {
+    animation: .2s hs-out ease-out;
+    transform: translateY(-9999px);
+}
+
+.hover-summary-title {
+    margin: 0;
+    font-family: var(--font-sans);
+}
+
+.hover-summary-content {
+    margin: 0;
+}
+
+.hover-summary-content *:last-child {
+    margin-bottom: 0;
+}

@@ -1107,6 +1107,9 @@ sub {
     content: "Attribution: ";
     color: var(--gray);
 }
+.attribution a:after {
+    vertical-align: baseline;
+}
 
 /* special hyperlinks */
 .article-content a[target="_blank"]::after {
