@@ -93,18 +93,22 @@ for (anchor of document.querySelectorAll("a.page")) {
             summaryContentEl.innerHTML = `<div id="HoverSummaryInner"><h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div></div>`;
             const inner = document.getElementById("HoverSummaryInner");
 
-            summaryContentEl.style.left = offsetToBody(this, "left") + HoverSummaryMargin + "px";
+            var anchorOffset = this.getBoundingClientRect();
+            var x = e.clientX - anchorOffset.left;
+            x = (x < 20 || x > summaryContentEl.clientWidth - 20) ? 20 : x;
+
+            summaryContentEl.style.left = offsetToBody(this, "left") + document.body.getBoundingClientRect().x + "px";
             summaryContentEl.style.right = null;
-            if (offsetToBody(this, "left") + HoverSummaryMargin + summaryContentEl.clientWidth >= document.body.clientWidth) {
+            if (offsetToBody(this, "left") + summaryContentEl.clientWidth >= document.body.clientWidth) {
                 summaryContentEl.style.left = null;
                 summaryContentEl.style.right = "3px";
+
+                x = summaryContentEl.clientWidth - document.body.offsetWidth + e.clientX;
+                x = Math.min(x, summaryContentEl.clientWidth - 20);
             };
 
             var top = offsetToBody(this, "top") + this.offsetHeight + HoverSummaryMargin + "px";
-            var offset = this.getBoundingClientRect();
-            var x = e.clientX - offset.left;
-            x = (x < 20 || x > summaryContentEl.clientWidth - 20) ? 20 : x;
-            if (offset.top > (document.body.clientHeight - offset.bottom)) {
+            if (anchorOffset.top > (document.body.clientHeight - anchorOffset.bottom)) {
                 top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HoverSummaryMargin + "px";
                 inner.style.clipPath = `polygon(0 calc(100% - 5px), ${x-5}px calc(100% - 5px), ${x}px 100%, ${x+5}px calc(100% - 5px), 100% calc(100% - 5px), 100% 0, 0 0)`;
             } else {

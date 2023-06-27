@@ -1004,7 +1004,7 @@ blockquote .quote-from {
     font-family: var(--font-serif);
     opacity: .6;
 }
-@media (min-width: 1001px) and (max-width: 1225px) {
+@media (min-width: 1000px) and (max-width: 1225px) {
     .sidebar-active .section-heading {
         position: unset;
         left: unset;
