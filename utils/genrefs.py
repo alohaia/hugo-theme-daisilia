@@ -24,6 +24,11 @@ def check_anchor(file, anchor):
 
   return is_contained
 
+file_pathes = []
+for subdir, _, files in os.walk(rootdir):
+  for f in files:
+    file_pathes.append(subdir + '/' + f)
+
 # return file, anchor
 #   - file: file path like 'series/病原生物学/_index.md'
 #   - anchor: anchor, '' for empty heaing and top
@@ -36,23 +41,24 @@ def ref2pos(ref, reldir, path, linenr):
 
   found_realtive = False
   if not file.startswith('/'):                              # relative path
-    for subdir, _, files in os.walk(reldir):
-      for f in files:
-        full_path = subdir + '/' + f
-        if re.search('(' + re.escape('/'+file) + ')' + ext_pattern, full_path):
-          found_realtive = True
-          file = full_path
-          if check and anchor and (not check_anchor(full_path, anchor)):
-            print('[Warning] {path}:{linenr}:"{orig}", "{anchor}" not found in "{file}"'.format(orig=ref, file=full_path, anchor=anchor, path=path, linenr=linenr))
+    for file_path in file_pathes:
+      if re.search('(' + reldir + '/.*/' + re.escape(file) + ')' + ext_pattern, file_path):
+        found_realtive = True
+        file = file_path
+        if check and anchor and (not check_anchor(file_path, anchor)):
+          print('[Warning] {path}:{linenr}:"{orig}", "{anchor}" not found in "{file}"'.format(orig=ref, file=file_path, anchor=anchor, path=path, linenr=linenr))
+
+  base = ''
   if file.startswith('/') or found_realtive == False:       # absolute path
-    for subdir, _, files in os.walk(rootdir):
-      for f in files:
-        full_path = subdir + '/' + f
-        base = re.escape(rootdir) + ("" if file.startswith('/') else ".*") + "/" + re.escape(file)
-        if re.search('(' + base + ')' + ext_pattern, full_path):
-          file = full_path
-          if check and anchor and (not check_anchor(full_path, anchor)):
-            print('[Warning] {path}:{linenr}:"{orig}", "{anchor}" not found in "{file}"'.format(orig=ref, file=full_path, anchor=anchor, path=path, linenr=linenr))
+      if file.startswith('/'):
+        base = re.escape(rootdir)[:-1] + re.escape(file)
+      else:
+        base = re.escape(rootdir) + ".*/" + re.escape(file)
+      for file_path in file_pathes:
+        if re.search('(' + base + ')' + ext_pattern, file_path):
+          file = file_path
+          if check and anchor and (not check_anchor(file_path, anchor)):
+            print('[Warning] {path}:{linenr}:"{orig}", "{anchor}" not found in "{file}"'.format(orig=ref, file=file_path, anchor=anchor, path=path, linenr=linenr))
 
   return file[len(rootdir):], anchor
 
