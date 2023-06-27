@@ -23,6 +23,9 @@ document.addEventListener("pjax:send", function () {
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.unobserve(heading);
     });
+
+    summaryContentEl.classList.add("hide");
+    console.log("hide")
 });
 
 // Pjax 完成之后执行的函数
