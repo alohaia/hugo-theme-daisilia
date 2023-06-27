@@ -26,7 +26,7 @@ def check_anchor(file, anchor):
 
 file_pathes = []
 for subdir, _, files in os.walk(rootdir):
-  subdir = subdir.replace('\\', '/')     # windows
+  subdir = subdir.replace('\\', '/')     # Windows
   for f in files:
     full_path = (subdir + '/' + f)
     file_pathes.append(re.sub(r'/+', '/', full_path))
@@ -143,7 +143,7 @@ def get_refs(path):
 
 if __name__ == '__main__':
   for subdir, dirs, files in os.walk(rootdir):
-    subdir = subdir.replace('\\', '/')     # windows
+    subdir = subdir.replace('\\', '/')     # Windows
     for file in files:
       if file.endswith('.md'):
         full_path = subdir + '/' + file
