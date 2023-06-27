@@ -48,7 +48,8 @@ def ref2pos(ref, reldir, path, linenr):
     for subdir, _, files in os.walk(rootdir):
       for f in files:
         full_path = os.path.join(subdir, f)
-        if re.search('(' + os.path.join(re.escape(rootdir), "" if file.startswith('/') else ".*", re.escape(file)) + ')' + ext_pattern, full_path):
+        base = re.escape(rootdir) + ("" if file.startswith('/') else ".*") + "/" + re.escape(file)
+        if re.search('(' + base + ')' + ext_pattern, full_path):
           file = full_path
           if check and anchor and (not check_anchor(full_path, anchor)):
             print('[Warning] {path}:{linenr}:"{orig}", "{anchor}" not found in "{file}"'.format(orig=ref, file=full_path, anchor=anchor, path=path, linenr=linenr))
