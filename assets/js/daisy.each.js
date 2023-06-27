@@ -81,15 +81,17 @@ document.querySelectorAll('details').forEach((el) => {
 });
 
 // HoverSummary
+// hs.style.clipPath=`polygon(0 10px, ${x-5}px 10px, ${x}px 0, ${x+5}px 10px, 100% 10px, 100% 100%, 0 100%)`
 for (anchor of document.querySelectorAll("a.page")) {
     var timeOutId;
     var lastHoverEl;
-    anchor.addEventListener("mouseenter", function() {
+    anchor.addEventListener("mouseenter", function(e) {
         if (lastHoverEl == this) { clearTimeout(timeOutId) };
         lastHoverEl = this;
         timeOutId = setTimeout(()=>{
             var p = summaries[this.getAttribute("href").split("#")[0].toLowerCase()];
-            summaryContentEl.innerHTML = `<h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div>`;
+            summaryContentEl.innerHTML = `<div id="HoverSummaryInner"><h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div></div>`;
+            const inner = document.getElementById("HoverSummaryInner");
 
             summaryContentEl.style.left = offsetToBody(this, "left") + HoverSummaryMargin + "px";
             summaryContentEl.style.right = null;
@@ -100,8 +102,13 @@ for (anchor of document.querySelectorAll("a.page")) {
 
             var top = offsetToBody(this, "top") + this.offsetHeight + HoverSummaryMargin + "px";
             var offset = this.getBoundingClientRect();
+            var x = e.clientX - offset.left;
+            x = (x < 20 || x > summaryContentEl.clientWidth - 20) ? 20 : x;
             if (offset.top > (document.body.clientHeight - offset.bottom)) {
                 top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HoverSummaryMargin + "px";
+                inner.style.clipPath = `polygon(0 calc(100% - 5px), ${x-5}px calc(100% - 5px), ${x}px 100%, ${x+5}px calc(100% - 5px), 100% calc(100% - 5px), 100% 0, 0 0)`;
+            } else {
+                inner.style.clipPath = `polygon(0 5px, ${x-5}px 5px, ${x}px 0, ${x+5}px 5px, 100% 5px, 100% 100%, 0 100%)`;
             };
             summaryContentEl.style.top = top;
 

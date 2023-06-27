@@ -292,7 +292,7 @@ class Accordion {
 
 // HoverSummary
 const summaryContentEl = document.createElement("div");
-summaryContentEl.class = "hide";
+summaryContentEl.classList.add("hide");
 summaryContentEl.id = "HoverSummary";
 document.body.appendChild(summaryContentEl);
 

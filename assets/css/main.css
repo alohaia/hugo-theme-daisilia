@@ -340,21 +340,22 @@ body.local-server {
 }
 #HoverSummary {
     position: absolute;
-    background: var(--white);
-    border-radius: 4px;
-    box-shadow: 2px 2px 12px 2px var(--gray);
-    padding: 15px;
-    max-width: min(75vw, 400px);
-    min-width: 400px;
-    max-height: min(50vh,500px);
-    overflow: auto;
     z-index: var(--z-overcontent);
-
     animation: .2s hs-in ease-in;
+    filter: drop-shadow(0 0 3px var(--gray));
 }
 #HoverSummary.hide:not(:hover) {
     animation: .2s hs-out ease-out;
     transform: translateY(-9999px);
+}
+
+#HoverSummaryInner {
+    background: var(--white);
+    padding: 15px;
+    overflow: auto;
+    max-width: min(75vw,400px);
+    min-width: 400px;
+    max-height: min(50vh,500px);
 }
 
 .hover-summary-title {
