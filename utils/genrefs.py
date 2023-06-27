@@ -18,7 +18,7 @@ def check_anchor(file, anchor):
   is_contained = False
   anchor_pattern = r'(^|\n)#{{1,6}}\s+{anc}(\s*{{.*}})?($|\n)|{{.*?(#{anc}|id="{anc}").*?}}|{{{{<.*?(id="{anc}"|id={anc}.*?)>}}}}|{{{{%.*?(id="{anc}"|id={anc}).*?%}}}}'.format(anc = re.escape(anchor))
   anchor_pattern = re.sub(r'\\[ -]', '[ -]', anchor_pattern)  # " " == "-"
-  with open(file, 'r') as f:
+  with open(file, 'r', encoding='utf-8') as f:
     if re.search(anchor_pattern, f.read(), re.IGNORECASE):
       is_contained = True
 
