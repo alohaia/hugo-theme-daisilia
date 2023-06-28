@@ -342,7 +342,7 @@ body.local-server {
     position: absolute;
     z-index: var(--z-overcontent);
     animation: .2s hs-in ease-in;
-    filter: drop-shadow(0 0 3px var(--gray));
+    filter: drop-shadow(0 0 5px var(--gray));
 }
 #HoverSummary.hide:not(:hover) {
     animation: .2s hs-out ease-out;
