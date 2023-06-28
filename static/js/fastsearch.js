@@ -176,15 +176,15 @@ function executeSearch(term) {
                 }
             }
             searchitems = searchitems +
-`<li class="search-result-item">
-    <div class="header">
-        <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
-        <span class="publish">${item.date}</span>
-        <span class="tags">${tags}</span>
-        <span class="edit">${item.edit}</span>
-    </div>
-    <div class="summary article-content">${item.summary}</div>
-</li>`
+                `<li class="search-result-item">
+                    <div class="header">
+                        <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
+                        <span class="publish">${item.date}</span>
+                        <span class="tags">${tags}</span>
+                        <span class="edit">${item.edit}</span>
+                    </div>
+                    <div class="summary article-content">${item.summary}</div>
+                </li>`
         }
         resultsAvailable = true
     }

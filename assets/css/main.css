@@ -364,11 +364,7 @@ body.local-server {
 }
 
 .hover-summary-content {
-    margin: 0;
-}
-
-.hover-summary-content *:last-child {
-    margin-bottom: 0;
+    margin: 18px 0 0;
 }
 
 @media (max-width: 750px) {

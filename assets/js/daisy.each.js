@@ -81,7 +81,6 @@ document.querySelectorAll('details').forEach((el) => {
 });
 
 // HoverSummary
-// hs.style.clipPath=`polygon(0 10px, ${x-5}px 10px, ${x}px 0, ${x+5}px 10px, 100% 10px, 100% 100%, 0 100%)`
 for (anchor of document.querySelectorAll("a.page")) {
     var timeOutId;
     var lastHoverEl;
@@ -89,8 +88,20 @@ for (anchor of document.querySelectorAll("a.page")) {
         if (lastHoverEl == this) { clearTimeout(timeOutId) };
         lastHoverEl = this;
         timeOutId = setTimeout(()=>{
-            var p = summaries[this.getAttribute("href").split("#")[0].toLowerCase()];
-            summaryContentEl.innerHTML = `<div id="HoverSummaryInner"><h4 class="hover-summary-title">${p.title}</h4><div class="hover-summary-content article-content">${p.summary}</div></div>`;
+            var linkHref = this.getAttribute("href");
+            var linkAnchor = this.innerText.split("#")[1];
+            if (USE_TEXT_ANCHOR) {
+                var linkAnchor = linkAnchor ? linkAnchor : linkHref.split("#")[1];
+            }
+            var p = summaries[linkHref.split("#")[0].toLowerCase()];
+            summaryContentEl.innerHTML =
+                `<div id="HoverSummaryInner" class="article-content">
+                    <h4 class="hover-summary-title">
+                        <a href="${linkHref.split("#")[0]}">${p.title}</a>
+                        ${linkAnchor ? ('<a href="' + linkHref +'">#' + linkAnchor + '</a>') : ''}
+                    </h4>
+                    ${p.summary != '' ? ('<div class="hover-summary-content summary">' + p.summary + '</div>') : ''}
+                </div>`;
             const inner = document.getElementById("HoverSummaryInner");
             // refresh pjax
             window.pjax.refresh(inner);
@@ -109,9 +120,9 @@ for (anchor of document.querySelectorAll("a.page")) {
                 x = Math.min(x, summaryContentEl.clientWidth - 20);
             };
 
-            var top = offsetToBody(this, "top") + this.offsetHeight + HoverSummaryMargin + "px";
+            var top = offsetToBody(this, "top") + this.offsetHeight + HOVER_SUMMARY_MARGIN + "px";
             if (anchorOffset.top > (document.body.clientHeight - anchorOffset.bottom)) {
-                top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HoverSummaryMargin + "px";
+                top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HOVER_SUMMARY_MARGIN + "px";
                 inner.style.clipPath = `polygon(0 calc(100% - 5px), ${x-5}px calc(100% - 5px), ${x}px 100%, ${x+5}px calc(100% - 5px), 100% calc(100% - 5px), 100% 0, 0 0)`;
             } else {
                 inner.style.clipPath = `polygon(0 5px, ${x-5}px 5px, ${x}px 0, ${x+5}px 5px, 100% 5px, 100% 100%, 0 100%)`;

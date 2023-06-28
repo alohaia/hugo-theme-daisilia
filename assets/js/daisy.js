@@ -296,7 +296,8 @@ summaryContentEl.classList.add("hide");
 summaryContentEl.id = "HoverSummary";
 document.body.appendChild(summaryContentEl);
 
-const HoverSummaryMargin = 5;
+const HOVER_SUMMARY_MARGIN = 5;
+const USE_TEXT_ANCHOR = true;
 
 var summaries = {};
 fetch("/index.json").then((e)=>{e.json().then((e)=>{

@@ -659,13 +659,13 @@ dl.indent dt::after {
     color: var(--gray-deep);
     margin: 5px 0;
 }
-/* .page-list-item .read-more { */
-/*     color: var(--orange); */
-/*     text-decoration: none; */
-/* } */
-/* .page-list-item .read-more:hover { */
-/*     color: var(--orange-deep); */
-/* } */
+/* summary children margin */
+.summary *:first-child {
+    margin-top: 0;
+}
+.summary *:last-child {
+    margin-bottom: 0;
+}
 .page-list-item:not(:last-child)::after {
     content: "";
     display: block;
