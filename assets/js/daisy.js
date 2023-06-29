@@ -348,7 +348,7 @@ function getCookie(cname) {
         for (id in messages) {
             if (!confirmedMessages.includes(id)) {
                 messageHTML +=
-`<div id="message-${id}" class="site-message-item${messages[id].type ? (' ' + messages[id].type) : '' }">
+`<div id="message-${id}" class="site-message-item ${messages[id].type ? messages[id].type : 'default' }">
     <div class="site-message-close" role="button">X</div>
     ${messages[id].title ? '<h1 class="site-message-title">' + messages[id].title + '</h1>' : ''}
     <p class="site-message-content">${messages[id].content}</p>
