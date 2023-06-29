@@ -8,6 +8,7 @@ var maininput = document.getElementById('searchInput');
 var resultsAvailable = false; // Did we get any search results?
 const keys = [ 'title', 'contents' ];
 var loading = document.getElementById('searchLoading');
+var matchSurroundLength = 30;
 
 // ==========================================
 // Check searchVisible and toggle search
@@ -96,10 +97,10 @@ function loadSearch() {
 
         var options = { // fuse.js options; check fuse.js website for details
             shouldSort: true,
-            // minMatchCharLength: 2,
+            minMatchCharLength: 2,
             threshold: 0.6, // 0 for a perfect match, 1 would match anything
             ignoreLocation: true,
-            includeMatches: false,
+            includeMatches: true,
             useExtendedSearch: true,
             keys: keys,
         }
@@ -115,34 +116,30 @@ function loadSearch() {
     })
 }
 
-function isResultEqual(r1, r2) {
-    for(let idx = 0; idx < keys.length; idx++) {
-        if(r1[keys[idx]] != r2[keys[idx]]) {
-            return false
-        }
-    }
-    return true
-}
-
-
 // ===========================================
 // get first length results, length <= 0 to get as much as possible
 //
 function uniqueResults(results, length) {
-    let res = [results[0].item];        // hold return value
-    if(length <= 0) {
+    let res = [{   // hold return value
+        'item': results[0].item,
+        'matches': results[0].matches
+    }];
+    if (length <= 0) {
         length = results.length
     }
-    for(let idx = 1; idx < results.length; idx++) { // starts from the second
+    for (let idx = 1; idx < results.length; idx++) { // starts from the second
         let alreasyExists = false
-        for(i of res) {
-            if(isResultEqual(results[idx].item, i)) {
+        for (i of res) {
+            if (results[idx].item.permalink == i.item.permalink) {
                 alreasyExists = true
             }
         }
-        if(!alreasyExists) {
-            res.push(results[idx].item)
-            if(res.length >= length) {
+        if (!alreasyExists) {
+            res.push({
+                'item': results[idx].item,
+                'matches': results[idx].matches
+            })
+            if (res.length >= length) {
                 break
             }
         }
@@ -167,23 +164,35 @@ function executeSearch(term) {
         resultsAvailable = false
         searchitems = ''
     } else { // build our html
-        let items = uniqueResults(results, 20)
-        for (let item of items) {
+        for (let result of uniqueResults(results, 20)) {
+        // for (let result of results) {
+            var matchHTML = '';
+            for (match of result.matches) {
+                for (index of match.indices) {
+                    var context = match.value.slice(index[0]-matchSurroundLength >= 0 ? index[0]-matchSurroundLength : 0, index[0])
+                        + `<span class="search-item-match-highlight">${match.value.slice(index[0], index[1]+1)}</span>`
+                        + match.value.slice(index[1]+1, index[1]+1+matchSurroundLength);
+                    matchHTML = (matchHTML || "") +
+                        `<span class="search-item-match-index">${index[0] + "-" + index[1]}: </span>
+                        <span class="search-item-match-context">... ${context} ...</span>`;
+                }
+            }
             let tags = ""
-            if(item.tags && item.tags.length > 0) {
-                for(let tag of item.tags) {
-                    tags += `<a class="tag" href="/tags/${tag}">${tag}</a>`;
+            if(result.item.tags && result.item.tags.length > 0) {
+                for(let tag of result.item.tags) {
+                    tags += `<a class="search-item-tag" href="/tags/${tag}">${tag}</a>`;
                 }
             }
             searchitems = searchitems +
                 `<li class="search-result-item">
-                    <div class="header">
-                        <a class="title" tabindex="0" href="${item.permalink}">${item.title}</a>
-                        <span class="publish">${item.date}</span>
-                        <span class="tags">${tags}</span>
-                        <span class="edit">${item.edit}</span>
+                    <div class="search-item-heading">
+                        <a class="search-item-title" tabindex="0" href="${result.item.permalink}">${result.item.title}</a>
+                        <span class="search-item-publish">${result.item.date}</span>
+                        <span class="search-item-tags">${tags}</span>
+                        <span class="search-item-edit">${result.item.edit}</span>
                     </div>
-                    <div class="summary article-content">${item.summary}</div>
+                    <div class="search-item-summary article-content summary">${result.item.summary}</div>
+                    <div class="search-item-matches">${matchHTML}</div>
                 </li>`
         }
         resultsAvailable = true

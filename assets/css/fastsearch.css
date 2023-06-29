@@ -73,7 +73,7 @@
     margin: auto;
     margin-bottom: 20px;
 }
-.search-result-item .header {
+.search-item-heading {
     display: grid;
     grid-template-areas:
         "title publish"
@@ -81,7 +81,7 @@
     justify-content: space-between;
     align-items: end;
 }
-.search-result-item .header .title {
+.search-item-title {
     grid-area: title;
     font-size: 150%;
     line-height: 1;
@@ -89,47 +89,47 @@
     text-decoration: underline;
     font-family: var(--font-serif);
 }
-.search-result-item .header .title:hover {
+.search-item-title:hover {
     color: var(--orange-deep);
 }
-.search-result-item .header .publish {
+.search-item-publish {
     grid-area: publish;
     line-height: 150%;
     font-style: italic;
     text-align: right;
     font-family: var(--font-serif);
 }
-.search-result-item .header .publish::before {
+.search-item-publish::before {
     content: "Published on ";
 }
-.search-result-item .header .tags {
+.search-item-tags {
     grid-area: tags;
     font-style: italic;
     font-family: var(--font-sans);
 }
-.search-result-item .header .tags .tag {
+.search-item-tag {
     color: var(--gray-deep);
 }
-.search-result-item .header .tags .tag:not(:first-child) {
+.search-item-tag:not(:first-child) {
     margin-left: 8px;
 }
-.search-result-item .header .tags .tag:hover {
+.search-item-tag:hover {
     color: var(--orange-deep);
 }
-.search-result-item .header .tags .tag::before {
+.search-item-tag::before {
     content: "#";
 }
-.search-result-item .header .edit {
+.search-item-edit {
     grid-area: edit;
     font-style: italic;
     text-align: right;
     font-family: var(--font-serif);
 }
-.search-result-item .header .edit::before {
+.search-item-edit::before {
     content: "Edited on ";
 }
 
-.search-result-item .summary * {
+.search-item-summary * {
     color: var(--gray-deep)
 }
 .fast-search-hint {
@@ -145,4 +145,24 @@
         height: 100%;
         width: calc(100% - 10px);
     }
+}
+
+.search-item-matches {
+    margin: 20px;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 100px auto;
+    align-items: center;
+    max-height: 40vh;
+    overflow: auto;
+}
+span.search-item-match-context {
+    min-width: 500px;
+}
+.search-item-match {
+    margin: 5px 0;
+}
+.search-item-match-highlight {
+    text-decoration: underline dashed;
+    font-weight: bold;
 }
