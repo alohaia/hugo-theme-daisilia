@@ -7,6 +7,7 @@
   (resources.Get "css/tags.css")
   (resources.Get "css/fastsearch.css")
   (resources.Get "css/print.css")
+  (resources.Get "css/message.css")
 -}}
 {{- $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>

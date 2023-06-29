@@ -300,9 +300,7 @@ const HOVER_SUMMARY_MARGIN = 5;
 const USE_TEXT_ANCHOR = true;
 
 var summaries = {};
-fetch("/index.json").then((e)=>{e.json().then((e)=>{
-    var jsonData;
-    jsonData = e;
+fetch("/index.json").then((e)=>{e.json().then((jsonData)=>{
     for (page of jsonData) {
         summaries[page.permalink.toLowerCase()] = {
             "title": page.title,
@@ -315,3 +313,56 @@ fetch("/index.json").then((e)=>{e.json().then((e)=>{
 function offsetToBody(e, side) {
     return e.getBoundingClientRect()[side] - document.body.getBoundingClientRect()[side];
 }
+
+// set and get cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++)
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+// messages
+(function(){
+    fetch("/data/messages.json").then((e)=>{e.json().then((jsonData)=>{
+        var messages = {};
+        for (i in jsonData) {
+            messages[i.replace(/\s+/g, "-")] = jsonData[i];
+        }
+        var messageListEl = document.getElementById("MessageList");
+        var confirmedMessages = getCookie("confirmedMessages").split(",");
+
+        // display messages
+        var messageHTML = "";
+        for (id in messages) {
+            if (!confirmedMessages.includes(id)) {
+                messageHTML +=
+`<div id="message-${id}" class="site-message-item${messages[id].type ? (' ' + messages[id].type) : '' }">
+    <div class="site-message-close" role="button">X</div>
+    ${messages[id].title ? '<h1 class="site-message-title">' + messages[id].title + '</h1>' : ''}
+    <p class="site-message-content">${messages[id].content}</p>
+</div>`;
+            }
+        }
+        messageListEl.innerHTML = messageHTML;
+
+        document.querySelectorAll(".site-message-close").forEach(function(currentValue) {
+            currentValue.onclick = function() {
+                var closedMessage = this.parentElement.id.replace(/^message-/, getCookie("confirmedMessages") != "" ? "," : "");
+                setCookie("confirmedMessages", getCookie("confirmedMessages") + closedMessage, 14);
+                this.parentElement.style.display = "none"
+            }
+        })
+    })});
+})()

@@ -17,7 +17,7 @@
     <header class="site-header" id="SiteHeader">{{ partial "header" . }}</header>
     <div class="site-main" id="SiteMain">
       <div class="site-left" data-pjax>{{ block "left" . }}{{ end }}</div>
-      <div class="site-message-list">{{- partial "message" . -}}</div>
+      <div class="site-message-list" id="MessageList"></div>
       <div class="site-content"{{ if .Params.math }} mathjax{{ end }} data-pjax id="SiteContent">
         {{- block "main" . }}{{ end -}}
       </div>
