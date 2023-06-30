@@ -348,6 +348,9 @@ body.local-server {
     animation: .2s hs-out ease-out;
     transform: translateY(-9999px);
 }
+#HoverSummary.force-hide {
+    display: none;
+}
 
 #HoverSummaryInner {
     background: var(--white);

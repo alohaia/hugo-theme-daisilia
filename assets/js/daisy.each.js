@@ -85,6 +85,8 @@ for (anchor of document.querySelectorAll("a.page")) {
     var timeOutId;
     var lastHoverEl;
     anchor.addEventListener("mouseenter", function(e) {
+        summaryContentEl.classList.remove("force-hide");
+
         if (lastHoverEl == this) { clearTimeout(timeOutId) };
         lastHoverEl = this;
         timeOutId = setTimeout(()=>{
