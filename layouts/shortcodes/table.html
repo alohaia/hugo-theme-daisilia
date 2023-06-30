@@ -16,22 +16,21 @@
       {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
     {{- end -}}
     {{- range sort $refs "count" "desc" -}}
-      {{- $refs_html = printf "<a class=\"cross-ref\" href=\"%s\">%s</a>" (replaceRE "\\s+" "-" (relref $.Page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
+      {{- $refs_html = printf "<a class=\"cross-ref page\" href=\"%s\">%s</a>" (replaceRE "\\s+" "-" (relref $.Page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
     {{- end -}}
     {{- $refs_html = printf "<div class=\"cross-refs\">%s</div>" $refs_html -}}
   {{- end -}}
 
-  {{- $caption = printf "<caption class='caption'>%s%s%s</caption>"
+  {{- $caption = printf "<div class=\"table-caption\">%s%s%s</div>"
     ($caption | markdownify)
     (cond (ne $attr "") (printf "<p class=\"attribution tbl-attribution\">%s</p>" ($attr | markdownify)) "")
     $refs_html
   -}}
 {{- end -}}
-{{- $head := printf "<div class=\"table-wrap\"><table%s%s>%s%s"
+{{- $head := printf "%s<div class=\"table-wrap\"><table%s%s>"
+    (cond (ne $title "") (printf "<h4 class=\"table-title\">%s</h4>" ($title | markdownify)) "")
     (cond (ne $id "") (printf " id=\"%s\"" $id) "")
     (cond $ls " class=\"left-sticky\"" "")
-    $caption
-    (cond (ne $title "") (printf "<caption class='title'>%s</caption>" ($title | markdownify)) "")
 -}}
-{{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" "</table></div>" | safeHTML -}} {{- /* use markdownify to insure .Inner is render result */ -}}
+{{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" (printf "</table></div>%s" $caption) | safeHTML -}} {{- /* use markdownify to insure .Inner is render result */ -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

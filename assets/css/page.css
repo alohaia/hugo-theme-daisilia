@@ -200,11 +200,10 @@ figure.kroki .svg-wrap {
 }
 
 /* caption */
-figcaption, table caption {
+figcaption, .table-caption {
     text-align: left;
-    /* max-width: var(--content-width); */
 }
-figcaption>.title, table caption.title{
+figcaption>.title, .table-title{
     margin: 0;
     font-size: 20px;
     white-space: pre-wrap;
@@ -218,19 +217,17 @@ figcaption>.title::before {
 .diagram-kroki figcaption>.title::before {
     content: "Diagram - ";
 }
-table caption.title::before {
+.table-title::before {
     content: "Table - ";
     color: var(--gray);
 }
-figcaption>.caption, table caption.caption{
+figcaption>.caption, .table-caption {
     margin: 0;
     color: var(--gray-deep);
     white-space: pre-wrap;
+    font-size: 16px;
 }
-table caption.caption {
-    caption-side: bottom;
-}
-figcaption .cross-refs, .table-wrap + .cross-ref {
+figcaption .cross-refs, .table-caption .cross-refs {
     font-size: smaller;
 }
 
@@ -249,8 +246,13 @@ img.fancybox__image {
 /* table */
 .table-wrap {
     overflow: auto;
-    margin: 15px auto;
     max-height: 75vh;
+}
+.table-title {
+    margin-top: 15px;
+}
+.table-caption {
+    margin-bottom: 15px;
 }
 table:not(.highlight table) {
     white-space: nowrap;
@@ -290,7 +292,7 @@ table:not(.highlight table).left-sticky th:first-child {
     z-index: calc(var(--z-overcontent) + 1);
 }
 table:not(.highlight table):not(.table-wrap table) {
-    display: block;
+    display: block;  /* make bare table scrollable */
     overflow: auto;
     max-width: fit-content;
     margin: 15px auto;
@@ -1101,7 +1103,7 @@ sub {
 /* attribution */
 .attribution {
     font-size: x-small;
-    margin: 5px 0 0 0;
+    margin: 0;
 }
 .attribution::before {
     content: "Attribution: ";
