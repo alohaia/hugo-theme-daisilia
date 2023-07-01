@@ -1,7 +1,13 @@
-<details{{ if .Get "open" }} open{{ end }} class="tab tab-card {{ .Get "type" }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
-  <summary class="tab-sum"><span class="tab-sum-content">{{ .Get "src" }}</span><i class="tab-sum-trigger"></i></summary>
+{{- if (.Get "plain") -}}
+<div class="tab-card plain">
+  {{- (.Site.GetPage (print "/cards/" (.Get "src"))).Content -}}
+</div>
+{{- else -}}
+<details{{ if .Get "open" }} open{{ end }} class="tab tab-card {{ (or (.Get "style") "default") }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
+  <summary class="tab-sum"><span class="tab-sum-content"><a href="{{ print "/cards/" (.Get "src") }}">{{ (or (.Get "title") (.Get "src")) }}</a></span><i class="tab-sum-trigger"></i></summary>
   <div class="tab-content">
     {{- (.Site.GetPage (print "/cards/" (.Get "src"))).Content -}}
   </div>
 </details>
+{{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

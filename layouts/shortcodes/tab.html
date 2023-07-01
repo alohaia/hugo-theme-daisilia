@@ -4,7 +4,7 @@
 {{- $open    := false     -}}
 {{- $id      := ""        -}}
 {{- if .IsNamedParams -}}
-  {{- $type    = default "default" (.Get "type")    -}}
+  {{- $type    = default "default" (or (.Get "style") (.Get "type"))    -}}
   {{- $summary = .Get "summary" -}}
   {{- $details = .Get "details" -}}
   {{- $open    = .Get "open"    -}}
