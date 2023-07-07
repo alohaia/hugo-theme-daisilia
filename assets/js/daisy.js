@@ -298,6 +298,7 @@ summaryContentEl.id = "HoverSummary";
 document.body.appendChild(summaryContentEl);
 
 const HOVER_SUMMARY_MARGIN = 5;
+const INNER_BORDER = 30 + HOVER_SUMMARY_MARGIN;  // 15px * 2
 const USE_TEXT_ANCHOR = true;
 
 var summaries = {};

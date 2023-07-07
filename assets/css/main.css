@@ -13,7 +13,7 @@
     display: none;
 }
 body.local-server {
-    overflow: auto;
+    overflow: overlay;
 }
 
 #preload-mask {
@@ -318,7 +318,7 @@ body.local-server {
 }
 
 /* hover summary */
-@keyframes hs-in {
+@keyframes hs-down-in {
     0% {
         opacity: 0;
         transform: translateY(10px);
@@ -328,7 +328,7 @@ body.local-server {
         transform: translateY(0);
     }
 }
-@keyframes hs-out {
+@keyframes hs-up-out {
     0% {
         opacity: 1;
         transform: translateY(0);
@@ -336,17 +336,46 @@ body.local-server {
     100% {
         opacity: 0;
         transform: translateY(10px);
+    }
+}
+@keyframes hs-up-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes hs-down-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 }
 #HoverSummary {
     position: absolute;
     z-index: var(--z-overcontent);
-    animation: .2s hs-in ease-in;
     filter: drop-shadow(0 0 5px var(--gray));
 }
-#HoverSummary.hide:not(:hover) {
-    animation: .2s hs-out ease-out;
+#HoverSummary.top {
+    animation: .2s hs-down-in ease-in;
+}
+#HoverSummary.bottom {
+    animation: .2s hs-up-in ease-in;
+}
+#HoverSummary.top.hide:not(:hover) {
+    animation: .2s hs-up-out ease-out;
     transform: translateY(-9999px);
+}
+#HoverSummary.bottom.hide:not(:hover) {
+    animation: .2s hs-down-out ease-out;
+    transform: translateY(9999px);
 }
 #HoverSummary.force-hide {
     display: none;
