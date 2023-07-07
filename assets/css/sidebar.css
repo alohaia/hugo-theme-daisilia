@@ -228,6 +228,7 @@
 }
 .sidebar-quote.expanded .sidebar-quote-content.poem {
     text-align: center;
+    overflow-x: auto;
 }
 .sidebar-quote.collapsed .sidebar-quote-from {
     margin: 0;
