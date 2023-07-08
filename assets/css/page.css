@@ -466,7 +466,6 @@ dt, dd {
 dt {
     font-weight: bold;
     font-family: var(--font-italic);
-    font-style: italic;
     display: inline;
     float: left;
 }

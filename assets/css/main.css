@@ -385,7 +385,7 @@ body.local-server {
     background: var(--white);
     padding: 15px;
     overflow: auto;
-    max-width: min(75vw,400px);
+    max-width: min(75vw,450px);
     min-width: 400px;
     max-height: min(50vh,500px);
 }

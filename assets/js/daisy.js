@@ -195,7 +195,6 @@ const TOCOnscrollObserver = new IntersectionObserver(entries => {
         const el = document.querySelector(`#TableOfContents li a[href="#${id}"]`)
         if (entry.intersectionRatio > 0) {
             el.parentElement.classList.add('active')
-            el.parentElement.scrollIntoView({ behavior: 'auto', block: 'center' })
             // TODO _ensureInView(el)
         } else {
             el.parentElement.classList.remove('active')
