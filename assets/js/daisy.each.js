@@ -123,12 +123,13 @@ for (anchor of document.querySelectorAll("a.page")) {
             };
 
             var top = offsetToBody(this, "top") + this.offsetHeight + HOVER_SUMMARY_MARGIN;
+            var maxHeight = null;
             if (anchorOffset.top > (document.body.clientHeight - anchorOffset.bottom)) {
                 top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HOVER_SUMMARY_MARGIN;
                 inner.style.clipPath = `polygon(0 calc(100% - 5px), ${x-5}px calc(100% - 5px), ${x}px 100%, ${x+5}px calc(100% - 5px), 100% calc(100% - 5px), 100% 0, 0 0)`;
                 // max height
                 if (top < 0) {
-                    inner.style.maxHeight = summaryContentEl.offsetHeight + top - INNER_BORDER + "px";
+                    maxHeight = summaryContentEl.offsetHeight + top - INNER_BORDER + "px";
                     top = HOVER_SUMMARY_MARGIN;
                 }
                 summaryContentEl.classList.remove("bottom")
@@ -136,12 +137,13 @@ for (anchor of document.querySelectorAll("a.page")) {
             } else {
                 inner.style.clipPath = `polygon(0 5px, ${x-5}px 5px, ${x}px 0, ${x+5}px 5px, 100% 5px, 100% 100%, 0 100%)`;
                 // max height
-                if (top + summaryContentEl.offsetHeight > document.body.clientHeight) {
-                    inner.style.maxHeight = document.body.clientHeight - top - INNER_BORDER + "px";
+                if (top + summaryContentEl.offsetHeight > document.body.scrollHeight) {
+                    maxHeight = document.body.clientHeight - top - INNER_BORDER + "px";
                 }
                 summaryContentEl.classList.remove("top")
                 summaryContentEl.classList.add("bottom")
             };
+            if (maxHeight) inner.style.maxHeight = maxHeight;
             summaryContentEl.style.top = top + "px";
 
             summaryContentEl.classList.remove("hide");

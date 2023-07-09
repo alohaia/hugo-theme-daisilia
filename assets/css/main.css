@@ -387,7 +387,7 @@ body.local-server {
     overflow: auto;
     max-width: min(75vw,450px);
     min-width: 400px;
-    max-height: min(50vh,500px);
+    max-height: min(40vh,500px);
 }
 
 .hover-summary-title {
