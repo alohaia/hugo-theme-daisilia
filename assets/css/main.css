@@ -321,41 +321,49 @@ body.local-server {
 @keyframes hs-down-in {
     0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(-10px);
+        position: absolute;
     }
     100% {
         opacity: 1;
         transform: translateY(0);
+        position: absolute;
     }
 }
 @keyframes hs-up-out {
     0% {
         opacity: 1;
         transform: translateY(0);
+        position: absolute;
     }
     100% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(-10px);
+        position: absolute;
     }
 }
 @keyframes hs-up-in {
     0% {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(10px);
+        position: absolute;
     }
     100% {
         opacity: 1;
         transform: translateY(0);
+        position: absolute;
     }
 }
 @keyframes hs-down-out {
     0% {
         opacity: 1;
         transform: translateY(0);
+        position: absolute;
     }
     100% {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(10px);
+        position: absolute;
     }
 }
 #HoverSummary {
@@ -376,6 +384,9 @@ body.local-server {
 #HoverSummary.bottom.hide:not(:hover) {
     animation: .2s hs-down-out ease-out;
     transform: translateY(9999px);
+}
+#HoverSummary.hide:not(:hover) {
+    position: fixed;
 }
 #HoverSummary.force-hide {
     display: none;
