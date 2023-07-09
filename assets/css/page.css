@@ -70,7 +70,8 @@
 }
 .tab .cross-refs {
     margin: 0;
-    padding: 15px 10px 0 15px;
+    padding: 10px 15px;
+    border-bottom: 2px dashed var(--gray);
 }
 .table-wrap .cross-refs {
     margin: 0;

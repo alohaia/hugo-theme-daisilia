@@ -4,7 +4,9 @@
 {{- $id      := .Get "id" -}}
 {{- $ls      := default false (.Get "left-sticky") -}}
 {{- $crossrefs := false -}}
-{{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+{{- if $id -}}{{- if and site.Data.refs .Page.File -}}
+{{- if index site.Data.refs .Page.File.Path -}}
+{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
   {{- $crossrefs = true -}}
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
 {{- if or (or $caption $attr) $crossrefs -}}
@@ -16,7 +18,11 @@
       {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
     {{- end -}}
     {{- range sort $refs "count" "desc" -}}
-      {{- $refs_html = printf "<a class=\"cross-ref page\" href=\"%s\">%s</a>" (replaceRE "\\s+" "-" (relref $.Page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
+      {{- $refs_html = printf "<a class=\"cross-ref page\" href=\"%s\">%s%s</a>"
+        (replaceRE "\\s+" "-" (relref $.Page .ref | lower))
+        ($.Page.GetPage (index (split .ref "#") 0)).Title
+        (cond (len (split .ref "#") | ne 1) (index (last 1 (split .ref "#")) 0 | print "#") "")
+      -}}
     {{- end -}}
     {{- $refs_html = printf "<div class=\"cross-refs\">%s</div>" $refs_html -}}
   {{- end -}}

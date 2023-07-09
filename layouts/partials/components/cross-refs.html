@@ -4,7 +4,12 @@
 {{- $refs = $refs | append (dict "ref" $v "count" $c) -}}
 {{- end -}}
 {{- range sort $refs "count" "desc" -}}
-{{- $refs_html = printf "%s<a class=\"cross-ref page\" href=\"%s\">%s</a>" $refs_html (replaceRE "\\s+" "-" (relref $.page .ref | lower)) (index (last 1 (split .ref "/")) 0) -}}
+{{- $refs_html = printf "%s<a class=\"cross-ref page\" href=\"%s\">%s%s</a>"
+  $refs_html
+  (replaceRE "\\s+" "-" (relref $.page .ref | lower))
+  ($.page.GetPage (index (split .ref "#") 0)).Title
+  (cond (len (split .ref "#") | ne 1) (index (last 1 (split .ref "#")) 0 | print "#") "")
+-}}
 {{- end -}}
 {{- if ne $refs_html "" -}}
   <div class="cross-refs">{{ $refs_html | safeHTML }}</div>
