@@ -247,12 +247,14 @@ img.fancybox__image {
 .table-wrap {
     overflow: auto;
     max-height: 75vh;
-}
-.table-title {
-    margin-top: 15px;
+    margin-bottom: 18px;
 }
 .table-caption {
-    margin-bottom: 15px;
+    margin-top: -18px;
+    margin-bottom: 18px;
+}
+.table-title {
+    margin-top: 18px;
 }
 table:not(.highlight table) {
     white-space: nowrap;
