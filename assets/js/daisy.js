@@ -1,3 +1,22 @@
+// set and get cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++)
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
 function loadScript(src, type = "text/javascript",async = true) {
     var scriptEle = document.createElement('script');
     scriptEle.src = src;
@@ -121,10 +140,18 @@ function toggleSidebar(force){
     let siteRoot = document.getElementById("SiteRoot");
     if (force === 0) {
         siteRoot.classList.remove("sidebar-active");
+        setCookie("sidebarActive", "false", 28);
     } else if (force === 1) {
         siteRoot.classList.add("sidebar-active");
+        setCookie("sidebarActive", "true", 28);
     } else {
-        siteRoot.classList.toggle("sidebar-active");
+        if (siteRoot.classList.contains("sidebar-active")) {
+            siteRoot.classList.remove("sidebar-active");
+            setCookie("sidebarActive", "false", 28);
+        } else {
+            siteRoot.classList.add("sidebar-active");
+            setCookie("sidebarActive", "true", 28);
+        }
     }
 }
 
@@ -185,8 +212,22 @@ document.onreadystatechange = function(){
     if(document.readyState == 'complete') {
         $('#preload-mask').fadeOut('1000')
         document.body.style.overflowY = (typeof InstallTrigger !== 'undefined') ? 'auto' : 'overlay'; // set 'auto' for firefox
+
+        if (getCookie("sidebarActive") == "true") {
+            toggleSidebar(1);
+        }
     }
 };
+
+// on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', () => {
+    // Track all sections that have an `id` applied
+    document.querySelectorAll('.heading').forEach((section) => {
+        TOCOnscrollObserver.observe(section);
+    });
+
+    loadOrRefershThirdPartyScripts();
+});
 
 // TOC active
 const TOCOnscrollObserver = new IntersectionObserver(entries => {
@@ -200,16 +241,6 @@ const TOCOnscrollObserver = new IntersectionObserver(entries => {
             el.parentElement.classList.remove('active')
         }
     });
-});
-
-// on DOMContentLoaded
-window.addEventListener('DOMContentLoaded', () => {
-    // Track all sections that have an `id` applied
-    document.querySelectorAll('.heading').forEach((section) => {
-        TOCOnscrollObserver.observe(section);
-    });
-
-    loadOrRefershThirdPartyScripts();
 });
 
 // https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
@@ -313,25 +344,6 @@ fetch("/index.json").then((e)=>{e.json().then((jsonData)=>{
 
 function offsetToBody(e, side) {
     return e.getBoundingClientRect()[side] - document.body.getBoundingClientRect()[side];
-}
-
-// set and get cookie
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  var expires = "expires=" + d.toGMTString();
-  document.cookie = cname + "=" + cvalue + "; " + expires;
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++)
-  {
-    var c = ca[i].trim();
-    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-  }
-  return "";
 }
 
 // messages
