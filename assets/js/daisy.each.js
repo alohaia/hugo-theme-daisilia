@@ -118,7 +118,7 @@ for (anchor of document.querySelectorAll("a.page")) {
                 summaryContentEl.style.left = null;
                 summaryContentEl.style.right = "3px";
 
-                x = summaryContentEl.clientWidth - document.body.offsetWidth + e.clientX;
+                x = summaryContentEl.clientWidth - document.body.offsetWidth - document.body.getBoundingClientRect().x + e.clientX;
                 x = Math.min(x, summaryContentEl.clientWidth - 20);
             };
 
