@@ -217,6 +217,9 @@ document.onreadystatechange = function(){
             toggleSidebar(1);
         }
     }
+
+    const hashEl = document.getElementById(decodeURI(document.location.hash.slice(1)));
+    if (hashEl) hashEl.scrollIntoView({behavior: "instant"});
 };
 
 // on DOMContentLoaded
