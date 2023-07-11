@@ -19,7 +19,7 @@
         {{- errorf "The %q shortcode was unable to get the remote SVG file. Details: %s. See %s" $.Name . $.Position -}}
       {{- else -}}
         <div class="diagram-scroll">
-          <div class="svg-wrap">
+          <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:{{ . }}"{{ end }}>
             {{- .Content | safeHTML -}}
           </div>
         </div>

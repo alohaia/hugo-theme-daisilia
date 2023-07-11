@@ -8,14 +8,8 @@ description = ""
 homepage = "https://github.com/alohaia/hugo-theme-daisilia"
 tags = ["blog", "light", "docs", "responsive"]
 features = ["responsive", "blog", "simple", "clean", "docs"]
-min_version = "0.41.0"
+min_version = "0.112.3"
 
 [author]
   name = "Qihuan Liu"
-  homepage = "https://aloha.org.cn/"
-
-# If porting an existing theme
-[original]
-  name = ""
-  homepage = ""
-  repo = ""
+  homepage = "https://daisilia.com/"

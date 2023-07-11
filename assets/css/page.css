@@ -183,7 +183,7 @@ figure {
 .diagram-scroll {
     overflow: auto;
 }
-figure.kroki .svg-wrap {
+.svg-wrap {
     margin: auto;
 }
 .svg-wrap svg {
