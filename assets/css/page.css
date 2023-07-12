@@ -309,6 +309,9 @@ table .table-cell.left {
     text-align: left;
     padding-right: 1em;
 }
+table .table-cell.center {
+    text-align: center;
+}
 
 /* highlight & block */
 code * {
