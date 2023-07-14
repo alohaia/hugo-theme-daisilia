@@ -1,30 +1,40 @@
 {{- $id := .Get "id" -}}
 {{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
+{{- $embed := .Get "embed" -}}
 {{- $crossrefs := false -}}
 {{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
 {{- $crossrefs = true -}}
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
 {{- $src := .Get "src" | safeURL -}}
-{{- if not (findRE "^(ftp|sftp|file|ftps?|gemini|git|gopher|https?|ircs?|kitty|mailto|news|ssh)://|^/" $src) -}}
+{{- $isURL := (findRE "^(ftp|sftp|file|ftps?|gemini|git|gopher|https?|ircs?|kitty|mailto|news|ssh)://|^/" $src)  -}}
+{{- if not $isURL -}}
+  {{- if $embed -}}
+    {{- $src = print (urls.Parse .Page.RelPermalink).Path $src -}}
+  {{- else -}}
     {{- $src = print .Page.RelPermalink $src -}}
+  {{- end -}}
 {{- end -}}
 <figure
   {{- with or (.Get "class") (.Get "style") }} class="{{ . }}"{{ end -}}
   {{- with $id }} id="{{ . }}"{{ end -}}
   {{- with .Get "width" }} style="width:{{ . }}"{{ end -}}
 >
-  {{- if .Get "embed" -}}
-    {{- with resources.GetRemote $src }}
-      {{- with .Err -}}
-        {{- errorf "The %q shortcode was unable to get the remote SVG file. Details: %s. See %s" $.Name . $.Position -}}
+  {{- if $embed -}}
+    <div class="diagram-scroll">
+      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:{{ . }}"{{ end }}>
+      {{- if $isURL -}}
+        {{- with resources.GetRemote $src }}
+          {{- with .Err -}}
+            {{- errorf "The %q shortcode was unable to get the remote SVG file. Details: %s. See %s" $.Name . $.Position -}}
+          {{- else -}}
+                {{- .Content | safeHTML -}}
+          {{- end -}}
+        {{- end -}}
       {{- else -}}
-        <div class="diagram-scroll">
-          <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:{{ . }}"{{ end }}>
-            {{- .Content | safeHTML -}}
-          </div>
-        </div>
+        {{- readFile $src | safeHTML -}}
       {{- end -}}
-    {{- end -}}
+      </div>
+    </div>
   {{- else -}}
     {{- if .Get "link" -}}
     <a href="{{ .Get "link" }}" target="{{ with .Get "target" }}{{ . }}{{ else }}_blank{{ end }}">
