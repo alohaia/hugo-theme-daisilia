@@ -33,10 +33,19 @@
     $refs_html
   -}}
 {{- end -}}
-{{- $head := printf "%s<div class=\"table-wrap\"><table%s%s>"
-    (cond (ne $title "") (printf "<h4 class=\"table-title\">%s</h4>" ($title | markdownify)) "")
-    (cond (ne $id "") (printf " id=\"%s\"" $id) "")
-    (cond $ls " class=\"left-sticky\"" "")
--}}
+{{- $head := "" }}
+{{- if ne $title "" -}}
+  {{- $head = printf "%s<div class=\"table-wrap\"><table%s>"
+      (printf "<h4%s class=\"table-title\">%s</h4>"
+        (cond (ne $id "") (printf " id=\"%s\"" $id) "")
+        ($title | markdownify))
+      (cond $ls " class=\"left-sticky\"" "")
+  -}}
+{{- else -}}
+  {{- $head = printf "<div class=\"table-wrap\"><table%s%s>"
+      (cond (ne $id "") (printf " id=\"%s\"" $id) "")
+      (cond $ls " class=\"left-sticky\"" "")
+  -}}
+{{- end -}}
 {{- .Inner | markdownify | replaceRE "<table>" $head | replaceRE "</table>" (printf "</table></div>%s" $caption) | safeHTML -}} {{- /* use markdownify to insure .Inner is render result */ -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

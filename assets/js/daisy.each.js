@@ -85,11 +85,11 @@ for (anchor of document.querySelectorAll("a.page")) {
     var timeOutId;
     var lastHoverEl;
     anchor.addEventListener("mouseenter", function(e) {
-        summaryContentEl.classList.remove("force-hide");
-
         if (lastHoverEl == this) { clearTimeout(timeOutId) };
         lastHoverEl = this;
         timeOutId = setTimeout(()=>{
+            summaryContentEl.classList.remove("force-hide");
+
             var linkHref = this.getAttribute("href");
             var linkAnchor = this.innerText.split("#")[1];
             if (USE_TEXT_ANCHOR) {
