@@ -3,24 +3,16 @@
 {{/* fancybox */}}
 {{- if $theme.fancybox.enable }}{{ partial "third-party/fancybox.html" . }}{{ end -}}
 
-{{- /* daisy.js */ -}}
-{{- $daisy := resources.Get "js/daisy.js" | minify | fingerprint -}}
-<script src="{{ $daisy.RelPermalink }}" integrity="{{ $daisy.Data.Integrity }}"></script>
+<script src="/js/daisy.js"></script>
+<script data-pjax src="/js/daisy.each.js"></script>
 
-{{- /* daisy.each.js */ -}}
-{{- $each := resources.Get "js/daisy.each.js" | minify | fingerprint -}}
-<script data-pjax src="{{ $each.RelPermalink }}" integrity="{{ $each.Data.Integrity  }}"></script>
-
-{{- /* pjax.js */ -}}
 {{- if .Site.Params.daisy.pjax.enable -}}
-  <script src="/js/pjax.js"></script> {{- /* static/js/pjax.js */ -}}
-  {{- $pjax := resources.Get "js/pjax.js" | minify | fingerprint -}} {{- /* assets/js/pjax.js */ -}}
-  <script src="{{ $pjax.RelPermalink }}" integrity="{{ $pjax.Data.Integrity }}"></script>
+  <script src="/js/pjax.js"></script>
+  <script src="/js/pjax.user.js"></script>
 {{- end -}}
 
 {{- if $theme.calendar.enable -}}
-  {{- $calendar := resources.Get "js/calendar.js" | minify | fingerprint -}}
-  <script src="{{ $calendar.RelPermalink }}" integrity="{{ $calendar.Data.Integrity }}"></script>
+  <script src="/js/calendar.js"></script>
 {{- end -}}
 
 {{- if eq $theme.quote.enable "jinrishici" -}}

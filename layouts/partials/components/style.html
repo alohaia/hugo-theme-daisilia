@@ -1,16 +1,12 @@
-{{- $csses := slice
-  (resources.Get "css/root.css")
-  (resources.Get "css/sidebar.css")
-  (resources.Get "css/main.css")
-  (resources.Get "css/page.css")
-  (resources.Get "css/scrollbar.css")
-  (resources.Get "css/tags.css")
-  (resources.Get "css/fastsearch.css")
-  (resources.Get "css/print.css")
-  (resources.Get "css/message.css")
--}}
-{{- $styles := $csses | resources.Concat "css/bundle.css" | minify | fingerprint -}}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>
+<link href="/css/root.css" rel="stylesheet">
+<link href="/css/sidebar.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<link href="/css/page.css" rel="stylesheet">
+<link href="/css/scrollbar.css" rel="stylesheet">
+<link href="/css/tags.css" rel="stylesheet">
+<link href="/css/fastsearch.css" rel="stylesheet">
+<link href="/css/print.css" rel="stylesheet">
+<link href="/css/message.css" rel="stylesheet">
 <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">

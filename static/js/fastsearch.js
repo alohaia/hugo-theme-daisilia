@@ -15,18 +15,18 @@ var matchSurroundLength = 30;
 // force true: force on, false: force off
 //
 function toggleSearch(force) {
-    // Load json search index if first time invoking search
-    // Means we don't load json unless searches are going to happen; keep user payload small unless needed
-    if(firstRun) {
-        loadSearch(); // loads our json data and builds fuse.js search index
-        firstRun = false; // let's never do this again
-    }
-
     // Toggle visibility of search box
     if (force == true || (force === undefined && !searchVisible)) {
         document.getElementById("fastSearch").style.display = "block"
         document.body.style.overflowY = "hidden"
-        maininput.focus();
+
+        if (firstRun) {
+            loadSearch();
+            firstRun = false;
+        } else {
+            maininput.focus();
+        }
+
         searchVisible = true; // search is visible now
     } else {
         // document.getElementById("fastSearch").style.display = "none"
@@ -113,6 +113,9 @@ function loadSearch() {
         }
 
         maininput.disabled = false;
+
+        maininput.tabIndex = "0";
+        maininput.focus();
     })
 }
 
