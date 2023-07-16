@@ -60,7 +60,7 @@ $(".series-list").ready(function(){
     let series = document.querySelector(".series-list");
     if(series && !series.classList.contains("numbered")){
         series.classList.add("numbered");
-        genUlNum(series);
+        genUlNum(series, [0], true);
     }
 })
 
@@ -73,6 +73,14 @@ $(".series-content").ready(function(){
             break
         }
     }
+
+    // collapsable list
+    var collapseTriggers = document.querySelectorAll(".collapse-trigger");
+    collapseTriggers.forEach(function (el) {
+        el.addEventListener('click', function() {
+            this.parentElement.classList.toggle("collapsed");
+        });
+    })
 })
 
 // https://css-tricks.com/how-to-animate-the-details-element-using-waapi/

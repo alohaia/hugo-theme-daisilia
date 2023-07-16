@@ -565,9 +565,6 @@ dl.indent dt::after {
 .series-container a:hover {
     color: var(--orange-deep);
 }
-.series-title.now, .series-item.now {
-    color: var(--orange);
-}
 .series-toggle {
     position: absolute;
     top: 120px;
@@ -627,6 +624,30 @@ dl.indent dt::after {
 }
 .series-list li:hover {
     border-color: var(--orange);
+}
+/* collapse */
+.collapse-trigger:before {
+    content: "\f146";
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+}
+.collapsed .collapse-trigger:before {
+    content: "\f0fe";
+}
+.collapsed ul {
+    display: none;
+}
+.series-item:not(.collapse-trigger + .series-item) {
+    margin-left: 14px;
+}
+.collapse-trigger {
+    color: var(--gray-deep);
+    cursor: pointer;
+    margin-right: 2px;
+    margin-left: -2px;
+}
+.collapse-trigger:hover {
+    color: var(--orange);
 }
 
 /* related-contents */

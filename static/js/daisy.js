@@ -163,11 +163,11 @@ function searchIndex(anchor) {
     }
     return 0;
 }
-function genUlNum(ulNode, nums = [0]){
+function genUlNum(ulNode, nums = [0], addTrigger = false){
     for(let i = 0; i < ulNode.childElementCount; i++){
         nums[nums.length-1] += 1;
-        if(ulNode.children[i].childElementCount > 1) {
-            genUlNum(ulNode.children[i].children[1], nums.concat(0));
+        if (ulNode.children[i].childElementCount > 1) {
+            genUlNum(ulNode.children[i].children[1], nums.concat(0), addTrigger);
         }
         if (ulNode.parentNode.id == "TableOfContents") {
             let index = searchIndex(ulNode.children[i].children[0].getAttribute("href"));
@@ -175,8 +175,14 @@ function genUlNum(ulNode, nums = [0]){
                 nums[nums.length-1] = index;
             }
         }
-        ulNode.children[i].children[0].innerText = nums.join(".") + ". " + ulNode.children[i].children[0].innerText;
-        if(i == ulNode.childElementCount){
+        ulNode.children[i].children[0].innerHTML =
+            nums.join(".") + ". " + ulNode.children[i].children[0].innerText;
+        if (addTrigger && ulNode.children[i].children[1]) {
+            let triggerEl = document.createElement("i");
+            triggerEl.classList.add("collapse-trigger");
+            ulNode.children[i].insertBefore(triggerEl, ulNode.children[i].children[0]);
+        }
+        if (i == ulNode.childElementCount){
             return;
         }
     }
