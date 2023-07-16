@@ -622,6 +622,12 @@ dl.indent dt::after {
     width: 100%;
     text-align: center;
 }
+.series-list li {
+    border-left: 2px solid var(--gray);
+}
+.series-list li:hover {
+    border-color: var(--orange);
+}
 
 /* related-contents */
 @media (min-width: 751px) {
