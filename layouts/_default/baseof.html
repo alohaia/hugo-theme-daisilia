@@ -22,7 +22,14 @@
         {{- block "main" . }}{{ end -}}
       </div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
-      <div class="site-right" data-pjax>{{ block "right" . }}{{ end }}</div>
+      <div class="site-right">
+        <div class="series-container">
+          <div class="series-toggle"><i class="fas fa-book"></i></div>
+          <div id="SeriesList" class="series-content">
+            {{- block "seriesList" . }}{{- end }}
+          </div>
+        </div>
+      </div>
     </div>
     {{- partial "fastsearch" . -}}
     <footer class="site-footer" id="SiteFooter">{{ partial "footer" . }}</footer>

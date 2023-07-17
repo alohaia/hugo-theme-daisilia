@@ -56,33 +56,6 @@ $("sidebar-content").ready(function(){
     // }
 })
 
-$(".series-list").ready(function(){
-    let series = document.querySelector(".series-list");
-    if(series && !series.classList.contains("numbered")){
-        series.classList.add("numbered");
-        genUlNum(series, [0], true);
-    }
-})
-
-$(".series-content").ready(function(){
-    if(window.location.pathname == "/series/") { return }
-    let items = document.querySelectorAll(".series-title, .series-item")
-    for(let item of items){
-        if(item.getAttribute("href") == window.location.pathname) {
-            item.classList.add("now")
-            break
-        }
-    }
-
-    // collapsable list
-    var collapseTriggers = document.querySelectorAll(".collapse-trigger");
-    collapseTriggers.forEach(function (el) {
-        el.addEventListener('click', function() {
-            this.parentElement.classList.toggle("collapsed");
-        });
-    })
-})
-
 // https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
 document.querySelectorAll('details').forEach((el) => {
   new Accordion(el);

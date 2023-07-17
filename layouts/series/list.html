@@ -16,12 +16,9 @@
   {{- end -}}
 {{- end -}}
 
-{{- define "right" -}}
+{{- define "seriesList" -}}
   {{- if ne . (.GetPage "series") -}}
-    <div class="series-container">
-      <div class="series-toggle"><i class="fas fa-book"></i></div>
-      <div class="series-content">{{ partial "components/series-list" . }}</div>
-    </div>
+    {{ partial "components/series-list" . }}
   {{- end -}}
   {{- partial "components/related" . -}}
 {{- end  -}}

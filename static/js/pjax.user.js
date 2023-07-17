@@ -1,5 +1,6 @@
 var pjax;
 const siteRoot = document.getElementById("SiteRoot");
+var lastSeries = "";
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
@@ -48,4 +49,23 @@ document.addEventListener("pjax:complete", function () {
     });
 
     loadOrRefershThirdPartyScripts();
+
+    // series list
+    var currentSeries = window.location.pathname.split("/")[2];
+    if (
+        window.location.pathname.split("/")[1] == "series"
+        && currentSeries
+        && currentSeries != lastSeries
+        ) {
+        pjax.switchSelector(window.location.pathname, {selectors: ["#SeriesList"]}, function() {
+            pjax.refresh(document.getElementById("SeriesList"));
+            initSeriesList();
+        })
+    } else {
+        updateSeriesList();
+    }
+
+    if (window.location.pathname.split("/")[1] == "series" && currentSeries) {
+        lastSeries = currentSeries;
+    }
 });

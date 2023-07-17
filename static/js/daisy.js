@@ -140,17 +140,17 @@ function toggleSidebar(force){
     let siteRoot = document.getElementById("SiteRoot");
     if (force === 0) {
         siteRoot.classList.remove("sidebar-active");
-        setCookie("sidebarActive", "false", 28);
+        setCookie("sidebarActive", "false");
     } else if (force === 1) {
         siteRoot.classList.add("sidebar-active");
-        setCookie("sidebarActive", "true", 28);
+        setCookie("sidebarActive", "true");
     } else {
         if (siteRoot.classList.contains("sidebar-active")) {
             siteRoot.classList.remove("sidebar-active");
-            setCookie("sidebarActive", "false", 28);
+            setCookie("sidebarActive", "false");
         } else {
             siteRoot.classList.add("sidebar-active");
-            setCookie("sidebarActive", "true", 28);
+            setCookie("sidebarActive", "true");
         }
     }
 }
@@ -192,7 +192,6 @@ function back2Top(){
     $("html").animate({scrollTop: document.getElementById("SiteHeader").scrollHeight}, 200);
 }
 
-/****************** Once ****************/
 // add click event for .sidebar-toggle
 document.getElementById("SidebarToggle").onclick = toggleSidebar;
 
@@ -388,3 +387,39 @@ function offsetToBody(e, side) {
         })
     })});
 })()
+
+
+function updateSeriesList() {
+    document.querySelectorAll(".series-title.now, .series-item.now").forEach(function (el) {
+        el.classList.remove("now");
+    });
+    if (window.location.pathname.split("/")[1] == "series" && window.location.pathname.split("/")[2]) {
+        document.querySelectorAll(".series-title, .series-item").forEach(function (el) {
+            if(el.getAttribute("href") == window.location.pathname) {
+                el.classList.add("now");
+            }
+        })
+
+    }
+}
+
+function initSeriesList() {
+    // numbering
+    let series = document.querySelector(".series-list");
+    if(series && !series.classList.contains("numbered")){
+        series.classList.add("numbered");
+        genUlNum(series, [0], true);
+    }
+    // collapsable series-list
+    document.querySelectorAll(".collapse-trigger").forEach(function (el) {
+        el.addEventListener('click', function() {
+            this.parentElement.classList.toggle("collapsed");
+        });
+    })
+
+    updateSeriesList();
+}
+
+$(".series-content").ready(function(){
+    initSeriesList();
+})

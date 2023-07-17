@@ -104,6 +104,100 @@ Pjax.prototype = {
     );
   },
 
+  switchSelector: function(href, options, callback) {
+    var forEachEls = require("./lib/foreach-els");
+    var defaultSwitches = require("./lib/switches");
+    var pjax = this;
+
+    // from 16
+    var request = new XMLHttpRequest();
+    var requestMethod = "GET";
+    var timeout = options.timeout || 0;
+    var switchesQueue = [];
+
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        if (request.status === 200) {
+
+          // from loadContent
+          var tmpEl = document.implementation.createHTMLDocument("pjax");
+
+          // parse HTML attributes to copy them
+          // since we are forced to use documentElement.innerHTML (outerHTML can't be used for <html>)
+          // var htmlRegex = /<html[^>]+>/gi;
+          // var htmlAttribsRegex = /\s?[a-z:]+(?:=['"][^'">]+['"])*/gi;
+          // var matches = request.responseText.match(htmlRegex);
+          // if (matches && matches.length) {
+          //   matches = matches[0].match(htmlAttribsRegex);
+          //   if (matches.length) {
+          //     matches.shift();
+          //     matches.forEach(function(htmlAttrib) {
+          //       var attr = htmlAttrib.trim().split("=");
+          //       if (attr.length === 1) {
+          //         tmpEl.documentElement.setAttribute(attr[0], true);
+          //       } else {
+          //         tmpEl.documentElement.setAttribute(attr[0], attr[1].slice(1, -1));
+          //       }
+          //     });
+          //   }
+          // }
+
+          tmpEl.documentElement.innerHTML = request.responseText;
+
+          // from switchSelectors(17)
+          options.selectors.forEach(function(selector) {
+            var newEls = tmpEl.querySelectorAll(selector);
+            var oldEls = document.querySelectorAll(selector);
+            forEachEls(
+              newEls,
+              function(newEl, i) {
+                var oldEl = oldEls[i];
+                if (this.log) {
+                  this.log("newEl", newEl, "oldEl", oldEl);
+                }
+
+                var callback = switches[selector]
+                  ? switches[selector].bind(
+                      this,
+                      oldEl,
+                      newEl,
+                      options,
+                      switchesOptions[selector]
+                    )
+                  : defaultSwitches.outerHTML.bind(this, oldEl, newEl, options);
+
+                switchesQueue.push(callback);
+              },
+              this
+            );
+          }, pjax);
+
+          // pjax.state.numPendingSwitches = switchesQueue.length;
+
+          switchesQueue.forEach(function(queuedSwitch) {
+            queuedSwitch();
+          });
+
+          if (callback) callback();
+
+        } else if (request.status !== 0) {
+          console.error(request)
+        }
+      }
+    };
+
+    request.open(requestMethod, href, true);
+    request.timeout = timeout;
+    request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    request.setRequestHeader("X-PJAX", "true");
+    request.setRequestHeader(
+      "X-PJAX-Selectors",
+      JSON.stringify(options.selectors)
+    );
+
+    request.send();
+  },
+
   latestChance: function(href) {
     window.location = href;
   },
