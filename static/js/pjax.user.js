@@ -1,6 +1,6 @@
 var pjax;
 const siteRoot = document.getElementById("SiteRoot");
-var lastSeries = "";
+var lastSeries = decodeURI(window.location.pathname.split("/")[2]);
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
@@ -51,21 +51,22 @@ document.addEventListener("pjax:complete", function () {
     loadOrRefershThirdPartyScripts();
 
     // series list
-    var currentSeries = window.location.pathname.split("/")[2];
+    var currentSeries = decodeURI(window.location.pathname.split("/")[2]);
     if (
         window.location.pathname.split("/")[1] == "series"
         && currentSeries
+        && lastSeries
         && currentSeries != lastSeries
         ) {
         pjax.switchSelector(window.location.pathname, {selectors: ["#SeriesList"]}, function() {
             pjax.refresh(document.getElementById("SeriesList"));
             initSeriesList();
+            console.log("init")
+
+            lastSeries = currentSeries;
         })
     } else {
+        console.log("update")
         updateSeriesList();
-    }
-
-    if (window.location.pathname.split("/")[1] == "series" && currentSeries) {
-        lastSeries = currentSeries;
     }
 });

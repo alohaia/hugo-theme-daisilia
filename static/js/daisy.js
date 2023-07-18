@@ -395,7 +395,7 @@ function updateSeriesList() {
     });
     if (window.location.pathname.split("/")[1] == "series" && window.location.pathname.split("/")[2]) {
         document.querySelectorAll(".series-title, .series-item").forEach(function (el) {
-            if(el.getAttribute("href") == window.location.pathname) {
+            if(decodeURI(el.getAttribute("href")) == decodeURI(window.location.pathname)) {
                 el.classList.add("now");
             }
         })
@@ -421,5 +421,6 @@ function initSeriesList() {
 }
 
 $(".series-content").ready(function(){
+    console.log("init")
     initSeriesList();
 })

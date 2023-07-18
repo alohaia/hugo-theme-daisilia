@@ -45,15 +45,6 @@ $("sidebar-content").ready(function(){
     window.onscroll = function() {
         updateScrollPercent();
     }
-
-    // let anchors = document.querySelectorAll('a[href^="#"]');
-    // for(let anchor of anchors){
-    //     anchor.onclick = function(e) {
-    //         console.log(anchor.getAttribute("href"));
-    //         location.hash = anchor.getAttribute("href");
-    //         e.preventDefault();
-    //     }
-    // }
 })
 
 // https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
