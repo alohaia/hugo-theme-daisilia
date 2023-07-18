@@ -159,54 +159,66 @@ document.addEventListener("pjax:complete", function () {
 // a search query (for "term") every time a letter is typed
 // in the search box
 //
+var currentProcess;
 function executeSearch(term) {
-    let results = fuse.search(term); // the actual query being run using fuse.js
-    let searchitems = ''; // our results bucket
-
-    if (results.length === 0) { // no results based on what was typed into the input box
-        resultsAvailable = false
-        searchitems = ''
-    } else { // build our html
-        for (let result of uniqueResults(results, 20)) {
-        // for (let result of results) {
-            var matchHTML = '';
-            for (match of result.matches) {
-                for (index of match.indices) {
-                    var context = match.value.slice(index[0]-matchSurroundLength >= 0 ? index[0]-matchSurroundLength : 0, index[0])
-                        + `<span class="search-item-match-highlight">${match.value.slice(index[0], index[1]+1)}</span>`
-                        + match.value.slice(index[1]+1, index[1]+1+matchSurroundLength);
-                    matchHTML = (matchHTML || "") +
-                        `<span class="search-item-match-index">${index[0] + "-" + index[1]}: </span>
-                        <span class="search-item-match-context">... ${context} ...</span>`;
-                }
-            }
-            let tags = ""
-            if(result.item.tags && result.item.tags.length > 0) {
-                for(let tag of result.item.tags) {
-                    tags += `<a class="search-item-tag" href="/tags/${tag}">${tag}</a>`;
-                }
-            }
-            searchitems = searchitems +
-                `<li class="search-result-item">
-                    <div class="search-item-heading">
-                        <a class="search-item-title" tabindex="0" href="${result.item.permalink}">${result.item.title}</a>
-                        <span class="search-item-publish">${result.item.date}</span>
-                        <span class="search-item-tags">${tags}</span>
-                        <span class="search-item-edit">${result.item.edit}</span>
-                    </div>
-                    <div class="search-item-summary article-content summary">${result.item.summary}</div>
-                    <div class="search-item-matches">${matchHTML}</div>
-                </li>`
+    new Promise((resolve, reject) => {
+        if (!currentProcess) {
+            currentProcess = 1234;
+            resolve(fuse.search(term)); // the actual query being run using fuse.js
+        } else {
+            clearTimeout(currentProcess);
+            currentProcess = setTimeout(() => {
+                resolve(fuse.search(term)); // the actual query being run using fuse.js
+            }, 500)
         }
-        resultsAvailable = true
-    }
+    }).then(results => {
+        let searchitems = ''; // our results bucket
 
-    list.innerHTML = searchitems
-    if (results.length > 0) {
-        first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
-        last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
-    }
+        if (results.length === 0) { // no results based on what was typed into the input box
+            resultsAvailable = false
+            searchitems = ''
+        } else { // build our html
+            for (let result of uniqueResults(results, 20)) {
+            // for (let result of results) {
+                var matchHTML = '';
+                for (match of result.matches) {
+                    for (index of match.indices) {
+                        var context = match.value.slice(index[0]-matchSurroundLength >= 0 ? index[0]-matchSurroundLength : 0, index[0])
+                            + `<span class="search-item-match-highlight">${match.value.slice(index[0], index[1]+1)}</span>`
+                            + match.value.slice(index[1]+1, index[1]+1+matchSurroundLength);
+                        matchHTML = (matchHTML || "") +
+                            `<span class="search-item-match-index">${index[0] + "-" + index[1]}: </span>
+                            <span class="search-item-match-context">... ${context} ...</span>`;
+                    }
+                }
+                let tags = ""
+                if(result.item.tags && result.item.tags.length > 0) {
+                    for(let tag of result.item.tags) {
+                        tags += `<a class="search-item-tag" href="/tags/${tag}">${tag}</a>`;
+                    }
+                }
+                searchitems = searchitems +
+                    `<li class="search-result-item">
+                        <div class="search-item-heading">
+                            <a class="search-item-title" tabindex="0" href="${result.item.permalink}">${result.item.title}</a>
+                            <span class="search-item-publish">${result.item.date}</span>
+                            <span class="search-item-tags">${tags}</span>
+                            <span class="search-item-edit">${result.item.edit}</span>
+                        </div>
+                        <div class="search-item-summary article-content summary">${result.item.summary}</div>
+                        <div class="search-item-matches">${matchHTML}</div>
+                    </li>`
+            }
+            resultsAvailable = true
+        }
 
-    // refresh pjax
-    window.pjax.refresh(list);
+        list.innerHTML = searchitems
+        if (results.length > 0) {
+            first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
+            last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
+        }
+
+        // refresh pjax
+        window.pjax.refresh(list);
+    });
 }

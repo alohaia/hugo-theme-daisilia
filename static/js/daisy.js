@@ -421,6 +421,5 @@ function initSeriesList() {
 }
 
 $(".series-content").ready(function(){
-    console.log("init")
     initSeriesList();
 })

@@ -61,12 +61,10 @@ document.addEventListener("pjax:complete", function () {
         pjax.switchSelector(window.location.pathname, {selectors: ["#SeriesList"]}, function() {
             pjax.refresh(document.getElementById("SeriesList"));
             initSeriesList();
-            console.log("init")
 
             lastSeries = currentSeries;
         })
     } else {
-        console.log("update")
         updateSeriesList();
     }
 });
