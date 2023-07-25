@@ -52,6 +52,13 @@ document.querySelectorAll('details').forEach((el) => {
   new Accordion(el);
 });
 
+document.querySelectorAll(".article-content a[href^=\"#\"]").forEach(function (el) {
+    var id = decodeURI(el.getAttribute("href")).slice(1);
+    if (! document.getElementById(id)) {
+        el.outerHTML = el.innerHTML;
+    }
+})
+
 // HoverSummary
 for (anchor of document.querySelectorAll("a.page")) {
     var timeOutId;
