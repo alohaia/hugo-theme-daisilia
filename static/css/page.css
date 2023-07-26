@@ -601,7 +601,7 @@ dl.indent dt::after {
     content: none;
 }
 .series-content ul {
-    padding: 0 2px 5px 15px;
+    padding: 0 2px 0 15px;
     margin: 0;
 }
 .series-list {
