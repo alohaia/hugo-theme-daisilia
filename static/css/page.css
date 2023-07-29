@@ -180,16 +180,19 @@ figure {
     figure.right img { float: right }
 }
 /* kroki diagram */
-.diagram-scroll {
-    overflow: auto;
-}
-.svg-wrap {
-    margin: auto;
-}
-.svg-wrap svg {
-    max-width: -webkit-fill-available;
-    height: auto !important;
-}
+/* .diagram-scroll { */
+/*     overflow: auto; */
+/* } */
+/* .svg-wrap { */
+/*     margin: auto; */
+/* } */
+/* .svg-wrap svg { */
+/*     max-width: -webkit-fill-available; */
+/*     height: auto !important; */
+/* } */
+/* .diagram-kroki figcaption>.title::before { */
+/*     content: "Diagram - "; */
+/* } */
 /* mermaid */
 .mermaid[data-processed="true"] {
     margin: auto;
@@ -214,9 +217,6 @@ figcaption>.title, .table-title{
 figcaption>.title::before {
     content: "Figure - ";
     color: var(--gray);
-}
-.diagram-kroki figcaption>.title::before {
-    content: "Diagram - ";
 }
 .table-title::before {
     content: "Table - ";
