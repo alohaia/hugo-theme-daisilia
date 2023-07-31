@@ -55,7 +55,7 @@
       {{- if $crossrefs -}}
         {{- partial "components/cross-refs.html" (dict "page" .Page "index" $id) -}}
       {{- end -}}
-      {{- with (.Get "title") }}<h4 class="title">{{ . }}</h4>{{ end -}}
+      {{- with (.Get "title") }}<h4 class="title">{{ . | markdownify }}</h4>{{ end -}}
       {{- if or (.Get "caption") (.Get "attr") -}}<p class="caption">
         {{- .Get "caption" | markdownify -}}
         {{- with .Get "attrlink" -}}<a href="{{ . }}">{{- .Get "attr" | markdownify -}}</a>{{ end -}}

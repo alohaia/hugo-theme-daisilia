@@ -1,2 +1,2 @@
-<div class="section-heading">{{ .Inner | markdownify }}</div>
+<div class="section-heading{{ with .Get "nofloat" }} nofloat{{ else }} float{{ end }}">{{ .Inner | markdownify }}</div>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

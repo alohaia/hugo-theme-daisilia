@@ -1030,7 +1030,7 @@ blockquote .quote-from {
 .section-heading:hover {
     opacity: 1;
 }
-.section-heading {
+.section-heading.float {
     position: relative;
     left: -40px;
     width: 0;
@@ -1041,7 +1041,7 @@ blockquote .quote-from {
     opacity: .6;
 }
 @media (min-width: 1000px) and (max-width: 1225px) {
-    .sidebar-active .section-heading {
+    .sidebar-active .section-heading.float {
         position: unset;
         left: unset;
         width: unset;
@@ -1049,23 +1049,23 @@ blockquote .quote-from {
         writing-mode: unset;
         opacity: unset;
     }
-    .sidebar-active .section-heading {
-        display: inline-block;
+    .sidebar-active .section-heading.float {
+        display: block;
         margin: 10px 0;
         font-weight: bold;
         font-family: var(--font-serif);
     }
-    .sidebar-active .section-heading::before {
+    .sidebar-active .section-heading.float::before {
         content: "「";
         color: var(--gray-deep);
     }
-    .sidebar-active .section-heading::after {
+    .sidebar-active .section-heading.float::after {
         content: "」";
         color: var(--gray-deep);
     }
 }
 @media (max-width: 900px) {
-    .section-heading {
+    .section-heading.float {
         position: unset;
         left: unset;
         width: unset;
@@ -1073,20 +1073,35 @@ blockquote .quote-from {
         writing-mode: unset;
         opacity: unset;
     }
-    .section-heading {
-        display: inline-block;
+    .section-heading.float {
+        display: block;
         margin: 10px 0;
         font-weight: bold;
         font-family: var(--font-serif);
     }
-    .section-heading::before {
+    .section-heading.float::before {
         content: "「";
         color: var(--gray-deep);
     }
-    .section-heading::after {
+    .section-heading.float::after {
         content: "」";
         color: var(--gray-deep);
     }
+}
+/* nofloat */
+.section-heading.nofloat {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+    font-family: var(--font-serif);
+}
+.section-heading.nofloat::before {
+    content: "「";
+    color: var(--gray-deep);
+}
+.section-heading.nofloat::after {
+    content: "」";
+    color: var(--gray-deep);
 }
 
 /* styled text */
