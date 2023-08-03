@@ -596,6 +596,7 @@ dl.indent dt::after {
     z-index: var(--z-series);
     line-height: 1.5;
     padding: 20px 10px;
+    color: var(--gray);
 }
 .series-content li::marker {
     content: none;

@@ -4,7 +4,7 @@
 </div>
 {{- else -}}
 <details{{ if .Get "open" }} open{{ end }} class="tab tab-card {{ (or (.Get "style") "default") }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
-  <summary class="tab-sum"><span class="tab-sum-content"><a href="{{ print "/cards/" (.Get "src") }}">{{ (or (.Get "title") (.Get "src")) }}</a></span><i class="tab-sum-trigger"></i></summary>
+  <summary class="tab-sum"><span class="tab-sum-content"><a class="page" href="{{ print "/cards/" (.Get "src") }}">{{ (or (.Get "title") (.Get "src")) }}</a></span><i class="tab-sum-trigger"></i></summary>
   <div class="tab-content">
     {{- (.Site.GetPage (print "/cards/" (.Get "src"))).Content -}}
   </div>
