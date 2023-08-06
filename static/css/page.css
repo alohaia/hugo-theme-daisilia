@@ -626,6 +626,9 @@ dl.indent dt::after {
 .series-list li:hover {
     border-color: var(--orange);
 }
+.series-item.empty {
+    opacity: .6;
+}
 .series-title.now, .series-item.now {
     color: var(--orange);
 }
