@@ -155,6 +155,29 @@ function toggleSidebar(force){
     }
 }
 
+$("sidebar-content").ready(function(){
+    function updateScrollPercent() {
+        const bkt = document.getElementById("Back2top");
+        const prog = document.getElementById("Back2topProgress");
+        var h = document.documentElement,
+            hd = document.getElementById("SiteHeader");
+            st = 'scrollTop',
+            sh = 'scrollHeight';
+        var percent = (h[st] - hd.offsetHeight) / ((h[sh]) - h.clientHeight - hd.offsetHeight) * 100;
+
+        if (percent <= 0) {
+            bkt.style.display = "none";
+        } else {
+            bkt.style.display = null;
+            prog.innerText = (percent < 99 ? Math.round(percent) : 100) + "%";
+        }
+    }
+    updateScrollPercent()
+    window.onscroll = function() {
+        updateScrollPercent();
+    }
+})
+
 // generate numbers for lists
 function searchIndex(anchor) {
     let heading = document.querySelector(".heading".concat(anchor));

@@ -24,27 +24,6 @@ $("sidebar-content").ready(function(){
     if (document.getElementById("TOCTitle")) {
         document.getElementById("TOCTitle").onclick = back2Top;
     }
-
-    function updateScrollPercent() {
-        const bkt = document.getElementById("Back2top");
-        const prog = document.getElementById("Back2topProgress");
-        var h = document.documentElement,
-            b = document.body,
-            st = 'scrollTop',
-            sh = 'scrollHeight';
-        var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
-
-        if (percent == 0) {
-            bkt.style.display = "none";
-        } else {
-            bkt.style.display = null;
-            prog.innerText = (percent < 99 ? Math.round(percent) : 100) + "%";
-        }
-    }
-    updateScrollPercent()
-    window.onscroll = function() {
-        updateScrollPercent();
-    }
 })
 
 // https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
