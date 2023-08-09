@@ -2,8 +2,12 @@
 <link rel="stylesheet" type="text/css" href="/css/fancybox.css">
 <script type="module">
   Fancybox.bind("[data-fancybox]", {
-    "groupAll": true,
-    "hideScrollbar": true, // to avoid viewport shaking, set scroll as overlay
+    groupAll: true,
+    hideScrollbar: true, // to avoid viewport shaking, set scroll as overlay
+    caption: function(instance, slide, caption){
+      const figcaption = slide.triggerEl?.querySelector("figcaption .title");
+      return figcaption ? figcaption.innerHTML : slide.caption || "";
+    }
   });
 </script>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

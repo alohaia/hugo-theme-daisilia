@@ -1,10 +1,4 @@
 @font-face {
-    font-family: "Han KaiTi";
-    font-style: italic;
-    src: local("AR PL UKai CN"), local("KaiTi"), local("STXingkai");
-}
-
-@font-face {
     font-family: "Eng Italic";
     font-style: italic;
     font-weight: bold;
@@ -27,7 +21,7 @@
 
     --font-handwrite: "Indie Flower", cursive;
     --font-code: "JetBrains Mono", monospace;
-    --font-italic: "Eng Italic", "Han KaiTi", "Noto Serif SC", cursive;
+    --font-italic: "Eng Italic", "Noto Serif SC", cursive;
     --font-sans: "Roboto", "Noto Sans SC", sans-serif;
     --font-serif: "Andada Pro", "Noto Serif SC", serif;
     --font-height-double: 32px;

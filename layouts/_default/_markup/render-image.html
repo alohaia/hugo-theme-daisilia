@@ -1,7 +1,6 @@
 {{- $fancybox := site.Params.daisy.fancybox.enable -}}
 <div class="image-wrap">
-  {{- if $fancybox }}<a data-fancybox data-src="{{ .Destination | safeURL }}">{{ end }}
-    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title }} title="{{ . }}"{{ end }} />
-  {{- if $fancybox }}</a>{{ end }}
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title }} title="{{ . }}"{{ end }}
+      {{- if $fancybox }} data-fancybox data-src="{{ .Destination | safeURL }}"{{ end }}/>
 </div>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

@@ -193,6 +193,10 @@ figure {
 /* .diagram-kroki figcaption>.title::before { */
 /*     content: "Diagram - "; */
 /* } */
+.svg-wrap svg {
+    width: 100%;
+    height: 100%;
+}
 /* mermaid */
 .mermaid[data-processed="true"] {
     margin: auto;
@@ -235,6 +239,9 @@ figcaption .cross-refs, .table-caption .cross-refs {
 /* fancybox */
 img.fancybox__image {
     background-color: white;
+}
+[data-fancybox] {
+    cursor: pointer;
 }
 
 /* content font size */

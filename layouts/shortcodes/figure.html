@@ -1,6 +1,7 @@
 {{- $id := .Get "id" -}}
 {{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
 {{- $embed := .Get "embed" -}}
+{{- $link := .Get "link" -}}
 {{- $crossrefs := false -}}
 {{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
 {{- $crossrefs = true -}}
@@ -19,9 +20,15 @@
   {{- with $id }} id="{{ . }}"{{ end -}}
   {{- with .Get "width" }} style="width:{{ . }}"{{ end -}}
 >
+  {{- if $link -}}
+  <a href="{{ $link }}" target="{{ with .Get "target" }}{{ . }}{{ else }}_blank{{ end }}">
+  {{- end -}}
+
   {{- if $embed -}}
     <div class="diagram-scroll">
-      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:{{ . }}"{{ end }}>
+      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:{{ . }}"{{ end -}}
+        {{- if and $fancybox ($link | not) }} data-fancybox data-src="{{ $src }}"{{ end -}}
+        >
       {{- if $isURL -}}
         {{- with resources.GetRemote $src }}
           {{- with .Err -}}
@@ -36,20 +43,20 @@
       </div>
     </div>
   {{- else -}}
-    {{- if .Get "link" -}}
-    <a href="{{ .Get "link" }}" target="{{ with .Get "target" }}{{ . }}{{ else }}_blank{{ end }}">
-    {{- else if $fancybox -}}
-    <a data-fancybox data-src="{{ $src }}">
-    {{- end -}}
-      <img src="{{ $src }}"
-        {{- if or (.Get "alt") (.Get "title") }}
-        alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
-        {{- end -}}
-        {{- with .Get "img-width" }} width="{{ . }}"{{ end -}}
-        {{- with .Get "height" }} height="{{ . }}"{{ end -}}
-      />
-    {{- if or (.Get "link") $fancybox }}</a>{{ end -}}
+    <img src="{{ $src }}"
+      {{- if and $fancybox ($link | not) }} data-fancybox data-src="{{ $src }}"{{ end -}}
+      {{- if or (.Get "alt") (.Get "title") }}
+      alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
+      {{- end -}}
+      {{- with .Get "img-width" }} width="{{ . }}"{{ end -}}
+      {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+    />
   {{- end -}}
+
+  {{- if $link -}}
+  </a>
+  {{- end -}}
+
   {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") | or $crossrefs -}}
     <figcaption>
       {{- if $crossrefs -}}
