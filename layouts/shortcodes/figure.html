@@ -26,7 +26,7 @@
 
   {{- if $embed -}}
     <div class="diagram-scroll">
-      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:{{ . }}"{{ end -}}
+      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:min({{ . }}, 100%)"{{ end -}}
         {{- if and $fancybox ($link | not) }} data-fancybox data-src="{{ $src }}"{{ end -}}
         >
       {{- if $isURL -}}
@@ -48,7 +48,7 @@
       {{- if or (.Get "alt") (.Get "title") }}
       alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
       {{- end -}}
-      {{- with .Get "img-width" }} width="{{ . }}"{{ end -}}
+      {{- with .Get "img-width" }} width="min({{ . }}, 100%)"{{ end -}}
       {{- with .Get "height" }} height="{{ . }}"{{ end -}}
     />
   {{- end -}}

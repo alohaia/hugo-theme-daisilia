@@ -1,21 +1,21 @@
-{{- $theme := .Site.Params.daisy -}}
+{{- $theme := .Site.Params.daisy }}
 
 {{/* fancybox */}}
-{{- if $theme.fancybox.enable }}{{ partial "third-party/fancybox.html" . }}{{ end -}}
+{{- if $theme.fancybox.enable }}{{ partial "third-party/fancybox.html" . }}{{ end }}
 
 <script src="/js/daisy.js"></script>
 <script data-pjax src="/js/daisy.each.js"></script>
 
-{{- if .Site.Params.daisy.pjax.enable -}}
-  <script src="/js/pjax.js"></script>
-  <script src="/js/pjax.user.js"></script>
-{{- end -}}
+{{- if .Site.Params.daisy.pjax.enable }}
+<script src="/js/pjax.js"></script>
+<script src="/js/pjax.user.js"></script>
+{{- end }}
 
-{{- if $theme.calendar.enable -}}
-  <script src="/js/calendar.js"></script>
-{{- end -}}
+{{- if $theme.calendar.enable }}
+<script src="/js/calendar.js"></script>
+{{- end }}
 
-{{- if eq $theme.quote.enable "jinrishici" -}}
+{{- if eq $theme.quote.enable "jinrishici" }}
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script>
   var content_part, content_full;
@@ -60,7 +60,7 @@
     content.onclick = toggleFull;
   });
 </script>
-{{- else if eq $theme.quote.enable "rainbow" -}}
+{{- else if eq $theme.quote.enable "rainbow" }}
 <script>
   fetch('https://api.eatrice.top')
   .then(response => response.json())
@@ -83,5 +83,5 @@
   })
   .catch(console.error)
 </script>
-{{- end -}}
+{{- end }}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

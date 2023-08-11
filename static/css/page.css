@@ -193,10 +193,22 @@ figure {
 /* .diagram-kroki figcaption>.title::before { */
 /*     content: "Diagram - "; */
 /* } */
+.svg-wrap {
+    margin: auto;
+}
 .svg-wrap svg {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
 }
+
+/* fancybox */
+img.fancybox__image {
+    background-color: white;
+}
+[data-fancybox] {
+    cursor: pointer;
+}
+
 /* mermaid */
 .mermaid[data-processed="true"] {
     margin: auto;
@@ -234,14 +246,6 @@ figcaption>.caption, .table-caption {
 }
 figcaption .cross-refs, .table-caption .cross-refs {
     font-size: smaller;
-}
-
-/* fancybox */
-img.fancybox__image {
-    background-color: white;
-}
-[data-fancybox] {
-    cursor: pointer;
 }
 
 /* content font size */
