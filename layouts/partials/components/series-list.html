@@ -15,12 +15,12 @@
 <ul class="series-list">
 {{- range (where .Pages "Params.draft" false).ByWeight -}}
   <li>
-    <a class="series-item{{ if (.Content | eq "") }} empty{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <a class="series-item{{ if le (.Content | len) 0 }} empty{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
     {{- if eq .Kind "section" | and .Pages -}}
     <ul>
       {{- range .Pages.ByWeight -}}
       <li>
-        <a class="series-item{{ if (.Content | eq "") }} empty{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <a class="series-item{{ if le (.Content | len) 0 }} empty{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
           {{- if eq .Kind "section" | and .Pages -}}
           <ul>
             {{- range .Pages.ByWeight -}}
