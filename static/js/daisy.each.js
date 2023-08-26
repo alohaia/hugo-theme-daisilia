@@ -39,13 +39,14 @@ document.querySelectorAll(".article-content a[href^=\"#\"]").forEach(function (e
 })
 
 // HoverSummary
+var HoverSummaryShowUpID;
 for (anchor of document.querySelectorAll("a.page")) {
-    var timeOutId;
     var lastHoverEl;
     anchor.addEventListener("mouseenter", function(e) {
-        if (lastHoverEl == this) { clearTimeout(timeOutId) };
+        if (lastHoverEl == this) { clearTimeout(HoverSummaryShowUpID) };
+
         lastHoverEl = this;
-        timeOutId = setTimeout(()=>{
+        HoverSummaryShowUpID = setTimeout(()=>{
             summaryContentEl.classList.remove("force-hide");
 
             var linkHref = this.getAttribute("href");
@@ -108,9 +109,11 @@ for (anchor of document.querySelectorAll("a.page")) {
         }, 500);
     });
     anchor.addEventListener("mouseleave", function() {
-        if (lastHoverEl == this) { clearTimeout(timeOutId) };
+        if (lastHoverEl == this) { clearTimeout(HoverSummaryShowUpID) };
+
         lastHoverEl = this;
-        timeOutId = setTimeout(()=>{
+
+        HoverSummaryShowUpID = setTimeout(()=>{
             summaryContentEl.classList.add("hide");
         }, 500);
     });

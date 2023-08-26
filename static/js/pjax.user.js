@@ -21,11 +21,12 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("pjax:send", function () {
     siteRoot.classList.add("pjax-loading");
 
+    clearTimeout(HoverSummaryShowUpID);
+    summaryContentEl.classList.add("force-hide");
+
     document.querySelectorAll('.heading').forEach((heading) => {
         TOCOnscrollObserver.unobserve(heading);
     });
-
-    summaryContentEl.classList.add("force-hide");
 });
 
 // Pjax 完成之后执行的函数
