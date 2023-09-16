@@ -275,6 +275,10 @@ table:not(.highlight table) {
     border-collapse: separate;
     border-spacing: 0;
 }
+.table-wrap table.wrap {
+    line-break: loose;
+    white-space: break-spaces;
+}
 table:not(.highlight table) th {
     border: 1px solid var(--gray-deep);
     border-bottom: 3px solid var(--gray-deep);
@@ -433,6 +437,7 @@ h6.heading::before {
     word-break: break-all;
 }
 .heading-alias:hover {
+    transition: color .5s;
     color: var(--black);
 }
 .heading-alias::before {
@@ -1055,6 +1060,10 @@ blockquote .quote-from {
     font-family: var(--font-serif);
     opacity: .6;
 }
+.section-heading.float:hover {
+    transition: opacity .5s;
+    opacity: 1;
+}
 @media (min-width: 1000px) and (max-width: 1225px) {
     .sidebar-active .section-heading.float {
         position: unset;
@@ -1077,6 +1086,9 @@ blockquote .quote-from {
     .sidebar-active .section-heading.float::after {
         content: "」";
         color: var(--gray-deep);
+    }
+    .section-heading.float + ol, .section-heading.float + ul {
+        margin-top: 0;
     }
 }
 @media (max-width: 900px) {
@@ -1102,6 +1114,9 @@ blockquote .quote-from {
         content: "」";
         color: var(--gray-deep);
     }
+    .section-heading.float + ol, .section-heading.float + ul {
+        margin-top: 0;
+    }
 }
 /* nofloat */
 .section-heading.nofloat {
@@ -1118,6 +1133,9 @@ blockquote .quote-from {
     content: "」";
     color: var(--gray-deep);
 }
+.section-heading.nofloat + ol, .section-heading.nofloat + ul {
+    margin-top: 0;
+}
 
 /* styled text */
 ins {
@@ -1130,6 +1148,7 @@ del {
 em {
     font-style: normal;
     font-family: var(--font-italic);
+    text-decoration: underline dashed var(--gray-deep);
 }
 .heading em {
     font-family: inherit;

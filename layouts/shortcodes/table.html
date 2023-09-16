@@ -3,6 +3,7 @@
 {{- $attr    := default ""    (.Get "attr")   -}}
 {{- $id      := .Get "id" -}}
 {{- $ls      := default false (.Get "left-sticky") -}}
+{{- $wrap    := default false (.Get "wrap") -}}
 {{- $crossrefs := false -}}
 {{- if $id -}}{{- if and site.Data.refs .Page.File -}}
 {{- if index site.Data.refs .Page.File.Path -}}
@@ -39,7 +40,7 @@
       (printf "<h4%s class=\"table-title\">%s</h4>"
         (cond (ne $id "") (printf " id=\"%s\"" $id) "")
         ($title | markdownify))
-      (cond $ls " class=\"left-sticky\"" "")
+      (cond (or $ls $wrap) (printf " class=\"%s%s\"" (cond $ls "left-sticky" "") (cond $wrap (cond $ls " wrap" "wrap") "")) "")
   -}}
 {{- else -}}
   {{- $head = printf "<div class=\"table-wrap\"><table%s%s>"
