@@ -157,7 +157,7 @@
 figure {
     margin: 10px auto;
     overflow: hidden;
-    max-width: 100%;
+    width: 100%;
 }
 @media (min-width: 751px) {
     figure.float-left {
@@ -1224,7 +1224,7 @@ sub {
 
 /* ul, ol */
 .article-content ol, .article-content ul {
-    padding-inline-start: 25px;
+    padding-inline-start: 32px;
 }
 
 /* custom */
