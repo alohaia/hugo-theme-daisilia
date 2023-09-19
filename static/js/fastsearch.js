@@ -37,6 +37,16 @@ function toggleSearch(force) {
     }
 }
 
+function escapeHtml(unsafe)
+{
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+
 document.getElementById("searchBtn").onclick = ()=>{ toggleSearch(true) }
 document.getElementById("searchHint").onclick = ()=>{ toggleSearch(false) }
 
@@ -183,9 +193,9 @@ function executeSearch(term) {
                 var matchHTML = '';
                 for (match of result.matches) {
                     for (index of match.indices) {
-                        var context = match.value.slice(index[0]-matchSurroundLength >= 0 ? index[0]-matchSurroundLength : 0, index[0])
-                            + `<span class="search-item-match-highlight">${match.value.slice(index[0], index[1]+1)}</span>`
-                            + match.value.slice(index[1]+1, index[1]+1+matchSurroundLength);
+                        var context = escapeHtml(match.value.slice(index[0]-matchSurroundLength >= 0 ? index[0]-matchSurroundLength : 0, index[0]))
+                            + `<span class="search-item-match-highlight">${escapeHtml(match.value.slice(index[0], index[1]+1))}</span>`
+                            + escapeHtml(match.value.slice(index[1]+1, index[1]+1+matchSurroundLength));
                         matchHTML = (matchHTML || "") +
                             `<span class="search-item-match-index">${index[0] + "-" + index[1]}: </span>
                             <span class="search-item-match-context">... ${context} ...</span>`;

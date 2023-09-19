@@ -1003,7 +1003,6 @@ blockquote {
     background-color: var(--gray-light);
     border-radius: 4px;
     font-family: var(--font-italic);
-    font-size: 20px;
 }
 blockquote code {
     font-family: var(--font-italic);
