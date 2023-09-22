@@ -48,7 +48,7 @@
       {{- if or (.Get "alt") (.Get "title") }}
       alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
       {{- end -}}
-      {{- with .Get "img-width" }} width="min({{ . }}, 100%)"{{ end -}}
+      {{- with .Get "img-width" }} style="width:min({{ . }}, 100%)"{{ end }}
       {{- with .Get "height" }} height="{{ . }}"{{ end -}}
     />
   {{- end -}}
