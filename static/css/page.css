@@ -443,6 +443,7 @@ h6.heading::before {
 .heading-alias::before {
     content: "·";
     color: var(--gray-deep);
+    margin: 0 0.2em;
 }
 
 /* kbd */

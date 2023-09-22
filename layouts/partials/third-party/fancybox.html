@@ -5,7 +5,7 @@
     groupAll: true,
     hideScrollbar: true, // to avoid viewport shaking, set scroll as overlay
     caption: function(instance, slide, caption){
-      const figcaption = slide.triggerEl?.querySelector("figcaption .title");
+      const figcaption = slide.triggerEl?.parentElement.querySelector("figcaption .title");
       return figcaption ? figcaption.innerHTML : slide.caption || "";
     }
   });
