@@ -25,10 +25,10 @@
   {{- end -}}
 
   {{- if $embed -}}
-    <div class="diagram-scroll">
-      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:min({{ . }}, 100%)"{{ end -}}
-        {{- if and $fancybox ($link | not) }} data-fancybox data-src="{{ $src }}"{{ end -}}
-        >
+    <div class="diagram-scroll"
+      {{- if and $fancybox ($link | not) }} data-fancybox data-src="{{ $src }}"{{ end -}}
+      >
+      <div class="svg-wrap"{{ with $.Get "img-width" }} style="width:min({{ . }}, 100%)"{{ end }}>
       {{- if $isURL -}}
         {{- with resources.GetRemote $src }}
           {{- with .Err -}}
