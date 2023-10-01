@@ -202,8 +202,8 @@ figure {
 }
 
 /* fancybox */
-img.fancybox__image {
-    background-color: white;
+img[src$=".svg"] {
+    background: var(--white);
 }
 [data-fancybox] {
     cursor: pointer;
@@ -368,6 +368,7 @@ pre:not(.highlight pre):not([data-processed].mermaid),
 .article-content li p,
 .article-content dd p {
     margin: 0;
+    display: inline;
 }
 .article-content li::marker {
     color: var(--gray-deep);
@@ -482,6 +483,7 @@ dl {
 }
 dl:first-child, .heading + dl {
     margin-top: 10px;
+    font-size: 0;
 }
 dt, dd {
     line-height: 24px;  /* vertical align */
@@ -489,8 +491,8 @@ dt, dd {
 dt {
     font-weight: bold;
     font-family: var(--font-italic);
-    display: inline;
-    float: left;
+    display: inline-block;
+    font-size: 18px;
 }
 dt::after {
     content: ": ";
@@ -503,9 +505,13 @@ dt::after {
 }
 dd {
     margin: 0;
+    margin-left: -1px;
+    font-size: 18px;
+    display: inline;
 }
 dd:not(dt+dd) {
     text-indent: 1em;
+    display: inline-block;
 }
 dd:not(dt+dd)::before {
     content: "#";
@@ -516,6 +522,7 @@ dd:not(dt+dd)::before {
 dl:not(.grid) dd+dt, dl:not(.grid) dd+dt+dd {
     margin-top: 10px;
 }
+
 /* grid deflist */
 @media (min-width: 601px) {
     dl.grid {
