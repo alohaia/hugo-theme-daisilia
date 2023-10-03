@@ -483,7 +483,6 @@ dl {
 }
 dl:first-child, .heading + dl {
     margin-top: 10px;
-    font-size: 0;
 }
 dt, dd {
     line-height: 24px;  /* vertical align */
@@ -491,8 +490,8 @@ dt, dd {
 dt {
     font-weight: bold;
     font-family: var(--font-italic);
-    display: inline-block;
-    font-size: 18px;
+    display: inline;
+    float: left;
 }
 dt::after {
     content: ": ";
@@ -505,13 +504,9 @@ dt::after {
 }
 dd {
     margin: 0;
-    margin-left: -1px;
-    font-size: 18px;
-    display: inline;
 }
 dd:not(dt+dd) {
     text-indent: 1em;
-    display: inline-block;
 }
 dd:not(dt+dd)::before {
     content: "#";
