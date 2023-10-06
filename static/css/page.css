@@ -752,15 +752,21 @@ dl.indent dt::after {
 
 /* card */
 .card-container {
-    display: grid;
-    grid-template-columns: minmax(200px,1fr) minmax(200px,1fr);
-    gap: 5px;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
     margin-top: 40px;
 }
 .card {
     box-shadow: 1px 1px 3px 0px var(--gray-deep);
     border-radius: 4px;
     padding: 10px;
+}
+.card:nth-child(odd) {
+    margin-left: 20px;
+}
+.card:nth-child(even) {
+    margin-right: 20px;
 }
 
 /* pagination */
