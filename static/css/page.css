@@ -196,6 +196,9 @@ figure {
 .svg-wrap {
     margin: auto;
 }
+[data-fancybox] .svg-wrap {
+    user-select: none;
+}
 .svg-wrap svg {
     max-width: 100%;
     height: 100%;
