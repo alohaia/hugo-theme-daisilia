@@ -836,19 +836,39 @@ dl.indent dt::after {
     system: fixed;
     symbols: ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳ ⑳;
 }
-.inline-list {
+.inline-list.list {
     counter-reset: hzlistCounter;
 }
-.inline-list-item {
+.inline-list.list .inline-list-item {
     counter-increment: hzlistCounter;
 }
-.inline-list-item::before {
+.inline-list.list .inline-list-item::before {
     content: counter(hzlistCounter, circled-number);
     color: var(--gray-deep);
     margin: 0 2px;
 }
-.inline-list-conjunction {
+.inline-list.list .inline-list-conjunction {
     font-size: 50%;
+}
+
+.inline-list.label {
+    display: inline-flex;
+    gap: 5px;
+}
+.inline-list.label .inline-list-item {
+    font-size: 16px;
+    background: var(--gray-light);
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.inline-list.label .inline-list-item:before {
+    content: "\f02b";
+    font-family: "Font Awesome 6 Free";
+    color: var(--gray-deep);
+    font-weight: 800;
+    font-size: smaller;
+    padding: 0 2px 0 1px;
 }
 
 /* hdt */
