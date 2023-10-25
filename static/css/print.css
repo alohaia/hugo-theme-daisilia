@@ -21,7 +21,7 @@
     }
     table {
         max-height: 100%;
-        white-space: normal;
+        white-space: normal important;
     }
     table td, table th {
         padding: .2em .4em;
