@@ -1,2 +1,2 @@
-<span class="noted{{ with .Get 1 }} {{ . }}{{ end }}"><span class="note">{{ .Get 0 }}</span>{{ .Inner }}</span>
+<span class="noted{{ with .Get 1 }} {{ . }}{{ end }}">{{ .Inner | markdownify }}<span class="note">{{ .Get 0 | markdownify }}</span></span>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

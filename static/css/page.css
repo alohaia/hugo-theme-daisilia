@@ -209,7 +209,7 @@ img[src$=".svg"] {
     background: var(--white);
 }
 [data-fancybox] {
-    cursor: pointer;
+    cursor: zoom-in;
 }
 
 /* mermaid */
@@ -885,10 +885,10 @@ dl.indent dt::after {
     font-weight: bold;
     line-break: anywhere;
 }
-.note::before {
+.note.inline-note::before {
     content: "（";
 }
-.note::after {
+.note.inline-note::after {
     content: "）";
 }
 .noted {
@@ -905,7 +905,7 @@ dl.indent dt::after {
     text-decoration-color: var(--orange);
 }
 @media (min-width: 1350px) {
-    .noted.exam .note {
+    .noted:not(.inline-note) .note {
         float: right;
         max-width: 200px;
         height: 0;
@@ -1175,6 +1175,7 @@ ins {
 }
 del {
     text-decoration-thickness: 0.16em;
+    text-decoration-color: #e20000;
 }
 em {
     font-style: normal;
