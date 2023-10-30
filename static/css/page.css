@@ -577,8 +577,21 @@ dl.indent dt::after {
     transition: right .5s ease-out;
     z-index: var(--z-series);
 }
-.series-container:hover {
+.series-container:hover, .series-container.pinned {
     right: 0;
+}
+.series-list-pin {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    transform: rotate(-45deg);
+}
+.series-list-pin:hover {
+    color: var(--gray-deep);
+}
+.series-container.pinned .series-list-pin {
+    transform: rotate(0);
 }
 .series-container a {
     color: var(--gray-deep);
