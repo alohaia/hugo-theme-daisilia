@@ -475,9 +475,11 @@ hr {
 .footnote-ref::before {
     content: "[";
 }
-
 .footnote-ref::after {
     content: "]";
+}
+.footnote-ref::after, .footnote-ref::before {
+    color: var(--gray-deep);
 }
 
 /* deflist */
@@ -898,15 +900,23 @@ dl.indent dt::after {
     font-weight: bold;
     line-break: anywhere;
 }
-.note.inline-note::before {
-    content: "（";
+.note::before {
+    content: "〔";
+    color: var(--gray-deep);
 }
-.note.inline-note::after {
-    content: "）";
+.note::after {
+    content: "〕";
+    color: var(--gray-deep);
+    display: inline-block;
+    width: 0;
 }
 .noted {
     text-decoration: underline;
     text-decoration-style: double;
+}
+.noted:not(.inline-note) .note {
+    float: right;
+    max-width: 200px;
 }
 /* exam questions  */
 .noted.exam .note {
@@ -916,20 +926,6 @@ dl.indent dt::after {
     text-decoration: underline;
     text-decoration-style: wavy;
     text-decoration-color: var(--orange);
-}
-@media (min-width: 1350px) {
-    .noted:not(.inline-note) .note {
-        float: right;
-        max-width: 200px;
-        height: 0;
-        transform: translate(100%, 0);
-    }
-    .noted.exam .note::before {
-        content: none;
-    }
-    .noted.exam .note::after {
-        content: none;
-    }
 }
 
 /* sense-group */
