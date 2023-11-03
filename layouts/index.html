@@ -21,14 +21,8 @@
       <span class="pages-recommended-switch most-referenced selected" role="button">Most Referenced</span>
       <span class="pages-recommended-switch recently-published" role="button">Recently Published</span>
     </div>
-    {{- $pages := slice }}
-    {{- range .Site.Pages }}
-      {{- if ne .Parent site.Home }}
-        {{- $pages = $pages | append . }}
-      {{- end }}
-    {{- end }}
     <div class="pages-recommended-tab recently-modified">
-      {{- range first 10 $pages.ByLastmod.Reverse -}}
+      {{- range first 10 (where .Site.Pages "Kind" "not in" (slice "term" "taxonomy")).ByLastmod.Reverse -}}
       <div class="page-list-item {{ .Kind }}">
         <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
         <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
@@ -49,7 +43,7 @@
     {{- end -}}
     </div>
     <div class="pages-recommended-tab recently-published">
-      {{- range first 10 $pages.ByPublishDate.Reverse -}}
+      {{- range first 10 (where .Site.Pages "Kind" "not in" (slice "term" "taxonomy")).ByPublishDate.Reverse -}}
       <div class="page-list-item {{ .Kind }}">
         <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
         <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
