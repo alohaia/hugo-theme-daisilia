@@ -897,18 +897,8 @@ dl.indent dt::after {
 /* noted text */
 /* available classes: inline-note, exam */
 .note {
-    font-weight: bold;
+    font-family: var(--font-serif);
     line-break: anywhere;
-}
-.note::before {
-    content: "〔";
-    color: var(--gray-deep);
-}
-.note::after {
-    content: "〕";
-    color: var(--gray-deep);
-    display: inline-block;
-    width: 0;
 }
 .noted {
     text-decoration: underline;
@@ -917,6 +907,11 @@ dl.indent dt::after {
 .noted:not(.inline-note) .note {
     float: right;
     max-width: 200px;
+    background: var(--gray-light);
+    padding: 0 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    border-bottom: 2px solid var(--gray-deep);
 }
 /* exam questions  */
 .noted.exam .note {
