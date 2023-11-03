@@ -766,6 +766,7 @@ span.pages-recommended-switch.selected {
     font-weight: bold;
     font-size: xx-large;
     color: var(--gray-deep);
+    cursor: default;
 }
 
 @media (max-width: 700px){
