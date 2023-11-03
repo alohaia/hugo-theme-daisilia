@@ -716,8 +716,7 @@ dl.indent dt::after {
 /* page-list */
 .article-content+.page-list::before,
 .diary-list::before,
-.most-referenced::before {
-    content: "Child Pages";
+.pages-recommended-tab::before {
     color: var(--gray);
     border-bottom: 2px dashed var(--gray);
     display: block;
@@ -727,7 +726,6 @@ dl.indent dt::after {
     text-align: center;
     font-size: 24px;
 }
-.most-referenced::before { content: "Most Referenced" } /* most referenced */
 .diary-list::before { content: "Diary List" }
 .page-list-item {
     margin-top: 30px;
@@ -737,6 +735,64 @@ dl.indent dt::after {
     color: var(--gray-deep);
     margin: 5px 0;
 }
+
+/* pages recommended */
+.pages-recommended-tab {
+    animation: fadeRight 0.5s ease-out;
+}
+.pages-recommended-tab:not(.selected) {
+    display: none;
+}
+.pages-recommended-switch-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    align-items: flex-end;
+    height: 50px;
+    margin-top: 30px;
+}
+span.pages-recommended-switch {
+    text-decoration: underline;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all .2s;
+}
+span.pages-recommended-switch:hover {
+    color: var(--gray-deep);
+    font-size: x-large;
+}
+span.pages-recommended-switch.selected {
+    font-weight: bold;
+    font-size: xx-large;
+    color: var(--gray-deep);
+}
+
+@media (max-width: 700px){
+    .pages-recommended-switch-container {
+        display: none;
+    }
+    .pages-recommended {
+        display: flex;
+        flex-direction: column;
+    }
+    .pages-recommended-tab.most-referenced {
+        order: -1;
+    }
+    .pages-recommended-tab:not(.selected) {
+        display: block;
+    }
+    .pages-recommended-tab.recently-modified::before {
+        content: "Recently Modified";
+    }
+    .pages-recommended-tab.most-referenced::before {
+        content: "Most Referenced";
+    }
+    .pages-recommended-tab.recently-published::before {
+        content: "Recently Published";
+    }
+}
+
 /* summary children margin */
 .summary *:first-child {
     margin-top: 0;
