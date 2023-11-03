@@ -1011,18 +1011,17 @@ details[open] .tab-sum-trigger {
 }
 
 /* bilibili & youtube */
-.vedio-container {
+.video-container {
     height: 0;
-    margin: 10px 15px;
-    overflow: hidden;
-    padding-top: 65%;
+    margin: 10px 0;
+    padding-bottom: 56.25%;
     position: relative;
-    width: calc(100% - 30px);
     background-color: var(--gray);
+    box-shadow: 0 2px 10px var(--gray);
 }
-.vedio-container iframe,
-.vedio-container object,
-.vedio-container embed {
+.video-container iframe,
+.video-container object,
+.video-container embed {
     height: 100%;
     left: 0;
     margin: 0;

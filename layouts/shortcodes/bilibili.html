@@ -1,7 +1,7 @@
 {{- $type := substr (.Get "id") 0 2 | lower -}}
 {{- $id := substr (.Get "id") 2 -}}
 {{- $page := .Get "page" -}}
-<div class="vedio-container">
+<div class="video-container">
   <iframe class="bilibili-player" src="//player.bilibili.com/player.html?autoplay={{with .Get "autoplay"}}1{{ else }}0{{ end }}{{ with $page }}page={{ . }}{{ end }}{{ if eq $type "av" }}&aid={{ $id }}{{ else if eq $type "bv" }}&bvid=BV{{ $id }}{{ end }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
