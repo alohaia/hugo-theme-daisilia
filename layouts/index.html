@@ -17,20 +17,11 @@
   {{- end -}}
   <div class="pages-recommended">
     <div class="pages-recommended-switch-container">
-      <span class="pages-recommended-switch recently-modified" role="button">Recently Modified</span>
-      <span class="pages-recommended-switch most-referenced selected" role="button">Most Referenced</span>
+      <span class="pages-recommended-switch most-referenced" role="button">Most Referenced</span>
+      <span class="pages-recommended-switch recently-modified selected" role="button">Recently Modified</span>
       <span class="pages-recommended-switch recently-published" role="button">Recently Published</span>
     </div>
-    <div class="pages-recommended-tab recently-modified">
-      {{- range first 10 (where .Site.Pages "Kind" "not in" (slice "term" "taxonomy")).ByLastmod.Reverse -}}
-      <div class="page-list-item {{ .Kind }}">
-        <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
-        <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
-        {{- partial "components/summary" . -}}
-      </div>
-      {{- end -}}
-    </div>
-    <div class="pages-recommended-tab most-referenced selected">
+    <div class="pages-recommended-tab most-referenced">
     {{- if .Site.Data.refs -}}
       {{- range first 10 (sort .Site.Data.refs "count" "desc") -}}
         {{- $page := site.GetPage (index . "file_ref") -}}
@@ -41,6 +32,15 @@
       </div>
       {{- end -}}
     {{- end -}}
+    </div>
+    <div class="pages-recommended-tab recently-modified selected">
+      {{- range first 10 (where .Site.Pages "Kind" "not in" (slice "term" "taxonomy")).ByLastmod.Reverse -}}
+      <div class="page-list-item {{ .Kind }}">
+        <h1 class="page-title article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+        <div class="page-metadata article-metadata">{{ partial "components/metadata" . }}</div>
+        {{- partial "components/summary" . -}}
+      </div>
+      {{- end -}}
     </div>
     <div class="pages-recommended-tab recently-published">
       {{- range first 10 (where .Site.Pages "Kind" "not in" (slice "term" "taxonomy")).ByPublishDate.Reverse -}}
