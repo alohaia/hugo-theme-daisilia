@@ -445,7 +445,7 @@ h6.heading::before {
     color: var(--black);
 }
 .heading-alias::before {
-    content: "·";
+    content: "/";
     color: var(--gray-deep);
     margin: 0 0.2em;
 }
