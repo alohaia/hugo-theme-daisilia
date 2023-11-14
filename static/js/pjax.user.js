@@ -1,6 +1,5 @@
 var pjax;
 const siteRoot = document.getElementById("SiteRoot");
-var lastSeries = decodeURI(window.location.pathname.split("/")[2]);
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init Pjax instance
@@ -30,6 +29,7 @@ document.addEventListener("pjax:send", function () {
 });
 
 // Pjax 完成之后执行的函数
+var lastSeries = decodeURI(window.location.pathname.split("/")[2]);
 document.addEventListener("pjax:complete", function () {
     siteRoot.classList.remove("pjax-loading");
 
@@ -56,16 +56,19 @@ document.addEventListener("pjax:complete", function () {
     if (
         window.location.pathname.split("/")[1] == "series"
         && currentSeries
-        && lastSeries
         && currentSeries != lastSeries
-        ) {
+    ) {
         pjax.switchSelector(window.location.pathname, {selectors: ["#SeriesList"]}, function() {
+            console.log(`"series"?: ${window.location.pathname.split("/")[1] == "series"}\ncurrentSeries: ${currentSeries}\nlastSeries: ${lastSeries}`)
             pjax.refresh(document.getElementById("SeriesList"));
+            console.log("initSeriesList");
             initSeriesList();
 
             lastSeries = currentSeries;
         })
     } else {
+            console.log(`"series"?: ${window.location.pathname.split("/")[1] == "series"}\ncurrentSeries: ${currentSeries}\nlastSeries: ${lastSeries}`)
+        console.log("updateSeriesList");
         updateSeriesList();
     }
 });
