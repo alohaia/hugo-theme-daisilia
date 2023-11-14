@@ -777,7 +777,7 @@ span.pages-recommended-switch.selected {
         display: flex;
         flex-direction: column;
     }
-    .pages-recommended-tab.most-referenced {
+    .pages-recommended-tab.selected {
         order: -1;
     }
     .pages-recommended-tab:not(.selected) {
