@@ -1327,7 +1327,7 @@ sub {
     color: #82c91e;
     margin: 0 5px;
 }
-.heading.important a {
+.section-heading.important, .heading.important a {
     color: red;
 }
 .heading.unimportant a {
