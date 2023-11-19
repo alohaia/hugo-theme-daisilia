@@ -104,6 +104,15 @@
     text-decoration: underline;
     text-decoration-thickness: 2px;
 }
+.heading a { color: var(--black) }
+/* link-break */
+.link-break::after {
+    content: "\f127";
+    font-family: 'font awesome 6 free';
+    font-weight: 900;
+    font-size: x-small;
+    vertical-align: super;
+}
 
 .article-copy {
     background: var(--gray-light);
@@ -111,8 +120,6 @@
     padding: 1em;
     margin: 15px 0;
 }
-
-.heading a { color: var(--black) }
 
 .page-nav {
     width: 100%;

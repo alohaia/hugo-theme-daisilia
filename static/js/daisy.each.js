@@ -34,7 +34,7 @@ document.querySelectorAll('details').forEach((el) => {
 document.querySelectorAll(".article-content a[href^=\"#\"]").forEach(function (el) {
     var id = decodeURI(el.getAttribute("href")).slice(1);
     if (! document.getElementById(id)) {
-        el.outerHTML = el.innerHTML;
+        el.outerHTML = `<span class="link-break">${el.innerHTML}</span>`;
     }
 })
 
