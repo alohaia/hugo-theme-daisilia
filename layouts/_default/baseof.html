@@ -18,7 +18,7 @@
     <div class="site-main" id="SiteMain">
       <div class="site-left" data-pjax>{{ block "left" . }}{{ end }}</div>
       <div class="site-message-list" id="MessageList"></div>
-      <div class="site-content"{{ if .Params.math }} mathjax{{ end }} data-pjax id="SiteContent">
+      <div class="site-content"{{ if or (.Params.math) (in .Params.features "math") }} mathjax{{ end }} data-pjax id="SiteContent">
         {{- block "main" . }}{{ end -}}
       </div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
@@ -37,6 +37,26 @@
   </div>
   <div class="loading-track"><div class="loading-progress"></div></div>
   {{- partial "components/js" . -}} {{- /* js */ -}}
+  <div data-pjax>
+    {{- if in .Params.features "clickableHiddenText" }}
+    <style>
+      .hidden-text {
+          cursor: pointer;
+      }
+      .hidden-text.passed {
+          background: inherit;
+          text-decoration: underline;
+      }
+      </style>
+      <script>
+      for (h of document.getElementsByClassName("hidden-text")) {
+          h.onclick = function() {
+              this.classList.toggle("passed");
+          }
+      }
+      </script>
+    {{- end }}
+  </div>
 </body>
 </html>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
