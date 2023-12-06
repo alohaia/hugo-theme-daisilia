@@ -28,9 +28,8 @@
 .meta-item::marker {
     content: none;
 }
-.meta-item:not(:last-child)::after {
-    content: "|";
-    margin: 0 2px;
+.meta-item:not(:last-child) {
+    margin-right: 8px;
 }
 .meta-section {
     margin: 0;
