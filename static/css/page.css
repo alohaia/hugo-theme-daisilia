@@ -1105,27 +1105,22 @@ blockquote {
 blockquote code {
     font-family: var(--font-italic);
 }
-blockquote:before {
+blockquote:before, blockquote::after {
     color: var(--gray);
-    content: open-quote;
     font-family: var(--font-sans);
-    position: relative;
-    float: left;
-    font-size: xxx-large;
-    left: -20px;
-    top: -10px;
     width: 0;
+    height: 0;
+    font-size: x-large;
+}
+blockquote:before {
+    content: open-quote;
+    float: left;
+    transform: translate(-10px, 0);
 }
 blockquote::after {
-    color: var(--gray);
     content: close-quote;
-    font-family: var(--font-sans);
-    position: relative;
     float: right;
-    font-size: xxx-large;
-    right: -2px;
-    bottom: 15px;
-    width: 0;
+    transform: translate(0px, -20px);
 }
 blockquote a.cite {
     text-decoration: none;
