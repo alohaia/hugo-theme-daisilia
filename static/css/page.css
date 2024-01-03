@@ -1320,6 +1320,29 @@ sub {
     padding-inline-start: 32px;
 }
 
+/* refmark */
+span.refmark {
+    background: var(--gray-light);
+    border-radius: 4px;
+    margin: 0 2px;
+    padding: 0 2px;
+}
+span.refmark.mark:before {
+    content: "[";
+    color: var(--gray-deep);
+}
+span.refmark.mark:after {
+    content: "]";
+    color: var(--gray-deep);
+}
+span.refmark.ref a[href^="#"]:before {
+    content: none;
+}
+span.refmark.ref:before {
+    content: "※";
+    color: var(--gray-deep);
+}
+
 /* custom */
 .heading.medicine::after {
     content: "\f484";

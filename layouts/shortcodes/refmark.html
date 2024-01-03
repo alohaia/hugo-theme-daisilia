@@ -1,0 +1,19 @@
+{{- $text := "" -}}
+{{- $ref := "" -}}
+{{- if .Get 0 | eq "mark" -}}
+{{- $text = index (split (.Get 1) ":") 0 -}}
+{{- $ref = index (split (.Get 1) ":") 1 -}}
+{{- $ref = cond (ne $ref nil) $ref $text -}}
+<span class="refmark mark" id="refmark:{{ $ref }}">{{ $text | markdownify }}</span>
+{{- else if .Get 0 | eq "ref" -}}
+<span class="refmark ref">
+  {{- range $n,$v := (split (.Get 1) "&") -}}
+    {{- $text = index (split . ":") 0 -}}
+    {{- $ref = index (split . ":") 1 -}}
+    {{- $ref = cond (ne $ref nil) $ref $text -}}
+    {{- if ne $n 0 }}, {{ end -}}
+  <a href="#refmark:{{ $ref }}">{{ $text | markdownify }}</a>
+  {{- end -}}
+</span>
+{{- end -}}
+{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
