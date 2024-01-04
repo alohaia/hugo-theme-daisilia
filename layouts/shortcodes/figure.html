@@ -1,5 +1,6 @@
 {{- $id := .Get "id" -}}
 {{- $fancybox := default .Site.Params.daisy.fancybox.enable (.Get "fancybox") -}}
+{{- $group := .Get "group" -}}
 {{- $embed := .Get "embed" -}}
 {{- $link := .Get "link" -}}
 {{- $crossrefs := false -}}
@@ -16,6 +17,7 @@
   {{- end -}}
 {{- end -}}
 <figure
+  {{- with $group }} group="{{ . }}"{{ end -}}
   {{- with or (.Get "class") (.Get "style") }} class="{{ . }}"{{ end -}}
   {{- with $id }} id="{{ . }}"{{ end -}}
   {{- with .Get "width" }} style="width:{{ . }}"{{ end -}}

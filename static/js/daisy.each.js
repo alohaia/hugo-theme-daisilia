@@ -118,3 +118,28 @@ for (anchor of document.querySelectorAll("a.page")) {
         }, 500);
     });
 }
+
+// grouping figures
+var fig_groups = [];
+for (fig of document.querySelectorAll("figure[group]")) {
+    var group = fig.getAttribute("group");
+    if (!fig_groups.includes(group)) {
+        fig_groups.push(group);
+    }
+}
+
+for (group of fig_groups) {
+    var figs = document.querySelectorAll(`figure[group="${group}"]`);
+    if (figs.length >= 2) {
+        var group_el = document.createElement("div");
+        group_el.classList.add("fig-group");
+        group_el.setAttribute("group", group);
+        for (fig of figs) {
+            fig.removeAttribute("group");
+            if (group_el.innerHTML == "") {
+                fig.parentElement.insertBefore(group_el, fig);
+            }
+            group_el.appendChild(fig);
+        }
+    }
+}

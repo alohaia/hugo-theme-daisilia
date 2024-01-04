@@ -209,6 +209,10 @@ figure {
     max-width: 100%;
     height: 100%;
 }
+/* figure groups */
+.fig-group {
+    display: flex;
+}
 
 /* fancybox */
 img[src$=".svg"] {

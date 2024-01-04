@@ -6,7 +6,7 @@
     hideScrollbar: true, // to avoid viewport shaking, set scroll as overlay
     caption: function(instance, slide, caption){
       const figcaption = slide.triggerEl?.parentElement.querySelector("figcaption .title");
-      return figcaption ? figcaption.innerHTML : slide.caption || "";
+      return figcaption ? figcaption.innerHTML : slide.caption || slide.triggerEl?.getAttribute("alt");
     }
   });
 </script>
