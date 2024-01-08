@@ -1,4 +1,5 @@
 #! /usr/bin/env Rscript
+# run this script in site root dir
 
 local({
     # fall back on '/' if baseurl is not specified
@@ -11,20 +12,14 @@ local({
 
     # input/output filenames are passed as two additional arguments to Rscript
     a <- commandArgs(TRUE)
-    root_dir <- getwd()
-    if (a[3] != "NA") {
-        root_dir <- path.expand(a[3])
-    }
-    root_dir <- gsub("/$", "", root_dir)
     reld <- gsub("^content/|(/_?index)?\\.Rmd$", "", a[1])
 
     # clean up old figures
-    unlink(sprintf("%s/static/R-figures/%s/", root_dir, reld), recursive = FALSE)
+    unlink(sprintf("static/R-figures/%s/", reld), recursive = FALSE)
 
-    cat(sprintf("%s/static/R-figures/%s/\n", root_dir, reld))
     knitr::opts_chunk$set(
-        fig.path   = sprintf("%s/static/R-figures/%s/", root_dir, reld),
-        cache.path = sprintf("%s/.cache/%s/", root_dir, reld),
+        fig.path   = sprintf("static/R-figures/%s/", reld),
+        cache.path = sprintf(".cache/%s/", reld),
         comment    = "#>",
         results    = "hold",
         tiry       = TRUE,
@@ -43,7 +38,7 @@ local({
 
     text <- readLines(a[2], encoding = "UTF-8")
     # post processing
-    text <- gsub("!\\[plot of chunk (.*?)\\]\\(.*?([^/]*?\\.png)\\)",
+    text <- gsub("!\\[plot of chunk (.*?)|.*?\\]\\(.*?([^/]*?\\.png)\\)",
         sprintf('{{< figure src="/R-figures/%s/\\2" group="\\1" alt="\\1" >}}', reld),
         text,
         perl = TRUE
