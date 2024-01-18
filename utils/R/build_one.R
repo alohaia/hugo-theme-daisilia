@@ -15,11 +15,11 @@ local({
     reld <- gsub("^content/|(/_?index)?\\.Rmd$", "", a[1])
 
     # clean up old figures
-    unlink(sprintf("static/R-figures/%s/", reld), recursive = FALSE)
+    unlink(sprintf("../static/R-figures/%s/", reld), recursive = FALSE)
 
     knitr::opts_chunk$set(
-        fig.path   = sprintf("static/R-figures/%s/", reld),
-        cache.path = sprintf(".cache/%s/", reld),
+        fig.path   = sprintf("../static/R-figures/%s/", reld),
+        cache.path = sprintf("../.cache/%s/", reld),
         comment    = "#>",
         results    = "hold",
         tiry       = TRUE,
@@ -38,8 +38,8 @@ local({
 
     text <- readLines(a[2], encoding = "UTF-8")
     # post processing
-    text <- gsub("!\\[plot of chunk (.*?)|.*?\\]\\(.*?([^/]*?\\.png)\\)",
-        sprintf('{{< figure src="/R-figures/%s/\\2" group="\\1" alt="\\1" >}}', reld),
+    text <- gsub("!\\[(plot of chunk )?(.*?)\\]\\(.*?([^/]*?)\\)",
+        sprintf('{{< figure src="/R-figures/%s/\\3" group="\\2" alt="\\2" >}}', reld),
         text,
         perl = TRUE
     )
