@@ -1,4 +1,4 @@
-<i class="series-list-pin fa-solid fa-thumbtack" role="button" onclick="document.querySelector('.series-container').classList.toggle('pinned')"></i>
+<i class="series-list-pin fa-solid fa-thumbtack" role="button" onclick="document.querySelector('.site-root').classList.toggle('series-list-pinned')"></i>
 {{- if eq .Parent .FirstSection -}}                            {{- /* series/病原生物学 */ -}}
   <a class="series-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
   {{- block "_structure" . -}}{{ end }}

@@ -6,6 +6,15 @@
     .site-root.sidebar-active {
         margin-left: 320px;
     }
+
+    .site-root.series-list-pinned:not(.sidebar-active) {
+        margin-right: 320px;
+    }
+}
+@media (min-width: 1320px) {
+    .site-root.series-list-pinned {
+        margin-right: 320px;
+    }
 }
 
 /* if on local server */
