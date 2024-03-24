@@ -5,6 +5,7 @@
 }
 .article-title:not(.page-title):not(.card-title) {
     margin: 40px 0 0 0;
+    font-size: 30px;
 }
 .page-title, .card-title {
     text-align: left;
