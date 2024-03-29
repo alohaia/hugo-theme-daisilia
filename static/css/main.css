@@ -153,7 +153,7 @@ body.local-server {
     line-height: var(--header-height);
     font-family: var(--font-handwrite);
     user-select: none;
-    text-shadow: 3px 3px var(--gray);
+    text-shadow: 3px 3px 4px var(--gray-deep);
 }
 @media (min-width: 751px) {
     .main-menu .menu-item {

@@ -1250,7 +1250,9 @@ del {
 em {
     font-style: normal;
     font-family: var(--font-italic);
-    text-decoration: underline dashed var(--gray-deep);
+}
+em, strong {
+    text-shadow: 0 0 .1em var(--gray-deep);
 }
 .heading em {
     font-family: inherit;
