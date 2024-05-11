@@ -4,7 +4,7 @@ var firstRun = true; // allow us to delay loading json data unless search activa
 var list = document.getElementById('searchResults');
 var first = list.firstChild; // first child of search list
 var last = list.lastChild; // last child of search list
-var maininput = document.getElementById('searchInput');
+var searchInput = document.getElementById('searchInput');
 var resultsAvailable = false; // Did we get any search results?
 const keys = [ 'title', 'contents' ];
 var loading = document.getElementById('searchLoading');
@@ -24,7 +24,7 @@ function toggleSearch(force) {
             loadSearch();
             firstRun = false;
         } else {
-            maininput.focus();
+            searchInput.focus();
         }
 
         searchVisible = true; // search is visible now
@@ -48,7 +48,7 @@ function escapeHtml(unsafe)
 }
 
 document.getElementById("searchBtn").onclick = ()=>{ toggleSearch(true) }
-document.getElementById("searchHint").onclick = ()=>{ toggleSearch(false) }
+document.getElementById("searchToggle").onclick = ()=>{ toggleSearch(false) }
 
 document.addEventListener("click", event => {
     if(event.target === document.getElementById("fastSearch")) {
@@ -75,7 +75,7 @@ document.addEventListener('keydown', function(event) {
 
 // ==========================================
 // execute search as text is changed
-maininput.onkeyup = function() {
+searchInput.onkeyup = function() {
     executeSearch(this.value);
 }
 
@@ -122,10 +122,10 @@ function loadSearch() {
             loading.classList.add('loaded');
         }
 
-        maininput.disabled = false;
+        searchInput.disabled = false;
 
-        maininput.tabIndex = "0";
-        maininput.focus();
+        searchInput.tabIndex = "0";
+        searchInput.focus();
     })
 }
 
@@ -192,13 +192,14 @@ function executeSearch(term) {
             // for (let result of results) {
                 var matchHTML = '';
                 for (match of result.matches) {
+                    if (match.key == 'title') continue;
                     for (index of match.indices) {
                         var context = escapeHtml(match.value.slice(index[0]-matchSurroundLength >= 0 ? index[0]-matchSurroundLength : 0, index[0]))
                             + `<span class="search-item-match-highlight">${escapeHtml(match.value.slice(index[0], index[1]+1))}</span>`
                             + escapeHtml(match.value.slice(index[1]+1, index[1]+1+matchSurroundLength));
                         matchHTML = (matchHTML || "") +
-                            `<span class="search-item-match-index">${index[0] + "-" + index[1]}: </span>
-                            <span class="search-item-match-context">... ${context} ...</span>`;
+                            `<span class="search-item-match-index">${index[0] + "-" + index[1]}:</span>
+                            <span class="search-item-match-context">${context}</span>`;
                     }
                 }
                 let tags = ""
@@ -232,3 +233,43 @@ function executeSearch(term) {
         window.pjax.refresh(list);
     });
 }
+
+for (inputEl of document.querySelectorAll(".fast-search-advanced input:not(#advanced-option-inverse)")) {
+    inputEl.addEventListener("change", function() {
+        if (this.checked == true) {
+            var inputEls = document.querySelectorAll(".fast-search-advanced input:not(#advanced-option-inverse)")
+            for (el of inputEls) { if (el != this) { el.checked = false } }
+        }
+    })
+}
+
+for (inputEl of document.querySelectorAll(".fast-search-advanced input")) {
+    inputEl.addEventListener("change", function() {
+        var m = searchInput.value.match(/^!?(?:\^?(|[^='].*?)\$?|(?:'|=|)(.*?))$/)
+        var text = m[1] != undefined ? m[1] : m[2]
+
+        if (document.getElementById("advanced-option-include").checked)
+            text = "'" + text
+        else if (document.getElementById("advanced-option-exact").checked)
+            text = "=" + text
+        else if (document.getElementById("advanced-option-prefix").checked)
+            text = "^" + text
+        else if (document.getElementById("advanced-option-suffix").checked)
+            text = text + "$"
+
+        if (document.getElementById("advanced-option-inverse").checked)
+            text = "!" + text
+
+        searchInput.value = text
+        executeSearch(text)
+    })
+}
+
+searchInput.addEventListener("input", function() {
+    document.getElementById("advanced-option-include").checked = this.value.match(/^!?'/) != null
+    document.getElementById("advanced-option-exact").checked = this.value.match(/^!?=/) != null
+    document.getElementById("advanced-option-prefix").checked = this.value.match(/^!?\^/) != null
+    document.getElementById("advanced-option-suffix").checked = this.value.match(/\$$/) != null
+    document.getElementById("advanced-option-inverse").checked = this.value[0] == '!'
+    document.getElementById("advanced-option-fuzzy").checked = this.value.match(/^!?['=^]|\$$/) == null
+})

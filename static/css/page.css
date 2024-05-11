@@ -399,11 +399,6 @@ h1.heading {
 h2.heading {
     text-align: center;
     font-size: 28px;
-    /* scrollIntoView 目前存在问题 */
-    z-index: var(--z-overcontent);
-    /* position: sticky; */
-    /* top: 48px; */
-    background-color: var(--white);
     counter-reset: h3Counter h4Counter h5Counter h6Counter;
     counter-increment: h2Counter;
 }

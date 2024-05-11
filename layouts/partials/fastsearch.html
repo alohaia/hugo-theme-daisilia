@@ -2,7 +2,15 @@
   <div class="fast-search-container">
     <div class="fast-search-header">
       <input id="searchInput" tabindex="-1" disabled autocomplete="off">
-      <span class="fast-search-hint" id="searchHint">CTRL-/</span>
+      <div class="fast-search-advanced">Advanced options:
+        <input type="checkbox" class="option" id="advanced-option-fuzzy" name="fuzzy" checked="true"><label class="option-label" for="advanced-option-fuzzy">fuzzy</label>
+        <input type="checkbox" class="option" id="advanced-option-include" name="include"><label class="option-label" for="advanced-option-include">include</label>
+        <input type="checkbox" class="option" id="advanced-option-exact" name="exact"><label class="option-label" for="advanced-option-exact">exact</label>
+        <input type="checkbox" class="option" id="advanced-option-prefix" name="prefix"><label class="option-label" for="advanced-option-prefix">prefix</label>
+        <input type="checkbox" class="option" id="advanced-option-suffix" name="suffix"><label class="option-label" for="advanced-option-suffix">suffix</label>
+        <input type="checkbox" class="option" id="advanced-option-inverse" name="inverse"><label class="option-label" for="advanced-option-inverse">inverse</label>
+      </div>
+      <div class="fast-search-toggle" id="searchToggle"><i class="fas fa-xmark" aria-hidden="true"></i></div>
     </div>
     <ul id="searchResults">
       <div id="searchLoading" class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
