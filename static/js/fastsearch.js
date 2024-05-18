@@ -50,7 +50,7 @@ function escapeHtml(unsafe)
 document.getElementById("searchBtn").onclick = ()=>{ toggleSearch(true) }
 document.getElementById("searchToggle").onclick = ()=>{ toggleSearch(false) }
 
-document.addEventListener("click", event => {
+document.addEventListener("mousedown", event => {
     if(event.target === document.getElementById("fastSearch")) {
         toggleSearch(false)
     }

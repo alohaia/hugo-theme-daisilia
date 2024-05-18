@@ -955,7 +955,6 @@ span.pages-recommended-switch.selected {
     background-color: var(--black);
     color: var(--black) !important;
     transition: background-color .5s;
-    padding: 0 10px;
 }
 .hidden-text:hover {
     background-color: var(--gray);
