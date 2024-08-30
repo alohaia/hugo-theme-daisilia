@@ -17,7 +17,7 @@
     </div>
     <div class="sidebar-overview sidebar-pannel">
       <div class="sidebar-avatar">
-        <a href="/about"><img class="site-avatar-image" alt="{{ .Site.Author.nickname }}" src="{{ .Site.Author.avatar }}"></a>
+        <a href="/about"><img class="site-avatar-image" alt="{{ $theme.author.name }}" src="{{ $theme.author.avatar }}"></a>
       </div>
       <p class="site-author-name">{{ partial "components/getname" . }}</p>
       <p class="site-description">{{ with $theme.description }}{{ . }}{{ else }}Subtitle here{{ end }}</p>

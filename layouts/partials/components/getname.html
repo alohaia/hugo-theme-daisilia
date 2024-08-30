@@ -1,10 +1,6 @@
-{{- with site.Author -}}
-  {{- if .fullname -}}
-    {{- .fullname -}}
-  {{- else if .nickname -}}
-    {{- .nickname -}}
-  {{- end -}}
+{{- with .Site.Params.daisy.author.name -}}
+  {{- . -}}
 {{- else -}}
-  {{- "Site author here" -}}
+  {{- "Author name not provided" -}}
 {{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

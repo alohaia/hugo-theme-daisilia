@@ -1,7 +1,7 @@
 <div class="footer-copyright">© {{ site.Params.daisy.footer.copyright.startyear }} - {{ now.Format "2006" }}
     {{- site.Params.daisy.footer.copyright.icon | safeHTML }}
-    {{- if site.Author.homepage }}
-    <span><a href="{{ site.Author.homepage }}" target="_blank">{{ partial "components/getname" . }}</a></span>
+    {{- if site.Taxonomies.homepage }}
+    <span><a href="{{ .Site.Params.daisy.author.homepage }}" target="_blank">{{ partial "components/getname" . }}</a></span>
     {{- else }}
     <span>{{ partial "components/getname" . }}</span>
     {{- end }}

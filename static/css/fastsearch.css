@@ -20,26 +20,22 @@
     animation: fadeUp 0.2s ease-out;
 }
 .fast-search-header {
-    height: 78px;
+    height: 50px;
     padding: 5px;
     border-bottom: 2px dashed var(--gray-light);
+    font-size: 30px;
     line-height: 30px;
-    display: grid;
-    grid-template-areas:
-        "input toggle"
-        "options toggle";
-    grid-template-rows: 50px 28px;
-    grid-template-columns: 1fr 80px;
-    grid-column-gap: 5px;
+    display: flex;
 }
 #searchInput {
     height: 40px;
     padding: 0;
     font-size: 30px;
     line-height: 30px;
+    width: calc(100% - 55px);
     border: 5px solid var(--gray-light);
     border-radius: 4px;
-    grid-area: input;
+    font-family: var(--font-serif);
 }
 #searchInput:focus {
     background-color: var(--gray-light);
@@ -49,9 +45,9 @@
     cursor: wait;
 }
 #searchResults {
-    height: calc(100% - 100px);
+    height: calc(100% - 72px);
     overflow-y: auto;
-    padding: 5px;
+    padding: 5px 20px;
     margin: 0;
 }
 #searchLoading {
@@ -74,7 +70,7 @@
 .search-result-item:not(:first-child)::before {
     content: "";
     display: block;
-    border-top: 2px dashed var(--gray-light);
+    border-top: 2px dashed var(--gray);
     width: 75%;
     margin: auto;
     margin-bottom: 20px;
@@ -140,11 +136,10 @@
 }
 .fast-search-toggle {
     cursor: pointer;
-    grid-area: toggle;
-    margin: auto;
-    font-size: 77px;
-    width: 78px;
-    height: 78px;
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    margin: 0 0 0 5px;
     text-align: center;
     border-radius: 4px;
     background: var(--gray-light);
@@ -162,7 +157,9 @@
 }
 
 .search-item-matches {
-    margin: 20px;
+    margin-top: 10px;
+    padding: 8px;
+    border: 2px dashed var(--gray-light);
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: auto auto;
@@ -187,23 +184,6 @@
     font-weight: bold;
 }
 
-.fast-search-advanced {
-    font-size: 20px;
-    grid-area: options;
-    display: flex;
-    justify-content: space-between;
-    max-width: 600px;
-}
-.fast-search-advanced .option {
-    display: none;
-}
-.fast-search-advanced .option-label {
-    cursor: pointer;
-    color: var(--gray);
-    text-decoration: underline;
-    text-decoration-style: dashed;
-}
-.fast-search-advanced .option:checked+.option-label {
-    color: var(--gray-deep);
-    text-decoration-style: solid;
+.search-hint {
+    text-align: center;
 }

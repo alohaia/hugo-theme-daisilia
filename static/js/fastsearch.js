@@ -1,14 +1,18 @@
 var fuse; // holds our search engine
 var searchVisible = false;
 var firstRun = true; // allow us to delay loading json data unless search activated
-var list = document.getElementById('searchResults');
-var first = list.firstChild; // first child of search list
-var last = list.lastChild; // last child of search list
+var resultList = document.getElementById('searchResults');
 var searchInput = document.getElementById('searchInput');
-var resultsAvailable = false; // Did we get any search results?
-const keys = [ 'title', 'contents' ];
+var resultsAvailable = false;
+const keys = [
+    { name: 'title', weight: 2 },
+    'contents', // weight defaults to 1
+];
 var loading = document.getElementById('searchLoading');
 var matchSurroundLength = 30;
+const searchHint = `<p class="search-hint article-content">Loading completed, type something and press <kbd>Enter</kbd> to search.<br>
+Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> to show this information.<br>
+<a target="_blank" href="https://www.fusejs.io/examples.html#extended-search">Advanced searching</a> is supported.</p>`;
 
 // ==========================================
 // Check searchVisible and toggle search
@@ -37,8 +41,7 @@ function toggleSearch(force) {
     }
 }
 
-function escapeHtml(unsafe)
-{
+function escapeHtml(unsafe) {
     return unsafe
          .replace(/&/g, "&amp;")
          .replace(/</g, "&lt;")
@@ -61,7 +64,7 @@ document.addEventListener("mousedown", event => {
 //
 document.addEventListener('keydown', function(event) {
     // Crtl-/ to show / hide Search
-    if (event.ctrlKey && event.key == "/") {
+    if (event.ctrlKey && !event.shiftKey && !event.altKey && event.key == "/") {
         event.preventDefault();
         toggleSearch();
     }
@@ -75,9 +78,15 @@ document.addEventListener('keydown', function(event) {
 
 // ==========================================
 // execute search as text is changed
-searchInput.onkeyup = function() {
-    executeSearch(this.value);
-}
+// searchInput.onchange = function() {
+//     executeSearch(this.value);
+// }
+searchInput.addEventListener('keydown', function(event) {
+    if (!event.ctrlKey && !event.shiftKey && !event.altKey && event.key == 'Enter')
+        executeSearch(this.value);
+    else if (event.ctrlKey && event.shiftKey && !event.altKey && event.key == 'H')
+        resultList.innerHTML = searchHint;
+})
 
 
 // ==========================================
@@ -118,7 +127,7 @@ function loadSearch() {
 
         // change loading mask
         if (loading) {
-            loading.innerHTML = 'Loading completed, type to search.';
+            loading.innerHTML = searchHint;
             loading.classList.add('loaded');
         }
 
@@ -217,59 +226,15 @@ function executeSearch(term) {
                             <span class="search-item-edit">${result.item.edit}</span>
                         </div>
                         <div class="search-item-summary article-content summary">${result.item.summary}</div>
-                        <div class="search-item-matches">${matchHTML}</div>
+                        ${matchHTML && '<div class="search-item-matches">' + matchHTML + '</div>'}
                     </li>`
             }
             resultsAvailable = true
         }
 
-        list.innerHTML = searchitems
-        if (results.length > 0) {
-            first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
-            last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
-        }
+        resultList.innerHTML = searchitems
 
         // refresh pjax
-        window.pjax.refresh(list);
+        window.pjax.refresh(resultList);
     });
 }
-
-for (inputEl of document.querySelectorAll(".fast-search-advanced input:not(#advanced-option-inverse)")) {
-    inputEl.addEventListener("change", function() {
-        if (this.checked == true) {
-            var inputEls = document.querySelectorAll(".fast-search-advanced input:not(#advanced-option-inverse)")
-            for (el of inputEls) { if (el != this) { el.checked = false } }
-        }
-    })
-}
-
-for (inputEl of document.querySelectorAll(".fast-search-advanced input")) {
-    inputEl.addEventListener("change", function() {
-        var m = searchInput.value.match(/^!?(?:\^?(|[^='].*?)\$?|(?:'|=|)(.*?))$/)
-        var text = m[1] != undefined ? m[1] : m[2]
-
-        if (document.getElementById("advanced-option-include").checked)
-            text = "'" + text
-        else if (document.getElementById("advanced-option-exact").checked)
-            text = "=" + text
-        else if (document.getElementById("advanced-option-prefix").checked)
-            text = "^" + text
-        else if (document.getElementById("advanced-option-suffix").checked)
-            text = text + "$"
-
-        if (document.getElementById("advanced-option-inverse").checked)
-            text = "!" + text
-
-        searchInput.value = text
-        executeSearch(text)
-    })
-}
-
-searchInput.addEventListener("input", function() {
-    document.getElementById("advanced-option-include").checked = this.value.match(/^!?'/) != null
-    document.getElementById("advanced-option-exact").checked = this.value.match(/^!?=/) != null
-    document.getElementById("advanced-option-prefix").checked = this.value.match(/^!?\^/) != null
-    document.getElementById("advanced-option-suffix").checked = this.value.match(/\$$/) != null
-    document.getElementById("advanced-option-inverse").checked = this.value[0] == '!'
-    document.getElementById("advanced-option-fuzzy").checked = this.value.match(/^!?['=^]|\$$/) == null
-})
