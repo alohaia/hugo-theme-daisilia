@@ -41,6 +41,7 @@ function MathJaxConfig() {
                 '[tex]/AMScd': '[tex]/amscd'
             }
         },
+        // edit `markup.goldmark.extensions.passthrough.delimiters` meanwhile
         tex: {
             inlineMath: {'[+]': [['$', '$']]},
             displayMath: [
