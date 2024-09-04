@@ -9,7 +9,7 @@ const keys = [
     'contents', // weight defaults to 1
 ];
 var loading = document.getElementById('searchLoading');
-var matchSurroundLength = 30;
+var matchSurroundLength = 45;
 const searchHint = `<p class="search-hint article-content">Loading completed, type something and press <kbd>Enter</kbd> to search.<br>
 Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> to show this information.<br>
 <a target="_blank" href="https://www.fusejs.io/examples.html#extended-search">Advanced searching</a> is supported.</p>`;
@@ -207,7 +207,7 @@ function executeSearch(term) {
                             + `<span class="search-item-match-highlight">${escapeHtml(match.value.slice(index[0], index[1]+1))}</span>`
                             + escapeHtml(match.value.slice(index[1]+1, index[1]+1+matchSurroundLength));
                         matchHTML = (matchHTML || "") +
-                            `<span class="search-item-match-index">${index[0] + "-" + index[1]}:</span>
+                            `<span class="search-item-match-index">${Math.round(index[0] / match.value.length * 100)}%:</span>
                             <span class="search-item-match-context">${context}</span>`;
                     }
                 }
