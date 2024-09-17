@@ -1,7 +1,7 @@
 {{- $page := . }}{{ if .Params.copy }}{{ $page = .GetPage .Params.copy }}{{ end -}}
-{{- $sum := "" -}}
-{{- if $page.Params.summary -}}
-  {{- $sum = $page.Params.summary -}}
+{{- $sum := $page.Summary -}}
+{{- if and (not (strings.Contains .RawContent "<!--more-->")) (not .Params.summary) -}}
+  {{- $sum = printf "<p>%s</p>" ($sum | plainify | strings.Truncate site.Params.daisy.summary_length) -}}
 {{- else -}}
   {{- $sum = $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" -}}
 {{- end -}}
