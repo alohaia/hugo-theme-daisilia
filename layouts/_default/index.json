@@ -1,6 +1,16 @@
 {{- $.Scratch.Add "index" slice -}}
 {{- range (append .Site.RegularPages (where .Site.Pages "Kind" "section")) -}}
-    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .RelPermalink "summary" (replaceRE `<a href="#.*?">(.*?)</a>` "$1" .Summary) "date" (.Date.Format "2006-01-02") "edit" (.Lastmod.Format "2006-01-02") "section" .Section) -}}
+  {{- /* FUNCTION summary begin */ -}}
+  {{- $page := . -}}
+  {{- if .Params.copy }}{{ $page = .GetPage .Params.copy }}{{ end -}}
+  {{- $sum := $page.Summary -}}
+  {{- if and (not (strings.Contains .RawContent "<!--more-->")) (not .Params.summary) -}}
+    {{- $sum = printf "<p>%s</p>" ($sum | plainify | strings.Truncate site.Params.daisy.summary_length) -}}
+  {{- else -}}
+    {{- $sum = $page.Summary | replaceRE "<a\\shref=('#.*?'|\"#.*?\")>(.*?)</a>" "$2" -}}
+  {{- end -}}
+  {{- /* FUNCTION summary end */ -}}
+  {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .RelPermalink "summary" (replaceRE `<a href="#.*?">(.*?)</a>` "$1" $sum) "date" (.Date.Format "2006-01-02") "edit" (.Lastmod.Format "2006-01-02") "section" .Section) -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
