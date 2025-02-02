@@ -216,8 +216,8 @@ figure {
 }
 
 /* fancybox */
-img[src$=".svg"] {
-    background: var(--white);
+.fancybox-image {
+    background-color: var(--white);
 }
 [data-fancybox] {
     cursor: zoom-in;
@@ -460,6 +460,7 @@ h6.heading::before {
 kbd {
     display: inline-block;
     padding: .25em;
+    margin: 0 .2em;
     background-color: var(--white);
     border: 1px solid var(--gray);
     border-bottom-color: var(--gray-deep);
@@ -467,7 +468,7 @@ kbd {
     box-shadow: inset 0 -1px 0 var(--gray-deep);
     font-size: .8em;
     line-height: 1.25;
-    font-family: var(--font-code);
+    font-family: var(--font-sans);
     color: var(--black);
 }
 
@@ -1121,9 +1122,7 @@ blockquote:before {
     transform: translate(-10px, 0);
 }
 blockquote::after {
-    content: close-quote;
-    float: right;
-    transform: translate(0px, -20px);
+    content: no-close-quote;
 }
 blockquote a.cite {
     text-decoration: none;
@@ -1363,3 +1362,20 @@ span.refmark.ref:before {
     font-style: italic;
     color: var(--gray-deep);
 }
+/* wrap ul */
+ul.wrap, ol.wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 3px;
+    line-height: 24px;
+}
+
+/* ul.wrap, ol.wrap { */
+/*     display: grid; */
+/*     grid-auto-flow: column; */
+/*     grid-template-columns: repeat(auto-fill, minmax(max-content, 100px)); */
+/*     grid-template-rows: auto; */
+/*     column-gap: 32px; */
+/*     line-height: 24px; */
+/* } */

@@ -1,5 +1,19 @@
 #! /usr/bin/env Rscript
 
+if (!requireNamespace("blogdown", quietly = TRUE)) {
+    message("=> blogdown not installed, installing...")
+    install.packages("blogdown")
+}
+
+# knitr options
+# fall back on '/' if baseurl is not specified
+knitr::opts_knit$set(
+    base.url = blogdown:::get_config("baseUrl"),
+    base.dir = normalizePath("content"),
+    width = 70,
+    aliases = c(h = "fig.height", w = "fig.width")
+)
+
 message("=> knit Rmarkdown files")
 
 a <- commandArgs(TRUE)
