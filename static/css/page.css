@@ -1244,9 +1244,6 @@ em {
     font-style: normal;
     font-family: var(--font-italic);
 }
-em, strong {
-    text-shadow: 0 0 .1em var(--gray-deep);
-}
 .heading em {
     font-family: inherit;
     color: var(--gray-deep);

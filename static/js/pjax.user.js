@@ -59,16 +59,12 @@ document.addEventListener("pjax:complete", function () {
         && currentSeries != lastSeries
     ) {
         pjax.switchSelector(window.location.pathname, {selectors: ["#SeriesList"]}, function() {
-            console.log(`"series"?: ${window.location.pathname.split("/")[1] == "series"}\ncurrentSeries: ${currentSeries}\nlastSeries: ${lastSeries}`)
             pjax.refresh(document.getElementById("SeriesList"));
-            console.log("initSeriesList");
             initSeriesList();
 
             lastSeries = currentSeries;
         })
     } else {
-            console.log(`"series"?: ${window.location.pathname.split("/")[1] == "series"}\ncurrentSeries: ${currentSeries}\nlastSeries: ${lastSeries}`)
-        console.log("updateSeriesList");
         updateSeriesList();
     }
 });

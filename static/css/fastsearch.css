@@ -180,8 +180,7 @@
     margin: 5px 0;
 }
 .search-item-match-highlight {
-    text-decoration: underline dashed;
-    font-weight: bold;
+    background-color: yellow;
 }
 
 .search-hint {
