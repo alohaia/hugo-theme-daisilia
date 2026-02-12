@@ -1,17 +1,13 @@
 {{- if hasPrefix .Destination "#" -}} {{- /* anchor */ -}}
-  <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+  <a href="{{ .Destination | anchorize }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | urls.PathUnescape }}</a>
 {{- else -}}
-  {{- if or (hasPrefix .Destination site.BaseURL) (hasPrefix .Destination "/") | or (or (hasPrefix .Destination "./") (hasPrefix .Destination "../")) | or (hasPrefix .Destination "HAHAHUGOSHORTCODE") -}} {{- /* https://discourse.gohugo.io/t/solved-destination-from-rel-or-relref-does-has-unexpect-prefix/42848/2 */ -}}
-    <a href="{{ .Destination }}" class="page" {{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
-  {{- else -}} {{- /* external link */ -}}
-    {{- $url := .Text | urls.Parse -}}
-    {{- $urltext := "" -}}
-    {{- if $url.Host -}}
-      {{- $urltext = printf "%s://%s%s" $url.Scheme $url.Host $url.Path -}}
-    {{- else -}}
-      {{- $urltext = .Text -}}
-    {{- end -}}
-    <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank" rel="external">{{ $urltext | safeHTML }}</a>
+  {{- if or (hasPrefix .Destination site.BaseURL) (hasPrefix .Destination "/")
+      | or (or (hasPrefix .Destination "./") (hasPrefix .Destination "../"))
+      | or (hasPrefix .Destination "HAHAHUGOSHORTCODE")
+  -}} {{- /* internal URL */ -}}
+    <a href="{{ .Destination | urlize }}" class="page" {{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | urls.PathUnescape }}</a>
+  {{- else -}} {{- /* external URL */ -}}
+    <a href="{{ .Destination | urlize }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank" rel="external">{{ .Text | urls.PathUnescape }}</a>
   {{- end -}}
 {{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
