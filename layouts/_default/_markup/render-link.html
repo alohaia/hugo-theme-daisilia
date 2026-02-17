@@ -6,9 +6,9 @@
       | or (or (hasPrefix .Destination "./") (hasPrefix .Destination "../"))
       | or (hasPrefix .Destination "HAHAHUGOSHORTCODE")
   -}} {{- /* internal URL */ -}}
-    <a href="{{ .Destination | urlize }}" class="page" {{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | urls.PathUnescape }}</a>
+    <a href="{{ .Destination }}" class="page" {{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | urls.PathUnescape }}</a>
   {{- else -}} {{- /* external URL */ -}}
-    <a href="{{ .Destination | urlize }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank" rel="external">{{ .Text | urls.PathUnescape }}</a>
+    <a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank" rel="external">{{ .Text | urls.PathUnescape }}</a>
   {{- end -}}
 {{- end -}}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
