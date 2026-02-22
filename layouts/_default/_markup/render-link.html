@@ -1,6 +1,6 @@
 {{- $u := urls.Parse .Destination -}}
 {{- if hasPrefix .Destination "#" -}} {{- /* anchor */ -}}
-  <a href="{{ .Destination | anchorize }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | urls.PathUnescape }}</a>
+  <a href="#{{ .Destination | anchorize }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | urls.PathUnescape }}</a>
 {{- else -}}
   {{- if or (hasPrefix .Destination site.BaseURL) (hasPrefix .Destination "/")
       | or (or (hasPrefix .Destination "./") (hasPrefix .Destination "../"))
