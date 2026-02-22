@@ -1102,11 +1102,9 @@ blockquote {
     quotes: "“" "”" "‘" "’" "“" "”" "‘" "’";
     margin: 10px 0;
     padding: 10px 25px;
+    border-left: solid var(--gray-deep) 4px;
     background-color: var(--gray-light);
     border-radius: 4px;
-    font-family: var(--font-italic);
-}
-blockquote code {
     font-family: var(--font-italic);
 }
 blockquote:before, blockquote::after {
