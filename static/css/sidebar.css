@@ -216,6 +216,7 @@
 .sidebar-quote {
     margin-top: 15px;
     width: 100%;
+    font-family: "LXGW WenKai", "Noto Serif SC", sans-serif;
 }
 .sidebar-quote-content {
     grid-area: content;
@@ -233,7 +234,6 @@
 .sidebar-quote.collapsed .sidebar-quote-from {
     margin: 0;
     text-align: right;
-    font-style: italic;
     font-size: smaller;
     opacity: 0.8;
 }
@@ -261,7 +261,6 @@
 .sidebar-quote.expanded .author {
     grid-area: author;
     font-size: smaller;
-    font-style: italic;
 }
 
 /* site overview */
