@@ -1,5 +1,5 @@
 {{- $link := .Get "link" -}}
-<blockquote{{ with .Get "align" }} class="align-{{ . }}"{{ end }}>
+<blockquote{{ with .Get "align" }} class="regular align-{{ . }}"{{ end }}>
   <div class="quote-content">
     {{- with $link }}<a class="cite" target="_blank" href="{{ . }}">{{ end }}{{ .Inner | markdownify }}{{ with $link }}</a>{{ end -}}
   </div>

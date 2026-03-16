@@ -1097,46 +1097,81 @@ details[open] .tab-sum-trigger {
     width: 100%;
 }
 
-/* blockquote */
-blockquote {
+/* regular blockquotes */
+blockquote.regular {
     quotes: "“" "”" "‘" "’" "“" "”" "‘" "’";
-    margin: 10px 0;
-    padding: 10px 25px;
+    margin: 0.8em 0;
+    padding: 0.8em 1.2em;
     border-left: solid var(--gray-deep) 4px;
-    background-color: var(--gray-light);
-    border-radius: 4px;
-    font-family: var(--font-italic);
+    font-family: var(--font-serif);
 }
-blockquote:before, blockquote::after {
+blockquote.regular:before, blockquote.regular::after {
     color: var(--gray);
     font-family: var(--font-sans);
     width: 0;
     height: 0;
     font-size: x-large;
 }
-blockquote:before {
+blockquote.regular:before {
     content: open-quote;
     float: left;
-    transform: translate(-10px, 0);
+    transform: translate(-0.5em, -0.1em);
 }
-blockquote::after {
+blockquote.regular::after {
     content: no-close-quote;
 }
-blockquote a.cite {
+blockquote.regular a.cite {
     text-decoration: none;
 }
-blockquote a[target=_blank].cite::after {
+blockquote.regular a[target=_blank].cite::after {
     content: none;
 }
-blockquote .quote-content, blockquote .quote-from, blockquote p {
+blockquote.regular .quote-content,
+blockquote.regular .quote-from,
+blockquote.regular p {
     margin: 0;
 }
-blockquote.align-center .quote-content { text-align: center }
-blockquote.align-left .quote-content { text-align: left }
-blockquote.align-right .quote-content { text-align: right }
-blockquote .quote-from {
+blockquote.regular.align-center .quote-content { text-align: center }
+blockquote.regular.align-left .quote-content { text-align: left }
+blockquote.regular.align-right .quote-content { text-align: right }
+blockquote.regular .quote-from {
     text-align: right;
 }
+/* alert blockquotes */
+blockquote.alert {
+    font-family: var(--font-serif);
+    border-left: solid 4px;
+    margin: 0.8em 0;
+    padding: 0.8em 0 0.8em 1.2em;
+}
+blockquote.alert-note      { border-color: #316dca; }
+blockquote.alert-tip       { border-color: #2da44e; }
+blockquote.alert-important { border-color: #8250df; }
+blockquote.alert-warning   { border-color: #bf8700; }
+blockquote.alert-caution   { border-color: #cf222e; }
+
+blockquote.alert .alert-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 0;
+    margin-bottom: 1em;
+    width: 100%;
+    font-weight: bold;
+}
+blockquote.alert-note      .alert-heading { color: #316dca; fill: #316dca; }
+blockquote.alert-tip       .alert-heading { color: #2da44e; fill: #2da44e; }
+blockquote.alert-important .alert-heading { color: #8250df; fill: #8250df; }
+blockquote.alert-warning   .alert-heading { color: #bf8700; fill: #bf8700; }
+blockquote.alert-caution   .alert-heading { color: #cf222e; fill: #cf222e; }
+
+blockquote.alert p {
+    margin-top: 0;
+}
+blockquote.alert>:last-child {
+    margin-bottom: 0;
+}
+
 
 /* section-heading */
 .section-heading:hover {
