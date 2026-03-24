@@ -62,7 +62,7 @@
     --orange: #ff8855;
     --orange-deep: #ff6020;
 
-    --code-background: #fafafa;
+    --code-background: #efefef;
     --inline-code-background: #f0f0f0;
     --link: var(--black);
     --link-hover: var(--orange-deep);

@@ -343,7 +343,7 @@ table .table-cell.center {
 }
 
 /* highlight & block */
-code * {
+code *, pre code {
     font-family: var(--font-code);
 }
 code:not(pre code) { /* inline code */
@@ -376,6 +376,11 @@ pre:not(.highlight pre):not([data-processed].mermaid),
 .highlight td:first-child code {
     display: flex;
     flex-direction: column;
+}
+/* merge .highlight (fenced code block) and following pre (indented code block) */
+.highlight + pre {
+    margin-top: -16px !important;
+    border-top: 2px dashed var(--gray) !important;
 }
 
 /* list */
@@ -1115,7 +1120,7 @@ blockquote.regular:before, blockquote.regular::after {
 blockquote.regular:before {
     content: open-quote;
     float: left;
-    transform: translate(-0.5em, -0.1em);
+    transform: translate(-0.5em, -0.2em);
 }
 blockquote.regular::after {
     content: no-close-quote;

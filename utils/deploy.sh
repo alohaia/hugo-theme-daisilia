@@ -15,3 +15,5 @@ echo "=> push code to Github"
 git add .
 git commit -m "${mes}"
 git push
+
+echo "############## deployment completed ##############"
