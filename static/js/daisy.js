@@ -32,87 +32,21 @@ function loadScript(src, type = "text/javascript",async = true) {
 
 }
 
-function MathJaxConfig() {
-    window.MathJax = {
-        loader: {
-            load: ['[tex]/mhchem'], // https://mhchem.github.io/MathJax-mhchem/
-            source: {
-                '[tex]/amsCd': '[tex]/amscd',
-                '[tex]/AMScd': '[tex]/amscd'
-            }
-        },
-        // edit `markup.goldmark.extensions.passthrough.delimiters` meanwhile
-        tex: {
-            inlineMath: {'[+]': [['$', '$']]},
-            displayMath: [
-                ["$$", "$$"],
-                ["\[\[", "\]\]"],
-            ],
-            packages: {'[+]': ['mhchem']},
-            tags: 'ams'
-        },
-        options: {
-            renderActions: {
-                findScript: [10, doc => {
-                    document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                        const display = !!node.type.match(/; *mode=display/);
-                        const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                        const text = document.createTextNode('');
-                        node.parentNode.replaceChild(text, node);
-                        math.start = {node: text, delim: '', n: 0};
-                        math.end = {node: text, delim: '', n: 0};
-                        doc.math.push(math);
-                    });
-                }, '', false],
-                insertedScript: [200, () => {
-                    document.querySelectorAll('mjx-container').forEach(node => {
-                        let target = node.parentNode;
-                        if (target.nodeName.toLowerCase() === 'li') {
-                            target.parentNode.classList.add('has-jax');
-                        }
-                    });
-                }, '', false]
-            }
-        }
-    };
-}
-
-function loadOrRefershThirdPartyScripts() {
+function onLoadOrRefersh() {
     // mermaid
-    if (document.getElementsByClassName("mermaid")[0]) {
-        if (window.mermaid) {
-            mermaid.run();
-        } else {
-            loadScript('https://cdn.jsdelivr.net/npm/mermaid@10.2.3/dist/mermaid.min.js')
-                .then(() => {
-                    mermaid.initialize({
-                        startOnLoad: false, // pjax:complete won't toggle startOnLoad
-                        theme: 'neutral',
-                        flowchart: {
-                            useMaxWidth: true
-                        }
-                    });
-                    mermaid.run();
-                })
-                .catch(e => {
-                    console.error("failed to load mermaid.min.js:", e)
-                });
-        }
-    }
+    document.querySelectorAll('.mermaid').forEach(el => {
+        // avoid repeat rendering
+        // `data-processed` will be added by mermaid automatically
+        if (el.dataset.processed) return;
+
+        mermaid.init(undefined, el);
+    });
 
     // MathJax
-    if (document.getElementById("SiteContent").hasAttribute("mathjax")) {
-        if (window.MathJax) {
-            if (MathJax.typeset) {
-                MathJax.texReset();
-                MathJax.typeset();
-            }
-        } else {
-            MathJaxConfig();
-            loadScript('https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js')
-            .catch(e => {
-                console.error("failed to load tex-mml-chtml.js:", e);
-            });
+    if (document.getElementById("SiteContent")?.hasAttribute("has-math")) {
+        if (window.MathJax?.typesetPromise) {
+            MathJax.typesetClear?.();
+            MathJax.typesetPromise();
         }
     }
 }
@@ -258,7 +192,7 @@ window.addEventListener('DOMContentLoaded', () => {
         TOCOnscrollObserver.observe(section);
     });
 
-    loadOrRefershThirdPartyScripts();
+    onLoadOrRefersh();
 });
 
 // TOC active

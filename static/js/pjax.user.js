@@ -49,7 +49,7 @@ document.addEventListener("pjax:complete", function () {
         TOCOnscrollObserver.observe(heading);
     });
 
-    loadOrRefershThirdPartyScripts();
+    onLoadOrRefersh();
 
     // series list
     var currentSeries = decodeURI(window.location.pathname.split("/")[2]);

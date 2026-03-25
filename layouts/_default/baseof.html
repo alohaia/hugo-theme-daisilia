@@ -8,6 +8,29 @@
   {{- partial "components/style" . -}}     {{- /* css */ -}}
   {{- partial "components/favicon" . -}}   {{- /* favicon */ -}}
   <script src="/js/jquery-3.6.0.min.js"></script>
+  <!-- init MathJax -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      packages: {'[+]': ['mhchem']},
+      tags: 'ams'
+    }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <!-- init Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.3/dist/mermaid.min.js"></script>
+  <script>
+  if (window.mermaid) {
+      mermaid.initialize({
+          startOnLoad: false,  // pjax:complete won't toggle startOnLoad
+          theme: 'neutral',
+          flowchart: { useMaxWidth: true }
+      });
+  }
+  </script>
 </head>
 <body class="site-root{{ if hugo.IsServer }} local-server{{ end }}" id="SiteRoot">
   <div id="preload-mask">
@@ -18,7 +41,9 @@
     <div class="site-main" id="SiteMain">
       <div class="site-left" data-pjax>{{ block "left" . }}{{ end }}</div>
       <div class="site-message-list" id="MessageList"></div>
-      <div class="site-content"{{ if or (.Params.math) (in .Params.features "math") }} mathjax{{ end }} data-pjax id="SiteContent">
+      <div class="site-content" id="SiteContent" data-pjax
+        {{ if .Page.Store.Get "hasMath" }}has-math{{ end }}
+      >
         {{- block "main" . }}{{ end -}}
       </div>
       <div class="site-comment">{{ partial "third-party/comment" . }}</div>
@@ -59,4 +84,4 @@
   </div>
 </body>
 </html>
-{{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
+{{- /* vim:set ft=gotmpl ts=2 sw=2: */ -}}
