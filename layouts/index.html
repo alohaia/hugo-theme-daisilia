@@ -22,8 +22,8 @@
       <span class="pages-recommended-switch recently-published" role="button">Recently Published</span>
     </div>
     <div class="pages-recommended-tab most-referenced">
-    {{- if .Site.Data.refs -}}
-      {{- range first 10 (sort .Site.Data.refs "count" "desc") -}}
+    {{- if hugo.Data.refs -}}
+      {{- range first 10 (sort hugo.Data.refs "count" "desc") -}}
         {{- $page := site.GetPage (index . "file_ref") -}}
       <div class="page-list-item {{ $page.Kind }}">
         <h1 class="page-title article-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h1>

@@ -20,9 +20,9 @@
 <details{{ if $open }} open{{ end }} class="tab {{ $type }}"{{ with $id }} id="{{ . }}"{{ end }}>
   <summary class="tab-sum"><span class="tab-sum-content">{{ $summary | markdownify }}</span><i class="tab-sum-trigger"></i></summary>
   {{- if $id -}}
-  {{- if and site.Data.refs .Page.File -}}
-  {{- if index site.Data.refs .Page.File.Path -}}
-  {{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+  {{- if and hugo.Data.refs .Page.File -}}
+  {{- if index hugo.Data.refs .Page.File.Path -}}
+  {{- if index (index hugo.Data.refs .Page.File.Path).link_here $id -}}
     {{- partial "components/cross-refs.html" (dict "page" .Page "index" $id) -}}
   {{- end -}}
   {{- end -}}
@@ -38,9 +38,9 @@
   <div class="tab-sum"><span class="tab-sum-content">{{ $summary | markdownify }}</span></div>
   {{- end -}}
   {{- if $id -}}
-  {{- if and site.Data.refs .Page.File -}}
-  {{- if index site.Data.refs .Page.File.Path -}}
-  {{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+  {{- if and hugo.Data.refs .Page.File -}}
+  {{- if index hugo.Data.refs .Page.File.Path -}}
+  {{- if index (index hugo.Data.refs .Page.File.Path).link_here $id -}}
     {{- partial "components/cross-refs.html" (dict "page" .Page "index" $id) -}}
   {{- end -}}
   {{- end -}}

@@ -4,7 +4,7 @@
 {{- $embed := .Get "embed" -}}
 {{- $link := .Get "link" -}}
 {{- $crossrefs := false -}}
-{{- if $id -}}{{- if and site.Data.refs .Page.File -}}{{- if index site.Data.refs .Page.File.Path -}}{{- if index (index site.Data.refs .Page.File.Path).link_here $id -}}
+{{- if $id -}}{{- if and hugo.Data.refs .Page.File -}}{{- if index hugo.Data.refs .Page.File.Path -}}{{- if index (index hugo.Data.refs .Page.File.Path).link_here $id -}}
 {{- $crossrefs = true -}}
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
 {{- $src := .Get "src" | safeURL -}}

@@ -5,9 +5,9 @@
   <a href="#{{ .Anchor }}">{{ .Text | safeHTML }}</a>
   {{- with .Attributes.alias -}}<span class="heading-aliases">{{ range (split . " ") }}<span class="heading-alias">{{ replace . "\\_" " " | markdownify }}</span>{{ end }}</span>{{ end }}
 </h{{ .Level }}>
-{{- if and site.Data.refs .Page.File -}}
-{{- if index site.Data.refs .Page.File.Path -}}
-{{- if index (index site.Data.refs .Page.File.Path).link_here .Anchor -}}
+{{- if and hugo.Data.refs .Page.File -}}
+{{- if index hugo.Data.refs .Page.File.Path -}}
+{{- if index (index hugo.Data.refs .Page.File.Path).link_here .Anchor -}}
   {{- partial "components/cross-refs.html" (dict "page" .Page "index" .Anchor) -}}
 {{- end -}}
 {{- end -}}

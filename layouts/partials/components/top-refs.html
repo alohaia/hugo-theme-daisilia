@@ -1,6 +1,6 @@
-{{- if and .Site.Data.refs .Page.File -}}
-{{- if index $.Site.Data.refs .Page.File.Path -}}
-{{- if index (index $.Site.Data.refs .Page.File.Path).link_here "" -}}
+{{- if and hugo.Data.refs .Page.File -}}
+{{- if index hugo.Data.refs .Page.File.Path -}}
+{{- if index (index hugo.Data.refs .Page.File.Path).link_here "" -}}
 <div class="top-refs">
   {{- partial "components/cross-refs.html" (dict "page" .Page "index" "") -}}
 </div>
