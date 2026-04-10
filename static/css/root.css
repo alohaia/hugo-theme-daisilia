@@ -47,7 +47,7 @@
     --content-width: 800px;
 
     --font-handwrite: "Indie Flower", cursive;
-    --font-code: "JetBrains Mono", monospace;
+    --font-code: "JetBrains Mono", "Noto Sans SC", monospace;
     --font-italic: "Reforma1918 Italic", "LXGW WenKai", cursive;
     --font-sans: "Roboto", "Noto Sans SC", sans-serif;
     --font-serif: "Andada Pro", "Noto Serif SC", serif;
