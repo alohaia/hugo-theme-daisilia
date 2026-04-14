@@ -33,13 +33,38 @@ function loadScript(src, type = "text/javascript",async = true) {
 }
 
 function onLoadOrRefersh() {
-    // mermaid
-    document.querySelectorAll('.mermaid').forEach(el => {
+    // Mermaid
+    document.querySelectorAll(".mermaid").forEach(el => {
         // avoid repeat rendering
         // `data-processed` will be added by mermaid automatically
         if (el.dataset.processed) return;
 
         mermaid.init(undefined, el);
+    });
+
+    // Graphviz
+    document.querySelectorAll("figure.graphviz").forEach(async (el) => {
+        if (el.dataset.processed) return;
+
+        const viz = new Viz();
+        const dot = el.textContent;
+        try {
+            const svg = await viz.renderString(dot);
+            const svgEl = new DOMParser()
+                .parseFromString(svg, "image/svg+xml")
+                .querySelector("svg");
+            svgEl.removeAttribute("width");
+            svgEl.removeAttribute("height");
+            svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+            el.innerHTML = "";
+            el.appendChild(svgEl);
+        } catch (err) {
+            console.error("Failed to render Graphviz:", err);
+            el.innerHTML = `<pre>Render Error</pre><pre>${dot}</pre>`;
+        }
+
+        el.dataset.processed = "true";
     });
 
     // MathJax
