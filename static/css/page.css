@@ -361,7 +361,6 @@ pre:not(.highlight pre):not([data-processed].mermaid),
     background-color: var(--code-background);
     overflow-x: auto;
     line-height: 1.5;
-    max-height: 60vh;  /* code blocks of 14 lines on windows overflow if setted to 50vh */
 }
 .highlight pre {
     margin: 0;
@@ -494,21 +493,23 @@ hr {
 }
 
 /* deflist */
+/* deflist */
 dl {
-    margin: 25px 0;
-}
-dl:first-child, .heading + dl {
-    margin-top: 10px;
-}
-dt, dd {
-    line-height: 24px;  /* vertical align */
+    margin-bottom: 24px;
 }
 dt {
+    margin-bottom: 10px;
     font-weight: bold;
     font-family: var(--font-italic);
-    display: inline;
-    float: left;
 }
+dd {
+    margin-left: 30px;
+    margin-bottom: 20px
+}
+dd+dd {
+    margin-top: -10px;
+}
+
 dt::after {
     content: ": ";
     color: var(--gray-deep);
@@ -517,21 +518,6 @@ dt::after {
     margin: 0 4px;
     font-family: var(--font-sans);
     line-height: 0;  /* to prevent dt deviation */
-}
-dd {
-    margin: 0;
-}
-dd:not(dt+dd) {
-    text-indent: 1em;
-}
-dd:not(dt+dd)::before {
-    content: "#";
-    color: var(--gray-deep);
-    font-weight: bold;
-    margin: 0 5px;
-}
-dl:not(.grid) dd+dt, dl:not(.grid) dd+dt+dd {
-    margin-top: 10px;
 }
 
 /* grid deflist */
@@ -967,25 +953,32 @@ span.pages-recommended-switch.selected {
 }
 
 /* noted text */
-/* available classes: inline-note, exam */
-.note {
-    font-family: var(--font-serif);
-    line-break: anywhere;
-}
+/* available extra classes: exam */
 .noted {
-    text-decoration: underline;
-    text-decoration-style: double;
+    position: relative;
+    cursor: help;
+    text-decoration: underline dashed;
+    text-underline-offset: 3px;
 }
-.noted:not(.inline-note) .note {
-    float: right;
-    max-width: 200px;
-    background: var(--gray-light);
-    padding: 0 5px;
-    border-radius: 5px;
-    margin-left: 5px;
-    border-bottom: 2px solid var(--gray-deep);
+.note {
+    font-family: var(--font-sans);
+    line-break: anywhere;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: #333;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    border-radius: 4px;
+    display: none;
 }
-/* exam questions  */
+.noted:hover .note {
+    display: block;
+}
+
+/* notes for exams  */
 .noted.exam .note {
     color: var(--orange);
 }
