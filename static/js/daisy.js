@@ -76,6 +76,14 @@ function onLoadOrRefersh() {
             MathJax.typesetPromise();
         }
     }
+
+    // detect broken links
+    document.querySelectorAll(".article-content a[href^=\"#\"]").forEach(function (el) {
+        var id = decodeURI(el.getAttribute("href")).slice(1);
+        if (!(el.dataset.mjxHref || document.getElementById(id))) {
+            el.outerHTML = `<span class="link-break" data-linkto="${id}">${el.innerHTML}</span>`;
+        }
+    })
 }
 
 function switchPannel(n){
