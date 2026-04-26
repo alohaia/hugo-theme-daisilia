@@ -71,6 +71,8 @@ function onLoadOrRefersh() {
     if (document.getElementById("SiteContent")?.hasAttribute("has-math")) {
         if (window.MathJax?.typesetPromise) {
             MathJax.typesetClear?.();
+            // refresh equation lavels
+            MathJax.texReset?.();
             MathJax.typesetPromise();
         }
     }
