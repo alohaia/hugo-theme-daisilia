@@ -4,6 +4,7 @@
 {{- $embed := .Get "embed" -}}
 {{- $link := .Get "link" -}}
 {{- $crossrefs := false -}}
+{{- $lazy := default true (.Get "lazy") -}}
 {{- if $id -}}{{- if and hugo.Data.refs .Page.File -}}{{- if index hugo.Data.refs .Page.File.Path -}}{{- if index (index hugo.Data.refs .Page.File.Path).link_here $id -}}
 {{- $crossrefs = true -}}
 {{- end -}}{{- end -}}{{- end -}}{{- end -}}
@@ -46,6 +47,7 @@
     </div>
   {{- else -}}
     <img src="{{ $src }}"
+      {{- if $lazy }} loading="lazy"{{ end -}}
       {{- if and $fancybox ($link | not) }} data-fancybox data-src="{{ $src }}"{{ end -}}
       {{- if or (.Get "alt") (.Get "title") }}
       alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
