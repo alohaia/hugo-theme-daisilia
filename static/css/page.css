@@ -265,6 +265,7 @@ figcaption .cross-refs, .table-caption .cross-refs {
 /* content font size */
 .article-content {
     font-size: 18px;
+    line-height: 1.5;
     color: var(--black);
     overflow-wrap: break-word;
 }
@@ -360,7 +361,7 @@ pre:not(.highlight pre):not([data-processed].mermaid),
     border-radius: 4px;
     background-color: var(--code-background);
     overflow-x: auto;
-    line-height: 1.5;
+    /* line-height: 1.3; */
 }
 .highlight pre {
     margin: 0;
