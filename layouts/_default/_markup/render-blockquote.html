@@ -7,6 +7,19 @@
 -}}
 
 {{- if eq .Type "alert" -}}
+  {{- if .AlertSign -}}
+  <details class="alert alert-{{ .AlertType }}"{{ if eq .AlertSign "+" }} open{{ end }}>
+    <summary class="alert-heading">
+      {{ index $icons .AlertType | safeHTML }}
+      <span class="alert-heading-text">{{- with .AlertTitle -}}</span>
+        {{- . -}}
+      {{- else -}}
+        {{- or (i18n .AlertType) (title .AlertType) -}}
+      {{- end -}}
+    </summary>
+    {{- .Text -}}
+  </details>
+  {{- else -}}
   <blockquote class="alert alert-{{ .AlertType }}">
     <p class="alert-heading">
       {{ index $icons .AlertType | safeHTML }}
@@ -18,6 +31,7 @@
     </p>
     {{- .Text -}}
   </blockquote>
+  {{- end -}}
 {{- else -}}
   <blockquote class="regular">
     {{- .Text -}}

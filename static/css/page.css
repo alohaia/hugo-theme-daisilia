@@ -1097,59 +1097,61 @@ details[open] .tab-sum-trigger {
 }
 
 /* regular blockquotes */
-blockquote.regular {
+.regular {
     quotes: "“" "”" "‘" "’" "“" "”" "‘" "’";
     margin: 0.8em 0;
     padding: 0.8em 1.2em;
     border-left: solid var(--gray-deep) 4px;
     font-family: var(--font-serif);
 }
-blockquote.regular:before, blockquote.regular::after {
+.regular:before, .regular::after {
     color: var(--gray);
     font-family: var(--font-sans);
     width: 0;
     height: 0;
     font-size: x-large;
 }
-blockquote.regular:before {
+.regular:before {
     content: open-quote;
     float: left;
     transform: translate(-0.5em, -0.2em);
 }
-blockquote.regular::after {
+.regular::after {
     content: no-close-quote;
 }
-blockquote.regular a.cite {
+.regular a.cite {
     text-decoration: none;
 }
-blockquote.regular a[target=_blank].cite::after {
+.regular a[target=_blank].cite::after {
     content: none;
 }
-blockquote.regular .quote-content,
-blockquote.regular .quote-from,
-blockquote.regular p {
+.regular .quote-content,
+.regular .quote-from,
+.regular p {
     margin: 0;
 }
-blockquote.regular.align-center .quote-content { text-align: center }
-blockquote.regular.align-left .quote-content { text-align: left }
-blockquote.regular.align-right .quote-content { text-align: right }
-blockquote.regular .quote-from {
+.regular.align-center .quote-content { text-align: center }
+.regular.align-left .quote-content { text-align: left }
+.regular.align-right .quote-content { text-align: right }
+.regular .quote-from {
     text-align: right;
 }
 /* alert blockquotes */
-blockquote.alert {
-    font-family: var(--font-serif);
+.alert {
     border-left: solid 4px;
     margin: 0.8em 0;
     padding: 0.8em 0 0.8em 1.2em;
 }
-blockquote.alert-note      { border-color: #316dca; }
-blockquote.alert-tip       { border-color: #2da44e; }
-blockquote.alert-important { border-color: #8250df; }
-blockquote.alert-warning   { border-color: #bf8700; }
-blockquote.alert-caution   { border-color: #cf222e; }
+.alert-heading {
+    font-family: var(--font-serif);
+}
+.alert-note      { border-color: #316dca; }
+.alert-tip       { border-color: #2da44e; }
+.alert-important { border-color: #8250df; }
+.alert-warning   { border-color: #bf8700; }
+.alert-caution   { border-color: #cf222e; }
 
-blockquote.alert .alert-heading {
+.alert .alert-heading {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -1158,19 +1160,44 @@ blockquote.alert .alert-heading {
     width: 100%;
     font-weight: bold;
 }
-blockquote.alert-note      .alert-heading { color: #316dca; fill: #316dca; }
-blockquote.alert-tip       .alert-heading { color: #2da44e; fill: #2da44e; }
-blockquote.alert-important .alert-heading { color: #8250df; fill: #8250df; }
-blockquote.alert-warning   .alert-heading { color: #bf8700; fill: #bf8700; }
-blockquote.alert-caution   .alert-heading { color: #cf222e; fill: #cf222e; }
+.alert-note      .alert-heading { color: #316dca; fill: #316dca; }
+.alert-tip       .alert-heading { color: #2da44e; fill: #2da44e; }
+.alert-important .alert-heading { color: #8250df; fill: #8250df; }
+.alert-warning   .alert-heading { color: #bf8700; fill: #bf8700; }
+.alert-caution   .alert-heading { color: #cf222e; fill: #cf222e; }
 
-blockquote.alert p {
+.alert * {
     margin-top: 0;
 }
-blockquote.alert>:last-child {
+.alert>:last-child {
     margin-bottom: 0;
 }
 
+/* Extended syntax */
+/* https://gohugo.io/render-hooks/blockquotes/#extended-syntax */
+.alert summary::-webkit-details-marker {
+    display: none;
+}
+.alert summary::before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid currentColor;
+    transition: transform 0.2s ease;
+    transform-origin: center center;
+}
+.alert summary.alert-heading {
+    cursor: pointer;
+}
+details.alert[open] summary::before {
+    transform: rotate(90deg);
+}
+details.alert:not([open]) summary {
+    margin-bottom: 0;
+}
 
 /* section-heading */
 .section-heading:hover {

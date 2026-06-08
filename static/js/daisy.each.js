@@ -26,11 +26,6 @@ $("sidebar-content").ready(function(){
     }
 })
 
-// https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
-document.querySelectorAll('details').forEach((el) => {
-  new Accordion(el);
-});
-
 // HoverSummary
 var HoverSummaryShowUpID;
 for (anchor of document.querySelectorAll("a.page")) {
