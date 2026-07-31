@@ -728,11 +728,30 @@ dl.indent dt::after {
 .diary-list::before { content: "Diary List" }
 .page-list-item {
     margin-top: 30px;
+    border: 2px solid var(--gray-light);
+    border-radius: 5px;
+    padding: 15px 20px;
 }
 .page-list-item .summary,
 .card .summary {
     color: var(--gray-deep);
     margin: 5px 0;
+}
+/* .page-list-item:not(:last-child)::after { */
+/*     content: ""; */
+/*     display: block; */
+/*     border-top: 2px dashed; */
+/*     width: 75%; */
+/*     margin: auto; */
+/*     margin-top: 10px; */
+/*     color: var(--gray-light); */
+/* } */
+.page-list-item.section .page-title::before {
+    content: "\f07c";
+    font-family: "font awesome 6 free";
+    font-weight: 900;
+    color: var(--gray-deep);
+    margin-right: 5px;
 }
 
 /* pages recommended */
@@ -799,22 +818,6 @@ span.pages-recommended-switch.selected {
 }
 .summary *:last-child {
     margin-bottom: 0;
-}
-.page-list-item:not(:last-child)::after {
-    content: "";
-    display: block;
-    border-top: 2px dashed;
-    width: 75%;
-    margin: auto;
-    margin-top: 10px;
-    color: var(--gray-light);
-}
-.page-list-item.section .page-title::before {
-    content: "\f07c";
-    font-family: "font awesome 6 free";
-    font-weight: 900;
-    color: var(--gray-deep);
-    margin-right: 5px;
 }
 
 .page-list-item.page .page-title::before {
@@ -1183,6 +1186,7 @@ details[open] .tab-sum-trigger {
     display: inline-block;
     width: 0;
     height: 0;
+    margin-right: 10px;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-left: 6px solid currentColor;
