@@ -17,7 +17,6 @@
     color: var(--gray-deep);
     font-size: 0.875em;
     user-select: none;
-    margin-bottom: 10px;
     line-height: 1.8;
 }
 .page-metadata {
@@ -735,17 +734,8 @@ dl.indent dt::after {
 .page-list-item .summary,
 .card .summary {
     color: var(--gray-deep);
-    margin: 5px 0;
+    margin-top: 15px;
 }
-/* .page-list-item:not(:last-child)::after { */
-/*     content: ""; */
-/*     display: block; */
-/*     border-top: 2px dashed; */
-/*     width: 75%; */
-/*     margin: auto; */
-/*     margin-top: 10px; */
-/*     color: var(--gray-light); */
-/* } */
 .page-list-item.section .page-title::before {
     content: "\f07c";
     font-family: "font awesome 6 free";
