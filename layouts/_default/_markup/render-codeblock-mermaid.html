@@ -1,2 +1,2 @@
-<figure class="mermaid">{{- .Inner }}</figure>
+<figure data-mermaid{{- with .Attributes.class }} class="{{ . }}" {{- end }}>{{- .Inner }}</figure>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

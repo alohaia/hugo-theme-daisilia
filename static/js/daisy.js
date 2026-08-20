@@ -32,15 +32,68 @@ function loadScript(src, type = "text/javascript",async = true) {
 
 }
 
+let mermaidInited = false;
+async function renderMermaid() {
+    if (!mermaidInited) {
+        // https://github.com/mermaid-js/mermaid/blob/master/packages/mermaid/src/defaultConfig.ts
+        mermaid.initialize({
+            startOnLoad: true,  // pjax:complete won't toggle startOnLoad
+            theme: 'neutral',
+            theme: 'base',
+            themeVariables: {
+                fontFamily: 'var(--font-sans)',
+                fontSize: '14px',
+                primaryColor: '#f5f5f5',
+                primaryBorderColor: '#999',
+                lineColor: '#666'
+            }
+        });
+
+        console.log("init mermaid");
+        mermaidInited = true;
+    }
+
+    console.log("render mermaid");
+    await mermaid.run({
+        querySelector: '[data-mermaid]'
+    });
+}
+
+function renderFlowchart() {
+    console.log("render flowchart");
+    document
+        .querySelectorAll('[data-flowchart]')
+        .forEach((element, index) => {
+            const code = element.textContent.trim();
+
+            const chart = flowchart.parse(code);
+
+            element.textContent = '';
+            const id = `flowchart-${index}`
+            element.id = id;
+
+            chart.drawSVG(element, {
+                'line-width': 2,
+                'line-length': 50,
+                'text-margin': 10,
+                'font-size': 14,
+                'font-color': '#333',
+                'line-color': '#666',
+                'element-color': '#666',
+                'fill': 'white',
+                'yes-text': 'Yes',
+                'no-text': 'No',
+                'arrow-end': 'block'
+            });
+        });
+}
+
 function onLoadOrRefersh() {
     // Mermaid
-    document.querySelectorAll(".mermaid").forEach(el => {
-        // avoid repeat rendering
-        // `data-processed` will be added by mermaid automatically
-        if (el.dataset.processed) return;
-
-        mermaid.init(undefined, el);
-    });
+    renderMermaid();
+    
+    // flowchart.js
+    renderFlowchart();
 
     // Graphviz
     document.querySelectorAll("figure.graphviz").forEach(async (el) => {

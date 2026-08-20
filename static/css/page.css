@@ -223,12 +223,12 @@ figure {
 }
 
 /* mermaid */
-.mermaid[data-processed="true"] {
+[data-mermaid][data-processed="true"] {
     margin: auto;
     text-align: center;
     overflow: auto;
 }
-.mermaid:not([data-processed="true"]) {
+[data-mermaid]:not([data-processed="true"]) {
     max-width: initial !important;
 }
 
@@ -341,6 +341,15 @@ table .table-cell.left {
 table .table-cell.center {
     text-align: center;
 }
+/* wide table*/
+.table-wrap:not(.page-list *), table:not(.highlight table):not(.table-wrap table):not(.page-list *) {
+    width: min-content;
+    min-width: 100%;
+    max-width: max(90vw, 100%);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* highlight & block */
 code *, pre code {
@@ -353,7 +362,7 @@ code:not(pre code) { /* inline code */
     border-left: 5px solid var(--inline-code-background);
     border-right: 5px solid var(--inline-code-background);
 }
-pre:not(.highlight pre):not([data-processed].mermaid),
+pre:not(.highlight pre),
 .highlight {
     margin: 10px 0;
     border: 8px solid var(--code-background);
