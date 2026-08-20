@@ -7,6 +7,17 @@
   {{- block "title" . }}<title>{{ print .Title " | " .Site.Title }}</title>{{ end -}}
   {{- partial "components/style" . -}}     {{- /* css */ -}}
   {{- partial "components/favicon" . -}}   {{- /* favicon */ -}}
+  <script>
+  // prevent jumping
+  window.__initialHash = location.hash
+  if (window.__initialHash) {
+      history.replaceState(
+          null,
+          "",
+          location.pathname + location.search
+      )
+  }
+  </script>
   <script src="/js/jquery-4.0.0.min.js"></script>
   <!-- init MathJax -->
   <script>

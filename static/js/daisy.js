@@ -88,55 +88,107 @@ function renderFlowchart() {
         });
 }
 
-function onLoadOrRefersh() {
-    // Mermaid
-    renderMermaid();
-    
+async function scrollToAnchor(hash) {
+    if (!hash) return
+
+    const id = decodeURIComponent(hash.slice(1))
+    const target = document.getElementById(id)
+
+    if (!target) return
+
+    target.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+    })
+}
+
+async function initializePage() {
+    const hash = window.__initialHash
+
+    if (hash) {
+        console.log("scroll to", hash)
+        await scrollToAnchor(hash)
+
+        // 恢复 URL 中的 hash
+        history.replaceState(
+            null,
+            "",
+            location.pathname +
+            location.search +
+            hash
+        )
+    }
+}
+
+async function renderPage() {
+        // Mermaid
+    await renderMermaid();
+
     // flowchart.js
-    renderFlowchart();
+    await renderFlowchart();
 
     // Graphviz
-    document.querySelectorAll("figure.graphviz").forEach(async (el) => {
-        if (el.dataset.processed) return;
+    await Promise.all(
+        [...document.querySelectorAll("figure.graphviz")].map(async (el) => {
+            if (el.dataset.processed) return;
 
-        const viz = new Viz();
-        const dot = el.textContent;
-        try {
-            const svg = await viz.renderString(dot);
-            const svgEl = new DOMParser()
-                .parseFromString(svg, "image/svg+xml")
-                .querySelector("svg");
-            svgEl.removeAttribute("width");
-            svgEl.removeAttribute("height");
-            svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+            const viz = new Viz();
+            const dot = el.textContent;
 
-            el.innerHTML = "";
-            el.appendChild(svgEl);
-        } catch (err) {
-            console.error("Failed to render Graphviz:", err);
-            el.innerHTML = `<pre>Render Error</pre><pre>${dot}</pre>`;
-        }
+            try {
+                const svg = await viz.renderString(dot);
 
-        el.dataset.processed = "true";
-    });
+                const svgEl = new DOMParser()
+                    .parseFromString(svg, "image/svg+xml")
+                    .querySelector("svg");
+
+                svgEl.removeAttribute("width");
+                svgEl.removeAttribute("height");
+                svgEl.setAttribute(
+                    "preserveAspectRatio",
+                    "xMidYMid meet"
+                );
+
+                el.innerHTML = "";
+                el.appendChild(svgEl);
+            } catch (err) {
+                console.error("Failed to render Graphviz:", err);
+                el.innerHTML =
+                    `<pre>Render Error</pre><pre>${dot}</pre>`;
+            }
+
+            el.dataset.processed = "true";
+        })
+    );
 
     // MathJax
     if (document.getElementById("SiteContent")?.hasAttribute("has-math")) {
         if (window.MathJax?.typesetPromise) {
             MathJax.typesetClear?.();
-            // refresh equation lavels
             MathJax.texReset?.();
-            MathJax.typesetPromise();
+
+            await MathJax.typesetPromise();
         }
     }
 
     // detect broken links
-    document.querySelectorAll(".article-content a[href^=\"#\"]").forEach(function (el) {
-        var id = decodeURI(el.getAttribute("href")).slice(1);
-        if (!(el.dataset.mjxHref || document.getElementById(id))) {
-            el.outerHTML = `<span class="link-break" data-linkto="${id}">${el.innerHTML}</span>`;
-        }
-    })
+    document
+        .querySelectorAll(".article-content a[href^=\"#\"]")
+        .forEach(function (el) {
+            const id = decodeURI(el.getAttribute("href")).slice(1);
+
+            if (!(el.dataset.mjxHref || document.getElementById(id))) {
+                el.outerHTML =
+                    `<span class="link-break" data-linkto="${id}">${el.innerHTML}</span>`;
+            }
+        });
+}
+
+async function onLoadOrRefersh() {
+    await renderPage();
+
+    // initialize page
+    initializePage();
 }
 
 function switchPannel(n){
