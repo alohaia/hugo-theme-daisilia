@@ -342,7 +342,7 @@ table .table-cell.center {
     text-align: center;
 }
 /* wide table*/
-.table-wrap:not(.page-list *), table:not(.highlight table):not(.table-wrap table):not(.page-list *) {
+.table-wrap:not(.summary *), table:not(.highlight table):not(.table-wrap table):not(.summary *) {
     width: min-content;
     min-width: 100%;
     max-width: max(90vw, 100%);

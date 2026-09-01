@@ -121,7 +121,7 @@ async function initializePage() {
 }
 
 async function renderPage() {
-        // Mermaid
+    // Mermaid
     await renderMermaid();
 
     // flowchart.js
