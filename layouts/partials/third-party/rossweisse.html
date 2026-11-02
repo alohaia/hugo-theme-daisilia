@@ -1,62 +1,21 @@
-<div class="rossweisse" id="rossweisse">
-  <iframe
-    src="/rossweisse/embed.html"
-    title="Rossweisse live-2d"
-    loading="lazy"
-    allowtransparency="true"
-    style="display:block;width:100%;height:100%;margin:0 auto;border:0;background:transparent;"
-  ></iframe>
-  <button class="rossweisse-toggle" type="button" aria-pressed="false">
-    聚焦
-  </button>
-</div>
 <style>
-.rossweisse {
+#czn-live {
   position: fixed;
-  height: 640px;
-  width: 402px;
+  height: 560px;
+  width: 445px;
   bottom:0;
   right:0;
 }
-.rossweisse-toggle {
-  position: fixed;
-  bottom: 8px;
-  right: 8px;
-  z-index: 10;          /* 关键：高于 iframe */
-  padding: 4px 10px;
-  font-size: 13px;
-  border: 1px solid #888;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  touch-action: manipulation;
-}
-.rossweisse-toggle:hover {
-  background: #fff;
-}
-.rossweisse-toggle[aria-pressed="true"] {
-  background: #369;
-  color: #fff;
-  border-color: #369;
-}
-
-.rossweisse.focused {
-  position: absolute;
-  width: 100%;
-}
-.rossweisse.focused iframe {
-  transform: scale(2);
-}
 </style>
+<div id="czn-live"></div>
+<script src="/rossweisse/vendor/spine-player-3.8.js"></script>
+<script src="/rossweisse/inline.js"></script>
 <script>
-const rs_wrapper = document.getElementById('rossweisse');
-const rs_toggle = rs_wrapper.querySelector('.rossweisse-toggle');
-
-rs_toggle.addEventListener('click', () => {
-  const focused = rs_wrapper.classList.toggle('focused');
-  rs_toggle.setAttribute('aria-pressed', String(focused));
-  rs_toggle.textContent = focused ? '取消聚焦' : '聚焦';
-});
+  CZNInline.mount('#czn-live', {
+  skin: 1,
+  passthrough: true,
+  showSkins: true
+  });
 </script>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
 
