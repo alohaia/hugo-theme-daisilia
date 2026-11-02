@@ -38,25 +38,129 @@
   border-color: rgba(155, 112, 210, 0.8);
 }
 </style>
-<div id="rossweisse-live"></div>
-<button id="rossweisse-toggle" type="button" aria-pressed="false">聚焦</button>
-
-<script src="/rossweisse/vendor/spine-player-3.8.js"></script>
-<script src="/rossweisse/inline.js"></script>
 <script>
-CZNInline.mount('#rossweisse-live', {
-  skin: 1,
-  passthrough: true,
-  showSkins: true
-});
-const rs_wrapper = document.getElementById('rossweisse-live');
-const rs_toggle = document.getElementById('rossweisse-toggle');
+(function () {
+  var LOADED = '__rossweisseBooted';
+  if (window[LOADED]) return;
+  window[LOADED] = true;
 
-rs_toggle.addEventListener('click', () => {
-  const focused = rs_wrapper.classList.toggle('focused');
-  rs_toggle.setAttribute('aria-pressed', String(focused));
-  rs_toggle.textContent = focused ? '还原' : '聚焦';
-});
+  var STORAGE_KEY = 'rossweisse-live-enabled';
+  var memoryFlag = null;
+  var api = null;
+  var host = null;
+  var toggle = null;
+  var loading = false;
+
+  function queryFlag() {
+    try {
+      return (new URLSearchParams(window.location.search).get('rossweisse') || '').toLowerCase();
+    } catch (e) {
+      var m = window.location.search.match(/[?&]rossweisse=([^&]*)/i);
+      return m ? decodeURIComponent(m[1]).toLowerCase() : '';
+    }
+  }
+
+  function storageGet() {
+    try {
+      return window.sessionStorage.getItem(STORAGE_KEY) === 'true';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function storageSet(on) {
+    memoryFlag = !!on;
+    try {
+      if (on) window.sessionStorage.setItem(STORAGE_KEY, 'true');
+      else window.sessionStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+  }
+
+  function enabled() {
+    return memoryFlag === null ? storageGet() : memoryFlag;
+  }
+
+  function createUI() {
+    if (host) return;
+    host = document.createElement('div');
+    host.id = 'rossweisse-live';
+    toggle = document.createElement('button');
+    toggle.id = 'rossweisse-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-pressed', 'false');
+    toggle.textContent = '聚焦';
+    document.body.appendChild(host);
+    document.body.appendChild(toggle);
+
+    toggle.addEventListener('click', function () {
+      var focused = host.classList.toggle('focused');
+      toggle.setAttribute('aria-pressed', String(focused));
+      toggle.textContent = focused ? '还原' : '聚焦';
+    });
+  }
+
+  function mount() {
+    if (api || !window.CZNInline) return;
+    createUI();
+    try {
+      api = window.CZNInline.mount('#rossweisse-live', {
+        skin: 1,
+        passthrough: true,
+        showSkins: true
+      });
+      window.__rossweisseApi = api;
+    } catch (e) {
+      console.error('[rossweisse] mount failed', e);
+      teardown();
+    }
+  }
+
+  function loadScript(src, next) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = false;
+    s.onload = next;
+    s.onerror = function () {
+      console.error('[rossweisse] failed to load ' + src);
+      loading = false;
+      teardown();
+    };
+    document.head.appendChild(s);
+  }
+
+  function boot() {
+    if (!enabled() || api || loading) return;
+    if (window.CZNInline) {
+      mount();
+      return;
+    }
+    loading = true;
+    loadScript('/rossweisse/vendor/spine-player-3.8.js', function () {
+      loadScript('/rossweisse/inline.js', function () {
+        loading = false;
+        if (enabled()) mount();
+      });
+    });
+  }
+
+  function teardown() {
+    if (api) {
+      try { api.destroy(); } catch (e) {}
+      api = null;
+      window.__rossweisseApi = null;
+    }
+    if (host && host.parentNode) host.parentNode.removeChild(host);
+    if (toggle && toggle.parentNode) toggle.parentNode.removeChild(toggle);
+    host = null;
+    toggle = null;
+  }
+
+  var flag = queryFlag();
+  if (flag === 'true') storageSet(true);
+  else if (flag === 'false') storageSet(false);
+
+  if (enabled()) boot();
+})();
 </script>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
 
