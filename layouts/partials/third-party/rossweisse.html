@@ -106,7 +106,8 @@
       api = window.CZNInline.mount('#rossweisse-live', {
         skin: 1,
         passthrough: true,
-        showSkins: true
+        showSkins: true,
+        preloadDelay: 3000  // or `preloadSkins: false`, do not preload another skin
       });
       window.__rossweisseApi = api;
     } catch (e) {

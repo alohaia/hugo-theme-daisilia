@@ -103,9 +103,15 @@
     var activePlayer = null;
     var currentAnim = 'idle';
     var returnTimer = 0;
-    var switching = false;
-    var mountToken = 0;
     var destroyed = false;
+    var players = { '1': null, '2': null };
+    var playerReady = { '1': false, '2': false };
+    var playerLoading = { '1': false, '2': false };
+    var playerWaiters = { '1': [], '2': [] };
+    var loadToken = { '1': 0, '2': 0 };
+    var preloadTimer = 0;
+    var preloadDelay = opts.preloadDelay === undefined ? 1200 : opts.preloadDelay;
+    var preloadSkins = opts.preloadSkins !== false;
 
     if (hit) {
       hit.style.clipPath = hitShape;
@@ -123,6 +129,20 @@
     }
     applySuperSampling();
     global.addEventListener('resize', applySuperSampling);
+
+    // SpinePlayer assigns window.onresize itself; with two players only the
+    // last one survives, so redraw both explicitly.
+    global.addEventListener('resize', function () {
+      for (var s in players) {
+        if (players[s] && playerReady[s]) {
+          try { players[s].drawFrame(false); } catch (e) {}
+        }
+      }
+    });
+
+    function paneFor(skin) {
+      return panes[skin === '2' ? 1 : 0];
+    }
 
     function setActiveSkin() {
       var buttons = host.querySelectorAll('[data-skin]');
@@ -155,34 +175,30 @@
       }, 300);
     }
 
-    function mountSkin(skin) {
-      if (destroyed || switching) return;
-      if (skin === currentSkin && activePlayer) {
-        setActiveSkin();
+    function ensurePlayer(skin, cb) {
+      if (destroyed) {
+        if (cb) cb(null);
+        return;
+      }
+      if (players[skin] && playerReady[skin]) {
+        if (cb) cb(players[skin]);
+        return;
+      }
+      if (playerLoading[skin]) {
+        if (cb) playerWaiters[skin].push(cb);
+        return;
+      }
+      if (!MODELS[skin]) {
+        if (cb) cb(null);
         return;
       }
 
-      switching = true;
-      var previousSkin = currentSkin;
-      currentSkin = skin;
-      currentAnim = 'idle';
-      clearTimeout(returnTimer);
-      setActiveSkin();
-
-      var incoming = activePane
-        ? (activePane === panes[0] ? panes[1] : panes[0])
-        : panes[0];
-      var oldPane = activePane;
-      var oldPlayer = activePlayer;
-      var token = ++mountToken;
-
-      incoming.innerHTML = '';
-      incoming.classList.remove('active');
-      incoming.classList.add('incoming');
-      applySuperSampling();
-
+      playerLoading[skin] = true;
+      var token = ++loadToken[skin];
+      var pane = paneFor(skin);
       var model = MODELS[skin];
-      var next = new global.spine_3_8.SpinePlayer(incoming, {
+      pane.innerHTML = '';
+      var next = new global.spine_3_8.SpinePlayer(pane, {
         jsonUrl: base + model.json,
         atlasUrl: base + model.atlas,
         showLoading: false,
@@ -194,44 +210,106 @@
         backgroundColor: '#00000000',
         viewport: model.viewport,
         success: function (p) {
-          if (token !== mountToken) {
+          if (destroyed || token !== loadToken[skin]) {
             disposePlayer(p);
             return;
           }
-          activePlayer = p;
+          players[skin] = p;
+          playerReady[skin] = true;
+          playerLoading[skin] = false;
           p.play();
-
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              if (token !== mountToken) return;
-              incoming.classList.remove('incoming');
-              incoming.classList.add('active');
-              activePane = incoming;
-              switching = false;
-
-              if (oldPane && oldPane !== incoming) {
-                oldPane.classList.remove('active');
-                setTimeout(function () {
-                  if (oldPane === activePane) return;
-                  if (oldPane.classList.contains('incoming')) return;
-                  disposePlayer(oldPlayer);
-                  oldPane.innerHTML = '';
-                }, 60);
-              }
-            });
-          });
+          if (currentSkin !== skin) {
+            try { p.pause(); } catch (e) {}
+          }
+          var waiters = playerWaiters[skin];
+          playerWaiters[skin] = [];
+          for (var w = 0; w < waiters.length; w++) waiters[w](p);
+          if (currentSkin === skin) activateSkin(skin);
         },
         error: function () {
-          if (token !== mountToken) return;
-          currentSkin = previousSkin;
-          setActiveSkin();
-          incoming.classList.remove('incoming');
-          incoming.innerHTML = '';
-          switching = false;
+          if (destroyed || token !== loadToken[skin]) return;
+          playerLoading[skin] = false;
+          players[skin] = null;
+          playerReady[skin] = false;
+          pane.innerHTML = '';
+          var waiters = playerWaiters[skin];
+          playerWaiters[skin] = [];
+          for (var w = 0; w < waiters.length; w++) waiters[w](null);
+          if (currentSkin === skin) {
+            var other = skin === '1' ? '2' : '1';
+            if (playerReady[other]) {
+              currentSkin = other;
+              activateSkin(other);
+            } else {
+              setActiveSkin();
+            }
+          }
         }
       });
 
-      incoming.__spine = next;
+      pane.__spine = next;
+    }
+
+    function activateSkin(skin) {
+      if (destroyed) return;
+      if (!players[skin] || !playerReady[skin]) {
+        ensurePlayer(skin, function (p) {
+          if (p && !destroyed && currentSkin === skin) activateSkin(skin);
+        });
+        return;
+      }
+
+      currentSkin = skin;
+      currentAnim = 'idle';
+      clearTimeout(returnTimer);
+      setActiveSkin();
+      activePlayer = players[skin];
+      activePane = paneFor(skin);
+
+      for (var s in players) {
+        var pane = paneFor(s);
+        if (!pane) continue;
+        var on = s === skin;
+        pane.classList.toggle('active', on);
+        pane.classList.remove('incoming');
+        if (players[s] && playerReady[s]) {
+          if (on) {
+            try { players[s].play(); } catch (e) {}
+          } else {
+            try { players[s].pause(); } catch (e) {}
+          }
+        }
+      }
+
+      try {
+        activePlayer.setAnimation('idle', true);
+        activePlayer.play();
+      } catch (e) {}
+      schedulePreload();
+    }
+
+    function selectSkin(skin) {
+      if (destroyed) return;
+      if (skin !== '1' && skin !== '2') skin = '1';
+      currentSkin = skin;
+      currentAnim = 'idle';
+      clearTimeout(returnTimer);
+      setActiveSkin();
+      activateSkin(skin);
+    }
+
+    function schedulePreload() {
+      if (!preloadSkins || destroyed) return;
+      clearTimeout(preloadTimer);
+      preloadTimer = 0;
+      var other = currentSkin === '1' ? '2' : '1';
+      if (players[other] || playerLoading[other]) return;
+      preloadTimer = setTimeout(function () {
+        preloadTimer = 0;
+        if (!destroyed && !players[other] && !playerLoading[other]) {
+          ensurePlayer(other, null);
+        }
+      }, preloadDelay);
     }
 
     host.addEventListener('click', function (e) {
@@ -254,7 +332,7 @@
       skinButtons[i].addEventListener('click', function (e) {
         e.stopPropagation();
         var skin = this.getAttribute('data-skin');
-        if (skin !== currentSkin) mountSkin(skin);
+        if (skin !== currentSkin || !playerReady[skin]) selectSkin(skin);
       });
     }
 
@@ -262,22 +340,36 @@
       play: play,
       setSkin: function (skin) {
         skin = skin === '2' || skin === 2 ? '2' : '1';
-        if (skin !== currentSkin) mountSkin(skin);
+        if (skin !== currentSkin || !playerReady[skin]) selectSkin(skin);
       },
       getState: function () {
-        return { skin: currentSkin, anim: currentAnim, ready: !!activePlayer };
+        return {
+          skin: currentSkin,
+          anim: currentAnim,
+          ready: !!activePlayer,
+          cached: { '1': playerReady['1'], '2': playerReady['2'] }
+        };
       },
       destroy: function () {
         destroyed = true;
         clearTimeout(returnTimer);
-        disposePlayer(activePlayer);
+        clearTimeout(preloadTimer);
+        preloadTimer = 0;
+        for (var s in players) {
+          if (players[s]) disposePlayer(players[s]);
+        }
+        players = { '1': null, '2': null };
+        playerReady = { '1': false, '2': false };
+        playerLoading = { '1': false, '2': false };
+        playerWaiters = { '1': [], '2': [] };
         activePlayer = null;
+        activePane = null;
         host.innerHTML = '';
       }
     };
     host.__czn = api;
 
-    mountSkin(currentSkin);
+    selectSkin(currentSkin);
     return api;
   }
 
