@@ -70,7 +70,7 @@
     var base = opts.base || DEFAULT_BASE;
     var passthrough = !!opts.passthrough;
     var showSkins = opts.showSkins !== false;
-    var hitShape = opts.hitShape || 'ellipse(20% 40% at 50% 53%)';
+    var hitShape = opts.hitShape || 'ellipse(15% 40% at 50% 53%)';
     var currentSkin = opts.skin === '2' || opts.skin === 2 ? '2' : '1';
 
     host.classList.add('czn-live');
