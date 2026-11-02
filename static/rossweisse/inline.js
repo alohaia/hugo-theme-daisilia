@@ -37,7 +37,7 @@
     '.czn-pane .spine-player,.czn-pane canvas{width:100%!important;height:100%!important;display:block}',
     '.czn-live canvas{touch-action:manipulation}',
     '.czn-hit{position:absolute;inset:0;z-index:2;pointer-events:auto;cursor:pointer}',
-    '.czn-skins{grid-row:2;position:relative;justify-self:center;z-index:4;display:flex;gap:2px;margin:0 0 8px;padding:3px;border-radius:999px;background:rgba(18,10,34,.42);box-shadow:0 2px 12px rgba(0,0,0,.12);backdrop-filter:blur(6px);opacity:.45;transition:opacity .2s;pointer-events:auto;user-select:none}',
+    '.czn-skins{grid-row:2;position:relative;justify-self:center;z-index:4;display:flex;gap:2px;margin:0 0 8px;padding:3px;border-radius:999px;background:rgba(18,10,34,.42);box-shadow:0 2px 12px rgba(0,0,0,.12);backdrop-filter:blur(6px);opacity:.7;transition:opacity .2s;pointer-events:auto;user-select:none}',
     '.czn-skins:hover,.czn-skins:focus-within{opacity:.95}',
     '.czn-skins button{appearance:none;border:0;border-radius:999px;padding:4px 10px;background:transparent;color:#f4ecff;font:inherit;font-size:11px;line-height:1.4;letter-spacing:.03em;cursor:pointer}',
     '.czn-skins button.active{background:rgba(155,112,210,.55)}',
@@ -90,8 +90,8 @@
       '</div>' +
       (showSkins
         ? '<div class="czn-skins">' +
-            '<button type="button" data-skin="1">皮肤 1</button>' +
-            '<button type="button" data-skin="2">皮肤 2</button>' +
+            '<button type="button" data-skin="1">战斗服</button>' +
+            '<button type="button" data-skin="2">金礼服</button>' +
           '</div>'
         : '') +
       (passthrough ? '<div class="czn-hit" role="button" tabindex="0" aria-label="点击互动"></div>' : '');
