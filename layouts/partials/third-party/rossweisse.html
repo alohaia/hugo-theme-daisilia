@@ -1,21 +1,61 @@
 <style>
-#czn-live {
+#rossweisse-live {
   position: fixed;
   height: 560px;
-  width: 445px;
+  aspect-ratio: 445 / 560;
   bottom:0;
   right:0;
 }
+#rossweisse-live.focused {
+  height: 100vh;
+  /* centering */
+  bottom: auto;
+  right: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#rossweisse-toggle {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10;
+  padding: 4px 10px;
+  font-size: 13px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+#rossweisse-toggle:hover {
+  background: #fff;
+}
+#rossweisse-toggle[aria-pressed="true"] {
+  background: #369;
+  color: #fff;
+  border-color: #369;
+}
 </style>
-<div id="czn-live"></div>
+<div id="rossweisse-live"></div>
+<button id="rossweisse-toggle" type="button" aria-pressed="false">聚焦</button>
+
 <script src="/rossweisse/vendor/spine-player-3.8.js"></script>
 <script src="/rossweisse/inline.js"></script>
 <script>
-  CZNInline.mount('#czn-live', {
+CZNInline.mount('#rossweisse-live', {
   skin: 1,
   passthrough: true,
   showSkins: true
-  });
+});
+const rs_wrapper = document.getElementById('rossweisse-live');
+const rs_toggle = document.getElementById('rossweisse-toggle');
+
+rs_toggle.addEventListener('click', () => {
+  const focused = rs_wrapper.classList.toggle('focused');
+  rs_toggle.setAttribute('aria-pressed', String(focused));
+  rs_toggle.textContent = focused ? '还原' : '聚焦';
+});
 </script>
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}
 
