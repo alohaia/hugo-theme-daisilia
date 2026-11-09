@@ -12,7 +12,7 @@
       atlas: 'assets/p2/P2.atlas',
       runtime: '4.2',
       skin: 'default',
-      viewport: { x: -1500, y: -160, width: 3000, height: 4500, padLeft: 0, padRight: 0, padTop: 0, padBottom: 0 }
+      viewport: { x: -1550, y: -230, width: 3000, height: 4600, padLeft: 0, padRight: 0, padTop: 0, padBottom: 0 }
     },
     '2': {
       json: 'assets/30134_02.json',
