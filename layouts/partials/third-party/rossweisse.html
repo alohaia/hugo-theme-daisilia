@@ -108,7 +108,8 @@
         passthrough: true,
         showSkins: true,
         preloadDelay: 3000,  // or `preloadSkins: false`, do not preload another skin
-        preloadPoses: true   // warm all P2/pose assets after the gold dress is ready
+        preloadPoses: true,  // warm all P2/pose assets after the gold dress is ready
+        preloadLegacy: true  // create the classic 3.8 touch player during preload
       });
       window.__rossweisseApi = api;
     } catch (e) {
