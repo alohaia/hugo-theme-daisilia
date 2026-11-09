@@ -68,13 +68,13 @@
     '.czn-stage{grid-row:1;position:relative;min-height:0;overflow:hidden}',
     '.czn-pane{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;z-index:1;pointer-events:none;transform-origin:top left;transition:none}',
     '.czn-pane.active{opacity:1;z-index:2;pointer-events:none}',
-    '.czn-pane.incoming{opacity:0;z-index:3;pointer-events:none}',
+    '.czn-pane.incoming{opacity:1;z-index:3;pointer-events:none}',
     '.czn-pane .spine-player,.czn-pane canvas{width:100%!important;height:100%!important;display:block}',
     '.czn-live canvas{touch-action:manipulation}',
     '.czn-hit{position:absolute;inset:0;z-index:2;pointer-events:auto;cursor:pointer}',
     '.czn-zones{position:absolute;inset:0;z-index:3;pointer-events:none}',
     '.czn-zone{position:absolute;pointer-events:auto;cursor:pointer;background:transparent}',
-    '.czn-live.czn-skin-2 .czn-zones,.czn-live.czn-pose .czn-zones,.czn-live.czn-legacy .czn-zones{display:none}',
+    '.czn-live.czn-skin-2 .czn-zones,.czn-live.czn-pose .czn-zones,.czn-live.czn-legacy .czn-zones,.czn-live.czn-loading .czn-zones{display:none}',
     '.czn-actions{grid-row:2;position:relative;justify-self:center;z-index:4;display:flex;gap:2px;margin:0 0 4px;padding:3px;border-radius:999px;background:rgba(18,10,34,.42);box-shadow:0 2px 12px rgba(0,0,0,.12);backdrop-filter:blur(6px);opacity:.7;transition:opacity .2s;pointer-events:auto;user-select:none}',
     '.czn-actions:hover,.czn-actions:focus-within{opacity:.95}',
     '.czn-actions button{appearance:none;border:0;border-radius:999px;padding:3px 7px;background:transparent;color:#f4ecff;font:inherit;font-size:10px;line-height:1.4;letter-spacing:.02em;cursor:pointer}',
@@ -309,7 +309,9 @@
       document.head.appendChild(s);
     }
 
-    function clearPosePlayer() {
+    // keepVisible: 切换 pose 时保留当前画面，等新 pose 加载完成再替换，
+    // 避免中间露出底下的 P2 待机模型。
+    function clearPosePlayer(keepVisible) {
       poseToken++;
       poseLoading = false;
       poseReady = false;
@@ -319,19 +321,25 @@
         posePlayer = null;
       }
       if (posePane) {
-        posePane.classList.remove('active');
-        posePane.classList.remove('incoming');
-        posePane.innerHTML = '';
+        if (keepVisible) {
+          // 旧画面继续显示在最上层，直到新 pose 的 success 回调把它替换掉。
+          if (posePane.firstChild) posePane.classList.add('incoming');
+        } else {
+          posePane.classList.remove('active');
+          posePane.classList.remove('incoming');
+          posePane.innerHTML = '';
+        }
       }
     }
 
-    function showPose(key, p) {
+    function showPose(key, p, holder) {
       poseKey = key;
       poseReady = true;
       poseLoading = false;
       currentSkin = '1';
       host.classList.remove('czn-skin-2');
       host.classList.remove('czn-legacy');
+      host.classList.remove('czn-loading');
       host.classList.add('czn-pose');
       setActiveSkin();
       setActivePoseButton();
@@ -343,6 +351,14 @@
       }
       if (panes[0]) panes[0].classList.remove('active');
       if (panes[1]) panes[1].classList.remove('active');
+      // 新 pose 已就绪，再丢掉旧的画面，避免切换时闪出底下的 P2。
+      if (posePane) {
+        var slots = posePane.querySelectorAll('.czn-pose-slot');
+        for (var i = 0; i < slots.length; i++) {
+          if (slots[i] !== holder) posePane.removeChild(slots[i]);
+        }
+        if (holder && holder.parentNode !== posePane) posePane.appendChild(holder);
+      }
       posePane.classList.add('active');
       posePane.classList.remove('incoming');
 
@@ -361,8 +377,12 @@
       poseReady = false;
       var token = ++poseToken;
       var pane = posePane;
-      pane.innerHTML = '';
-      var p = new global.spine.SpinePlayer(pane, {
+      // 用一层新的容器承载新 pose，旧 pose 的画面留到新模型成功后再清掉。
+      var holder = document.createElement('div');
+      holder.className = 'czn-pose-slot';
+      holder.style.cssText = 'position:absolute;inset:0';
+      pane.appendChild(holder);
+      var p = new global.spine.SpinePlayer(holder, {
         jsonUrl: base + 'assets/poses/' + cfg.dir + '/' + cfg.json,
         atlasUrl: base + 'assets/poses/' + cfg.dir + '/' + cfg.atlas,
         showLoading: false,
@@ -374,23 +394,26 @@
         viewport: cfg.viewport,
         success: function (pl) {
           if (destroyed || token !== poseToken || currentSkin !== '1' || poseKey !== key) {
+            if (holder.parentNode) holder.parentNode.removeChild(holder);
             disposePlayer(pl);
             return;
           }
           posePlayer = pl;
-          showPose(key, pl);
+          showPose(key, pl, holder);
         },
         error: function () {
           if (destroyed || token !== poseToken) return;
+          if (holder.parentNode) holder.parentNode.removeChild(holder);
           poseLoading = false;
           poseReady = false;
           poseKey = 'idle';
           setActivePoseButton();
           if (posePane) {
-            posePane.innerHTML = '';
             posePane.classList.remove('active');
             posePane.classList.remove('incoming');
+            posePane.innerHTML = '';
           }
+          host.classList.remove('czn-loading');
           if (currentSkin === '1') activateSkin('1');
         }
       });
@@ -407,15 +430,19 @@
       var cfg = POSES[key];
       if (!cfg) return;
       if (posePlayer && poseKey === key && poseReady) {
+        host.classList.remove('czn-loading');
+        if (posePane) posePane.classList.add('active');
         showPose(key, posePlayer);
         return;
       }
       if (poseLoading && poseKey === key) return;
 
-      clearPosePlayer();
+      clearPosePlayer(true);
       poseKey = key;
       setActivePoseButton();
-      if (currentSkin === '1') activateSkin('1');
+      // 加载新 pose 期间保持当前画面（czn-loading），不要让 P2 待机模型露出来。
+      host.classList.add('czn-loading');
+      if (posePane) posePane.classList.add('active');
 
       ensurePoseRuntime(function (ok) {
         if (!ok) {
@@ -423,6 +450,7 @@
           console.error('[CZNInline] spine-player-4.2.js failed to load');
           poseKey = 'idle';
           setActivePoseButton();
+          exitPose(true);
           return;
         }
         if (destroyed || currentSkin !== '1' || poseKey !== key) return;
@@ -432,6 +460,7 @@
 
     function exitPose(showBase) {
       clearPosePlayer();
+      host.classList.remove('czn-loading');
       poseKey = 'idle';
       setActivePoseButton();
       if (showBase && currentSkin === '1') activateSkin('1');
@@ -498,6 +527,7 @@
       clearTimeout(returnTimer);
       legacyBusy = false;
       host.classList.remove('czn-legacy');
+      host.classList.remove('czn-loading');
       if (legacyPane) legacyPane.classList.remove('active');
       if (legacyPlayer) {
         try { legacyPlayer.pause(); } catch (e) {}
@@ -733,7 +763,8 @@
 
     function activateSkin(skin) {
       if (destroyed) return;
-      if (posePlayer || poseLoading) return;
+      // pose 加载中不要回到底下的 P2 待机模型，否则切换 pose 时会短暂闪出 P2。
+      if (posePlayer || poseLoading || host.classList.contains('czn-loading')) return;
       if (!players[skin] || !playerReady[skin]) {
         ensurePlayer(skin, function (p) {
           if (p && !destroyed && currentSkin === skin) activateSkin(skin);
@@ -744,6 +775,7 @@
       currentSkin = skin;
       currentAnim = 'idle';
       clearTimeout(returnTimer);
+      host.classList.remove('czn-loading');
       host.classList.toggle('czn-skin-2', skin === '2');
       host.classList.remove('czn-pose');
       host.classList.remove('czn-legacy');
