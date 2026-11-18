@@ -75,6 +75,8 @@
     --surface-1: light-dark(var(--white), #171614);
     --surface-2: light-dark(var(--gray-light-2), #1b1917);
     --surface-3: light-dark(#f1ede5, #211f1b);
+    /* card surface: a warmer, more saturated paper than the page background */
+    --card-bg: light-dark(#f9f0e2, #1a1411);
     --main-fg: light-dark(var(--black), var(--gray-light-2));
     --main-text-bg: var(--main-bg);
     --main-text-fg: var(--main-fg);
