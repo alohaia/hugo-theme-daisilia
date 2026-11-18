@@ -381,7 +381,7 @@ body.local-server {
 #HoverSummary {
     position: absolute;
     z-index: var(--z-overcontent);
-    filter: drop-shadow(0 0 5px var(--shadow-color));
+    filter: drop-shadow(0 8px 20px var(--shadow-color));
 }
 #HoverSummary.top {
     animation: .2s hs-down-in ease-in;
@@ -404,22 +404,79 @@ body.local-server {
     display: none;
 }
 
+#HoverSummary::before {
+    content: "";
+    position: absolute;
+    left: var(--hs-arrow-x, 20px);
+    width: 10px;
+    height: 10px;
+    background: var(--card-bg);
+    border-radius: 2px;
+    transform: translateX(-50%) rotate(45deg);
+}
+#HoverSummary.top::before {
+    bottom: -5px;
+}
+#HoverSummary.bottom::before {
+    top: -5px;
+}
+
 #HoverSummaryInner {
-    background: var(--surface-1);
-    padding: 15px;
+    padding: 16px 18px;
     overflow: auto;
     max-width: min(75vw,450px);
     min-width: 400px;
     max-height: min(40vh,500px);
+    color: var(--main-text-fg);
+    background: var(--card-bg);
+    border-radius: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+#HoverSummaryInner::-webkit-scrollbar {
+    width: 8px;
+}
+#HoverSummaryInner::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+}
+#HoverSummaryInner::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .hover-summary-title {
     margin: 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.hover-summary-title a {
+    color: var(--main-text-fg);
+    text-decoration: none;
+}
+.hover-summary-title a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .hover-summary-content {
-    margin: 18px 0 0;
+    margin: 12px 0 0;
+    color: var(--weak-text-fg);
+    font-size: .98rem;
+    line-height: 1.65;
+}
+.hover-summary-content * {
+    color: inherit;
+}
+#HoverSummaryInner .hover-summary-content a {
+    color: var(--accent);
+}
+#HoverSummaryInner .hover-summary-content a:hover {
+    color: var(--accent-hover);
 }
 
 @media (max-width: 750px) {

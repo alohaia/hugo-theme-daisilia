@@ -73,7 +73,7 @@ for (anchor of document.querySelectorAll("a.page")) {
             var maxHeight = null;
             if (anchorOffset.top > (document.body.clientHeight - anchorOffset.bottom)) {
                 top = offsetToBody(this, "top") - summaryContentEl.clientHeight - HOVER_SUMMARY_MARGIN;
-                inner.style.clipPath = `polygon(0 calc(100% - 5px), ${x-5}px calc(100% - 5px), ${x}px 100%, ${x+5}px calc(100% - 5px), 100% calc(100% - 5px), 100% 0, 0 0)`;
+                summaryContentEl.style.setProperty("--hs-arrow-x", x + "px");
                 // max height
                 if (top < 0) {
                     maxHeight = summaryContentEl.offsetHeight + top - INNER_BORDER + "px";
@@ -82,7 +82,7 @@ for (anchor of document.querySelectorAll("a.page")) {
                 summaryContentEl.classList.remove("bottom")
                 summaryContentEl.classList.add("top")
             } else {
-                inner.style.clipPath = `polygon(0 5px, ${x-5}px 5px, ${x}px 0, ${x+5}px 5px, 100% 5px, 100% 100%, 0 100%)`;
+                summaryContentEl.style.setProperty("--hs-arrow-x", x + "px");
                 // max height
                 if (top + summaryContentEl.offsetHeight > document.body.scrollHeight) {
                     maxHeight = document.body.clientHeight - top - INNER_BORDER + "px";
