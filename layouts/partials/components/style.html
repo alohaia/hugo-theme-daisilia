@@ -13,4 +13,34 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Andada+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Indie+Flower&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;600&family=Noto+Serif+SC:wght@600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" />
+
+{{ $opts := dict
+  "mode" "light"
+  "targetPath" "css/highlight-light.css"
+}}
+{{ $highlightLight := css.ChromaStyles $opts }}
+
+{{ $opts := dict
+  "mode" "dark"
+  "modeSelector" true
+  "targetPath" "css/highlight-dark.css"
+}}
+{{ $highlightDark := css.ChromaStyles $opts }}
+
+{{ with resources.Get "css/code.css" }}
+  {{ $opts := dict
+    "importContext" (slice $highlightLight $highlightDark)
+    "minify" (cond hugo.IsDevelopment false true)
+    "sourceMap" (cond hugo.IsDevelopment "linked" "none")
+  }}
+  {{ with . | css.Build $opts }}
+    {{ if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ else }}
+      {{ with . | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 {{- /* vim:set ft=gohtmltmpl ts=2 sw=2: */ -}}

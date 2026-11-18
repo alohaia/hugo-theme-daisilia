@@ -17,6 +17,18 @@ function getCookie(cname) {
   return "";
 }
 
+function cssColor(name) {
+    // Colours live in the "define colors" block of root.css. Use a probe
+    // element so light-dark()/var() are resolved to a concrete rgb() value.
+    const probe = document.createElement('span');
+    probe.style.color = `var(${name})`;
+    probe.style.display = 'none';
+    (document.body || document.documentElement).appendChild(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    return color || 'currentColor';
+}
+
 function loadScript(src, type = "text/javascript",async = true) {
     var scriptEle = document.createElement('script');
     scriptEle.src = src;
@@ -43,9 +55,9 @@ async function renderMermaid() {
             themeVariables: {
                 fontFamily: 'var(--font-sans)',
                 fontSize: '14px',
-                primaryColor: '#f5f5f5',
-                primaryBorderColor: '#999',
-                lineColor: '#666'
+                primaryColor: cssColor('--diagram-bg'),
+                primaryBorderColor: cssColor('--diagram-border'),
+                lineColor: cssColor('--diagram-line')
             }
         });
 
@@ -77,10 +89,10 @@ function renderFlowchart() {
                 'line-length': 50,
                 'text-margin': 10,
                 'font-size': 14,
-                'font-color': '#333',
-                'line-color': '#666',
-                'element-color': '#666',
-                'fill': 'white',
+                'font-color': cssColor('--diagram-fg'),
+                'line-color': cssColor('--diagram-line'),
+                'element-color': cssColor('--diagram-line'),
+                'fill': cssColor('--diagram-bg'),
                 'yes-text': 'Yes',
                 'no-text': 'No',
                 'arrow-end': 'block'

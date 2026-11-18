@@ -82,22 +82,22 @@
     '.czn-live.czn-legacy .czn-zones{z-index:7}',
     '.czn-live.czn-skin-2 .czn-zones,.czn-live.czn-pose .czn-zones,.czn-live.czn-loading .czn-zones{display:none}',
     '.czn-menu{position:absolute;right:8px;top:15%;z-index:6;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}',
-    '.czn-menu-toggle{pointer-events:auto;width:42px;height:42px;border:0;border-radius:50%;background:rgba(18,10,34,.62);color:#f4ecff;font:600 10px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2);backdrop-filter:blur(6px)}',
-    '.czn-menu-toggle:hover{background:rgba(80,50,120,.8)}',
-    '.czn-menu-list{display:none;flex-direction:column;gap:4px;padding:4px;border-radius:14px;background:rgba(18,10,34,.62);box-shadow:0 4px 18px rgba(0,0,0,.25);backdrop-filter:blur(8px);pointer-events:auto}',
+    '.czn-menu-toggle{pointer-events:auto;width:42px;height:42px;border:0;border-radius:50%;background:var(--rossweisse-panel);color:var(--rossweisse-fg-soft);font:600 10px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;box-shadow:0 2px 10px var(--rossweisse-shadow-2);backdrop-filter:blur(6px)}',
+    '.czn-menu-toggle:hover{background:var(--rossweisse-hover)}',
+    '.czn-menu-list{display:none;flex-direction:column;gap:4px;padding:4px;border-radius:14px;background:var(--rossweisse-panel);box-shadow:0 4px 18px var(--rossweisse-shadow-3);backdrop-filter:blur(8px);pointer-events:auto}',
     '.czn-menu.open .czn-menu-list{display:flex}',
     '.czn-menu-item{position:relative;width:48px;height:54px;padding:0;border:0;border-radius:10px;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden}',
     '.czn-menu-item img{width:44px;height:44px;object-fit:contain;display:block;pointer-events:none}',
-    '.czn-menu-item span{font-size:9px;line-height:1;color:#f4ecff;text-shadow:0 1px 3px rgba(0,0,0,.6);pointer-events:none}',
-    '.czn-menu-item.active{background:rgba(155,112,210,.55)}',
+    '.czn-menu-item span{font-size:9px;line-height:1;color:var(--rossweisse-fg-soft);text-shadow:0 1px 3px var(--rossweisse-shadow-4);pointer-events:none}',
+    '.czn-menu-item.active{background:var(--rossweisse-active-soft)}',
     '.czn-menu-item.idle{justify-content:center}',
     '.czn-menu-item.idle span{font-size:11px}',
     '.czn-live.czn-skin-2 .czn-menu{display:none}',
-    '.czn-skins{grid-row:2;position:relative;justify-self:center;z-index:4;display:flex;gap:2px;margin:0 0 8px;padding:3px;border-radius:999px;background:rgba(18,10,34,.42);box-shadow:0 2px 12px rgba(0,0,0,.12);backdrop-filter:blur(6px);opacity:.7;transition:opacity .2s;pointer-events:auto;user-select:none}',
+    '.czn-skins{grid-row:2;position:relative;justify-self:center;z-index:4;display:flex;gap:2px;margin:0 0 8px;padding:3px;border-radius:999px;background:var(--rossweisse-bg);box-shadow:0 2px 12px var(--rossweisse-shadow-1);backdrop-filter:blur(6px);opacity:.7;transition:opacity .2s;pointer-events:auto;user-select:none}',
     '.czn-skins:hover,.czn-skins:focus-within{opacity:.95}',
-    '.czn-skins button{appearance:none;border:0;border-radius:999px;padding:4px 10px;background:transparent;color:#f4ecff;font:inherit;font-size:11px;line-height:1.4;letter-spacing:.03em;cursor:pointer}',
-    '.czn-skins button.active{background:rgba(155,112,210,.55)}',
-    '.czn-skins button:focus-visible{outline:1px solid rgba(255,255,255,.8)}',
+    '.czn-skins button{appearance:none;border:0;border-radius:999px;padding:4px 10px;background:transparent;color:var(--rossweisse-fg-soft);font:inherit;font-size:11px;line-height:1.4;letter-spacing:.03em;cursor:pointer}',
+    '.czn-skins button.active{background:var(--rossweisse-active-soft)}',
+    '.czn-skins button:focus-visible{outline:1px solid var(--rossweisse-outline)}',
     '.czn-live.czn-no-ui .czn-skins{display:none}'
   ].join('');
 
@@ -414,7 +414,7 @@
         animation: 'idle',
         alpha: true,
         premultipliedAlpha: true,
-        backgroundColor: '#00000000',
+        backgroundColor: 'transparent',
         viewport: cfg.viewport,
         success: function (pl) {
           if (destroyed || token !== poseToken || currentSkin !== '1' || poseKey !== key) {
@@ -516,7 +516,7 @@
         skin: 'normal',
         alpha: true,
         premultipliedAlpha: true,
-        backgroundColor: '#00000000',
+        backgroundColor: 'transparent',
         viewport: { x: -500, y: -640, width: 1003, height: 1180, padLeft: 0, padRight: 0, padTop: 0, padBottom: 0 },
         success: function (pl) {
           if (destroyed || token !== legacyToken) {
@@ -749,7 +749,7 @@
           skin: model.skin || 'normal',
           alpha: true,
           premultipliedAlpha: true,
-          backgroundColor: '#00000000',
+          backgroundColor: 'transparent',
           viewport: model.viewport,
           success: function (p) {
             if (destroyed || token !== loadToken[skin]) {

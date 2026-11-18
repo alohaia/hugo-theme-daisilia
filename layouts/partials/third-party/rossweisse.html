@@ -22,10 +22,10 @@
   z-index: 10;
   padding: 4px 10px;
   font-size: 13px;
-  border: 1px solid #888;
+  border: 1px solid var(--rossweisse-border);
   border-radius: 999px;
-  color: #fff;
-  background: rgba(18, 10, 34, 0.42);
+  color: var(--rossweisse-fg);
+  background: var(--rossweisse-bg);
   opacity: 0.7;
   cursor: pointer;
   touch-action: manipulation;
@@ -34,8 +34,8 @@
   opacity: 0.95;
 }
 #rossweisse-toggle[aria-pressed="true"] {
-  background: rgba(155, 112, 210, 0.8);
-  border-color: rgba(155, 112, 210, 0.8);
+  background: var(--rossweisse-active);
+  border-color: var(--rossweisse-active);
 }
 </style>
 <script>

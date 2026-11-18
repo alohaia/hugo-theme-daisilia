@@ -31,7 +31,7 @@ body.local-server {
     left: 0px;
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: var(--main-bg);
     z-index: 99999;
     text-align: center;
 }
@@ -48,7 +48,7 @@ body.local-server {
     position: absolute;
     width: 6px;
     height: 6px;
-    background: var(--gray-deep);
+    background: var(--main-fg);
     border-radius: 50%;
     animation: lds-default 1.2s linear infinite;
 }
@@ -135,13 +135,13 @@ body.local-server {
     justify-content: center;
     align-items: center;
     column-gap: 20px;
-    background-color: var(--gray-light);
+    background-color: var(--main-bg);
     transition: all .2s ease-out;
     width: 100%;
     overscroll-behavior: contain;
 }
 .site-header a {
-    color: var(--black);
+    color: var(--main-text-fg);
     text-decoration: none;
 }
 .site-header i {
@@ -153,7 +153,7 @@ body.local-server {
     line-height: var(--header-height);
     font-family: var(--font-handwrite);
     user-select: none;
-    text-shadow: 3px 3px 4px var(--gray-deep);
+    text-shadow: 3px 3px 4px var(--main-text-fg);
 }
 @media (min-width: 751px) {
     .main-menu .menu-item {
@@ -171,7 +171,7 @@ body.local-server {
     }
     .main-menu {
         flex-direction: column;
-        background: var(--gray-light);
+        background: var(--main-bg);
         left: 0;
         width: 100%;
         display: none;
@@ -191,7 +191,7 @@ body.local-server {
 }
 .main-menu a,
 .main-menu .search {
-    color: #555;
+    color: var(--main-text-fg);
     cursor: pointer;
 }
 .main-menu .menu-item {
@@ -201,7 +201,7 @@ body.local-server {
     user-select: none;
 }
 .main-menu .menu-item:hover {
-    background-color: #ddd;
+    background-color: var(--surface-3);
     border-radius: 2px;
 }
 .main-menu .menu-item::marker {
@@ -213,7 +213,8 @@ body.local-server {
     grid-area: footer;
     text-align: center;
     font-family: var(--font-serif);
-    color: var(--gray-deep);
+    color: var(--main-text-fg);
+    background-color: var(--main-bg);
     font-size: 0.85em;
     display: flex;
     flex-direction: column;
@@ -222,15 +223,15 @@ body.local-server {
     line-height: 1.5;
 }
 .site-footer a {
-    color: var(--orange);
+    color: var(--link);
     text-decoration: none;
 }
 .site-footer a:hover {
-    color: var(--orange-deep);
+    color: var(--link-hover);
 }
 .site-footer .division, .site-footer .heart { padding: 0 4px }
 .site-footer .heart {
-    color: red;
+    color: var(--state-danger);
     animation-iteration-count: infinite;
     display: inline-block;
     animation-name: heartBeat;
@@ -249,6 +250,7 @@ body.local-server {
     grid-template-columns: 1fr minmax(140px,var(--content-width)) 1fr;
     grid-template-rows: minmax(0, auto) auto auto;
     grid-column-gap: 20px;
+    background: var(--main-bg);
 }
 @media (max-width: 750px) {
     .site-main {
@@ -303,7 +305,7 @@ body.local-server {
 .loading-progress {
     margin: auto;
     height: 4px;
-    background: linear-gradient(to left, #00000000, #77b6ff 5%, #1e81f2, #77b6ff 95%, #00000000);
+    background: linear-gradient(to left, transparent, var(--accent-soft) 5%, var(--accent) 50%, var(--accent-soft) 95%, transparent);
     transition: width .4s ease;
     animation-name: loading;
     animation-duration: 1.5s;
@@ -319,11 +321,11 @@ body.local-server {
     font-family: var(--font-handwrite);
 }
 .not-found .back-home {
-    color: var(--orange);
+    color: var(--link);
     text-decoration: none;
 }
 .not-found .back-home:hover {
-    color: var(--orange-deep);
+    color: var(--link-hover);
     text-decoration: underline;
 }
 
@@ -379,7 +381,7 @@ body.local-server {
 #HoverSummary {
     position: absolute;
     z-index: var(--z-overcontent);
-    filter: drop-shadow(0 0 5px var(--gray));
+    filter: drop-shadow(0 0 5px var(--shadow-color));
 }
 #HoverSummary.top {
     animation: .2s hs-down-in ease-in;
@@ -403,7 +405,7 @@ body.local-server {
 }
 
 #HoverSummaryInner {
-    background: var(--white);
+    background: var(--surface-1);
     padding: 15px;
     overflow: auto;
     max-width: min(75vw,450px);

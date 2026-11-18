@@ -52,6 +52,12 @@ function escapeHtml(unsafe) {
 
 document.getElementById("searchBtn").onclick = ()=>{ toggleSearch(true) }
 document.getElementById("searchToggle").onclick = ()=>{ toggleSearch(false) }
+document.getElementById("searchToggle").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleSearch(false);
+    }
+})
 
 document.addEventListener("mousedown", event => {
     if(event.target === document.getElementById("fastSearch")) {

@@ -6,8 +6,8 @@
     width: 300px;
     padding: 18px 10px;
     height: 100%;
-    color: var(--gray-deep);
-    background: var(--black);
+    color: var(--ui-fg);
+    background: var(--ui-bg);
     transition: all 0.2s ease-out;
 
     display: flex;
@@ -25,7 +25,7 @@
 }
 #SidebarFill {
     display: none;
-    background: var(--black);
+    background: var(--ui-bg);
     opacity: 0;
     position: fixed;
     right: 0;
@@ -64,10 +64,10 @@
 }
 
 .site-sidebar a {
-    color: var(--gray-deep);
+    color: var(--ui-fg-muted);
 }
 .site-sidebar a:hover {
-    color: var(--gray);
+    color: var(--ui-fg);
 }
 
 /* sidebar nav */
@@ -76,16 +76,14 @@
     animation: fadeRight 0.5s ease-out;
 }
 .sidebar-nav-item.active, .sidebar-nav-item.active:hover {
-    color: var(--orange);
+    color: var(--accent);
 }
 .sidebar-nav-item {
-    opacity: 0.6;
     cursor: pointer;
     font-size: 85%;
-    color: var(--gray-deep);
+    color: var(--ui-fg-muted);
 }
 .sidebar-nav-item:hover {
-    opacity: 1;
     border-bottom: 1px solid;
 }
 .sidebar-pannel {
@@ -109,7 +107,7 @@
     to   { opacity: 1; right: 0px; }
 }
 .sidebar-toggle {
-    background: var(--black);
+    background: var(--ui-bg);
     position: fixed;
     bottom: 45px;
     left: 30px;
@@ -124,7 +122,7 @@
 
 .sidebar-toggle-icon {
     opacity: 0;
-    color: var(--gray);
+    color: var(--ui-fg);
     font-family: 'Font Awesome 6 Free';
     font-style: normal;
     font-size: 18px;
@@ -141,12 +139,10 @@
 }
 .sidebar-toggle:not(.sidebar-active *):hover .right-arrow {
     animation: switch-right .5s;
-    color: var(--white);
     opacity: 1;
 }
 .sidebar-active .sidebar-toggle:hover .left-arrow {
     animation: switch-left .5s;
-    color: var(--white);
     opacity: 1;
 }
 
@@ -160,18 +156,26 @@
     cursor: pointer;
     position: sticky;
     top: 0;
-    background: var(--black);
 }
 .toc-title:hover {
-    color: var(--gray);
+    color: var(--link-hover);
     text-decoration: underline;
 }
+
+#TableOfContents li > a {
+    color: var(--ui-fg-muted);
+    transition: all 0.5s;
+}
+#TableOfContents li.active > a {
+    color: var(--ui-fg-0);
+}
+
 .sidebar-toc a {
-    color: var(--gray-deep);
+    color: var(--ui-fg);
     text-decoration: none;
 }
 .sidebar-toc a:hover {
-    color: var(--gray);
+    color: var(--link-hover) !important;
     text-decoration: underline;
 }
 .sidebar-toc ul {
@@ -181,12 +185,6 @@
 .sidebar-toc li::marker {
     content: none;
 }
-#TableOfContents li > a {
-    transition: all 0.5s;
-}
-#TableOfContents li.active > a {
-    color: var(--gray-light);
-}
 
 /* sidebar avatar */
 .sidebar-avatar {
@@ -194,7 +192,7 @@
 }
 .site-avatar-image {
     max-width: 96px;
-    border: 2px solid #333;
+    border: 2px solid var(--avatar-border);
     padding: 2px;
     border-radius: 50%;
     transition: transform 1s ease-out;
@@ -205,7 +203,7 @@
 
 .site-author-name {
     margin: 5px 0 0;
-    color: var(--gray);
+    color: var(--ui-fg);
 }
 .site-description {
     margin: 5px 0 0;
@@ -310,8 +308,8 @@ meting-js {
 
 /* back to top */
 .back2top {
-    background-color: var(--black);
-    color: var(--gray);
+    color: var(--ui-fg);
+    background: var(--ui-bg);
     opacity: .8;
     position: fixed;
     bottom: 45px;
@@ -322,9 +320,6 @@ meting-js {
     padding: 6px;
     cursor: pointer;
     user-select: none;
-}
-.back2top:hover * {
-    color: var(--gray-light);
 }
 @keyframes jump {
     0% {top: 0; opacity: 1}
@@ -354,24 +349,24 @@ meting-js {
 }
 .calendar-days span:not(.empty) {
     height: 24px;
-    border: 2px solid var(--gray-deep);
+    border: 2px solid var(--ui-border);
     border-radius: 2px;
     user-select: none;
 }
 .calendar-days .today {
-    border-color: var(--gray) !important;
+    border-color: var(--accent) !important;
 }
 .calendar input {
     font-size: inherit;
     vertical-align: middle;
     background: inherit;
-    color: var(--gray);
+    color: var(--ui-fg);
     padding: 0;
     border: 0;
     text-align: center;
 }
 .calendar input::placeholder {
-    color: var(--gray-deep);
+    color: var(--ui-fg-muted);
 }
 input#calendar-year { width: 50px }
 input#calendar-month { width: 30px }
@@ -387,14 +382,14 @@ input#calendar-month { width: 30px }
     cursor: pointer;
 }
 .calendar-header button:hover {
-    color: var(--orange);
+    color: var(--accent);
 }
 .calendar a {
     text-decoration: none;
-    color: var(--gray);
+    color: var(--ui-fg);
 }
 .calendar a:hover {
-    color: var(--orange)
+    color: var(--accent)
 }
 .calendar-body {
     transition: max-height 1s ease;

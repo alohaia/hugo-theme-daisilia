@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   {{- partial "components/opengraph" . -}} {{- /* open graph */ -}}
   {{- block "title" . }}<title>{{ print .Title " | " .Site.Title }}</title>{{ end -}}
   {{- partial "components/style" . -}}     {{- /* css */ -}}
   {{- partial "components/favicon" . -}}   {{- /* favicon */ -}}
+  {{- partialCached "components/code-theme.js.html" . -}}
   <script>
   // prevent jumping
   window.__initialHash = location.hash

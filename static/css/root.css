@@ -42,6 +42,7 @@
 }
 
 :root {
+    color-scheme: light dark;
     --header-height: 80px;
     --footer-height: 80px;
     --content-width: 800px;
@@ -53,19 +54,114 @@
     --font-serif: "Andada Pro", "Noto Serif SC", serif;
     --font-height-double: 32px;
 
-    --white: #ffffff;
-    --gray: #cccccc;
-    --gray-light: #f0f0f0;
-    --gray-deep: #818181;
-    --black: #1b1b1b;
-    --dark: #000000;
-    --orange: #ff8855;
-    --orange-deep: #ff6020;
+    /* ==================== define colors ==================== */
+    /* Literal color values are allowed only in this block. */
 
-    --code-background: #efefef;
-    --inline-code-background: #f0f0f0;
-    --link: var(--black);
-    --link-hover: var(--orange-deep);
+    /* raw palette: warm paper in light mode, warm ink in dark mode */
+    --white: #ffffff;
+    --paper: #faf7f1;
+    --gray-light-1: #9c9690;
+    --gray-light-2: #e9e6df;
+    --gray: #c9c4bb;
+    --gray-deep: #726d66;
+    --black: #1a1917;
+    --dark: #100f0e;
+    --orange: #e8703a;
+    --orange-deep: #d4521b;
+    --orange-soft: #f4c2a5;
+
+    /* surfaces & text */
+    --main-bg: light-dark(var(--paper), var(--dark));
+    --surface-1: light-dark(var(--white), #171614);
+    --surface-2: light-dark(var(--gray-light-2), #1b1917);
+    --surface-3: light-dark(#f1ede5, #211f1b);
+    --main-fg: light-dark(var(--black), var(--gray-light-2));
+    --main-text-bg: var(--main-bg);
+    --main-text-fg: var(--main-fg);
+    --weak-text-bg: var(--main-bg);
+    --weak-text-fg: light-dark(var(--gray-deep), var(--gray-light-1));
+
+    /* borders & dividers */
+    --border-soft: light-dark(var(--gray-light-2), #2a2724);
+    --border: light-dark(var(--gray), #3a3530);
+    --border-strong: light-dark(var(--gray-deep), var(--gray-light-1));
+
+    /* accent: terracotta for links, marks and active states */
+    --accent: light-dark(#bf4512, var(--orange));
+    --accent-hover: light-dark(#a83b0d, var(--orange-soft));
+    --accent-soft: light-dark(var(--orange-soft), rgba(232, 112, 58, 0.18));
+    --link: var(--main-text-fg);
+    --link-hover: var(--accent);
+    --link-decoration: light-dark(var(--gray), var(--gray-deep));
+
+    /* inverted UI surfaces: sidebar, search, floating buttons */
+    --ui-fg-0: light-dark(var(--white), var(--gray-light-2));
+    --ui-bg: light-dark(var(--black), #1b1917);
+    --ui-fg: light-dark(var(--white), var(--gray));
+    --ui-bg-1: light-dark(var(--dark), #211f1b);
+    --ui-bg-2: light-dark(#211f1b, #262320);
+    --ui-bg-3: light-dark(#2a2724, #302c28);
+    --ui-fg-muted: light-dark(var(--gray), var(--gray-light-1));
+    --ui-border: light-dark(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.12));
+    --ui-border-strong: light-dark(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.22));
+
+    /* state colors: tabs, alerts, messages */
+    --state-default: light-dark(var(--gray-deep), var(--gray-light-1));
+    --state-success: light-dark(#2f7d32, #7bc47f);
+    --state-info: light-dark(#2c6fbb, #7db4e8);
+    --state-primary: light-dark(#6a4c93, #b79ce0);
+    --state-warning: light-dark(#9a6400, #e0a63a);
+    --state-danger: light-dark(#b3342c, #f07a70);
+    --state-default-soft: light-dark(rgba(114, 109, 102, 0.14), rgba(156, 150, 144, 0.16));
+    --state-success-soft: light-dark(rgba(47, 125, 50, 0.14), rgba(123, 196, 127, 0.18));
+    --state-info-soft: light-dark(rgba(44, 111, 187, 0.14), rgba(125, 180, 232, 0.18));
+    --state-primary-soft: light-dark(rgba(106, 76, 147, 0.14), rgba(183, 156, 224, 0.18));
+    --state-warning-soft: light-dark(rgba(154, 100, 0, 0.14), rgba(224, 166, 58, 0.18));
+    --state-danger-soft: light-dark(rgba(179, 52, 44, 0.14), rgba(240, 122, 112, 0.18));
+
+    /* code, images & overlays */
+    --code-fg: var(--main-text-fg);
+    --code-bg: light-dark(var(--gray-light-2), #171614);
+    --img-bg: light-dark(var(--white), #171614);
+    --avatar-border: light-dark(var(--black), var(--gray-deep));
+    --tooltip-bg: light-dark(var(--black), #2a2724);
+    --tooltip-fg: light-dark(var(--white), var(--gray-light-2));
+    --overlay-bg: light-dark(rgba(16, 15, 14, 0.45), rgba(0, 0, 0, 0.65));
+    --scrollbar-thumb: light-dark(rgba(114, 109, 102, 0.45), rgba(201, 196, 187, 0.35));
+    --scrollbar-thumb-hover: light-dark(rgba(114, 109, 102, 0.7), rgba(201, 196, 187, 0.6));
+    --shadow-color: light-dark(rgba(26, 25, 23, 0.16), rgba(0, 0, 0, 0.55));
+    --selection-bg: light-dark(var(--orange-soft), rgba(232, 112, 58, 0.35));
+    --selection-fg: light-dark(var(--black), var(--gray-light-2));
+    --mark-bg: light-dark(var(--orange-soft), rgba(232, 112, 58, 0.3));
+    --mark-fg: var(--main-text-fg);
+    --search-highlight-bg: rgba(232, 112, 58, 0.42);
+    --search-highlight-fg: var(--white);
+
+    /* diagrams (read from CSS by daisy.js) */
+    --diagram-bg: light-dark(var(--gray-light-2), var(--gray-light-2));
+    --diagram-fg: var(--main-text-fg);
+    --diagram-border: light-dark(var(--gray-deep), var(--gray-light-1));
+    --diagram-line: light-dark(var(--gray-deep), var(--gray));
+
+    /* rossweisse widget (decorative, independent of page theme) */
+    --rossweisse-fg: #ffffff;
+    --rossweisse-fg-soft: #f4ecff;
+    --rossweisse-bg: rgba(18, 10, 34, 0.42);
+    --rossweisse-panel: rgba(18, 10, 34, 0.62);
+    --rossweisse-border: #888888;
+    --rossweisse-active: rgba(155, 112, 210, 0.8);
+    --rossweisse-active-soft: rgba(155, 112, 210, 0.55);
+    --rossweisse-hover: rgba(80, 50, 120, 0.8);
+    --rossweisse-outline: rgba(255, 255, 255, 0.8);
+    --rossweisse-shadow-1: rgba(0, 0, 0, 0.12);
+    --rossweisse-shadow-2: rgba(0, 0, 0, 0.2);
+    --rossweisse-shadow-3: rgba(0, 0, 0, 0.25);
+    --rossweisse-shadow-4: rgba(0, 0, 0, 0.6);
+
+    /* print is always ink on paper */
+    --print-bg: #ffffff;
+    --print-fg: #000000;
+    /* ================== end define colors ================== */
 
     --z-overcontent: 1;
     --z-series: 200;
@@ -74,6 +170,9 @@
     --z-fullscreen: 999;
     --z-loadingbar: 9999;
 }
+
+:root.dark  { color-scheme: dark; }
+:root.light { color-scheme: light; }
 
 html {
     height: 100%;
@@ -93,10 +192,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif) }
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-}
-
-::selection {
-    background-color: var(--gray);
 }
 
 :focus-visible {

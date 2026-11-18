@@ -14,29 +14,29 @@
 
 .tag-cloud-item {
     text-decoration: none;
-    color: var(--black);
+    color: var(--main-text-fg);
     white-space: nowrap;
     height: 100%;
     font-family: var(--font-serif);
 }
 
 .tag-cloud-item.now {
-    color: var(--orange);
+    color: var(--accent);
     font-weight: bold;
 }
 
 .tag-cloud-item:hover {
-    color: var(--orange-deep);
+    color: var(--accent-hover);
 }
 
 .tag-cloud-item sup {
-    color: var(--gray);
+    color: var(--weak-text-fg);
 }
 
 .tag-cloud.side {
     min-width: 250px;
     overflow: auto;
-    border: 2px dashed var(--gray);
+    border: 2px dashed var(--border);
     margin: 5px;
     padding: 0 5px 5px;
 }
@@ -57,9 +57,9 @@
 .tag-cloud.side .tag-cloud-title {
     position: sticky;
     top: 0;
-    color: var(--gray-deep);
-    background: var(--white);
-    border-bottom: 2px dashed var(--gray-light);
+    color: var(--weak-text-fg);
+    background: var(--surface-1);
+    border-bottom: 2px dashed var(--border-soft);
 }
 
 .tag-cloud-title {

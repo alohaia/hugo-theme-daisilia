@@ -1,6 +1,7 @@
 @media print {
     body {
-        background-color: white;
+        background-color: var(--print-bg);
+        color: var(--print-fg);
         margin: 2px 0;
     }
     .tab {
