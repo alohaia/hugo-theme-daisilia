@@ -48,7 +48,7 @@
     font-size: 20px;
     line-height: 1.4;
     outline: none;
-    transition: background .2s, border-color .2s, box-shadow .2s;
+    transition: background .2s, box-shadow .2s;
 }
 #searchInput::placeholder {
     color: var(--ui-fg-muted);
@@ -56,8 +56,8 @@
 #searchInput:focus {
     color: var(--ui-fg);
     background: var(--ui-bg-2);
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--accent);
 }
 #searchInput:disabled {
     cursor: wait;
