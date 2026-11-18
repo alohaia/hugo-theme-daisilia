@@ -122,7 +122,7 @@
     /* code, images & overlays */
     --code-fg: var(--main-text-fg);
     --code-bg: light-dark(var(--gray-light-2), #171614);
-    --img-bg: light-dark(var(--white), #171614);
+    --img-bg: light-dark(var(--white), var(--white));
     --avatar-border: light-dark(var(--black), var(--gray-deep));
     --tooltip-bg: light-dark(var(--black), #2a2724);
     --tooltip-fg: light-dark(var(--white), var(--gray-light-2));
@@ -138,7 +138,7 @@
     --search-highlight-fg: var(--white);
 
     /* diagrams (read from CSS by daisy.js) */
-    --diagram-bg: light-dark(var(--gray-light-2), var(--gray-light-2));
+    --diagram-bg: light-dark(var(--gray-light-2), #211f1b);
     --diagram-fg: var(--main-text-fg);
     --diagram-border: light-dark(var(--gray-deep), var(--gray-light-1));
     --diagram-line: light-dark(var(--gray-deep), var(--gray));

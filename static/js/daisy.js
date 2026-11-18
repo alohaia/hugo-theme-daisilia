@@ -44,31 +44,124 @@ function loadScript(src, type = "text/javascript",async = true) {
 
 }
 
-let mermaidInited = false;
+function mermaidThemeVariables() {
+    var color = function (name) { return cssColor(name); };
+    // https://github.com/mermaid-js/mermaid/blob/master/packages/mermaid/src/defaultConfig.ts
+    return {
+        fontFamily: 'var(--font-sans)',
+        fontSize: '14px',
+
+        /* base graph */
+        background: color('--main-bg'),
+        primaryColor: color('--diagram-bg'),
+        primaryTextColor: color('--diagram-fg'),
+        primaryBorderColor: color('--diagram-border'),
+        secondaryColor: color('--diagram-bg'),
+        secondaryTextColor: color('--diagram-fg'),
+        secondaryBorderColor: color('--diagram-border'),
+        tertiaryColor: color('--diagram-bg'),
+        tertiaryTextColor: color('--diagram-fg'),
+        tertiaryBorderColor: color('--diagram-border'),
+        mainBkg: color('--diagram-bg'),
+        nodeBorder: color('--diagram-border'),
+        nodeTextColor: color('--diagram-fg'),
+        textColor: color('--diagram-fg'),
+        titleColor: color('--diagram-fg'),
+        lineColor: color('--diagram-line'),
+        defaultLinkColor: color('--diagram-line'),
+        edgeLabelBackground: color('--main-bg'),
+        clusterBkg: color('--surface-2'),
+        clusterBorder: color('--diagram-border'),
+
+        /* sequence */
+        actorBkg: color('--diagram-bg'),
+        actorBorder: color('--diagram-border'),
+        actorTextColor: color('--diagram-fg'),
+        actorLineColor: color('--diagram-line'),
+        signalColor: color('--diagram-line'),
+        signalTextColor: color('--diagram-fg'),
+        labelBoxBkgColor: color('--diagram-bg'),
+        labelBoxBorderColor: color('--diagram-border'),
+        labelBoxTextColor: color('--diagram-fg'),
+        loopTextColor: color('--diagram-fg'),
+        activationBkgColor: color('--diagram-bg'),
+        activationBorderColor: color('--diagram-border'),
+        sequenceNumberColor: color('--diagram-fg'),
+        noteBkgColor: color('--surface-2'),
+        noteTextColor: color('--diagram-fg'),
+        noteBorderColor: color('--diagram-border'),
+
+        /* gantt */
+        sectionBkgColor: color('--diagram-bg'),
+        altSectionBkgColor: color('--surface-2'),
+        sectionBkgColor2: color('--surface-2'),
+        taskBkgColor: color('--diagram-bg'),
+        taskBorderColor: color('--diagram-border'),
+        taskTextColor: color('--diagram-fg'),
+        taskTextLightColor: color('--diagram-fg'),
+        taskTextOutsideColor: color('--diagram-fg'),
+        taskTextClickableColor: color('--diagram-fg'),
+        activeTaskBkgColor: color('--diagram-bg'),
+        activeTaskBorderColor: color('--accent'),
+        gridColor: color('--diagram-border'),
+        doneTaskBkgColor: color('--surface-2'),
+        doneTaskBorderColor: color('--diagram-border'),
+        critBkgColor: color('--diagram-bg'),
+        critBorderColor: color('--state-danger'),
+        todayLineColor: color('--state-danger'),
+
+        /* pie */
+        pieTitleTextColor: color('--diagram-fg'),
+        pieSectionTextColor: color('--diagram-fg'),
+        pieLegendTextColor: color('--diagram-fg'),
+        pieStrokeColor: color('--diagram-border'),
+        pieOuterStrokeColor: color('--diagram-border')
+    };
+}
+
+function initMermaid() {
+    mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: mermaidThemeVariables()
+    });
+}
+
+function rememberMermaidSource() {
+    document.querySelectorAll('[data-mermaid]:not([data-processed])').forEach(function (el) {
+        if (!el.dataset.mermaidSrc) {
+            el.dataset.mermaidSrc = el.textContent;
+        }
+    });
+}
+
 async function renderMermaid() {
-    if (!mermaidInited) {
-        // https://github.com/mermaid-js/mermaid/blob/master/packages/mermaid/src/defaultConfig.ts
-        mermaid.initialize({
-            startOnLoad: true,  // pjax:complete won't toggle startOnLoad
-            theme: 'neutral',
-            theme: 'base',
-            themeVariables: {
-                fontFamily: 'var(--font-sans)',
-                fontSize: '14px',
-                primaryColor: cssColor('--diagram-bg'),
-                primaryBorderColor: cssColor('--diagram-border'),
-                lineColor: cssColor('--diagram-line')
-            }
-        });
-
-        console.log("init mermaid");
-        mermaidInited = true;
-    }
-
+    rememberMermaidSource();
+    initMermaid();
     console.log("render mermaid");
     await mermaid.run({
-        querySelector: '[data-mermaid]'
+        querySelector: '[data-mermaid]:not([data-processed])'
     });
+}
+
+function resetMermaid() {
+    document.querySelectorAll('[data-mermaid][data-mermaid-src]').forEach(function (el) {
+        el.textContent = el.dataset.mermaidSrc;
+        el.removeAttribute('data-processed');
+    });
+}
+
+// Re-render diagrams when the light/dark class on <html> changes.
+let mermaidThemeTimer;
+if (window.MutationObserver) {
+    new MutationObserver(function () {
+        if (!document.querySelector('[data-mermaid]')) return;
+        clearTimeout(mermaidThemeTimer);
+        mermaidThemeTimer = setTimeout(async function () {
+            resetMermaid();
+            await renderMermaid();
+        }, 120);
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 }
 
 function renderFlowchart() {
