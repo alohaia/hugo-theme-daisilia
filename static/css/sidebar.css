@@ -55,6 +55,8 @@
 }
 
 .sidebar-content {
+    flex: 1 1 auto;
+    min-height: 0;
     overflow: auto;
     overscroll-behavior: contain;
 }
@@ -306,6 +308,84 @@ meting-js {
     border-bottom: 1px dashed;
 }
 
+/* theme switcher */
+.sidebar-theme {
+    flex: 0 0 auto;
+    margin-top: 12px;
+    margin-bottom: 50px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ui-border);
+}
+#theme-switcher {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+#theme-switcher legend {
+    width: 100%;
+    margin: 0 0 6px;
+    padding: 0;
+    color: var(--ui-fg-muted);
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-align: left;
+}
+.theme-switcher-options {
+    display: flex;
+    gap: 2px;
+    padding: 3px;
+    background: var(--ui-bg-1);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+}
+#theme-switcher label {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    cursor: pointer;
+}
+#theme-switcher input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+#theme-switcher label span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 2px;
+    border-radius: 999px;
+    color: var(--ui-fg-muted);
+    font-size: .78rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: color .2s, background .2s, box-shadow .2s;
+}
+#theme-switcher label span i {
+    font-size: .9em;
+}
+#theme-switcher label:hover span {
+    color: var(--ui-fg);
+    background: var(--ui-bg-2);
+}
+#theme-switcher input:checked + span {
+    color: var(--ui-fg);
+    background: var(--ui-bg-3);
+    box-shadow: 0 1px 2px var(--shadow-color);
+}
+#theme-switcher input:checked + span i {
+    color: var(--accent);
+}
+#theme-switcher input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
 /* back to top */
 .back2top {
     color: var(--ui-fg);
@@ -335,7 +415,7 @@ meting-js {
 }
 .sidebar-active .back2top {
     position: static;
-    margin: 10px auto 0;
+    margin: -30px auto 0;
 }
 
 /* calendar */

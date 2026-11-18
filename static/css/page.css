@@ -323,7 +323,6 @@ table:not(.highlight table) th {
     position: sticky;
     z-index: var(--z-overcontent);
     top: 0;
-    background: var(--surface-1);
     padding: .3em 1em;
 }
 table:not(.highlight table) td {

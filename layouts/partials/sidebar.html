@@ -69,25 +69,24 @@
       {{- end -}}
     </div>
   </div>
-  <div>
-  <fieldset id="theme-switcher">
-  <legend>主题</legend>
-
-  <label>
-  <input type="radio" name="theme" value="light">
-  亮色
-  </label>
-
-  <label>
-  <input type="radio" name="theme" value="dark">
-  暗色
-  </label>
-
-  <label>
-  <input type="radio" name="theme" value="system">
-  跟随系统
-  </label>
-  </fieldset>
+  <div class="sidebar-theme">
+    <fieldset id="theme-switcher">
+      <legend>主题</legend>
+      <div class="theme-switcher-options">
+        <label>
+          <input type="radio" name="theme" value="light">
+          <span><i class="fas fa-sun" aria-hidden="true"></i>亮色</span>
+        </label>
+        <label>
+          <input type="radio" name="theme" value="dark">
+          <span><i class="fas fa-moon" aria-hidden="true"></i>暗色</span>
+        </label>
+        <label>
+          <input type="radio" name="theme" value="system">
+          <span><i class="fas fa-circle-half-stroke" aria-hidden="true"></i>跟随系统</span>
+        </label>
+      </div>
+    </fieldset>
   </div>
   <div class="back2top" id="Back2top" role="button">
     <i class="back2top-icon fas fa-angle-double-up"></i>
