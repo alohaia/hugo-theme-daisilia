@@ -6,6 +6,11 @@
     ? SCRIPT.src.split('?')[0].split('#')[0].replace(/\/[^/]*$/, '/')
     : '';
 
+  function canvasBackground() {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--rossweisse-canvas-bg').trim() || '#00000000';
+  }
+
   var MODELS = {
     '1': {
       json: 'assets/p2/P2.json',
@@ -67,13 +72,13 @@
   ];
 
   var CSS = [
-    '.czn-live{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden;background:transparent}',
+    '.czn-live{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden}',
     '.czn-live.czn-pass{pointer-events:none}',
     '.czn-stage{grid-row:1;position:relative;min-height:0;overflow:hidden}',
     '.czn-pane{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;z-index:1;pointer-events:none;transform-origin:top left;transition:none}',
     '.czn-pane.active{opacity:1;z-index:2;pointer-events:none}',
     '.czn-pane.incoming{opacity:1;z-index:3;pointer-events:none}',
-    '.czn-pane .spine-player,.czn-pane canvas{width:100%!important;height:100%!important;display:block;background:transparent!important}',
+    '.czn-pane .spine-player,.czn-pane canvas{width:100%!important;height:100%!important;display:block}',
     '.czn-live canvas{touch-action:manipulation}',
     '.czn-hit{position:absolute;inset:0;z-index:2;pointer-events:auto;cursor:pointer}',
     '.czn-zones{position:absolute;inset:0;z-index:3;pointer-events:none}',
@@ -414,7 +419,7 @@
         animation: 'idle',
         alpha: true,
         premultipliedAlpha: true,
-        backgroundColor: 'transparent',
+        backgroundColor: canvasBackground(),
         viewport: cfg.viewport,
         success: function (pl) {
           if (destroyed || token !== poseToken || currentSkin !== '1' || poseKey !== key) {
@@ -516,7 +521,7 @@
         skin: 'normal',
         alpha: true,
         premultipliedAlpha: true,
-        backgroundColor: 'transparent',
+        backgroundColor: canvasBackground(),
         viewport: { x: -500, y: -640, width: 1003, height: 1180, padLeft: 0, padRight: 0, padTop: 0, padBottom: 0 },
         success: function (pl) {
           if (destroyed || token !== legacyToken) {
@@ -749,7 +754,7 @@
           skin: model.skin || 'normal',
           alpha: true,
           premultipliedAlpha: true,
-          backgroundColor: 'transparent',
+          backgroundColor: canvasBackground(),
           viewport: model.viewport,
           success: function (p) {
             if (destroyed || token !== loadToken[skin]) {

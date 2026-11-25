@@ -147,6 +147,7 @@
     --diagram-line: light-dark(var(--gray-deep), var(--gray));
 
     /* rossweisse widget (decorative, independent of page theme) */
+    --rossweisse-canvas-bg: #00000000;
     --rossweisse-fg: #ffffff;
     --rossweisse-fg-soft: #f4ecff;
     --rossweisse-bg: rgba(18, 10, 34, 0.42);
