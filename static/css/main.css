@@ -135,6 +135,7 @@ body.local-server {
     justify-content: center;
     align-items: center;
     column-gap: 20px;
+    color: var(--main-fg);
     background-color: var(--main-bg);
     transition: all .2s ease-out;
     width: 100%;

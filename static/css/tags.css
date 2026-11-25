@@ -57,8 +57,8 @@
 .tag-cloud.side .tag-cloud-title {
     position: sticky;
     top: 0;
-    color: var(--weak-text-fg);
-    background: var(--surface-1);
+    color: var(--main-text-fg);
+    background: var(--main-text-bg);
     border-bottom: 2px dashed var(--border-soft);
 }
 

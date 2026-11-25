@@ -58,12 +58,13 @@
     /* Literal color values are allowed only in this block. */
 
     /* raw palette: warm paper in light mode, warm ink in dark mode */
-    --white: #ffffff;
+    --white: #eeeeee;
     --paper: #faf7f1;
     --gray-light-1: #9c9690;
     --gray-light-2: #e9e6df;
     --gray: #c9c4bb;
     --gray-deep: #726d66;
+    --gray-deep-1: #313131;
     --black: #1a1917;
     --dark: #100f0e;
     --orange: #e8703a;
@@ -123,7 +124,7 @@
 
     /* code, images & overlays */
     --code-fg: var(--main-text-fg);
-    --code-bg: light-dark(var(--gray-light-2), #171614);
+    --code-bg: light-dark(var(--gray-light-2), var(--gray-deep-1));
     --img-bg: light-dark(var(--white), var(--white));
     --avatar-border: light-dark(var(--black), var(--gray-deep));
     --tooltip-bg: light-dark(var(--black), #2a2724);

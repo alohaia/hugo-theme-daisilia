@@ -76,7 +76,7 @@
   </div>
   <div class="loading-track"><div class="loading-progress"></div></div>
   {{- partial "components/js" . -}} {{- /* js */ -}}
-  <div data-pjax>
+  <div data-pjax class="_hidden-text-script">
     {{- if in .Params.features "clickableHiddenText" }}
     <style>
       .hidden-text {

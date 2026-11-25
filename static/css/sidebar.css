@@ -439,8 +439,8 @@ meting-js {
 .calendar input {
     font-size: inherit;
     vertical-align: middle;
-    background: inherit;
     color: var(--ui-fg);
+    background: var(--ui-bg-3);
     padding: 0;
     border: 0;
     text-align: center;
@@ -448,8 +448,11 @@ meting-js {
 .calendar input::placeholder {
     color: var(--ui-fg-muted);
 }
-input#calendar-year { width: 50px }
-input#calendar-month { width: 30px }
+input#calendar-year, input#calendar-month {
+    field-sizing: content;
+    padding: 0 0.2em;
+    margin: 0 .2em;
+}
 .calendar-header {
     display: flex;
     justify-content: space-around;
@@ -466,10 +469,10 @@ input#calendar-month { width: 30px }
 }
 .calendar a {
     text-decoration: none;
-    color: var(--ui-fg);
+    color: var(--accent);
 }
 .calendar a:hover {
-    color: var(--accent)
+    color: var(--accent-hover)
 }
 .calendar-body {
     transition: max-height 1s ease;
