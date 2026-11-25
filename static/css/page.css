@@ -375,12 +375,13 @@ table .table-cell.center {
 
 /* highlight & block */
 code *, pre code, .chroma {
+    color: var(--code-fg);
     font-family: var(--font-code);
 }
 code:not(pre code) { /* inline code */
     font-family: var(--font-code);
     border-radius: .2em;
-    background-color: var(--code-bg);
+    background: var(--code-bg);
     border-left: .3em solid var(--code-bg);
     border-right: .3em solid var(--code-bg);
 
