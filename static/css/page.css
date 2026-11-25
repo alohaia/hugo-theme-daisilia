@@ -857,10 +857,10 @@ span.pages-recommended-switch.selected {
 }
 
 /* summary children margin */
-.summary *:first-child {
+.summary > *:first-child {
     margin-top: 0;
 }
-.summary *:last-child {
+.summary > *:last-child {
     margin-bottom: 0;
 }
 
