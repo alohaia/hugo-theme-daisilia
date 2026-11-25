@@ -394,6 +394,16 @@ pre, /* indent code */
     border: none;
     overflow-x: auto;
 }
+.chroma {
+    /* for sticky line number */
+    padding-left: 0;
+}
+/* sticky line number */
+.chroma .lntd:first-of-type {
+    position: sticky;
+    left: 0;
+}
+
 .chroma * {
     margin: 0;
     padding: 0;
