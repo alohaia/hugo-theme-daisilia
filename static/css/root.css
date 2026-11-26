@@ -42,7 +42,16 @@
 }
 
 :root {
-    color-scheme: light dark;
+  color-scheme: dark light;      /* auto, follow system or browser theme */
+}
+:root.dark {
+  color-scheme: dark;            /* dark */
+}
+:root.light {
+  color-scheme: light;           /* light */
+}
+
+:root {
     --header-height: 80px;
     --footer-height: 80px;
     --content-width: 800px;

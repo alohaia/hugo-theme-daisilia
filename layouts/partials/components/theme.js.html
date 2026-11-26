@@ -1,4 +1,4 @@
-{{ with resources.Get "js/code-theme.js" }}
+{{ with resources.Get "js/theme.js" }}
   {{ $opts := dict
     "minify" (cond hugo.IsDevelopment false true)
     "sourceMap" (cond hugo.IsDevelopment "linked" "none")
